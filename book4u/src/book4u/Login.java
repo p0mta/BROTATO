@@ -1,3 +1,4 @@
+
 package book4u;
 
 import javax.swing.*;
@@ -18,78 +19,88 @@ public class Login extends JFrame {
     Font texto = new Font("Comic Sans MS",Font.PLAIN,14);
     Font titulo1 = new Font("Comic Sans MS",Font.PLAIN,35);
    
-    public Login() {
-    	
-        // Configurar el frame
-        setTitle("BOOK4U- Login/Registro");
-        setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        this.setSize(900, 700);
-        this.setLocationRelativeTo(null);
-        
-        String colorfondo = "#579514";
-        
-        Color backgroundColor = Color.decode(colorfondo);
-        this.getContentPane().setBackground(backgroundColor);
-        
-        ImageIcon imagen = new ImageIcon("drogas.jpg");
-        JLabel label = new JLabel(imagen);
-        label.setBounds( 225, 150, 400, 300);
-        
-        
-        
+
+        public Login() {
+            // Configurar el frame
+            setTitle("BOOK4U- Login/Registro");
+            setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+            setSize(900, 700);
+            setLocationRelativeTo(null);
+
+            String colorFondo = "#579514";
+            Color backgroundColor = Color.decode(colorFondo);
+            getContentPane().setBackground(backgroundColor);
+
+            // Crear un JPanel en la parte superior con el logo
+            JPanel logoPanel = new JPanel();
+            logoPanel.setBounds(0, 0, 900, 100);
+            logoPanel.setBackground(Color.WHITE); // Fondo blanco
+
+            ImageIcon imagen = new ImageIcon("logo.png");
+            JLabel label = new JLabel(imagen);
+            label.setPreferredSize(new Dimension(450, 100));
+            logoPanel.add(label);
+            
+
+            // Crear los componentes de inicio de sesión
+            Font fuente = new Font("Arial", Font.PLAIN, 18);
+            Font texto = new Font("Arial", Font.PLAIN, 14);
+
+            JLabel usernameLabel = new JLabel("Usuario:");
+            usernameLabel.setFont(fuente);
+            usernameLabel.setForeground(Color.GREEN);
+            usernameLabel.setBounds(110, 500, 90, 20);
+
+            usernameField = new JTextField();
+            usernameField.setBounds(200, 501, 150, 25);
+            usernameField.setFont(texto);
+            usernameField.setForeground(Color.WHITE);
+            usernameField.setBorder(BorderFactory.createLineBorder(Color.GREEN));
+
+            JLabel passwordLabel = new JLabel("Contraseña:");
+            passwordLabel.setFont(fuente);
+            passwordLabel.setForeground(Color.GREEN);
+            passwordLabel.setBounds(450, 500, 150, 25);
+
+            passwordField = new JPasswordField();
+            passwordField.setBounds(580, 501, 150, 25);
+            passwordField.setBorder(BorderFactory.createLineBorder(Color.GREEN));
+
+            JButton loginButton = new JButton("Iniciar sesión");
+            loginButton.setBounds(150, 560, 150, 50);
+            loginButton.setBackground(Color.GREEN);
+            loginButton.setForeground(Color.WHITE);
+            loginButton.addActionListener(new ActionListener() {
+                @Override
+                public void actionPerformed(ActionEvent e) {
+                    // Aquí puedes agregar la lógica para el inicio de sesión
+                }
+            });
+
+            JButton registerButton = new JButton("Registrarse");
+            registerButton.setBounds(500, 560, 150, 50);
+            registerButton.setBackground(Color.GREEN);
+            registerButton.setForeground(Color.WHITE);
+            registerButton.addActionListener(new ActionListener() {
+                @Override
+                public void actionPerformed(ActionEvent e) {
+                    // Aquí puedes agregar la lógica para el registro
+                }
+            });
+
+            // Agregar los componentes al frame
+            add(logoPanel);
+            add(usernameLabel);
+            add(usernameField);
+            add(passwordLabel);
+            add(passwordField);
+            add(loginButton);
+            add(registerButton);
+
+            setLayout(null);
+            setVisible(true);
         
 
-        // Crear los componentes
-        JLabel titulo = new JLabel("BOOK4U");
-        titulo.setBounds(230,50,450,35);
-        titulo.setForeground(Color.GREEN);
-        titulo.setFont(titulo1);
-        JLabel usernameLabel = new JLabel("Usuario:");
-        usernameLabel.setFont(fuente);
-        usernameLabel.setForeground(Color.green);
-        usernameLabel.setBounds(110, 500, 90, 20);
-        usernameField = new JTextField();
-        usernameField.setBounds(200, 501, 150, 25);  
-        usernameField.setFont(texto);
-        usernameField.setBorder(null);
-        usernameField.setForeground(Color.WHITE);
-        
-        
-        JLabel passwordLabel = new JLabel("Contraseña:");
-        passwordLabel.setFont(fuente);
-        passwordLabel.setForeground(Color.green);
-        passwordLabel.setBounds(450, 500, 150, 25);
-        setPasswordField(new JPasswordField());
-        getPasswordField().setBorder(null);
-        getPasswordField().setBounds(580, 501, 150, 25);
-        
-        
-        JButton loginButton = new JButton("Iniciar sesión");
-        loginButton.setBorderPainted(false);
-        loginButton.setBounds(150, 560, 150, 50);
-        loginButton.setBackground(Color.green);
-        loginButton.setForeground(Color.white);
-        
-        
-        JButton registerButton = new JButton("Registrarse");
-        registerButton.setBorderPainted(false);
-        registerButton.setBounds(500, 560, 150, 50);
-        registerButton.setBackground(Color.green);
-        registerButton.setForeground(Color.white);
-        this.setLayout(null);
-
-        // Agregar los componentes al frame
-        add(titulo);
-        add(label);
-        add(usernameLabel);
-        add(usernameField);
-        add(passwordLabel);
-        add(getPasswordField());
-        add(loginButton);
-        add(registerButton);
-
-        // Mostrar el frame
-        setVisible(true);
     
 
        
