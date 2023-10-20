@@ -48,28 +48,34 @@ public class Login extends JFrame {
 
             JLabel usernameLabel = new JLabel("Usuario:");
             usernameLabel.setFont(fuente);
-            usernameLabel.setForeground(Color.GREEN);
-            usernameLabel.setBounds(110, 500, 90, 20);
+            usernameLabel.setForeground(Color.BLACK);
+            usernameLabel.setBounds(150, 300, 90, 20);
 
             usernameField = new JTextField();
-            usernameField.setBounds(200, 501, 150, 25);
+            usernameField.setBounds(250, 300, 150, 25);
             usernameField.setFont(texto);
-            usernameField.setForeground(Color.WHITE);
-            usernameField.setBorder(BorderFactory.createLineBorder(Color.GREEN));
+            usernameField.setForeground(Color.BLACK);
+            usernameField.setBorder(BorderFactory.createLineBorder(Color.BLACK));
 
             JLabel passwordLabel = new JLabel("Contraseña:");
             passwordLabel.setFont(fuente);
-            passwordLabel.setForeground(Color.GREEN);
-            passwordLabel.setBounds(450, 500, 150, 25);
+            passwordLabel.setForeground(Color.BLACK);
+            passwordLabel.setBounds(450, 300, 150, 25);
 
             passwordField = new JPasswordField();
-            passwordField.setBounds(580, 501, 150, 25);
-            passwordField.setBorder(BorderFactory.createLineBorder(Color.GREEN));
+            passwordField.setBounds(580, 300, 150, 25);
+            passwordField.setBorder(BorderFactory.createLineBorder(Color.BLACK));
 
             JButton loginButton = new JButton("Iniciar sesión");
-            loginButton.setBounds(150, 560, 150, 50);
+            loginButton.setBounds(350, 375, 150, 50);
             loginButton.setBackground(Color.GREEN);
             loginButton.setForeground(Color.WHITE);
+            
+            JLabel registroLabel = new JLabel("No estás registrado? Registrate!");
+            registroLabel.setFont(fuente);
+            registroLabel.setForeground(Color.BLACK);
+            registroLabel.setBounds(200,450, 150, 25);
+            
             loginButton.addActionListener(new ActionListener() {
                 @Override
                 public void actionPerformed(ActionEvent e) {
@@ -78,7 +84,7 @@ public class Login extends JFrame {
             });
 
             JButton registerButton = new JButton("Registrarse");
-            registerButton.setBounds(500, 560, 150, 50);
+            registerButton.setBounds(350, 450, 150, 50);
             registerButton.setBackground(Color.GREEN);
             registerButton.setForeground(Color.WHITE);
             registerButton.addActionListener(new ActionListener() {
@@ -96,6 +102,7 @@ public class Login extends JFrame {
             add(passwordField);
             add(loginButton);
             add(registerButton);
+            add(registroLabel);
 
             setLayout(null);
             setVisible(true);
