@@ -122,7 +122,7 @@ public class Login extends JFrame {
             }
         });
         try {
-            connection = DriverManager.getConnection("jdbc:oracle:thin:@192.168.3.26:1521:xe", "23_24_DAM2_BROTATO", "123456");
+            connection = DriverManager.getConnection("jdbc:oracle:thin:@oracle.ilerna.com:1521:xe", "23_24_DAM2_BROTATO", "123456");
         } catch (SQLException e) {
             e.printStackTrace();
             JOptionPane.showMessageDialog(Login.this, "Error al conectar a la base de datos");
@@ -133,7 +133,9 @@ public class Login extends JFrame {
             public void actionPerformed(ActionEvent e) {                
                
             	dispose();
-            	Registro reg = new Registro();
+            	Registro re = new Registro();
+            	
+            	
             	/*String usuario = usernameField.getText();
                 String password = new String(passwordField.getPassword());
 
@@ -187,12 +189,12 @@ public class Login extends JFrame {
     private boolean loginUser(String nombre, String password) {
     	
         try {
-        	String select = "SELECT NOMBRE, PASSWORD FROM USUARIO WHERE NOMBRE = '"+usernameField.getText()+"' AND PASSWORD = '"+String.valueOf(getPasswordField().getPassword())+"'";
+        	String select = "SELECT NOMBRE, CONTRASEÑA FROM USUARIO WHERE NOMBRE = '"+usernameField.getText()+"' AND CONTRASEÑA = '"+String.valueOf(getPasswordField().getPassword())+"'";
             PreparedStatement statement = connection.prepareStatement(select);
             ResultSet resultSet = statement.executeQuery();
             while(resultSet.next()) {
             	nombre = resultSet.getString("NOMBRE");
-            	password = resultSet.getString("PASSWORD");
+            	password = resultSet.getString("CONTRASEÑA");
             	return true;
             }
 
@@ -206,7 +208,7 @@ public class Login extends JFrame {
         return false;
     }
 
-   /* private boolean registerUser(String nombre, String password) {
+   /*private boolean registerUser(String nombre, String password) {
         try {
         	String insert = "INSERT INTO usuario (NOMBRE, PASSWORD) VALUES ('"+usernameField.getText()+"','"+String.valueOf(getPasswordField().getPassword())+"')";
             PreparedStatement statement = connection.prepareStatement(insert);
