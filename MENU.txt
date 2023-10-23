@@ -1,0 +1,65 @@
+import javax.swing.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+
+public class MENU {
+    public static void main(String[] args) {
+        // Crear un nuevo marco (ventana)
+        JFrame frame = new JFrame("Ejemplo de Menú con Desplegable");
+
+        // Crear una barra de menú
+        JMenuBar menuBar = new JMenuBar();
+
+        // Crear un menú desplegable
+        JMenu menu = new JMenu("Archivo");
+
+        // Crear elementos de menú
+        JMenuItem abrirItem = new JMenuItem("Inicio");
+        JMenuItem abrirItem = new JMenuItem("Historial");
+        JMenuItem abrirItem = new JMenuItem("Usuario");
+        JMenuItem guardarItem = new JMenuItem("Atras");
+        
+
+        // Agregar ActionListener a los elementos de menú para manejar eventos
+        abrirItem.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                // Coloca aquí la lógica para abrir un archivo
+                JOptionPane.showMessageDialog(frame, "Abrir archivo seleccionado.");
+            }
+        });
+
+        guardarItem.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                // Coloca aquí la lógica para guardar un archivo
+                JOptionPane.showMessageDialog(frame, "Guardar archivo seleccionado.");
+            }
+        });
+
+        salirItem.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                // Coloca aquí la lógica para salir de la aplicación
+                System.exit(0);
+            }
+        });
+
+        // Agregar los elementos de menú al menú desplegable
+        menu.add(abrirItem);
+        menu.add(guardarItem);
+        menu.addSeparator(); // Agregar una línea separadora
+        menu.add(salirItem);
+
+        // Agregar el menú al menú de la barra
+        menuBar.add(menu);
+
+        // Establecer la barra de menú en el marco
+        frame.setJMenuBar(menuBar);
+
+        // Configurar propiedades del marco
+        frame.setDefaultCloseOperation(JFrame.EXIT);
+        frame.setSize(300, 150);
+        frame.setVisible(true);
+    }
+}
