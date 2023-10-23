@@ -159,7 +159,7 @@ public class Registro extends JFrame {
                         if (rowsInserted > 0) {
                             // Éxito en la inserción
                         } else {
-                            JOptionPane.showMessageDialog(Registro.this, "Error al registrar el usuario");
+                            JOptionPane.showMessageDialog(Registro.this, "Error al registrar el usuario intentelo de nuevo");
                         }
                     } catch (SQLException e1) {
                         e1.printStackTrace();
