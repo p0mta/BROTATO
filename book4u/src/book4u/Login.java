@@ -131,7 +131,10 @@ public class Login extends JFrame {
         
         registerButton.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {                
-                String usuario = usernameField.getText();
+               
+            	dispose();
+            	Registro reg = new Registro();
+            	/*String usuario = usernameField.getText();
                 String password = new String(passwordField.getPassword());
 
                 // Conectar a la base de datos y realizar el registro
@@ -165,7 +168,7 @@ public class Login extends JFrame {
                              JOptionPane.showMessageDialog(Login.this, "Error al registrar el usuario");
                          }
                 
-            }
+            }*/
             }
         });
         
@@ -203,7 +206,7 @@ public class Login extends JFrame {
         return false;
     }
 
-    private boolean registerUser(String nombre, String password) {
+   /* private boolean registerUser(String nombre, String password) {
         try {
         	String insert = "INSERT INTO usuario (NOMBRE, PASSWORD) VALUES ('"+usernameField.getText()+"','"+String.valueOf(getPasswordField().getPassword())+"')";
             PreparedStatement statement = connection.prepareStatement(insert);
@@ -214,7 +217,7 @@ public class Login extends JFrame {
             JOptionPane.showMessageDialog(Login.this, "Error al registrar el usuario");
         }
         return false;
-    }
+    }*/
     
     public JTextField getUsernameField() {
         return usernameField;
