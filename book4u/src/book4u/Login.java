@@ -68,29 +68,48 @@ public class Login extends JFrame {
 
             JButton loginButton = new JButton("Iniciar sesión");
             loginButton.setBounds(350, 375, 150, 50);
-            loginButton.setBackground(Color.GREEN);
-            loginButton.setForeground(Color.WHITE);
+            loginButton.setFocusPainted(false);
+            loginButton.setBorderPainted(false);
+            loginButton.setContentAreaFilled(false);
+            
+            
+            
+            ImageIcon iniciarsesion = new ImageIcon("botoniniciosesion.png"); 
+            loginButton.setIcon(iniciarsesion);
             
             JLabel registroLabel = new JLabel("No estás registrado? Registrate!");
             registroLabel.setFont(fuente);
             registroLabel.setForeground(Color.BLACK);
-            registroLabel.setBounds(200,450, 150, 25);
+            registroLabel.setBounds(300,520, 400, 25);
             
             loginButton.addActionListener(new ActionListener() {
                 @Override
                 public void actionPerformed(ActionEvent e) {
-                    // Aquí puedes agregar la lógica para el inicio de sesión
+                    
                 }
             });
 
             JButton registerButton = new JButton("Registrarse");
             registerButton.setBounds(350, 450, 150, 50);
-            registerButton.setBackground(Color.GREEN);
-            registerButton.setForeground(Color.WHITE);
+            registerButton.setFocusPainted(false);
+            registerButton.setBorderPainted(false);
+            registerButton.setContentAreaFilled(false);
+
+           
+            ImageIcon registro = new ImageIcon("botonregistro.png");
+            registerButton.setIcon(registro); 
+
             registerButton.addActionListener(new ActionListener() {
                 @Override
                 public void actionPerformed(ActionEvent e) {
-                    // Aquí puedes agregar la lógica para el registro
+                    
+                }
+            });
+
+            registerButton.addActionListener(new ActionListener() {
+                @Override
+                public void actionPerformed(ActionEvent e) {
+                  
                 }
             });
 
