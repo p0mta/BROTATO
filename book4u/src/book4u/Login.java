@@ -157,41 +157,8 @@ public class Login extends JFrame {
         
         registerButton.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {                
-                String usuario = usernameField.getText();
-                String password = new String(passwordField.getPassword());
-
-                // Conectar a la base de datos y realizar el registro
-               
-                boolean userExists = false;
-
-                try {
-                    String query = "SELECT * FROM Usuario WHERE nombre = ?";
-                    PreparedStatement statement = connection.prepareStatement(query);
-                    statement.setString(1, usuario);
-
-                    ResultSet result = statement.executeQuery();
-                    if (result.next()) {
-                        userExists = true;
-                    }
-                } catch (SQLException ex) {
-                    ex.printStackTrace();
-                }
-
-                if (userExists) {
-                    JOptionPane.showMessageDialog(Login.this, "Este usuario ya está registrado cambia el usuario");
-                } else {
-                	JOptionPane.showMessageDialog(Login.this, "Registro exitoso, ahora inicia sesion");
-                    	 try {
-                         	String insert = "INSERT INTO usuario (NOMBRE, PASSWORD) VALUES ('"+usernameField.getText()+"','"+String.valueOf(getPasswordField().getPassword())+"')";
-                             PreparedStatement statement = connection.prepareStatement(insert);
-                             int rowsInserted = statement.executeUpdate();
-                              // Retorna true si se insertó al menos una fila
-                         } catch (SQLException e1) {
-                             e1.printStackTrace();
-                             JOptionPane.showMessageDialog(Login.this, "Error al registrar el usuario");
-                         }
-                
-            }
+               dispose();
+               Registro reg = new Registro();
             }
         });
         
@@ -229,19 +196,7 @@ public class Login extends JFrame {
         return false;
     }
 
-    private boolean registerUser(String nombre, String password) {
-        try {
-        	String insert = "INSERT INTO usuario (NOMBRE, PASSWORD) VALUES ('"+usernameField.getText()+"','"+String.valueOf(getPasswordField().getPassword())+"')";
-            PreparedStatement statement = connection.prepareStatement(insert);
-            int rowsInserted = statement.executeUpdate();
-            return rowsInserted > 0; // Retorna true si se insertó al menos una fila
-        } catch (SQLException e) {
-            e.printStackTrace();
-            JOptionPane.showMessageDialog(Login.this, "Error al registrar el usuario");
-        }
-        return false;
-    }
-    
+   
     public JTextField getUsernameField() {
         return usernameField;
     }
