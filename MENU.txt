@@ -1,65 +1,73 @@
 import javax.swing.*;
+import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
-public class MENU {
+public class menu {
     public static void main(String[] args) {
-        // Crear un nuevo marco (ventana)
-        JFrame frame = new JFrame("Ejemplo de Menú con Desplegable");
+        // Crear un JFrame (ventana principal)
+        JFrame frame = new JFrame("Página de Inicio");
+        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        frame.setSize(600, 400);
 
-        // Crear una barra de menú
-        JMenuBar menuBar = new JMenuBar();
+        // Crear un JPanel con color de fondo personalizado
+        JPanel panel = new JPanel();
+        panel.setBackground(Color.decode("#579514")); // Establecer el color de fondo
 
-        // Crear un menú desplegable
-        JMenu menu = new JMenu("Archivo");
+        // Crear un layout para organizar los componentes
+        panel.setLayout(new BorderLayout());
 
-        // Crear elementos de menú
-        JMenuItem abrirItem = new JMenuItem("Inicio");
-        JMenuItem abrirItem = new JMenuItem("Historial");
-        JMenuItem abrirItem = new JMenuItem("Usuario");
-        JMenuItem guardarItem = new JMenuItem("Atras");
-        
+        // Crear un JPanel en blanco (zona de contenido)
+        JPanel contenidoPanel = new JPanel();
+        contenidoPanel.setBackground(Color.WHITE); // Fondo blanco
 
-        // Agregar ActionListener a los elementos de menú para manejar eventos
-        abrirItem.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                // Coloca aquí la lógica para abrir un archivo
-                JOptionPane.showMessageDialog(frame, "Abrir archivo seleccionado.");
-            }
+        // Crear cuatro botones en la zona derecha
+        JPanel botonesPanel = new JPanel();
+        botonesPanel.setLayout(new GridLayout(4, 1)); // GridLayout para alinear los botones verticalmente
+
+        JButton boton1 = new JButton("Inicio");
+        JButton boton2 = new JButton("Historial");
+        JButton boton3 = new JButton("Usuario");
+        JButton Atras = new JButton("Atras");
+
+        // Agregar ActionListener a los botones
+     //   boton1.addActionListener(new ActionListener() {
+       //     public void actionPerformed(ActionEvent e) {
+         //       JOptionPane.showMessageDialog(frame, "Inicio seleccionado");
+           // }
         });
 
-        guardarItem.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                // Coloca aquí la lógica para guardar un archivo
-                JOptionPane.showMessageDialog(frame, "Guardar archivo seleccionado.");
-            }
+        //boton2.addActionListener(new ActionListener() {
+          //  public void actionPerformed(ActionEvent e) {
+            //    JOptionPane.showMessageDialog(frame, "Historial seleccionado");
+            //}
         });
 
-        salirItem.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                // Coloca aquí la lógica para salir de la aplicación
-                System.exit(0);
-            }
+      //  boton3.addActionListener(new ActionListener() {
+           // public void actionPerformed(ActionEvent e) {
+               // JOptionPane.showMessageDialog(frame, "Usuario seleccionado");
+            //}
         });
 
-        // Agregar los elementos de menú al menú desplegable
-        menu.add(abrirItem);
-        menu.add(guardarItem);
-        menu.addSeparator(); // Agregar una línea separadora
-        menu.add(salirItem);
+        //boton4.addActionListener(new ActionListener() {
+          //  public void actionPerformed(ActionEvent e) {
+            //    JOptionPane.showMessageDialog(frame, "Atras seleccionado");
+            //}
+        });
 
-        // Agregar el menú al menú de la barra
-        menuBar.add(menu);
+        botonesPanel.add(Inicio);
+        botonesPanel.add(Historial);
+        botonesPanel.add(Usuario);
+        botonesPanel.add(Atras);
 
-        // Establecer la barra de menú en el marco
-        frame.setJMenuBar(menuBar);
+        // Agregar el JPanel en blanco al centro y el panel de botones a la derecha
+        panel.add(contenidoPanel, BorderLayout.CENTER);
+        panel.add(botonesPanel, BorderLayout.EAST);
 
-        // Configurar propiedades del marco
-        frame.setDefaultCloseOperation(JFrame.EXIT);
-        frame.setSize(300, 150);
+        // Agregar el panel al JFrame
+        frame.add(panel);
+
+        // Hacer visible la ventana
         frame.setVisible(true);
     }
 }
