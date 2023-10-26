@@ -72,6 +72,27 @@ public class Login extends JFrame {
             loginButton.setBorderPainted(false);
             loginButton.setContentAreaFilled(false);
             
+            ImageIcon ima2 = new ImageIcon("ojo.png");
+            JToggleButton toggleButton = new JToggleButton(ima2);
+            toggleButton.setBounds(750, 300, 25, 25);
+            toggleButton.setBackground(Color.WHITE);
+
+            toggleButton.addActionListener(new ActionListener() {
+                public void actionPerformed(ActionEvent e) {
+                    if (toggleButton.isSelected()) {
+                   
+                    	passwordField.setEchoChar((char) 0);
+                        
+                    	passwordField.setFont(fuente);
+                        
+                    } else {
+                   
+                    	passwordField.setEchoChar('·');
+                        
+                       
+                    }
+                }
+            });
             
             
             ImageIcon iniciarsesion = new ImageIcon("boton.png"); 
@@ -122,6 +143,7 @@ public class Login extends JFrame {
             add(loginButton);
             add(registerButton);
             add(registroLabel);
+            this.add(toggleButton);
             
 
             setLayout(null);
