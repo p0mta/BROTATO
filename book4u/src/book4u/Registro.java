@@ -118,9 +118,23 @@ public class Registro extends JFrame {
         
         registro.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
-                String usuario = correo.getText();
+            	String usuario = correo.getText();
                 String password = new String(contraseña.getPassword());
+                String password2 = new String(contraseña2.getPassword());
+                String nombreText = nombre.getText();
+                String apellidosText = apellidos.getText();
+                String ciudadText = ciudad.getText();
 
+                // Comprueba si algún campo está vacío y muestra un mensaje de error.
+                if (usuario.isEmpty() || password.isEmpty() || password2.isEmpty() ||
+                    nombreText.isEmpty() || apellidosText.isEmpty() || ciudadText.isEmpty()) {
+                    JOptionPane.showMessageDialog(Registro.this, "Por favor, completa todos los campos.");
+                    return;
+                }
+                if(!(contraseña == contraseña2)) {
+               	 JOptionPane.showMessageDialog(Registro.this, "La contraseña no coincide vuelve a intentarlo");
+               	 return;
+               }
                 if (!usuario.endsWith("@gmail.com")) {
                     JOptionPane.showMessageDialog(Registro.this, "Debes utilizar un correo valido para registrarte.");
                     return; // Sale de la acción si el correo no es válido.
