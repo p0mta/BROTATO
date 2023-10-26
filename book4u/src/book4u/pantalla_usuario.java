@@ -33,7 +33,7 @@ public class pantalla_usuario extends JFrame {
 		this.add(pan);
 		JLabel tit = new JLabel("USUARIO");
         tit.setBounds(315, 20, 200, 40);
-        tit.setFont(Registro.fuente);
+        
         pan.add(tit);
 		
 		ImageIcon imagen = new ImageIcon("Logo.png");
@@ -45,8 +45,11 @@ public class pantalla_usuario extends JFrame {
 		JLabel cir1 = new JLabel(cir);
 		cir1.setBounds(670, -10, 100, 100);
 		
-		
-		JLabel let = new JLabel(cir, Registro.nombre.getText().toUpperCase().charAt(1));
+		String nombreUsuario;
+		nombreUsuario = Login.getUsernameField().getText().toUpperCase();
+		char primeraLetra = nombreUsuario.charAt(0);
+
+		JLabel let = new JLabel(String.valueOf(primeraLetra));
 		let.setBounds(713, 15, 50, 50);
 		let.setForeground(Color.white);
 		let.setFont(fuente);

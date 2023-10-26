@@ -119,7 +119,7 @@ public class Login extends JFrame {
                 if (loginSuccessful) {
                     JOptionPane.showMessageDialog(Login.this, "Inicio de sesión exitoso");
                     dispose();
-                    Menu carrit = new Menu();
+                    pantalla_usuario pant = new pantalla_usuario();
                    
                     
                     // Aquí iría el código para abrir la ventana principal de la aplicación
@@ -181,7 +181,7 @@ public class Login extends JFrame {
     }
 
     
-    public JTextField getUsernameField() {
+    public static JTextField getUsernameField() {
         return usernameField;
     }
     
