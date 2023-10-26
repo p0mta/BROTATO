@@ -3,6 +3,7 @@ package book4u;
 import java.awt.Color;
 import java.awt.Font;
 
+import javax.swing.BorderFactory;
 import javax.swing.ImageIcon;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
@@ -12,7 +13,7 @@ import javax.swing.JTextField;
 
 public class pantalla_usuario extends JFrame {
 	
-	static Font fuente = new Font("AGENCY FB", Font.BOLD,30);
+	static Font fuente = new Font("AGENCY FB", Font.BOLD,50);
 	static JTextField nombre;
 	static JPasswordField contra;
 	static JTextField correo;
@@ -33,8 +34,17 @@ public class pantalla_usuario extends JFrame {
 		this.add(pan);
 		JLabel tit = new JLabel("USUARIO");
         tit.setBounds(315, 20, 200, 40);
-        
+        tit.setFont(fuente);
         pan.add(tit);
+        nombre = new JTextField();
+		nombre.setBounds(100, 150, 200, 25);
+		nombre.setHorizontalAlignment(JTextField.CENTER);
+		nombre.setBorder(BorderFactory.createLineBorder(Color.black));
+		this.add(nombre);
+		JLabel nombre2 = new JLabel("CAMBIAR NOMBRE");
+		nombre2.setBounds(130, 120, 140, 30);
+		nombre2.setFont(Registro.fuente1);
+		this.add(nombre2);
 		
 		ImageIcon imagen = new ImageIcon("Logo.png");
 		JLabel ima = new JLabel(imagen);
@@ -45,12 +55,12 @@ public class pantalla_usuario extends JFrame {
 		JLabel cir1 = new JLabel(cir);
 		cir1.setBounds(670, -10, 100, 100);
 		
-		String nombreUsuario;
+		/*String nombreUsuario;
 		nombreUsuario = Login.getUsernameField().getText().toUpperCase();
-		char primeraLetra = nombreUsuario.charAt(0);
+		char primeraLetra = nombreUsuario.charAt(0);*/
 
-		JLabel let = new JLabel(String.valueOf(primeraLetra));
-		let.setBounds(713, 15, 50, 50);
+		JLabel let = new JLabel();
+		let.setBounds(712, 15, 50, 50);
 		let.setForeground(Color.white);
 		let.setFont(fuente);
 		pan.add(let);
@@ -59,10 +69,7 @@ public class pantalla_usuario extends JFrame {
 	        Color backgroundColor = Color.decode(colorfondo);
 	        this.getContentPane().setBackground(backgroundColor);
 		
-		nombre = new JTextField();
-		nombre.setBounds(140, 200, 200, 25);
-		nombre.setHorizontalAlignment(JTextField.CENTER);
-		this.add(nombre);
+		
 		
 	}
 }

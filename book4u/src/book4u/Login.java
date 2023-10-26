@@ -22,7 +22,7 @@ public class Login extends JFrame {
 
         public Login() {
             // Configurar el frame
-            setTitle("BOOK4U- Login/Registro");
+            setTitle("BOOK4U- Login");
             setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
             setSize(900, 700);
             setLocationRelativeTo(null);
@@ -57,6 +57,7 @@ public class Login extends JFrame {
             usernameField.setForeground(Color.BLACK);
             usernameField.setBorder(BorderFactory.createLineBorder(Color.BLACK));
 
+            
             JLabel passwordLabel = new JLabel("Contraseña:");
             passwordLabel.setFont(fuente);
             passwordLabel.setForeground(Color.BLACK);
@@ -106,7 +107,7 @@ public class Login extends JFrame {
 
             setLayout(null);
             setVisible(true);
-        
+            
 
     
 
@@ -145,27 +146,17 @@ public class Login extends JFrame {
             
             }
         });
-        
-        
-      
-
-     
-
-        // Establecer la conexión >a la base de datos
-       
-
-        // Mostrar el frame
         setVisible(true);
     }
 
     private boolean loginUser(String nombre, String password) {
     	
         try {
-        	String select = "SELECT NOMBRE, CONTRASEÑA FROM USUARIO WHERE NOMBRE = '"+usernameField.getText()+"' AND CONTRASEÑA = '"+String.valueOf(getPasswordField().getPassword())+"'";
+        	String select = "SELECT CORREO, CONTRASEÑA FROM USUARIO WHERE CORREO = '"+usernameField.getText()+"' AND CONTRASEÑA = '"+String.valueOf(getPasswordField().getPassword())+"'";
             PreparedStatement statement = connection.prepareStatement(select);
             ResultSet resultSet = statement.executeQuery();
             while(resultSet.next()) {
-            	nombre = resultSet.getString("NOMBRE");
+            	nombre = resultSet.getString("CORREO");
             	password = resultSet.getString("CONTRASEÑA");
             	return true;
             }

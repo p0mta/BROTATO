@@ -18,9 +18,10 @@ public class Registro extends JFrame {
 	static JPasswordField contraseña;
 	static JTextField apellidos;
 	static JPasswordField contraseña2;
-	 Font fuente = new Font("Agency FB",Font.BOLD,50);
-	 Font fuente1 = new Font("Agency FB",Font.BOLD, 23);
-	 Font fuente2 = new Font("Agency FB",Font.BOLD, 18);
+	static String usuario = "";
+	static Font fuente = new Font("Agency FB",Font.BOLD,50);
+	static Font fuente1 = new Font("Agency FB",Font.BOLD, 23);
+	static Font fuente2 = new Font("Agency FB",Font.BOLD, 18);
 	public Registro(){
 		
 		setTitle("Registro");
@@ -158,7 +159,7 @@ public class Registro extends JFrame {
      });
         registro.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
-            	String usuario = correo.getText();
+            	usuario = correo.getText();
                 String password = new String(contraseña.getPassword());
                 String password2 = new String(contraseña2.getPassword());
                 String nombreText = nombre.getText();
