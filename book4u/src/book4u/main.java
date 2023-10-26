@@ -2,7 +2,7 @@ package book4u;
 
 public class main {
 
-	public static void si(String [] args) {
+	public static void main(String [] args) {
 		Login log = new Login();
 	}
 }
