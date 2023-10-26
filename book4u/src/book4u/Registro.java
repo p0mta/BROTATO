@@ -17,6 +17,7 @@ public class Registro extends JFrame {
 	static JTextField ciudad;
 	static JPasswordField contraseña;
 	static JTextField apellidos;
+	static JPasswordField contraseña2;
 	 Font fuente = new Font("Agency FB",Font.BOLD,50);
 	 Font fuente1 = new Font("Agency FB",Font.BOLD, 23);
 	 Font fuente2 = new Font("Agency FB",Font.BOLD, 18);
@@ -68,7 +69,7 @@ public class Registro extends JFrame {
 		contraseña = new JPasswordField();
 		contraseña.setBounds(460, 150, 200, 25);
 		contraseña.setBorder(BorderFactory.createLineBorder(Color.BLACK));
-		contraseña.setFont(fuente2);
+		
 		this.add(contraseña);
 		JLabel contraseña1 = new JLabel("CONTRASEÑA");
 		contraseña1.setBounds(510, 120, 105, 30);
@@ -76,26 +77,36 @@ public class Registro extends JFrame {
 		this.add(contraseña1);
 		
 		ciudad = new JTextField();
-		ciudad.setBounds(460, 230, 200, 25);
+		ciudad.setBounds(460, 310, 200, 25);
 		ciudad.setBorder(BorderFactory.createLineBorder(Color.black));
 		ciudad.setHorizontalAlignment(JTextField.CENTER);
 		ciudad.setFont(fuente2);
 		this.add(ciudad);
 		JLabel ciudad1 = new JLabel("CIUDAD");
-		ciudad1.setBounds(530, 200, 60, 30);
+		ciudad1.setBounds(530, 280, 60, 30);
 		ciudad1.setFont(fuente1);
 		this.add(ciudad1);
 		
 		correo = new JTextField();
-		correo.setBounds(300, 310, 200, 25);
+		correo.setBounds(140, 310, 200, 25);
 		correo.setBorder(BorderFactory.createLineBorder(Color.black));
 		correo.setHorizontalAlignment(JTextField.CENTER);
 		correo.setFont(fuente2);
 		this.add(correo);
 		JLabel dni1 = new JLabel("CORREO");
-		dni1.setBounds(370, 280, 60, 30);
+		dni1.setBounds(210, 280, 60, 30);
 		dni1.setFont(fuente1);
 		this.add(dni1);
+		
+		contraseña2 = new JPasswordField();
+		contraseña2.setBounds(460, 230, 200, 25);
+		contraseña2.setBorder(BorderFactory.createLineBorder(Color.black));
+		
+		this.add(contraseña2);
+		JLabel contraseña3 = new JLabel("REPETIR CONTRASEÑA");
+		contraseña3.setBounds(480, 200, 180, 30);
+		contraseña3.setFont(fuente1);
+		this.add(contraseña3);
 		
 		ImageIcon regi = new ImageIcon("registro.png");
 		JButton registro = new JButton(regi);
@@ -116,6 +127,29 @@ public class Registro extends JFrame {
         this.add(tit);
         this.add(pan);
         
+        ImageIcon ima2 = new ImageIcon("ojo.png");
+        JButton botonvision = new JButton(ima2);
+        botonvision.setBounds(700, 147, 30, 30);
+        botonvision.setBackground(Color.white);
+        
+        this.add(botonvision);
+
+        botonvision.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent e) {
+                if (botonvision.isSelected()) {
+                	
+                    contraseña.setEchoChar((char) 0);
+                    contraseña2.setEchoChar((char) 0);
+                    contraseña.setFont(fuente2);
+                    contraseña2.setFont(fuente2);
+                } else {
+                	
+                    contraseña.setEchoChar('·'); 
+                    contraseña2.setEchoChar('·'); 
+                    
+                }
+            }
+        });
         registro.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
             	String usuario = correo.getText();
@@ -160,6 +194,8 @@ public class Registro extends JFrame {
                     JOptionPane.showMessageDialog(Registro.this, "Este usuario ya está registrado. Cambia el correo o inicia sesión.");
                 } else {
                     JOptionPane.showMessageDialog(Registro.this, "Registro exitoso. Ahora inicia sesión.");
+                    dispose();
+                    Login log = new Login();
                     try {
                         String insert = "INSERT INTO USUARIO (NOMBRE, CONTRASEÑA, CORREO, CIUDAD, APELLIDOS) VALUES (?, ?, ?, ?, ?)";
                         PreparedStatement statement = Login.connection.prepareStatement(insert);
