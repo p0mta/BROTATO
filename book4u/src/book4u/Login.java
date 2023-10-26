@@ -43,8 +43,8 @@ public class Login extends JFrame {
             
 
             // Crear los componentes de inicio de sesión
-            Font fuente = new Font("Arial", Font.PLAIN, 18);
-            Font texto = new Font("Arial", Font.PLAIN, 14);
+            Font fuente = new Font("Agency FB", Font.PLAIN, 23);
+            Font texto = new Font("Agency FB", Font.PLAIN, 18);
 
             JLabel usernameLabel = new JLabel("Usuario:");
             usernameLabel.setFont(fuente);
@@ -74,7 +74,7 @@ public class Login extends JFrame {
             
             
             
-            ImageIcon iniciarsesion = new ImageIcon("botoniniciosesion.png"); 
+            ImageIcon iniciarsesion = new ImageIcon("boton.png"); 
             loginButton.setIcon(iniciarsesion);
             
             JLabel registroLabel = new JLabel("No estás registrado? Registrate!");
@@ -90,7 +90,7 @@ public class Login extends JFrame {
             });
 
             JButton registerButton = new JButton("Registrarse");
-            registerButton.setBounds(350, 450, 150, 50);
+            registerButton.setBounds(365, 450, 130, 50);
             registerButton.setFocusPainted(false);
             registerButton.setBorderPainted(false);
             registerButton.setContentAreaFilled(false);
@@ -122,6 +122,7 @@ public class Login extends JFrame {
             add(loginButton);
             add(registerButton);
             add(registroLabel);
+            
 
             setLayout(null);
             setVisible(true);
@@ -177,12 +178,12 @@ public class Login extends JFrame {
     private boolean loginUser(String nombre, String password) {
     	
         try {
-        	String select = "SELECT NOMBRE, PASSWORD FROM USUARIO WHERE NOMBRE = '"+usernameField.getText()+"' AND PASSWORD = '"+String.valueOf(getPasswordField().getPassword())+"'";
+        	String select = "SELECT NOMBRE, CONTRASEÑA FROM USUARIO WHERE NOMBRE = '"+usernameField.getText()+"' AND CONTRASEÑA = '"+String.valueOf(getPasswordField().getPassword())+"'";
             PreparedStatement statement = connection.prepareStatement(select);
             ResultSet resultSet = statement.executeQuery();
             while(resultSet.next()) {
             	nombre = resultSet.getString("NOMBRE");
-            	password = resultSet.getString("PASSWORD");
+            	password = resultSet.getString("CONTRASEÑA");
             	return true;
             }
 
