@@ -69,7 +69,7 @@ public class Registro extends JFrame {
 		contraseña = new JPasswordField();
 		contraseña.setBounds(460, 150, 200, 25);
 		contraseña.setBorder(BorderFactory.createLineBorder(Color.BLACK));
-		contraseña.setFont(fuente2);
+		
 		this.add(contraseña);
 		JLabel contraseña1 = new JLabel("CONTRASEÑA");
 		contraseña1.setBounds(510, 120, 105, 30);
@@ -101,7 +101,7 @@ public class Registro extends JFrame {
 		contraseña2 = new JPasswordField();
 		contraseña2.setBounds(460, 230, 200, 25);
 		contraseña2.setBorder(BorderFactory.createLineBorder(Color.black));
-		contraseña2.setFont(fuente2);
+		
 		this.add(contraseña2);
 		JLabel contraseña3 = new JLabel("REPETIR CONTRASEÑA");
 		contraseña3.setBounds(480, 200, 180, 30);
@@ -127,6 +127,29 @@ public class Registro extends JFrame {
         this.add(tit);
         this.add(pan);
         
+        ImageIcon ima2 = new ImageIcon("ojo.png");
+        JButton botonvision = new JButton(ima2);
+        botonvision.setBounds(700, 147, 30, 30);
+        botonvision.setBackground(Color.white);
+        
+        this.add(botonvision);
+
+        botonvision.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent e) {
+                if (botonvision.isSelected()) {
+                	
+                    contraseña.setEchoChar((char) 0);
+                    contraseña2.setEchoChar((char) 0);
+                    contraseña.setFont(fuente2);
+                    contraseña2.setFont(fuente2);
+                } else {
+                	
+                    contraseña.setEchoChar('·'); 
+                    contraseña2.setEchoChar('·'); 
+                    
+                }
+            }
+        });
         registro.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
             	String usuario = correo.getText();
