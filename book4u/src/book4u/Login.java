@@ -43,8 +43,8 @@ public class Login extends JFrame {
             
 
             // Crear los componentes de inicio de sesión
-            Font fuente = new Font("Arial", Font.PLAIN, 18);
-            Font texto = new Font("Arial", Font.PLAIN, 14);
+            Font fuente = new Font("Agency FB", Font.PLAIN, 23);
+            Font texto = new Font("Agency FB", Font.PLAIN, 18);
 
             JLabel usernameLabel = new JLabel("Usuario:");
             usernameLabel.setFont(fuente);
@@ -69,29 +69,69 @@ public class Login extends JFrame {
 
             JButton loginButton = new JButton("Iniciar sesión");
             loginButton.setBounds(350, 375, 150, 50);
-            loginButton.setBackground(Color.GREEN);
-            loginButton.setForeground(Color.WHITE);
+            loginButton.setFocusPainted(false);
+            loginButton.setBorderPainted(false);
+            loginButton.setContentAreaFilled(false);
+            
+            ImageIcon ima2 = new ImageIcon("ojo.png");
+            JToggleButton toggleButton = new JToggleButton(ima2);
+            toggleButton.setBounds(750, 300, 25, 25);
+            toggleButton.setBackground(Color.WHITE);
+
+            toggleButton.addActionListener(new ActionListener() {
+                public void actionPerformed(ActionEvent e) {
+                    if (toggleButton.isSelected()) {
+                   
+                    	passwordField.setEchoChar((char) 0);
+                        
+                    	passwordField.setFont(fuente);
+                        
+                    } else {
+                   
+                    	passwordField.setEchoChar('·');
+                        
+                       
+                    }
+                }
+            });
+            
+            
+            ImageIcon iniciarsesion = new ImageIcon("boton.png"); 
+            loginButton.setIcon(iniciarsesion);
             
             JLabel registroLabel = new JLabel("No estás registrado? Registrate!");
             registroLabel.setFont(fuente);
             registroLabel.setForeground(Color.BLACK);
-            registroLabel.setBounds(200,450, 150, 25);
+            registroLabel.setBounds(300,520, 400, 25);
             
             loginButton.addActionListener(new ActionListener() {
                 @Override
                 public void actionPerformed(ActionEvent e) {
-                    // Aquí puedes agregar la lógica para el inicio de sesión
+                    
                 }
             });
 
             JButton registerButton = new JButton("Registrarse");
-            registerButton.setBounds(350, 450, 150, 50);
-            registerButton.setBackground(Color.GREEN);
-            registerButton.setForeground(Color.WHITE);
+            registerButton.setBounds(365, 450, 130, 50);
+            registerButton.setFocusPainted(false);
+            registerButton.setBorderPainted(false);
+            registerButton.setContentAreaFilled(false);
+
+           
+            ImageIcon registro = new ImageIcon("botonregistro.png");
+            registerButton.setIcon(registro); 
+
             registerButton.addActionListener(new ActionListener() {
                 @Override
                 public void actionPerformed(ActionEvent e) {
-                    // Aquí puedes agregar la lógica para el registro
+                    
+                }
+            });
+
+            registerButton.addActionListener(new ActionListener() {
+                @Override
+                public void actionPerformed(ActionEvent e) {
+                  
                 }
             });
 
@@ -104,6 +144,8 @@ public class Login extends JFrame {
             add(loginButton);
             add(registerButton);
             add(registroLabel);
+            this.add(toggleButton);
+            
 
             setLayout(null);
             setVisible(true);
@@ -138,12 +180,11 @@ public class Login extends JFrame {
         }
         
         registerButton.addActionListener(new ActionListener() {
-            public void actionPerformed(ActionEvent e) {                
-               
+            public void actionPerformed(ActionEvent e) {
+
             	dispose();
             	Registro re = new Registro();
-            	
-            
+
             }
         });
         setVisible(true);
@@ -170,7 +211,6 @@ public class Login extends JFrame {
         }
         return false;
     }
-
     
     public static JTextField getUsernameField() {
         return usernameField;
