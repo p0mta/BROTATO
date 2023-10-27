@@ -55,12 +55,12 @@ public class pantalla_usuario extends JFrame {
 		JLabel cir1 = new JLabel(cir);
 		cir1.setBounds(670, -10, 100, 100);
 		
-		/*String nombreUsuario;
+		String nombreUsuario;
 		nombreUsuario = Login.getUsernameField().getText().toUpperCase();
-		char primeraLetra = nombreUsuario.charAt(0);*/
+		char primeraLetra = nombreUsuario.charAt(0);
 
-		JLabel let = new JLabel();
-		let.setBounds(712, 15, 50, 50);
+		JLabel let = new JLabel(String.valueOf(primeraLetra));
+		let.setBounds(711, 15, 50, 50);
 		let.setForeground(Color.white);
 		let.setFont(fuente);
 		pan.add(let);

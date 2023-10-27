@@ -46,29 +46,30 @@ public class Login extends JFrame {
             Font fuente = new Font("Agency FB", Font.PLAIN, 23);
             Font texto = new Font("Agency FB", Font.PLAIN, 18);
 
-            JLabel usernameLabel = new JLabel("Usuario:");
-            usernameLabel.setFont(fuente);
+            JLabel usernameLabel = new JLabel("CORREO");
+            usernameLabel.setFont(Registro.fuente1);
             usernameLabel.setForeground(Color.BLACK);
-            usernameLabel.setBounds(150, 300, 90, 20);
+            usernameLabel.setBounds(230, 260, 90, 20);
 
             usernameField = new JTextField();
-            usernameField.setBounds(250, 300, 150, 25);
+            usernameField.setBounds(165, 300, 200, 25);
             usernameField.setFont(texto);
             usernameField.setForeground(Color.BLACK);
             usernameField.setBorder(BorderFactory.createLineBorder(Color.BLACK));
 
             
-            JLabel passwordLabel = new JLabel("Contraseña:");
-            passwordLabel.setFont(fuente);
+            JLabel passwordLabel = new JLabel("CONTRASEÑA");
+            passwordLabel.setFont(Registro.fuente1);
             passwordLabel.setForeground(Color.BLACK);
-            passwordLabel.setBounds(450, 300, 150, 25);
+            passwordLabel.setBounds(550, 260, 150, 25);
 
             passwordField = new JPasswordField();
-            passwordField.setBounds(580, 300, 150, 25);
+            passwordField.setBounds(500, 300, 200, 25);
             passwordField.setBorder(BorderFactory.createLineBorder(Color.BLACK));
-
-            JButton loginButton = new JButton("Iniciar sesión");
-            loginButton.setBounds(350, 375, 150, 50);
+            
+            ImageIcon iniciarsesion = new ImageIcon("login.png"); 
+            JButton loginButton = new JButton(iniciarsesion);
+            loginButton.setBounds(360, 375, 142, 49);
             loginButton.setFocusPainted(false);
             loginButton.setBorderPainted(false);
             loginButton.setContentAreaFilled(false);
@@ -96,13 +97,13 @@ public class Login extends JFrame {
             });
             
             
-            ImageIcon iniciarsesion = new ImageIcon("boton.png"); 
-            loginButton.setIcon(iniciarsesion);
+           
+            
             
             JLabel registroLabel = new JLabel("No estás registrado? Registrate!");
-            registroLabel.setFont(fuente);
+            registroLabel.setFont(Registro.fuente1);
             registroLabel.setForeground(Color.BLACK);
-            registroLabel.setBounds(300,520, 400, 25);
+            registroLabel.setBounds(310,570, 400, 25);
             
             loginButton.addActionListener(new ActionListener() {
                 @Override
@@ -110,23 +111,17 @@ public class Login extends JFrame {
                     
                 }
             });
-
-            JButton registerButton = new JButton("Registrarse");
-            registerButton.setBounds(365, 450, 130, 50);
+            ImageIcon registro = new ImageIcon("botonregistro.png");
+            JButton registerButton = new JButton(registro);
+            registerButton.setBounds(360, 500, 142, 49);
             registerButton.setFocusPainted(false);
             registerButton.setBorderPainted(false);
             registerButton.setContentAreaFilled(false);
 
            
-            ImageIcon registro = new ImageIcon("botonregistro.png");
-            registerButton.setIcon(registro); 
+            
+           
 
-            registerButton.addActionListener(new ActionListener() {
-                @Override
-                public void actionPerformed(ActionEvent e) {
-                    
-                }
-            });
 
             registerButton.addActionListener(new ActionListener() {
                 @Override
@@ -172,7 +167,7 @@ public class Login extends JFrame {
             }
         });
         try {
-            connection = DriverManager.getConnection("jdbc:oracle:thin:@oracle.ilerna.com:1521:xe", "23_24_DAM2_BROTATO", "123456");
+            connection = DriverManager.getConnection("jdbc:oracle:thin:@192.168.3.26:1521:xe", "23_24_DAM2_BROTATO", "123456");
         } catch (SQLException e) {
             e.printStackTrace();
             JOptionPane.showMessageDialog(Login.this, "Error al conectar a la base de datos");
