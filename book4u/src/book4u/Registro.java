@@ -11,16 +11,17 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 
 public class Registro extends JFrame {
-
+	private boolean contraseniasVisible = false;
 	static JTextField nombre;
 	static JTextField correo;
 	static JTextField ciudad;
 	static JPasswordField contraseña;
 	static JTextField apellidos;
 	static JPasswordField contraseña2;
-	 Font fuente = new Font("Agency FB",Font.BOLD,50);
-	 Font fuente1 = new Font("Agency FB",Font.BOLD, 23);
-	 Font fuente2 = new Font("Agency FB",Font.BOLD, 18);
+	static String usuario = "";
+	static Font fuente = new Font("Agency FB",Font.BOLD,50);
+	static Font fuente1 = new Font("Agency FB",Font.BOLD, 23);
+	static Font fuente2 = new Font("Agency FB",Font.BOLD, 18);
 	public Registro(){
 		
 		setTitle("Registro");
@@ -29,7 +30,12 @@ public class Registro extends JFrame {
 		this.setLocationRelativeTo(null);
 		this.setVisible(true);
 		this.setLayout(null);
-		
+		ImageIcon ima2 = new ImageIcon("ojo.png");
+        JButton botonvision = new JButton(ima2);
+        botonvision.setBounds(700, 147, 30, 30);
+        botonvision.setBackground(Color.white);
+        
+        this.add(botonvision);
 		
 		
 		JPanel pan = new JPanel();
@@ -127,32 +133,33 @@ public class Registro extends JFrame {
         this.add(tit);
         this.add(pan);
         
-        ImageIcon ima2 = new ImageIcon("ojo.png");
-        JButton botonvision = new JButton(ima2);
-        botonvision.setBounds(700, 147, 30, 30);
-        botonvision.setBackground(Color.white);
         
-        this.add(botonvision);
 
-        botonvision.addActionListener(new ActionListener() {
-            public void actionPerformed(ActionEvent e) {
-                if (botonvision.isSelected()) {
-                	
-                    contraseña.setEchoChar((char) 0);
-                    contraseña2.setEchoChar((char) 0);
-                    contraseña.setFont(fuente2);
-                    contraseña2.setFont(fuente2);
-                } else {
-                	
-                    contraseña.setEchoChar('·'); 
-                    contraseña2.setEchoChar('·'); 
-                    
-                }
-            }
-        });
+        
+
+     // ...
+
+     botonvision.addActionListener(new ActionListener() {
+         public void actionPerformed(ActionEvent e) {
+             // Cambiar el estado de visibilidad de las contraseñas
+             contraseniasVisible = !contraseniasVisible;
+             
+             if (contraseniasVisible) {
+                 contraseña.setEchoChar((char) 0);
+                 contraseña2.setEchoChar((char) 0);
+                 contraseña.setFont(fuente2);
+                 contraseña2.setFont(fuente2);
+             } else {
+                 contraseña.setEchoChar('·');
+                 contraseña2.setEchoChar('·');
+                 contraseña.setFont(fuente2);
+                 contraseña2.setFont(fuente2);
+             }
+         }
+     });
         registro.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
-            	String usuario = correo.getText();
+            	usuario = correo.getText();
                 String password = new String(contraseña.getPassword());
                 String password2 = new String(contraseña2.getPassword());
                 String nombreText = nombre.getText();
@@ -160,15 +167,16 @@ public class Registro extends JFrame {
                 String ciudadText = ciudad.getText();
 
                 // Comprueba si algún campo está vacío y muestra un mensaje de error.
+                if (!password.equals(password2)) {
+                    JOptionPane.showMessageDialog(Registro.this, "La contraseña no coincide, vuelve a intentarlo");
+                    return;
+                }
+
                 if (usuario.isEmpty() || password.isEmpty() || password2.isEmpty() ||
                     nombreText.isEmpty() || apellidosText.isEmpty() || ciudadText.isEmpty()) {
                     JOptionPane.showMessageDialog(Registro.this, "Por favor, completa todos los campos.");
                     return;
                 }
-                if(!(contraseña == contraseña2)) {
-               	 JOptionPane.showMessageDialog(Registro.this, "La contraseña no coincide vuelve a intentarlo");
-               	 return;
-               }
                 if (!usuario.endsWith("@gmail.com")) {
                     JOptionPane.showMessageDialog(Registro.this, "Debes utilizar un correo valido para registrarte.");
                     return; // Sale de la acción si el correo no es válido.
