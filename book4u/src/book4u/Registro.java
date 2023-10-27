@@ -182,6 +182,26 @@ public class Registro extends JFrame {
                     JOptionPane.showMessageDialog(Registro.this, "Debes utilizar un correo valido para registrarte.");
                     return; // Sale de la acción si el correo no es válido.
                 }
+                if(nombre.getText().length() > 15) {
+                	JOptionPane.showMessageDialog(Registro.this, "No puede rebasar de 15 caracteres en su nombre");
+                    return; 
+                }
+                else if(contraseña.getPassword().length > 20) {
+                	JOptionPane.showMessageDialog(Registro.this, "No puede rebasar de 20 caracteres en la contraseña");
+                    return; 
+                }
+                else if(ciudad.getText().length() > 20) {
+                	JOptionPane.showMessageDialog(Registro.this, "No puede rebasar de 20 caracteres en la ciudad");
+                    return; 
+                }
+                else if(apellidos.getText().length() > 50) {
+                	JOptionPane.showMessageDialog(Registro.this, "No puede rebasar de 50 caracteres en sus apellidos");
+                    return; 
+                }
+                else if(correo.getText().length() > 30) {
+                	JOptionPane.showMessageDialog(Registro.this, "No puede rebasar de 30 caracteres en el correo");
+                    return; 
+                }
 
                 // Conectar a la base de datos y realizar el registro
                 boolean userExists = false;

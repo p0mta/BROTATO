@@ -4,6 +4,9 @@ import java.awt.Color;
 import java.awt.Font;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.WindowAdapter;
+import java.awt.event.WindowEvent;
+import java.awt.event.WindowListener;
 import java.beans.Statement;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -25,6 +28,7 @@ public class pantalla_usuario extends JFrame {
 	static JTextField nombre3;
 	static JPasswordField contra;
 	static JTextField correo;
+	private boolean visiongucci = false;
 	public pantalla_usuario() {
 		
 		setTitle("Usuario");
@@ -46,14 +50,56 @@ public class pantalla_usuario extends JFrame {
         pan.add(tit);
         nombre3 = new JTextField();
 		nombre3.setBounds(100, 150, 200, 25);
+		nombre3.setFont(Registro.fuente2);
 		nombre3.setHorizontalAlignment(JTextField.CENTER);
 		nombre3.setBorder(BorderFactory.createLineBorder(Color.black));
 		this.add(nombre3);
-		JLabel nombre2 = new JLabel("CAMBIAR NOMBRE");
-		nombre2.setBounds(130, 120, 140, 30);
+		String correo = Login.usernameField.getText();
+		String contraseña = String.valueOf(Login.getPasswordField().getPassword());
+		String nombre = obtenerNombreDesdeBaseDeDatos(correo, contraseña);
+		JLabel nombre2 = new JLabel("CAMBIAR NOMBRE ("+nombre.toUpperCase()+")");
+		nombre2.setHorizontalAlignment(JLabel.CENTER);
+		nombre2.setBounds(50, 120, 300, 30);
 		nombre2.setFont(Registro.fuente1);
 		this.add(nombre2);
-		
+		contra = new JPasswordField();
+		contra.setBounds(500, 150, 200, 25);
+		contra.setBorder(BorderFactory.createLineBorder(Color.black));
+		this.add(contra);
+		JLabel conti = new JLabel("CAMBIAR CONTRASEÑA");
+		conti.setBounds(450, 120, 300, 30);
+		conti.setFont(Registro.fuente1);
+		conti.setHorizontalAlignment(JLabel.CENTER);
+		this.add(conti);
+		ImageIcon icono = new ImageIcon("change.png");
+		JButton siu = new JButton(icono);
+		siu.setBounds(518, 180, 150, 30);
+		siu.setText("CHANGE"); 
+		siu.setFont(Registro.fuente1);
+		siu.setFocusPainted(false);
+		siu.setBorderPainted(false);
+		siu.setContentAreaFilled(false);
+		this.add(siu);
+		ImageIcon ima2 = new ImageIcon("ojo.png");
+        JButton botonvision = new JButton(ima2);
+        botonvision.setBounds(710, 147, 30, 30);
+        botonvision.setBackground(Color.white);
+        
+        this.add(botonvision);
+        botonvision.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent e) {
+                visiongucci = !visiongucci; // Invertir la visibilidad
+
+                if(visiongucci) {
+                	contra.setEchoChar((char) 0); 
+                    contra.setFont(Registro.fuente2);
+                }
+                else {
+                	contra.setEchoChar('·');
+                }
+               
+            }
+        });
 		ImageIcon imagen = new ImageIcon("Logo.png");
 		JLabel ima = new JLabel(imagen);
 		ima.setBounds(0, 0, 150, 100); 
@@ -62,20 +108,29 @@ public class pantalla_usuario extends JFrame {
 		ImageIcon cir = new ImageIcon("circulo.png");
 		JLabel cir1 = new JLabel(cir);
 		cir1.setBounds(670, -10, 100, 100);
-		
-		String nombreUsuario;
-		nombreUsuario = Login.getUsernameField().getText().toUpperCase();
-		char primeraLetra = nombreUsuario.charAt(0);
 
-		JLabel let = new JLabel(String.valueOf(primeraLetra));
-		let.setHorizontalAlignment(JLabel.CENTER);
-		let.setBounds(696, 15, 50, 50);
-		let.setForeground(Color.white);
-		let.setFont(fuente);
-		pan.add(let);
+		if (nombre != null) {
+		    // Obtener la primera letra del nombre
+		    if (!nombre.isEmpty()) {
+		        char primeraLetra = nombre.toUpperCase().charAt(0);
+		        // Luego puedes usar "primeraLetra" como lo hiciste anteriormente
+		        JLabel let = new JLabel(String.valueOf(primeraLetra));
+		        let.setHorizontalAlignment(JLabel.CENTER);
+		        let.setBounds(695, 15, 50, 50);
+		        let.setForeground(Color.white);
+		        let.setFont(fuente);
+		        pan.add(let);
+		    } else {
+		        JOptionPane.showMessageDialog(pantalla_usuario.this, "El nombre de usuario está vacío.");
+		    }
+		} else {
+		    JOptionPane.showMessageDialog(pantalla_usuario.this, "No se pudo obtener el nombre de usuario desde la base de datos.");
+		}
+
+
 		pan.add(cir1);
 		
-		ImageIcon icono = new ImageIcon("change.png");
+		
         
         // Crear un botón y establecer la imagen y el texto
         JButton change = new JButton(icono);
@@ -91,35 +146,36 @@ public class pantalla_usuario extends JFrame {
 	        Color backgroundColor = Color.decode(colorfondo);
 	        this.getContentPane().setBackground(backgroundColor);
 		
-		
+	        
 	        change.addActionListener(new ActionListener() {
 	            public void actionPerformed(ActionEvent e) {
 	                String correo = Login.usernameField.getText();
-	                String contrasena = String.valueOf(Login.getPasswordField().getPassword());
+	                String contraseña = String.valueOf(Login.getPasswordField().getPassword());
 
 	                // Obtener el nombre de usuario desde la base de datos
-	                String nombre = obtenerNombreDesdeBaseDeDatos(correo, contrasena);
-	                if(nombre3.getText().isEmpty()) {
-	                	JOptionPane.showMessageDialog(pantalla_usuario.this, "Tienes que rellenar el campo nombre");
-	                	return;
-	                }
-	                if (nombre != null) {
-	                    // Mostrar un cuadro de diálogo para que el usuario ingrese el nuevo nombre
-	                    
+	                String nombre = obtenerNombreDesdeBaseDeDatos(correo, contraseña);
 
-	                    if (nombre2.getText() != null && !nombre2.getText().isEmpty()) {
+	                if (nombre != null) {
+	                    // Validar que el nombre no tenga más de 15 caracteres
+	                    if (nombre3.getText().isEmpty()) {
+	                        JOptionPane.showMessageDialog(pantalla_usuario.this, "Tienes que rellenar el campo nombre");
+	                    } else if (nombre3.getText().length() > 15) {
+	                        JOptionPane.showMessageDialog(pantalla_usuario.this, "El nombre no puede tener más de 15 caracteres");
+	                    } else {
 	                        // Realizar la actualización con el nuevo nombre
 	                        String update = "UPDATE USUARIO SET NOMBRE = ? WHERE CORREO = ? AND CONTRASEÑA = ?";
 	                        try {
 	                            PreparedStatement preparedStatement = Login.connection.prepareStatement(update);
 	                            preparedStatement.setString(1, nombre3.getText());
 	                            preparedStatement.setString(2, correo);
-	                            preparedStatement.setString(3, contrasena);
+	                            preparedStatement.setString(3, contraseña);
 
 	                            int rowsUpdated = preparedStatement.executeUpdate();
 
 	                            if (rowsUpdated > 0) {
 	                                JOptionPane.showMessageDialog(pantalla_usuario.this, "Nombre de usuario modificado correctamente");
+	                                dispose();
+	                                pantalla_usuario panta = new pantalla_usuario();
 	                            } else {
 	                                JOptionPane.showMessageDialog(pantalla_usuario.this, "No se pudo modificar el nombre de usuario. Verifica que la contraseña actual sea correcta.");
 	                            }
@@ -127,22 +183,63 @@ public class pantalla_usuario extends JFrame {
 	                            ex.printStackTrace();
 	                            JOptionPane.showMessageDialog(pantalla_usuario.this, "Error al modificar el nombre de usuario");
 	                        }
-	                    } else {
-	                        JOptionPane.showMessageDialog(pantalla_usuario.this, "Nombre de usuario no válido.");
 	                    }
 	                } else {
 	                    JOptionPane.showMessageDialog(pantalla_usuario.this, "No se pudo obtener el nombre de usuario desde la base de datos.");
 	                }
-	                
 	            }
 	        });
+	        
+	        siu.addActionListener(new ActionListener() {
+	            public void actionPerformed(ActionEvent e) {
+	                String correo = Login.usernameField.getText();
+	                String contraseñaActual = String.valueOf(Login.getPasswordField().getPassword());
+	                String nuevaContraseña = String.valueOf(contra.getPassword());
+
+	                // Obtener el nombre de usuario desde la base de datos
+	                String nombre = obtenerNombreDesdeBaseDeDatos(correo, contraseñaActual);
+	                if(nuevaContraseña.length() > 20) {
+	                	JOptionPane.showMessageDialog(pantalla_usuario.this, "La contraseña no puede tener mas de 20 caracteres");
+	                	return;
+	                }
+	                if (nombre != null) {
+	                    if (nuevaContraseña.isEmpty()) {
+	                        JOptionPane.showMessageDialog(pantalla_usuario.this, "Tienes que rellenar el campo de nueva contraseña");
+	                    } else {
+	                        // Realizar la actualización de la contraseña en la base de datos
+	                        String update = "UPDATE USUARIO SET CONTRASEÑA = ? WHERE CORREO = ? AND CONTRASEÑA = ?";
+	                        try {
+	                            PreparedStatement preparedStatement = Login.connection.prepareStatement(update);
+	                            preparedStatement.setString(1, nuevaContraseña);
+	                            preparedStatement.setString(2, correo);
+	                            preparedStatement.setString(3, contraseñaActual);
+
+	                            int rowsUpdated = preparedStatement.executeUpdate();
+
+	                            if (rowsUpdated > 0) {
+	                                JOptionPane.showMessageDialog(pantalla_usuario.this, "Contraseña modificada correctamente");
+	                                
+	                            } else {
+	                                JOptionPane.showMessageDialog(pantalla_usuario.this, "No se pudo modificar la contraseña. Verifica que la contraseña actual sea correcta.");
+	                            }
+	                        } catch (SQLException ex) {
+	                            ex.printStackTrace();
+	                            JOptionPane.showMessageDialog(pantalla_usuario.this, "Error al modificar la contraseña");
+	                        }
+	                    }
+	                } else {
+	                    JOptionPane.showMessageDialog(pantalla_usuario.this, "Para cambiar la contraseña cierre la app y vuelvala a abrir,gracias");
+	                }
+	            }
+	        });
+
 	    }
 
 	    // Método para obtener el nombre desde la base de datos
 	    
 
 	
-private String obtenerNombreDesdeBaseDeDatos(String correo, String contraseña) {
+public String obtenerNombreDesdeBaseDeDatos(String correo, String contraseña) {
     String nombre = null;
     try {
         String selectQuery = "SELECT NOMBRE FROM USUARIO WHERE CORREO = ? AND CONTRASEÑA = ?";
