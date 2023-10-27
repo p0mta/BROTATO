@@ -167,16 +167,17 @@ public class Registro extends JFrame {
                 String ciudadText = ciudad.getText();
 
                 // Comprueba si algún campo está vacío y muestra un mensaje de error.
+                if (usuario.isEmpty() || password.isEmpty() || password2.isEmpty() ||
+                        nombreText.isEmpty() || apellidosText.isEmpty() || ciudadText.isEmpty()) {
+                        JOptionPane.showMessageDialog(Registro.this, "Por favor, completa todos los campos.");
+                        return;
+                    }
                 if (!password.equals(password2)) {
                     JOptionPane.showMessageDialog(Registro.this, "La contraseña no coincide, vuelve a intentarlo");
                     return;
                 }
 
-                if (usuario.isEmpty() || password.isEmpty() || password2.isEmpty() ||
-                    nombreText.isEmpty() || apellidosText.isEmpty() || ciudadText.isEmpty()) {
-                    JOptionPane.showMessageDialog(Registro.this, "Por favor, completa todos los campos.");
-                    return;
-                }
+               
                 if (!usuario.endsWith("@gmail.com")) {
                     JOptionPane.showMessageDialog(Registro.this, "Debes utilizar un correo valido para registrarte.");
                     return; // Sale de la acción si el correo no es válido.

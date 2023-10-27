@@ -69,7 +69,7 @@ public class Login extends JFrame {
             
             ImageIcon iniciarsesion = new ImageIcon("login.png"); 
             JButton loginButton = new JButton(iniciarsesion);
-            loginButton.setBounds(360, 375, 142, 49);
+            loginButton.setBounds(360, 375, 150, 55);
             loginButton.setFocusPainted(false);
             loginButton.setBorderPainted(false);
             loginButton.setContentAreaFilled(false);
@@ -113,7 +113,7 @@ public class Login extends JFrame {
             });
             ImageIcon registro = new ImageIcon("botonregistro.png");
             JButton registerButton = new JButton(registro);
-            registerButton.setBounds(360, 500, 142, 49);
+            registerButton.setBounds(360, 500, 150, 48);
             registerButton.setFocusPainted(false);
             registerButton.setBorderPainted(false);
             registerButton.setContentAreaFilled(false);
