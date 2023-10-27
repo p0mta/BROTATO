@@ -179,9 +179,11 @@ public class Login extends JFrame {
         }
         
         registerButton.addActionListener(new ActionListener() {
-            public void actionPerformed(ActionEvent e) {                
-               dispose();
-               Registro reg = new Registro();
+            public void actionPerformed(ActionEvent e) {
+
+            	dispose();
+            	Registro re = new Registro();
+
             }
         });
         
@@ -218,8 +220,7 @@ public class Login extends JFrame {
         }
         return false;
     }
-
-   
+    
     public JTextField getUsernameField() {
         return usernameField;
     }
