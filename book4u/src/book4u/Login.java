@@ -167,7 +167,7 @@ public class Login extends JFrame {
             }
         });
         try {
-            connection = DriverManager.getConnection("jdbc:oracle:thin:@oracle.ilerna.com:1521:xe", "23_24_DAM2_BROTATO", "123456");
+            connection = DriverManager.getConnection("jdbc:oracle:thin:@192.168.3.26:1521:xe", "23_24_DAM2_BROTATO", "123456");
         } catch (SQLException e) {
             e.printStackTrace();
             JOptionPane.showMessageDialog(Login.this, "Error al conectar a la base de datos");

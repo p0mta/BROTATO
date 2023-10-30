@@ -11,7 +11,18 @@ import java.beans.Statement;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import javax.swing.*;
+import java.awt.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 
+import java.sql.PreparedStatement;
+import java.sql.SQLException;
+
+import javax.swing.*;
+import java.awt.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import javax.swing.BorderFactory;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
@@ -192,46 +203,31 @@ public class pantalla_usuario extends JFrame {
 	        
 	        siu.addActionListener(new ActionListener() {
 	            public void actionPerformed(ActionEvent e) {
-	                String correo = Login.usernameField.getText();
-	                String contraseñaActual = String.valueOf(Login.getPasswordField().getPassword());
-	                String nuevaContraseña = String.valueOf(contra.getPassword());
+	                String update = "UPDATE usuario SET contraseña = ? WHERE CORREO = ? AND contraseña = ?";
+	                try {
+	                    // Crear un PreparedStatement en lugar de un Statement para evitar SQL Injection
+	                    PreparedStatement preparedStatement = Login.connection.prepareStatement(update);
+	                    preparedStatement.setString(1, String.valueOf(contra.getPassword()));
+	                    preparedStatement.setString(2, Login.usernameField.getText());
+	                    preparedStatement.setString(3, String.valueOf(Login.getPasswordField().getPassword()));
 
-	                // Obtener el nombre de usuario desde la base de datos
-	                String nombre = obtenerNombreDesdeBaseDeDatos(correo, contraseñaActual);
-	                if(nuevaContraseña.length() > 20) {
-	                	JOptionPane.showMessageDialog(pantalla_usuario.this, "La contraseña no puede tener mas de 20 caracteres");
-	                	return;
-	                }
-	                if (nombre != null) {
-	                    if (nuevaContraseña.isEmpty()) {
-	                        JOptionPane.showMessageDialog(pantalla_usuario.this, "Tienes que rellenar el campo de nueva contraseña");
+	                    int rowsUpdated = preparedStatement.executeUpdate();     
+	                    if (rowsUpdated > 0) {
+	                        JOptionPane.showMessageDialog(pantalla_usuario.this, "Contraseña modificada correctamente");
 	                    } else {
-	                        // Realizar la actualización de la contraseña en la base de datos
-	                        String update = "UPDATE USUARIO SET CONTRASEÑA = ? WHERE CORREO = ? AND CONTRASEÑA = ?";
-	                        try {
-	                            PreparedStatement preparedStatement = Login.connection.prepareStatement(update);
-	                            preparedStatement.setString(1, nuevaContraseña);
-	                            preparedStatement.setString(2, correo);
-	                            preparedStatement.setString(3, contraseñaActual);
-
-	                            int rowsUpdated = preparedStatement.executeUpdate();
-
-	                            if (rowsUpdated > 0) {
-	                                JOptionPane.showMessageDialog(pantalla_usuario.this, "Contraseña modificada correctamente");
-	                                
-	                            } else {
-	                                JOptionPane.showMessageDialog(pantalla_usuario.this, "No se pudo modificar la contraseña. Verifica que la contraseña actual sea correcta.");
-	                            }
-	                        } catch (SQLException ex) {
-	                            ex.printStackTrace();
-	                            JOptionPane.showMessageDialog(pantalla_usuario.this, "Error al modificar la contraseña");
-	                        }
+	                        JOptionPane.showMessageDialog(pantalla_usuario.this, "No se pudo modificar la contraseña. Verifica que la contraseña actual sea correcta.");
 	                    }
-	                } else {
-	                    JOptionPane.showMessageDialog(pantalla_usuario.this, "Para cambiar la contraseña cierre la app y vuelvala a abrir,gracias");
+	                    if(contra.getText().length() > 20) {
+	                    	JOptionPane.showMessageDialog(pantalla_usuario.this, "La contraseña no puede contener mas de 20 caracteres");
+	                    }
+	                } catch (SQLException ex) {
+	                    ex.printStackTrace();
+	                    JOptionPane.showMessageDialog(pantalla_usuario.this, "Error al modificar la contraseña");
 	                }
+	                
 	            }
 	        });
+
 
 	    }
 
