@@ -210,21 +210,23 @@ public class pantalla_usuario extends JFrame {
 	                    preparedStatement.setString(1, String.valueOf(contra.getPassword()));
 	                    preparedStatement.setString(2, Login.usernameField.getText());
 	                    preparedStatement.setString(3, String.valueOf(Login.getPasswordField().getPassword()));
-
+	                    if(contra.getText().length() > 20) {
+	                    	JOptionPane.showMessageDialog(pantalla_usuario.this, "La contraseña no puede contener mas de 20 caracteres");
+	                    	return;
+	                    }
 	                    int rowsUpdated = preparedStatement.executeUpdate();     
 	                    if (rowsUpdated > 0) {
 	                        JOptionPane.showMessageDialog(pantalla_usuario.this, "Contraseña modificada correctamente");
 	                    } else {
 	                        JOptionPane.showMessageDialog(pantalla_usuario.this, "No se pudo modificar la contraseña. Verifica que la contraseña actual sea correcta.");
 	                    }
-	                    if(contra.getText().length() > 20) {
-	                    	JOptionPane.showMessageDialog(pantalla_usuario.this, "La contraseña no puede contener mas de 20 caracteres");
-	                    }
+	                    
 	                } catch (SQLException ex) {
 	                    ex.printStackTrace();
 	                    JOptionPane.showMessageDialog(pantalla_usuario.this, "Error al modificar la contraseña");
 	                }
-	                
+	                dispose();
+	                Login logi = new Login();
 	            }
 	        });
 
