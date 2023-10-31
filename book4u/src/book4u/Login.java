@@ -18,7 +18,7 @@ public class Login extends JFrame {
     Font fuente = new Font("Comic Sans MS",Font.PLAIN,23);
     Font texto = new Font("Comic Sans MS",Font.PLAIN,14);
     Font titulo1 = new Font("Comic Sans MS",Font.PLAIN,35);
-   
+    private boolean contraseniasVisible = false;
 
         public Login() {
             // Configurar el frame
@@ -66,6 +66,16 @@ public class Login extends JFrame {
             passwordField = new JPasswordField();
             passwordField.setBounds(500, 300, 200, 25);
             passwordField.setBorder(BorderFactory.createLineBorder(Color.BLACK));
+            ImageIcon ima4 = new ImageIcon("ojo.png");
+            JButton botonvision2 = new JButton(ima4);
+            botonvision2.setBounds(230, 230, 30, 30);
+            botonvision2.setBackground(Color.white);
+            botonvision2.setBounds(passwordField.getWidth() - 30, 1, 25, 25); 
+            botonvision2.setBackground(Color.white);
+            botonvision2.setFocusPainted(false);
+            botonvision2.setBorderPainted(false);
+            botonvision2.setContentAreaFilled(false);
+            passwordField.add(botonvision2);
             
             ImageIcon iniciarsesion = new ImageIcon("login.png"); 
             JButton loginButton = new JButton(iniciarsesion);
@@ -74,25 +84,23 @@ public class Login extends JFrame {
             loginButton.setBorderPainted(false);
             loginButton.setContentAreaFilled(false);
             
-            ImageIcon ima2 = new ImageIcon("ojo.png");
-            JToggleButton toggleButton = new JToggleButton(ima2);
-            toggleButton.setBounds(750, 300, 25, 25);
-            toggleButton.setBackground(Color.WHITE);
+            
 
-            toggleButton.addActionListener(new ActionListener() {
+            botonvision2.addActionListener(new ActionListener() {
                 public void actionPerformed(ActionEvent e) {
-                    if (toggleButton.isSelected()) {
-                   
-                    	passwordField.setEchoChar((char) 0);
+                	 contraseniasVisible = !contraseniasVisible;
+                     
+                     if (contraseniasVisible) {
+                    	 passwordField.setEchoChar((char) 0);
                         
-                    	passwordField.setFont(fuente);
-                        
-                    } else {
-                   
-                    	passwordField.setEchoChar('·');
-                        
-                       
-                    }
+                    	 passwordField.setFont(Registro.fuente2);
+                      
+                     } else {
+                    	 passwordField.setEchoChar('·');
+                         
+                    	 passwordField.setFont(Registro.fuente2);
+                         
+                     }
                 }
             });
             
@@ -139,7 +147,7 @@ public class Login extends JFrame {
             add(loginButton);
             add(registerButton);
             add(registroLabel);
-            this.add(toggleButton);
+            
             
 
             setLayout(null);
@@ -157,7 +165,7 @@ public class Login extends JFrame {
                 if (loginSuccessful) {
                     JOptionPane.showMessageDialog(Login.this, "Inicio de sesión exitoso");
                     dispose();
-                    pantalla_usuario pant = new pantalla_usuario();
+                    Pantalla_principal pant = new Pantalla_principal();
                    
                     
                     // Aquí iría el código para abrir la ventana principal de la aplicación
