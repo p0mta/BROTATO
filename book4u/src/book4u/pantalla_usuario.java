@@ -55,10 +55,15 @@ public class pantalla_usuario extends JFrame {
 		pan.setBackground(Color.WHITE);
 		pan.setLayout(null);
 		this.add(pan);
+		
+		
+		
 		JLabel tit = new JLabel("USUARIO");
         tit.setBounds(315, 20, 200, 40);
         tit.setFont(fuente);
         pan.add(tit);
+        
+        
         nombre3 = new JTextField();
 		nombre3.setBounds(100, 150, 200, 25);
 		nombre3.setFont(Registro.fuente2);
@@ -73,6 +78,8 @@ public class pantalla_usuario extends JFrame {
 		nombre2.setBounds(50, 120, 300, 30);
 		nombre2.setFont(Registro.fuente1);
 		this.add(nombre2);
+		
+		
 		contra = new JPasswordField();
 		contra.setBounds(500, 150, 200, 25);
 		contra.setBorder(BorderFactory.createLineBorder(Color.black));
@@ -81,7 +88,20 @@ public class pantalla_usuario extends JFrame {
 		conti.setBounds(450, 120, 300, 30);
 		conti.setFont(Registro.fuente1);
 		conti.setHorizontalAlignment(JLabel.CENTER);
-		this.add(conti);
+		ImageIcon ima2 = new ImageIcon("ojo.png");
+        JButton botonvision = new JButton(ima2);
+        botonvision.setBounds(230, 230, 30, 30);
+        botonvision.setBackground(Color.white);
+        botonvision.setBounds(contra.getWidth() - 30, 1, 25, 25); 
+        botonvision.setBackground(Color.white);
+        botonvision.setFocusPainted(false);
+        botonvision.setBorderPainted(false);
+        botonvision.setContentAreaFilled(false);
+        this.add(conti);
+        contra.add(botonvision);
+		
+		
+		
 		ImageIcon icono = new ImageIcon("change.png");
 		JButton siu = new JButton(icono);
 		siu.setBounds(518, 180, 150, 30);
@@ -91,12 +111,19 @@ public class pantalla_usuario extends JFrame {
 		siu.setBorderPainted(false);
 		siu.setContentAreaFilled(false);
 		this.add(siu);
-		ImageIcon ima2 = new ImageIcon("ojo.png");
-        JButton botonvision = new JButton(ima2);
-        botonvision.setBounds(710, 147, 30, 30);
-        botonvision.setBackground(Color.white);
+		
+		
+		
         
-        this.add(botonvision);
+        ImageIcon back = new ImageIcon("back.png");
+        JButton but = new JButton(back);
+        but.setBounds(10, 90, 30, 30);
+        but.setFont(Registro.fuente1);
+        but.setFocusPainted(false);
+        but.setBorderPainted(false);
+        but.setContentAreaFilled(false);
+        this.add(but);
+        
         botonvision.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
                 visiongucci = !visiongucci; // Invertir la visibilidad
@@ -229,7 +256,12 @@ public class pantalla_usuario extends JFrame {
 	                Login logi = new Login();
 	            }
 	        });
-
+	        but.addActionListener(new ActionListener() {
+	            public void actionPerformed(ActionEvent e) {
+	            	dispose();
+	            	Pantalla_principal pat = new Pantalla_principal();
+	            }
+	        });
 
 	    }
 
