@@ -86,6 +86,15 @@ public class Registro extends JFrame {
         botonvision.setBorderPainted(false);
         botonvision.setContentAreaFilled(false);
         contraseña.add(botonvision);
+        
+        ImageIcon back = new ImageIcon("back.png");
+        JButton but = new JButton(back);
+        but.setBounds(10, 90, 30, 30);
+        but.setFont(Registro.fuente1);
+        but.setFocusPainted(false);
+        but.setBorderPainted(false);
+        but.setContentAreaFilled(false);
+        this.add(but);
 		
 		
 		ciudad = new JTextField();
@@ -155,7 +164,12 @@ public class Registro extends JFrame {
         
 
      // ...
-
+        but.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent e) {
+            	dispose();
+            	Login pat = new Login();
+            }
+        });
      botonvision.addActionListener(new ActionListener() {
          public void actionPerformed(ActionEvent e) {
              // Cambiar el estado de visibilidad de las contraseñas
