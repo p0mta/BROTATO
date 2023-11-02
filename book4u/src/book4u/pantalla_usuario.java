@@ -177,7 +177,8 @@ public class pantalla_usuario extends JFrame {
         change.setContentAreaFilled(false);
         this.add(change);
         
-        JLabel saldo = new JLabel("AÑADIR SALDO");
+        double saldo3 = obtenerSaldoDesdeBaseDeDatos(correo, contraseña);
+        JLabel saldo = new JLabel("AÑADIR SALDO('"+saldo3+"'€)");
         saldo.setHorizontalAlignment(JLabel.CENTER);
         saldo.setFont(Registro.fuente1);
         saldo.setBounds(75, 250, 250, 30);
@@ -200,6 +201,7 @@ public class pantalla_usuario extends JFrame {
         	return;
         }
 		
+        JLabel contras = new JLabel("REPETIR CONTRASEÑA");
         
 		 String colorfondo = "#579514";
 	        Color backgroundColor = Color.decode(colorfondo);
@@ -339,7 +341,7 @@ public class pantalla_usuario extends JFrame {
 	    
 
 	public double obtenerSaldoDesdeBaseDeDatos(String correo, String contraseña) {
-	    double saldo = -1; // Valor por defecto si no se encuentra el saldo
+	    double saldo3 = -1; // Valor por defecto si no se encuentra el saldo
 	    try {
 	        String selectQuery = "SELECT DINERO FROM USUARIO WHERE CORREO = ? AND CONTRASEÑA = ?";
 	        PreparedStatement preparedStatement = Login.connection.prepareStatement(selectQuery);
@@ -348,14 +350,14 @@ public class pantalla_usuario extends JFrame {
 	        ResultSet resultSet = preparedStatement.executeQuery();
 
 	        if (resultSet.next()) {
-	            saldo = resultSet.getDouble("DINERO");
+	            saldo3 = resultSet.getDouble("DINERO");
 	        }
 
 	        resultSet.close();
 	    } catch (SQLException ex) {
 	        ex.printStackTrace();
 	    }
-	    return saldo;
+	    return saldo3;
 	}
 
 	// Método para actualizar el saldo en la base de datos

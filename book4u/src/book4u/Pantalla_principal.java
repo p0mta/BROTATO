@@ -13,7 +13,7 @@ public class Pantalla_principal extends JFrame {
     private boolean menuvisible = false;
     public Font fuenti = new Font("Agency FB", Font.BOLD, 40);
     public Font fuenti2 = new Font("Agency FB", Font.BOLD, 30);
-
+    
     public Pantalla_principal() {
         JPanel pan = new JPanel();
         pan.setBounds(0, 0, 800, 75);
@@ -32,15 +32,21 @@ public class Pantalla_principal extends JFrame {
         String contraseña = String.valueOf(Login.getPasswordField().getPassword());
         double din = obtenerdinero(correo, contraseña);
         String nombre = obtenerNombreDesdeBaseDeDatos(correo, contraseña);
-        JLabel mama = new JLabel("Saldo: " + din);
+        JLabel mama = new JLabel("Saldo: " + din + "€");
         mama.setHorizontalAlignment(JLabel.CENTER);
-        mama.setBounds(625, 100, 150, 50);
+        mama.setBounds(625, 75, 150, 50);
         mama.setFont(fuenti2);
         JLabel titi = new JLabel("BIENVENIDO A BOOK4U " + nombre);
         titi.setHorizontalAlignment(JLabel.CENTER);
         titi.setBounds(100, 100, 600, 50);
         titi.setFont(fuenti);
-
+        JLabel etiqueta = new JLabel();
+        ImageIcon imageIcon = new ImageIcon("moneda.gif");
+        etiqueta.setIcon(imageIcon);
+        imageIcon.setImageObserver(etiqueta);
+        etiqueta.setBounds(100, 20, 200, 200);
+        pan.add(etiqueta);
+        
         // Crear un JLayeredPane para administrar las capas
         JLayeredPane layeredPane = new JLayeredPane();
         layeredPane.setBounds(0, 0, 800, 500);
@@ -59,8 +65,8 @@ public class Pantalla_principal extends JFrame {
         gran.setBounds(25, 170, 150, 25);
         nep.add(gran);
         layeredPane.add(nep, JLayeredPane.DEFAULT_LAYER);
+       
         
-
         JPanel nep2 = new JPanel();
         nep2.setLayout(null);
         nep2.setBounds(293, 160, 200, 270);
