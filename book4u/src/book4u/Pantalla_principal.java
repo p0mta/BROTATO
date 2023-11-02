@@ -12,6 +12,7 @@ import java.sql.SQLException;
 public class Pantalla_principal extends JFrame {
     private boolean menuvisible = false;
     public Font fuenti = new Font("Agency FB", Font.BOLD, 40);
+    public Font fuenti2 = new Font("Agency FB", Font.BOLD, 30);
 
     public Pantalla_principal() {
         JPanel pan = new JPanel();
@@ -29,7 +30,12 @@ public class Pantalla_principal extends JFrame {
 
         String correo = Login.usernameField.getText();
         String contraseña = String.valueOf(Login.getPasswordField().getPassword());
+        double din = obtenerdinero(correo, contraseña);
         String nombre = obtenerNombreDesdeBaseDeDatos(correo, contraseña);
+        JLabel mama = new JLabel("Saldo: " + din);
+        mama.setHorizontalAlignment(JLabel.CENTER);
+        mama.setBounds(625, 100, 150, 50);
+        mama.setFont(fuenti2);
         JLabel titi = new JLabel("BIENVENIDO A BOOK4U " + nombre);
         titi.setHorizontalAlignment(JLabel.CENTER);
         titi.setBounds(100, 100, 600, 50);
@@ -100,6 +106,7 @@ public class Pantalla_principal extends JFrame {
         layeredPane.add(desp, JLayeredPane.PALETTE_LAYER);
 
         add(titi);
+        add(mama);
 
         setTitle("BOOK4U- Menu");
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -192,5 +199,24 @@ public class Pantalla_principal extends JFrame {
             ex.printStackTrace();
         }
         return nombre;
+    }
+    public double obtenerdinero(String correo, String contraseña) {
+        double mon = 0;
+        try {
+            String selectQuery = "SELECT DINERO FROM USUARIO WHERE CORREO = ? AND CONTRASEÑA = ?";
+            PreparedStatement preparedStatement = Login.connection.prepareStatement(selectQuery);
+            preparedStatement.setString(1, correo);
+            preparedStatement.setString(2, contraseña);
+            ResultSet resultSet = preparedStatement.executeQuery();
+
+            if (resultSet.next()) {
+            	mon = resultSet.getDouble("DINERO");
+            }
+
+            resultSet.close();
+        } catch (SQLException ex) {
+            ex.printStackTrace();
+        }
+        return mon;
     }
 }

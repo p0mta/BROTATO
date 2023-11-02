@@ -165,10 +165,7 @@ public class pantalla_usuario extends JFrame {
 		    JOptionPane.showMessageDialog(pantalla_usuario.this, "No se pudo obtener el nombre de usuario desde la base de datos.");
 		}
 
-
-		pan.add(cir1);
-		
-		
+		pan.add(cir1);	
         
         // Crear un botón y establecer la imagen y el texto
         JButton change = new JButton(icono);
@@ -179,11 +176,84 @@ public class pantalla_usuario extends JFrame {
         change.setBorderPainted(false);
         change.setContentAreaFilled(false);
         this.add(change);
+        
+        JLabel saldo = new JLabel("AÑADIR SALDO");
+        saldo.setHorizontalAlignment(JLabel.CENTER);
+        saldo.setFont(Registro.fuente1);
+        saldo.setBounds(75, 250, 250, 30);
+        add(saldo);
+        JTextField saldo1 = new JTextField();
+        saldo1.setFont(Registro.fuente2);
+        saldo1.setBounds(100, 280, 200, 25);
+        saldo1.setBorder(BorderFactory.createLineBorder(Color.black));
+        add(saldo1);
+        JButton change2 = new JButton(icono);
+        change2.setBounds(118, 310, 150, 30);
+        change2.setFont(Registro.fuente1);
+        change2.setText("CHANGE"); // Establece el texto del botón
+        change2.setFocusPainted(false);
+        change2.setBorderPainted(false);
+        change2.setContentAreaFilled(false);
+        this.add(change2);
+        if(saldo1.getText().length() > 10) {
+        	JOptionPane.showMessageDialog(pantalla_usuario.this, "No puede contener mas de 10 digitos.");
+        	return;
+        }
 		
+        
 		 String colorfondo = "#579514";
 	        Color backgroundColor = Color.decode(colorfondo);
 	        this.getContentPane().setBackground(backgroundColor);
 		
+	        
+	        change2.addActionListener(new ActionListener() {
+	            public void actionPerformed(ActionEvent e) {
+	                String correo = Login.usernameField.getText();
+	                String contraseña = String.valueOf(Login.getPasswordField().getPassword());
+
+	                // Obtener el saldo actual desde la base de datos
+	                double saldoActual = obtenerSaldoDesdeBaseDeDatos(correo, contraseña);
+
+	                if (saldoActual != -1) { // Se encontró un saldo válido en la base de datos
+	                    try {
+	                        // Obtener el texto ingresado en el JTextField
+	                        String saldoIngresado = saldo1.getText();
+
+	                        // Validar que el texto ingresado sea un número (entero o decimal)
+	                        if (saldoIngresado.matches("^\\d+(,\\d+)?(\\.\\d+)?$")) {
+	                            // Reemplazar comas por puntos para asegurarse de que sea un número válido
+	                            saldoIngresado = saldoIngresado.replace(",", ".");
+
+	                            // Convertir el saldo ingresado a un número
+	                            double cantidadIngresada = Double.parseDouble(saldoIngresado);
+
+	                            // Validar que la cantidad ingresada sea positiva
+	                            if (cantidadIngresada > 0) {
+	                                // Calcular el nuevo saldo sumando la cantidad ingresada
+	                                double nuevoSaldo = saldoActual + cantidadIngresada;
+
+	                                // Actualizar el saldo en la base de datos
+	                                if (actualizarSaldoEnBaseDeDatos(correo, contraseña, nuevoSaldo)) {
+	                                    JOptionPane.showMessageDialog(pantalla_usuario.this, "Saldo actualizado correctamente");
+	                                } else {
+	                                    JOptionPane.showMessageDialog(pantalla_usuario.this, "No se pudo actualizar el saldo.");
+	                                }
+	                            } else {
+	                                JOptionPane.showMessageDialog(pantalla_usuario.this, "La cantidad ingresada debe ser positiva.");
+	                            }
+	                        } else {
+	                            JOptionPane.showMessageDialog(pantalla_usuario.this, "Ingresa un número válido en el campo de saldo. Utiliza comas o puntos como separadores decimales.");
+	                        }
+	                    } catch (NumberFormatException ex) {
+	                        JOptionPane.showMessageDialog(pantalla_usuario.this, "Ingresa un número válido en el campo de saldo.");
+	                    }
+	                } else {
+	                    JOptionPane.showMessageDialog(pantalla_usuario.this, "No se pudo obtener el saldo desde la base de datos.");
+	                }
+	            }
+	        });
+
+
 	        
 	        change.addActionListener(new ActionListener() {
 	            public void actionPerformed(ActionEvent e) {
@@ -268,7 +338,43 @@ public class pantalla_usuario extends JFrame {
 	    // Método para obtener el nombre desde la base de datos
 	    
 
-	
+	public double obtenerSaldoDesdeBaseDeDatos(String correo, String contraseña) {
+	    double saldo = -1; // Valor por defecto si no se encuentra el saldo
+	    try {
+	        String selectQuery = "SELECT DINERO FROM USUARIO WHERE CORREO = ? AND CONTRASEÑA = ?";
+	        PreparedStatement preparedStatement = Login.connection.prepareStatement(selectQuery);
+	        preparedStatement.setString(1, correo);
+	        preparedStatement.setString(2, contraseña);
+	        ResultSet resultSet = preparedStatement.executeQuery();
+
+	        if (resultSet.next()) {
+	            saldo = resultSet.getDouble("DINERO");
+	        }
+
+	        resultSet.close();
+	    } catch (SQLException ex) {
+	        ex.printStackTrace();
+	    }
+	    return saldo;
+	}
+
+	// Método para actualizar el saldo en la base de datos
+	public boolean actualizarSaldoEnBaseDeDatos(String correo, String contraseña, double nuevoSaldo) {
+	    try {
+	        String updateQuery = "UPDATE USUARIO SET DINERO = ? WHERE CORREO = ? AND CONTRASEÑA = ?";
+	        PreparedStatement preparedStatement = Login.connection.prepareStatement(updateQuery);
+	        preparedStatement.setDouble(1, nuevoSaldo);
+	        preparedStatement.setString(2, correo);
+	        preparedStatement.setString(3, contraseña);
+
+	        int rowsUpdated = preparedStatement.executeUpdate();
+
+	        return rowsUpdated > 0;
+	    } catch (SQLException ex) {
+	        ex.printStackTrace();
+	        return false;
+	    }
+	}
 public String obtenerNombreDesdeBaseDeDatos(String correo, String contraseña) {
     String nombre = null;
     try {
