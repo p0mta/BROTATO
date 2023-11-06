@@ -11,16 +11,17 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 
 public class Registro extends JFrame {
-
+	private boolean contraseniasVisible = false;
 	static JTextField nombre;
 	static JTextField correo;
 	static JTextField ciudad;
 	static JPasswordField contraseña;
 	static JTextField apellidos;
 	static JPasswordField contraseña2;
-	 Font fuente = new Font("Agency FB",Font.BOLD,50);
-	 Font fuente1 = new Font("Agency FB",Font.BOLD, 23);
-	 Font fuente2 = new Font("Agency FB",Font.BOLD, 18);
+	static String usuario = "";
+	static Font fuente = new Font("Agency FB",Font.BOLD,50);
+	static Font fuente1 = new Font("Agency FB",Font.BOLD, 23);
+	static Font fuente2 = new Font("Agency FB",Font.BOLD, 18);
 	public Registro(){
 		
 		setTitle("Registro");
@@ -30,7 +31,8 @@ public class Registro extends JFrame {
 		this.setVisible(true);
 		this.setLayout(null);
 		
-		
+       
+        
 		
 		JPanel pan = new JPanel();
 		pan.setBounds(0, 0, 800, 75);
@@ -56,25 +58,44 @@ public class Registro extends JFrame {
 		this.add(nombre1);
 		
 		apellidos = new JTextField();
-		apellidos.setBounds(140, 230, 200, 25);
+		apellidos.setBounds(460, 150, 200, 25);
 		apellidos.setBorder(BorderFactory.createLineBorder(Color.BLACK));
 		apellidos.setFont(fuente2);
 		apellidos.setHorizontalAlignment(JTextField.CENTER);
 		this.add(apellidos);
 		JLabel apellidos1 = new JLabel("APELLIDOS");
-		apellidos1.setBounds(205, 200, 80, 30);
+		apellidos1.setBounds(520, 120, 80, 30);
 		apellidos1.setFont(fuente1);
 		this.add(apellidos1);
 		
 		contraseña = new JPasswordField();
-		contraseña.setBounds(460, 150, 200, 25);
+		contraseña.setBounds(140, 230, 200, 25);
 		contraseña.setBorder(BorderFactory.createLineBorder(Color.BLACK));
-		
 		this.add(contraseña);
 		JLabel contraseña1 = new JLabel("CONTRASEÑA");
-		contraseña1.setBounds(510, 120, 105, 30);
+		contraseña1.setBounds(190, 200, 105, 30);
 		contraseña1.setFont(fuente1);
 		this.add(contraseña1);
+		ImageIcon ima2 = new ImageIcon("ojo.png");
+        JButton botonvision = new JButton(ima2);
+        botonvision.setBounds(230, 230, 30, 30);
+        botonvision.setBackground(Color.white);
+        botonvision.setBounds(contraseña.getWidth() - 30, 1, 25, 25); 
+        botonvision.setBackground(Color.white);
+        botonvision.setFocusPainted(false);
+        botonvision.setBorderPainted(false);
+        botonvision.setContentAreaFilled(false);
+        contraseña.add(botonvision);
+        
+        ImageIcon back = new ImageIcon("back.png");
+        JButton but = new JButton(back);
+        but.setBounds(10, 90, 30, 30);
+        but.setFont(Registro.fuente1);
+        but.setFocusPainted(false);
+        but.setBorderPainted(false);
+        but.setContentAreaFilled(false);
+        this.add(but);
+		
 		
 		ciudad = new JTextField();
 		ciudad.setBounds(460, 310, 200, 25);
@@ -101,12 +122,21 @@ public class Registro extends JFrame {
 		contraseña2 = new JPasswordField();
 		contraseña2.setBounds(460, 230, 200, 25);
 		contraseña2.setBorder(BorderFactory.createLineBorder(Color.black));
-		
 		this.add(contraseña2);
 		JLabel contraseña3 = new JLabel("REPETIR CONTRASEÑA");
 		contraseña3.setBounds(480, 200, 180, 30);
 		contraseña3.setFont(fuente1);
 		this.add(contraseña3);
+		ImageIcon ima3 = new ImageIcon("ojo.png");
+        JButton botonvision2 = new JButton(ima3);
+        botonvision2.setBounds(230, 230, 30, 30);
+        botonvision2.setBackground(Color.white);
+        botonvision2.setBounds(contraseña2.getWidth() - 30, 1, 25, 25); 
+        botonvision2.setBackground(Color.white);
+        botonvision2.setFocusPainted(false);
+        botonvision2.setBorderPainted(false);
+        botonvision2.setContentAreaFilled(false);
+        contraseña2.add(botonvision2);
 		
 		ImageIcon regi = new ImageIcon("registro.png");
 		JButton registro = new JButton(regi);
@@ -127,32 +157,58 @@ public class Registro extends JFrame {
         this.add(tit);
         this.add(pan);
         
-        ImageIcon ima2 = new ImageIcon("ojo.png");
-        JButton botonvision = new JButton(ima2);
-        botonvision.setBounds(700, 147, 30, 30);
-        botonvision.setBackground(Color.white);
         
-        this.add(botonvision);
 
-        botonvision.addActionListener(new ActionListener() {
+        
+
+        
+
+     // ...
+        but.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
-                if (botonvision.isSelected()) {
-                	
-                    contraseña.setEchoChar((char) 0);
-                    contraseña2.setEchoChar((char) 0);
-                    contraseña.setFont(fuente2);
-                    contraseña2.setFont(fuente2);
-                } else {
-                	
-                    contraseña.setEchoChar('·'); 
-                    contraseña2.setEchoChar('·'); 
-                    
-                }
+            	dispose();
+            	Login pat = new Login();
             }
         });
+     botonvision.addActionListener(new ActionListener() {
+         public void actionPerformed(ActionEvent e) {
+             // Cambiar el estado de visibilidad de las contraseñas
+             contraseniasVisible = !contraseniasVisible;
+             
+             if (contraseniasVisible) {
+                 contraseña.setEchoChar((char) 0);
+                
+                 contraseña.setFont(fuente2);
+              
+             } else {
+                 contraseña.setEchoChar('·');
+                 
+                 contraseña.setFont(fuente2);
+                 
+             }
+         }
+     });
+     botonvision2.addActionListener(new ActionListener() {
+         public void actionPerformed(ActionEvent e) {
+             // Cambiar el estado de visibilidad de las contraseñas
+             contraseniasVisible = !contraseniasVisible;
+             
+             if (contraseniasVisible) {
+                 
+                 contraseña2.setEchoChar((char) 0);
+                
+                 contraseña2.setFont(fuente2);
+             } else {
+                
+                 contraseña2.setEchoChar('·');
+                
+                 contraseña2.setFont(fuente2);
+             }
+         }
+     });
         registro.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
-            	String usuario = correo.getText();
+            	usuario = correo.getText();
                 String password = new String(contraseña.getPassword());
                 String password2 = new String(contraseña2.getPassword());
                 String nombreText = nombre.getText();
@@ -161,17 +217,39 @@ public class Registro extends JFrame {
 
                 // Comprueba si algún campo está vacío y muestra un mensaje de error.
                 if (usuario.isEmpty() || password.isEmpty() || password2.isEmpty() ||
-                    nombreText.isEmpty() || apellidosText.isEmpty() || ciudadText.isEmpty()) {
-                    JOptionPane.showMessageDialog(Registro.this, "Por favor, completa todos los campos.");
+                        nombreText.isEmpty() || apellidosText.isEmpty() || ciudadText.isEmpty()) {
+                        JOptionPane.showMessageDialog(Registro.this, "Por favor, completa todos los campos.");
+                        return;
+                    }
+                if (!password.equals(password2)) {
+                    JOptionPane.showMessageDialog(Registro.this, "La contraseña no coincide, vuelve a intentarlo");
                     return;
                 }
-                if(!(contraseña == contraseña2)) {
-               	 JOptionPane.showMessageDialog(Registro.this, "La contraseña no coincide vuelve a intentarlo");
-               	 return;
-               }
+
+               
                 if (!usuario.endsWith("@gmail.com")) {
                     JOptionPane.showMessageDialog(Registro.this, "Debes utilizar un correo valido para registrarte.");
                     return; // Sale de la acción si el correo no es válido.
+                }
+                if(nombre.getText().length() > 15) {
+                	JOptionPane.showMessageDialog(Registro.this, "No puede rebasar de 15 caracteres en su nombre");
+                    return; 
+                }
+                else if(contraseña.getPassword().length > 20) {
+                	JOptionPane.showMessageDialog(Registro.this, "No puede rebasar de 20 caracteres en la contraseña");
+                    return; 
+                }
+                else if(ciudad.getText().length() > 20) {
+                	JOptionPane.showMessageDialog(Registro.this, "No puede rebasar de 20 caracteres en la ciudad");
+                    return; 
+                }
+                else if(apellidos.getText().length() > 50) {
+                	JOptionPane.showMessageDialog(Registro.this, "No puede rebasar de 50 caracteres en sus apellidos");
+                    return; 
+                }
+                else if(correo.getText().length() > 30) {
+                	JOptionPane.showMessageDialog(Registro.this, "No puede rebasar de 30 caracteres en el correo");
+                    return; 
                 }
 
                 // Conectar a la base de datos y realizar el registro
