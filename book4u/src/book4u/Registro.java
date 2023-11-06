@@ -4,14 +4,13 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.sql.Connection;
-import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
 public class Registro extends JFrame {
 	private boolean contraseniasVisible = false;
+	private boolean contraseniasVisible2 = false;
 	static JTextField nombre;
 	static JTextField correo;
 	static JTextField ciudad;
@@ -191,9 +190,9 @@ public class Registro extends JFrame {
      botonvision2.addActionListener(new ActionListener() {
          public void actionPerformed(ActionEvent e) {
              // Cambiar el estado de visibilidad de las contraseñas
-             contraseniasVisible = !contraseniasVisible;
+        	 contraseniasVisible2 = !contraseniasVisible2;
              
-             if (contraseniasVisible) {
+             if (contraseniasVisible2) {
                  
                  contraseña2.setEchoChar((char) 0);
                 

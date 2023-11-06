@@ -4,7 +4,6 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -13,7 +12,7 @@ public class Pantalla_principal extends JFrame {
     private boolean menuvisible = false;
     public Font fuenti = new Font("Agency FB", Font.BOLD, 40);
     public Font fuenti2 = new Font("Agency FB", Font.BOLD, 30);
-
+    
     public Pantalla_principal() {
         JPanel pan = new JPanel();
         pan.setBounds(0, 0, 800, 75);
@@ -33,14 +32,16 @@ public class Pantalla_principal extends JFrame {
         double din = obtenerdinero(correo, contraseña);
         String nombre = obtenerNombreDesdeBaseDeDatos(correo, contraseña);
         JLabel mama = new JLabel("Saldo: " + din);
-        mama.setHorizontalAlignment(JLabel.CENTER);
-        mama.setBounds(625, 100, 150, 50);
+        mama.setHorizontalAlignment(JLabel.RIGHT);
+        mama.setBounds(505, 75, 250, 50);
         mama.setFont(fuenti2);
         JLabel titi = new JLabel("BIENVENIDO A BOOK4U " + nombre);
         titi.setHorizontalAlignment(JLabel.CENTER);
         titi.setBounds(100, 100, 600, 50);
         titi.setFont(fuenti);
+        
 
+        
         // Crear un JLayeredPane para administrar las capas
         JLayeredPane layeredPane = new JLayeredPane();
         layeredPane.setBounds(0, 0, 800, 500);
@@ -59,8 +60,8 @@ public class Pantalla_principal extends JFrame {
         gran.setBounds(25, 170, 150, 25);
         nep.add(gran);
         layeredPane.add(nep, JLayeredPane.DEFAULT_LAYER);
+       
         
-
         JPanel nep2 = new JPanel();
         nep2.setLayout(null);
         nep2.setBounds(293, 160, 200, 270);
@@ -152,7 +153,10 @@ public class Pantalla_principal extends JFrame {
         desp.add(UsuarioButton);
         desp.add(HistorialButton);
         desp.add(AtrasButton);
-
+        ImageIcon imageIcon = new ImageIcon("moneda.gif");
+        JLabel mo = new JLabel(imageIcon);
+        mo.setBounds(750, 82, 30, 32);
+        this.add(mo);
         setVisible(true);
 
         ne.addActionListener(new ActionListener() {
