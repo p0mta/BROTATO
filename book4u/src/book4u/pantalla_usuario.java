@@ -1,31 +1,18 @@
 package book4u;
 
+import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.Font;
+import java.awt.Graphics;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.awt.event.WindowAdapter;
-import java.awt.event.WindowEvent;
-import java.awt.event.WindowListener;
-import java.beans.Statement;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import javax.swing.*;
-import java.awt.*;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
-
-import java.sql.PreparedStatement;
-import java.sql.SQLException;
-
-import javax.swing.*;
-import java.awt.*;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
 import javax.swing.BorderFactory;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
+import javax.swing.JDialog;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
@@ -40,6 +27,9 @@ public class pantalla_usuario extends JFrame {
 	static JPasswordField contra;
 	static JTextField correo;
 	private boolean visiongucci = false;
+	private boolean visiongucci2 = false;
+	static JPasswordField rep;
+	ImageIcon papi = new ImageIcon("panel.png");
 	public pantalla_usuario() {
 		
 		setTitle("Usuario");
@@ -48,7 +38,6 @@ public class pantalla_usuario extends JFrame {
 		this.setLocationRelativeTo(null);
 		this.setVisible(true);
 		this.setLayout(null);
-		
 		JPanel pan = new JPanel();
 		pan.setBounds(0, 0, 800, 75);
 		pan.setVisible(true);
@@ -99,6 +88,25 @@ public class pantalla_usuario extends JFrame {
         botonvision.setContentAreaFilled(false);
         this.add(conti);
         contra.add(botonvision);
+        
+        rep = new JPasswordField();
+        rep.setBounds(500, 280, 200, 25);
+		rep.setBorder(BorderFactory.createLineBorder(Color.black));
+		this.add(rep);
+		JLabel repe = new JLabel("REPETIR CONTRASEÑA");
+		repe.setBounds(520, 250, 200, 30);
+		repe.setFont(Registro.fuente1);
+		this.add(repe);
+		ImageIcon ima9 = new ImageIcon("ojo.png");
+        JButton botonvisio9 = new JButton(ima9);
+        botonvisio9.setBounds(230, 230, 30, 30);
+        botonvisio9.setBackground(Color.white);
+        botonvisio9.setBounds(rep.getWidth() - 30, 1, 25, 25); 
+        botonvisio9.setBackground(Color.white);
+        botonvisio9.setFocusPainted(false);
+        botonvisio9.setBorderPainted(false);
+        botonvisio9.setContentAreaFilled(false);
+        rep.add(botonvisio9);
 		
 		
 		
@@ -134,6 +142,20 @@ public class pantalla_usuario extends JFrame {
                 }
                 else {
                 	contra.setEchoChar('·');
+                }
+               
+            }
+        });
+        botonvisio9.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent e) {
+                visiongucci2 = !visiongucci2; // Invertir la visibilidad
+
+                if(visiongucci2) {
+                	rep.setEchoChar((char) 0); 
+                    rep.setFont(Registro.fuente2);
+                }
+                else {
+                	rep.setEchoChar('·');
                 }
                
             }
@@ -181,7 +203,7 @@ public class pantalla_usuario extends JFrame {
         JLabel saldo = new JLabel("AÑADIR SALDO('"+saldo3+"'€)");
         saldo.setHorizontalAlignment(JLabel.CENTER);
         saldo.setFont(Registro.fuente1);
-        saldo.setBounds(75, 250, 250, 30);
+        saldo.setBounds(25, 250, 350, 30);
         add(saldo);
         JTextField saldo1 = new JTextField();
         saldo1.setFont(Registro.fuente2);
@@ -196,10 +218,7 @@ public class pantalla_usuario extends JFrame {
         change2.setBorderPainted(false);
         change2.setContentAreaFilled(false);
         this.add(change2);
-        if(saldo1.getText().length() > 10) {
-        	JOptionPane.showMessageDialog(pantalla_usuario.this, "No puede contener mas de 10 digitos.");
-        	return;
-        }
+        
 		
         JLabel contras = new JLabel("REPETIR CONTRASEÑA");
         
@@ -215,7 +234,12 @@ public class pantalla_usuario extends JFrame {
 
 	                // Obtener el saldo actual desde la base de datos
 	                double saldoActual = obtenerSaldoDesdeBaseDeDatos(correo, contraseña);
-
+	                
+	                if (saldo1.getText().length() > 10) {
+	                    OtrasCosas ja = new OtrasCosas();
+	                    ja.Otrascosas();
+	                    return;
+	                }
 	                if (saldoActual != -1) { // Se encontró un saldo válido en la base de datos
 	                    try {
 	                        // Obtener el texto ingresado en el JTextField
@@ -236,7 +260,9 @@ public class pantalla_usuario extends JFrame {
 
 	                                // Actualizar el saldo en la base de datos
 	                                if (actualizarSaldoEnBaseDeDatos(correo, contraseña, nuevoSaldo)) {
-	                                    JOptionPane.showMessageDialog(pantalla_usuario.this, "Saldo actualizado correctamente");
+	                                	OtrasCosas ja = new OtrasCosas();
+	                                	ja.casi();
+	                                	
 	                                } else {
 	                                    JOptionPane.showMessageDialog(pantalla_usuario.this, "No se pudo actualizar el saldo.");
 	                                }
@@ -302,30 +328,49 @@ public class pantalla_usuario extends JFrame {
 	        
 	        siu.addActionListener(new ActionListener() {
 	            public void actionPerformed(ActionEvent e) {
-	                String update = "UPDATE usuario SET contraseña = ? WHERE CORREO = ? AND contraseña = ?";
-	                try {
-	                    // Crear un PreparedStatement en lugar de un Statement para evitar SQL Injection
-	                    PreparedStatement preparedStatement = Login.connection.prepareStatement(update);
-	                    preparedStatement.setString(1, String.valueOf(contra.getPassword()));
-	                    preparedStatement.setString(2, Login.usernameField.getText());
-	                    preparedStatement.setString(3, String.valueOf(Login.getPasswordField().getPassword()));
-	                    if(contra.getText().length() > 20) {
-	                    	JOptionPane.showMessageDialog(pantalla_usuario.this, "La contraseña no puede contener mas de 20 caracteres");
-	                    	return;
+	                // Mostrar un diálogo de confirmación
+	                int respuesta = JOptionPane.showConfirmDialog(pantalla_usuario.this, "¿Estás seguro de cambiar la contraseña?", "Confirmar Cambio de Contraseña", JOptionPane.YES_NO_OPTION);
+
+	                if (respuesta == JOptionPane.YES_OPTION) {
+	                    // El usuario ha confirmado que quiere cambiar la contraseña
+	                    String update = "UPDATE usuario SET contraseña = ? WHERE CORREO = ? AND contraseña = ?";
+	                    String password = new String(contra.getPassword());
+	                    String password2 = new String(rep.getPassword());
+
+	                    if (password.length() > 20) {
+	                        JOptionPane.showMessageDialog(pantalla_usuario.this, "La contraseña no puede contener más de 20 caracteres");
+	                        return;
 	                    }
-	                    int rowsUpdated = preparedStatement.executeUpdate();     
-	                    if (rowsUpdated > 0) {
-	                        JOptionPane.showMessageDialog(pantalla_usuario.this, "Contraseña modificada correctamente");
-	                    } else {
-	                        JOptionPane.showMessageDialog(pantalla_usuario.this, "No se pudo modificar la contraseña. Verifica que la contraseña actual sea correcta.");
+
+	                    if (!password.equals(password2)) {
+	                        JOptionPane.showMessageDialog(pantalla_usuario.this, "Las contraseñas no coinciden");
+	                        return;
 	                    }
-	                    
-	                } catch (SQLException ex) {
-	                    ex.printStackTrace();
-	                    JOptionPane.showMessageDialog(pantalla_usuario.this, "Error al modificar la contraseña");
+
+	                    try {
+	                        // Crear un PreparedStatement en lugar de un Statement para evitar SQL Injection
+	                        PreparedStatement preparedStatement = Login.connection.prepareStatement(update);
+	                        preparedStatement.setString(1, String.valueOf(contra.getPassword()));
+	                        preparedStatement.setString(2, Login.usernameField.getText());
+	                        preparedStatement.setString(3, String.valueOf(Login.getPasswordField().getPassword()));
+
+	                        int rowsUpdated = preparedStatement.executeUpdate();
+
+	                        if (rowsUpdated > 0) {
+	                            JOptionPane.showMessageDialog(pantalla_usuario.this, "Contraseña modificada correctamente");
+	                        } else {
+	                            JOptionPane.showMessageDialog(pantalla_usuario.this, "No se pudo modificar la contraseña. Verifica que la contraseña actual sea correcta.");
+	                        }
+
+	                    } catch (SQLException ex) {
+	                        ex.printStackTrace();
+	                        JOptionPane.showMessageDialog(pantalla_usuario.this, "Error al modificar la contraseña");
+	                    }
+
+	                    // Cerrar la ventana actual y volver a la ventana de inicio de sesión
+	                    dispose();
+	                    Login logi = new Login();
 	                }
-	                dispose();
-	                Login logi = new Login();
 	            }
 	        });
 	        but.addActionListener(new ActionListener() {
@@ -338,8 +383,8 @@ public class pantalla_usuario extends JFrame {
 	    }
 
 	    // Método para obtener el nombre desde la base de datos
-	    
-
+	
+	
 	public double obtenerSaldoDesdeBaseDeDatos(String correo, String contraseña) {
 	    double saldo3 = -1; // Valor por defecto si no se encuentra el saldo
 	    try {
@@ -396,4 +441,5 @@ public String obtenerNombreDesdeBaseDeDatos(String correo, String contraseña) {
     }
     return nombre;
 }
+
 }

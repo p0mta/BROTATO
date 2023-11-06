@@ -4,7 +4,6 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -32,22 +31,15 @@ public class Pantalla_principal extends JFrame {
         String contraseña = String.valueOf(Login.getPasswordField().getPassword());
         double din = obtenerdinero(correo, contraseña);
         String nombre = obtenerNombreDesdeBaseDeDatos(correo, contraseña);
-        JLabel mama = new JLabel("Saldo: " + din + "€");
-        mama.setHorizontalAlignment(JLabel.CENTER);
-        mama.setBounds(625, 75, 150, 50);
+        JLabel mama = new JLabel("Saldo: " + din);
+        mama.setHorizontalAlignment(JLabel.RIGHT);
+        mama.setBounds(505, 75, 250, 50);
         mama.setFont(fuenti2);
         JLabel titi = new JLabel("BIENVENIDO A BOOK4U " + nombre);
         titi.setHorizontalAlignment(JLabel.CENTER);
         titi.setBounds(100, 100, 600, 50);
         titi.setFont(fuenti);
-        ImageIcon imageIcon = new ImageIcon("moneda.gif");
-        Image image = imageIcon.getImage().getScaledInstance(20, 20, Image.SCALE_SMOOTH);
-        ImageIcon resizedImageIcon = new ImageIcon(image);
-
-        JLabel etiqueta = new JLabel();
-        etiqueta.setIcon(resizedImageIcon);
-        etiqueta.setBounds(200, 20, 20, 20);
-        pan.add(etiqueta);
+        
 
         
         // Crear un JLayeredPane para administrar las capas
@@ -161,7 +153,10 @@ public class Pantalla_principal extends JFrame {
         desp.add(UsuarioButton);
         desp.add(HistorialButton);
         desp.add(AtrasButton);
-
+        ImageIcon imageIcon = new ImageIcon("moneda.gif");
+        JLabel mo = new JLabel(imageIcon);
+        mo.setBounds(750, 82, 30, 32);
+        this.add(mo);
         setVisible(true);
 
         ne.addActionListener(new ActionListener() {

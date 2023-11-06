@@ -163,19 +163,20 @@ public class Login extends JFrame {
                 String password = new String(getPasswordField().getPassword());
                 boolean loginSuccessful = loginUser(usuario, password);
                 if (loginSuccessful) {
-                    JOptionPane.showMessageDialog(Login.this, "Inicio de sesión exitoso");
-                    dispose();
+                	dispose();
                     Pantalla_principal pant = new Pantalla_principal();
-                   
-                    
+                    OtrasCosas lp = new OtrasCosas();
+                    lp.a();
+
                     // Aquí iría el código para abrir la ventana principal de la aplicación
                 } else {
-                    JOptionPane.showMessageDialog(Login.this, "Inicio de sesión fallido");
+                	OtrasCosas lp = new OtrasCosas();
+                    lp.b();
                 }
             }
         });
         try {
-            connection = DriverManager.getConnection("jdbc:oracle:thin:@oracle.ilerna.com:1521:xe", "23_24_DAM2_BROTATO", "123456");
+            connection = DriverManager.getConnection("jdbc:oracle:thin:@192.168.3.26:1521:xe", "23_24_DAM2_BROTATO", "123456");
         } catch (SQLException e) {
             e.printStackTrace();
             JOptionPane.showMessageDialog(Login.this, "Error al conectar a la base de datos");
