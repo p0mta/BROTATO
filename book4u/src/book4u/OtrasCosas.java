@@ -10,6 +10,7 @@ import javax.swing.JTextField;
 public class OtrasCosas {
 	JButton ja = new JButton("SI");
 	JButton ja2 = new JButton("NO");
+	JFrame j;
 	public void Otrascosas() {
         JFrame j = new JFrame();
         j.setSize(515, 150);
@@ -652,7 +653,7 @@ public void o() {
     });
 }
 public void botonpregunta() {
-	JFrame j = new JFrame();
+	j = new JFrame();
     j.setSize(515, 150);
     j.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
     ImageIcon im = new ImageIcon("panel.png");
@@ -684,14 +685,7 @@ public void botonpregunta() {
     j.setBackground(new Color(0, 0, 0, 0)); 
     j.setLocationRelativeTo(null);
     j.setVisible(true);
-    ja.addActionListener(new ActionListener() {
-        public void actionPerformed(ActionEvent e) {
-        }			
-    });
-    ja2.addActionListener(new ActionListener() {
-        public void actionPerformed(ActionEvent e) {
-        }			
-    });
+    
 }
 }
 

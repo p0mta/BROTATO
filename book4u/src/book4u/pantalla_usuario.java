@@ -385,11 +385,19 @@ public class pantalla_usuario extends JFrame {
 		                    // Cerrar la ventana actual y volver a la ventana de inicio de sesión
 		                    dispose();
 		                    Login logi = new Login();
+		                    
+		                    
+	                            otra.j.dispose(); 
+	                        
 	                    }
 	                });
 	                otra.ja2.addActionListener(new ActionListener() {
 	                    public void actionPerformed(ActionEvent e) {
-	                        dispose();
+	                    	
+	                    	if (otra.j != null) {
+	                            otra.j.dispose(); // Cerrar la ventana al presionar "NO"
+	                        }
+	    	                
 	                        return;
 	                    }
 	                });
