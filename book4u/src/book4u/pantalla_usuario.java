@@ -181,10 +181,12 @@ public class pantalla_usuario extends JFrame {
 		        let.setFont(fuente);
 		        pan.add(let);
 		    } else {
-		        JOptionPane.showMessageDialog(pantalla_usuario.this, "El nombre de usuario está vacío.");
+		        OtrasCosas ne = new OtrasCosas();
+		        ne.e();
 		    }
 		} else {
-		    JOptionPane.showMessageDialog(pantalla_usuario.this, "No se pudo obtener el nombre de usuario desde la base de datos.");
+			OtrasCosas ne = new OtrasCosas();
+	        ne.f();
 		}
 
 		pan.add(cir1);	
