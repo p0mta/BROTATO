@@ -163,14 +163,15 @@ public class Login extends JFrame {
                 String password = new String(getPasswordField().getPassword());
                 boolean loginSuccessful = loginUser(usuario, password);
                 if (loginSuccessful) {
-                    JOptionPane.showMessageDialog(Login.this, "Inicio de sesión exitoso");
-                    dispose();
+                	dispose();
                     Pantalla_principal pant = new Pantalla_principal();
-                   
-                    
+                    OtrasCosas lp = new OtrasCosas();
+                    lp.a();
+
                     // Aquí iría el código para abrir la ventana principal de la aplicación
                 } else {
-                    JOptionPane.showMessageDialog(Login.this, "Inicio de sesión fallido");
+                	OtrasCosas lp = new OtrasCosas();
+                    lp.b();
                 }
             }
         });
