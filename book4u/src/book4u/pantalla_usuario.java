@@ -266,19 +266,24 @@ public class pantalla_usuario extends JFrame {
 	                                	ja.casi();
 	                                	
 	                                } else {
-	                                    JOptionPane.showMessageDialog(pantalla_usuario.this, "No se pudo actualizar el saldo.");
+	                                	OtrasCosas ja = new OtrasCosas();
+	                                	ja.g();
 	                                }
 	                            } else {
-	                                JOptionPane.showMessageDialog(pantalla_usuario.this, "La cantidad ingresada debe ser positiva.");
+	                            	OtrasCosas ja = new OtrasCosas();
+                                	ja.h();
 	                            }
 	                        } else {
-	                            JOptionPane.showMessageDialog(pantalla_usuario.this, "Ingresa un número válido en el campo de saldo. Utiliza comas o puntos como separadores decimales.");
+	                        	OtrasCosas ja = new OtrasCosas();
+                            	ja.i();
 	                        }
 	                    } catch (NumberFormatException ex) {
-	                        JOptionPane.showMessageDialog(pantalla_usuario.this, "Ingresa un número válido en el campo de saldo.");
+	                    	OtrasCosas ja = new OtrasCosas();
+                        	ja.i();
 	                    }
 	                } else {
-	                    JOptionPane.showMessageDialog(pantalla_usuario.this, "No se pudo obtener el saldo desde la base de datos.");
+	                	OtrasCosas ja = new OtrasCosas();
+                    	ja.j();
 	                }
 	            }
 	        });
@@ -296,9 +301,11 @@ public class pantalla_usuario extends JFrame {
 	                if (nombre != null) {
 	                    // Validar que el nombre no tenga más de 15 caracteres
 	                    if (nombre3.getText().isEmpty()) {
-	                        JOptionPane.showMessageDialog(pantalla_usuario.this, "Tienes que rellenar el campo nombre");
+	                    	OtrasCosas ja = new OtrasCosas();
+	                    	ja.k();
 	                    } else if (nombre3.getText().length() > 15) {
-	                        JOptionPane.showMessageDialog(pantalla_usuario.this, "El nombre no puede tener más de 15 caracteres");
+	                    	OtrasCosas ja = new OtrasCosas();
+	                    	ja.l();
 	                    } else {
 	                        // Realizar la actualización con el nuevo nombre
 	                        String update = "UPDATE USUARIO SET NOMBRE = ? WHERE CORREO = ? AND CONTRASEÑA = ?";
@@ -311,19 +318,23 @@ public class pantalla_usuario extends JFrame {
 	                            int rowsUpdated = preparedStatement.executeUpdate();
 
 	                            if (rowsUpdated > 0) {
-	                                JOptionPane.showMessageDialog(pantalla_usuario.this, "Nombre de usuario modificado correctamente");
-	                                dispose();
+	                            	dispose();
 	                                pantalla_usuario panta = new pantalla_usuario();
+	                                OtrasCosas ja = new OtrasCosas();
+	    	                    	ja.m();                              
 	                            } else {
-	                                JOptionPane.showMessageDialog(pantalla_usuario.this, "No se pudo modificar el nombre de usuario. Verifica que la contraseña actual sea correcta.");
+	                            	OtrasCosas ja = new OtrasCosas();
+	    	                    	ja.n();   
 	                            }
 	                        } catch (SQLException ex) {
 	                            ex.printStackTrace();
-	                            JOptionPane.showMessageDialog(pantalla_usuario.this, "Error al modificar el nombre de usuario");
+	                            OtrasCosas ja = new OtrasCosas();
+    	                    	ja.n();   
 	                        }
 	                    }
 	                } else {
-	                    JOptionPane.showMessageDialog(pantalla_usuario.this, "No se pudo obtener el nombre de usuario desde la base de datos.");
+	                	OtrasCosas ja = new OtrasCosas();
+                    	ja.o();   
 	                }
 	            }
 	        });
@@ -331,48 +342,57 @@ public class pantalla_usuario extends JFrame {
 	        siu.addActionListener(new ActionListener() {
 	            public void actionPerformed(ActionEvent e) {
 	                // Mostrar un diálogo de confirmación
-	                int respuesta = JOptionPane.showConfirmDialog(pantalla_usuario.this, "¿Estás seguro de cambiar la contraseña?", "Confirmar Cambio de Contraseña", JOptionPane.YES_NO_OPTION);
+	            	OtrasCosas otra = new OtrasCosas();
+	                otra.botonpregunta();
+	               
+	                otra.ja.addActionListener(new ActionListener() {
+	                    public void actionPerformed(ActionEvent e) {
+	                    	 // El usuario ha confirmado que quiere cambiar la contraseña
+		                    String update = "UPDATE usuario SET contraseña = ? WHERE CORREO = ? AND contraseña = ?";
+		                    String password = new String(contra.getPassword());
+		                    String password2 = new String(rep.getPassword());
 
-	                if (respuesta == JOptionPane.YES_OPTION) {
-	                    // El usuario ha confirmado que quiere cambiar la contraseña
-	                    String update = "UPDATE usuario SET contraseña = ? WHERE CORREO = ? AND contraseña = ?";
-	                    String password = new String(contra.getPassword());
-	                    String password2 = new String(rep.getPassword());
+		                    if (password.length() > 20) {
+		                        JOptionPane.showMessageDialog(pantalla_usuario.this, "La contraseña no puede contener más de 20 caracteres");
+		                        return;
+		                    }
 
-	                    if (password.length() > 20) {
-	                        JOptionPane.showMessageDialog(pantalla_usuario.this, "La contraseña no puede contener más de 20 caracteres");
+		                    if (!password.equals(password2)) {
+		                        JOptionPane.showMessageDialog(pantalla_usuario.this, "Las contraseñas no coinciden");
+		                        return;
+		                    }
+
+		                    try {
+		                        // Crear un PreparedStatement en lugar de un Statement para evitar SQL Injection
+		                        PreparedStatement preparedStatement = Login.connection.prepareStatement(update);
+		                        preparedStatement.setString(1, String.valueOf(contra.getPassword()));
+		                        preparedStatement.setString(2, Login.usernameField.getText());
+		                        preparedStatement.setString(3, String.valueOf(Login.getPasswordField().getPassword()));
+
+		                        int rowsUpdated = preparedStatement.executeUpdate();
+
+		                        if (rowsUpdated > 0) {
+		                            JOptionPane.showMessageDialog(pantalla_usuario.this, "Contraseña modificada correctamente");
+		                        } else {
+		                            JOptionPane.showMessageDialog(pantalla_usuario.this, "No se pudo modificar la contraseña. Verifica que la contraseña actual sea correcta.");
+		                        }
+
+		                    } catch (SQLException ex) {
+		                        ex.printStackTrace();
+		                        JOptionPane.showMessageDialog(pantalla_usuario.this, "Error al modificar la contraseña");
+		                    }
+
+		                    // Cerrar la ventana actual y volver a la ventana de inicio de sesión
+		                    dispose();
+		                    Login logi = new Login();
+	                    }
+	                });
+	                otra.ja2.addActionListener(new ActionListener() {
+	                    public void actionPerformed(ActionEvent e) {
+	                        dispose();
 	                        return;
 	                    }
-
-	                    if (!password.equals(password2)) {
-	                        JOptionPane.showMessageDialog(pantalla_usuario.this, "Las contraseñas no coinciden");
-	                        return;
-	                    }
-
-	                    try {
-	                        // Crear un PreparedStatement en lugar de un Statement para evitar SQL Injection
-	                        PreparedStatement preparedStatement = Login.connection.prepareStatement(update);
-	                        preparedStatement.setString(1, String.valueOf(contra.getPassword()));
-	                        preparedStatement.setString(2, Login.usernameField.getText());
-	                        preparedStatement.setString(3, String.valueOf(Login.getPasswordField().getPassword()));
-
-	                        int rowsUpdated = preparedStatement.executeUpdate();
-
-	                        if (rowsUpdated > 0) {
-	                            JOptionPane.showMessageDialog(pantalla_usuario.this, "Contraseña modificada correctamente");
-	                        } else {
-	                            JOptionPane.showMessageDialog(pantalla_usuario.this, "No se pudo modificar la contraseña. Verifica que la contraseña actual sea correcta.");
-	                        }
-
-	                    } catch (SQLException ex) {
-	                        ex.printStackTrace();
-	                        JOptionPane.showMessageDialog(pantalla_usuario.this, "Error al modificar la contraseña");
-	                    }
-
-	                    // Cerrar la ventana actual y volver a la ventana de inicio de sesión
-	                    dispose();
-	                    Login logi = new Login();
-	                }
+	                });
 	            }
 	        });
 	        but.addActionListener(new ActionListener() {
