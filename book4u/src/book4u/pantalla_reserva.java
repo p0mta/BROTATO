@@ -73,6 +73,25 @@ public class pantalla_reserva extends JFrame {
         calcularPrecioButton.setFont(Registro.fuente1);
         calcularPrecioButton.setBackground(Color.white);
         calcularPrecioButton.setBorder(BorderFactory.createLineBorder(Color.BLACK));
+        
+        ImageIcon back = new ImageIcon("back.png");
+        JButton but = new JButton(back);
+        but.setBounds(10, 90, 30, 30);
+        but.setFont(Registro.fuente1);
+        but.setFocusPainted(false);
+        but.setBorderPainted(false);
+        but.setContentAreaFilled(false);
+        this.add(but);
+        
+        but.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent e) {
+            	dispose();
+            	Pantalla_principal pat = new Pantalla_principal();
+            }
+        });
+
+    
+
 
         calcularPrecioButton.addActionListener(new ActionListener() {
             @Override
