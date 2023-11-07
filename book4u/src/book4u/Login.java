@@ -179,7 +179,8 @@ public class Login extends JFrame {
             connection = DriverManager.getConnection("jdbc:oracle:thin:@192.168.3.26:1521:xe", "23_24_DAM2_BROTATO", "123456");
         } catch (SQLException e) {
             e.printStackTrace();
-            JOptionPane.showMessageDialog(Login.this, "Error al conectar a la base de datos");
+            OtrasCosas lp = new OtrasCosas();
+            lp.c();
             System.exit(1);
         }
         
@@ -211,7 +212,8 @@ public class Login extends JFrame {
            
         } catch (SQLException e) {
             e.printStackTrace();
-            JOptionPane.showMessageDialog(Login.this, "Error al consultar la base de datos");
+            OtrasCosas lp = new OtrasCosas();
+            lp.d();
         }
         return false;
     }
