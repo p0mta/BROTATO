@@ -54,11 +54,14 @@ public class pantalla_reserva extends JFrame {
         add(lugarLabel);
         lugarLabel.setFont(Registro.fuente1);
 
-        String[] lugaresResidenciales = {"Casa", "Apartamento", "Cabaña"};
-        JComboBox<String> lugarResidencialCombo = new JComboBox<>(lugaresResidenciales);
-        lugarResidencialCombo.setBounds(350, 150, 200, 30);
+        String[] lugaresResidenciales = {"Casa", "Apartamento", "Cabaña","Hotel"};
+        JComboBox<String> combi = new JComboBox<>(lugaresResidenciales);
+        combi.setBounds(350, 150, 200, 30);
+        combi.setFont(Registro.fuente2);
+        combi.setBackground(Color.WHITE);
+        combi.setBorder(BorderFactory.createLineBorder(Color.BLACK));
         
-        add(lugarResidencialCombo);
+        add(combi);
 
         JLabel paisLabel = new JLabel("País:");
         paisLabel.setBounds(200, 200, 150, 30);
@@ -68,6 +71,9 @@ public class pantalla_reserva extends JFrame {
         String[] paises = {"Dubai", "Japon", "Corea","Francia","Russia","Italia","Grecia","Colombia","Mexico","Irlanda","Alemania", };
         JComboBox<String> paisCombo = new JComboBox<>(paises);
         paisCombo.setBounds(350, 200, 200, 30);
+        paisCombo.setFont(Registro.fuente2);
+        paisCombo.setBackground(Color.WHITE);
+        paisCombo.setBorder(BorderFactory.createLineBorder(Color.BLACK));
      
         add(paisCombo);
 
@@ -79,7 +85,8 @@ public class pantalla_reserva extends JFrame {
         JDateChooser dateChooser = new JDateChooser();
         dateChooser.setBounds(350, 250, 200, 30);
         add(dateChooser);
-        dateChooser.setBackground(Color.white);
+        dateChooser.setBackground(Color.WHITE);
+        dateChooser.setFont(Registro.fuente2);
         dateChooser.setBorder(BorderFactory.createLineBorder(Color.BLACK));
 
         JLabel precioLabel = new JLabel("Precio de la reserva: $0.00");
@@ -95,7 +102,7 @@ public class pantalla_reserva extends JFrame {
         calcularPrecioButton.setBorder(BorderFactory.createLineBorder(Color.BLACK));
 
         calcularPrecioButton.addActionListener(e -> {
-            String lugarResidencial = (String) lugarResidencialCombo.getSelectedItem();
+            String lugarResidencial = (String) combi.getSelectedItem();
             String pais = (String) paisCombo.getSelectedItem();
             Date selectedDate = dateChooser.getDate();
             Date today = new Date();  // Fecha actual
