@@ -10,7 +10,9 @@ import javax.swing.JTextField;
 public class OtrasCosas {
 	JButton ja = new JButton("SI");
 	JButton ja2 = new JButton("NO");
+	JFrame j8;
 	JFrame j;
+	JButton but = new JButton("NO");
 	public void Otrascosas() {
         JFrame j = new JFrame();
         j.setSize(515, 150);
@@ -200,7 +202,7 @@ public class OtrasCosas {
             }			
         });
     } 
-public void d() {
+    public void d() {
     	JFrame j = new JFrame();
         j.setSize(515, 150);
         j.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -241,452 +243,933 @@ public void d() {
             }			
         });
     }
-public void e() {
-	JFrame j = new JFrame();
-    j.setSize(515, 150);
-    j.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-    ImageIcon im = new ImageIcon("panel.png");
-    JLabel label = new JLabel(im);
-    j.setLayout(null);
-    label.setBounds(0, 0, im.getIconWidth(), im.getIconHeight());
-    j.add(label);
-    JLabel mi = new JLabel("NOMBRE DE USUARIO ESTA VACÍO");
-    mi.setBounds(25, 10, 450, 30); 
-    mi.setHorizontalAlignment(JLabel.CENTER);
-    mi.setFont(Registro.fuente1);
-    label.add(mi);
-    JButton ja = new JButton("OK");
-    ja.setBounds(220, 70, 60, 30);
-    label.add(ja);
-    String color2 = "#027017";
-    Color bac = Color.decode(color2);
-    ja.setBackground(bac);
-    ja.setFocusPainted(false);
-    ja.setBorderPainted(false);
-    j.setResizable(false);
-    j.setUndecorated(true);
-    j.setBackground(new Color(0, 0, 0, 0)); 
-    j.setLocationRelativeTo(null);
-    j.setVisible(true);
-    ja.addActionListener(new ActionListener() {
-        public void actionPerformed(ActionEvent e) {
-            j.dispose();
-        }			
-    });
-}
-public void f() {
-	JFrame j = new JFrame();
-    j.setSize(515, 150);
-    j.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-    ImageIcon im = new ImageIcon("panel.png");
-    JLabel label = new JLabel(im);
-    j.setLayout(null);
-    label.setBounds(0, 0, im.getIconWidth(), im.getIconHeight());
-    j.add(label);
-    JLabel mi = new JLabel("NO SE PUDO OBTENER EL NOMBRE DE LA BASE DE DATOS");
-    mi.setBounds(25, 10, 450, 30); 
-    mi.setHorizontalAlignment(JLabel.CENTER);
-    mi.setFont(Registro.fuente1);
-    label.add(mi);
-    ImageIcon cruz = new ImageIcon("cruz.png");
-    JLabel cru = new JLabel(cruz);
-    cru.setBounds(290, 45, 50, 50);
-    label.add(cru);
-    ImageIcon cruz2 = new ImageIcon("cruz.png");
-    JLabel cru2 = new JLabel(cruz2);
-    cru2.setBounds(160, 45, 50, 50);
-    label.add(cru2);
-    JButton ja = new JButton("OK");
-    ja.setBounds(220, 70, 60, 30);
-    label.add(ja);
-    String color2 = "#027017";
-    Color bac = Color.decode(color2);
-    ja.setBackground(bac);
-    ja.setFocusPainted(false);
-    ja.setBorderPainted(false);
-    j.setResizable(false);
-    j.setUndecorated(true);
-    j.setBackground(new Color(0, 0, 0, 0)); 
-    j.setLocationRelativeTo(null);
-    j.setVisible(true);
-    ja.addActionListener(new ActionListener() {
-        public void actionPerformed(ActionEvent e) {
-            j.dispose();
-        }			
-    });
-}
-public void g() {
-	JFrame j = new JFrame();
-    j.setSize(515, 150);
-    j.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-    ImageIcon im = new ImageIcon("panel.png");
-    JLabel label = new JLabel(im);
-    j.setLayout(null);
-    label.setBounds(0, 0, im.getIconWidth(), im.getIconHeight());
-    j.add(label);
-    JLabel mi = new JLabel("NO SE HA PODIDO ACTUALIZAR EL SALDO");
-    mi.setBounds(25, 10, 450, 30); 
-    mi.setHorizontalAlignment(JLabel.CENTER);
-    mi.setFont(Registro.fuente1);
-    label.add(mi);
-    ImageIcon cruz = new ImageIcon("cruz.png");
-    JLabel cru = new JLabel(cruz);
-    cru.setBounds(290, 45, 50, 50);
-    label.add(cru);
-    ImageIcon cruz2 = new ImageIcon("cruz.png");
-    JLabel cru2 = new JLabel(cruz2);
-    cru2.setBounds(160, 45, 50, 50);
-    label.add(cru2);
-    JButton ja = new JButton("OK");
-    ja.setBounds(220, 70, 60, 30);
-    label.add(ja);
-    String color2 = "#027017";
-    Color bac = Color.decode(color2);
-    ja.setBackground(bac);
-    ja.setFocusPainted(false);
-    ja.setBorderPainted(false);
-    j.setResizable(false);
-    j.setUndecorated(true);
-    j.setBackground(new Color(0, 0, 0, 0)); 
-    j.setLocationRelativeTo(null);
-    j.setVisible(true);
-    ja.addActionListener(new ActionListener() {
-        public void actionPerformed(ActionEvent e) {
-            j.dispose();
-        }			
-    });
-}
-public void h() {
-	JFrame j = new JFrame();
-    j.setSize(515, 150);
-    j.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-    ImageIcon im = new ImageIcon("panel.png");
-    JLabel label = new JLabel(im);
-    j.setLayout(null);
-    label.setBounds(0, 0, im.getIconWidth(), im.getIconHeight());
-    j.add(label);
-    JLabel mi = new JLabel("LA CANTIDAD INGRESADA HA DE SER POSITIVA");
-    mi.setBounds(25, 10, 450, 30); 
-    mi.setHorizontalAlignment(JLabel.CENTER);
-    mi.setFont(Registro.fuente1);
-    label.add(mi);
-    JButton ja = new JButton("OK");
-    ja.setBounds(220, 70, 60, 30);
-    label.add(ja);
-    String color2 = "#027017";
-    Color bac = Color.decode(color2);
-    ja.setBackground(bac);
-    ja.setFocusPainted(false);
-    ja.setBorderPainted(false);
-    j.setResizable(false);
-    j.setUndecorated(true);
-    j.setBackground(new Color(0, 0, 0, 0)); 
-    j.setLocationRelativeTo(null);
-    j.setVisible(true);
-    ja.addActionListener(new ActionListener() {
-        public void actionPerformed(ActionEvent e) {
-            j.dispose();
-        }			
-    });
-}
-public void i() {
-	JFrame j = new JFrame();
-    j.setSize(515, 150);
-    j.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-    ImageIcon im = new ImageIcon("panel.png");
-    JLabel label = new JLabel(im);
-    j.setLayout(null);
-    label.setBounds(0, 0, im.getIconWidth(), im.getIconHeight());
-    j.add(label);
-    JLabel mi = new JLabel("INSERTA UN NUMERO VALIDO EN EL CAMPO");
-    mi.setBounds(25, 10, 450, 30); 
-    mi.setHorizontalAlignment(JLabel.CENTER);
-    mi.setFont(Registro.fuente1);
-    label.add(mi);
-    JButton ja = new JButton("OK");
-    ja.setBounds(220, 70, 60, 30);
-    label.add(ja);
-    String color2 = "#027017";
-    Color bac = Color.decode(color2);
-    ja.setBackground(bac);
-    ja.setFocusPainted(false);
-    ja.setBorderPainted(false);
-    j.setResizable(false);
-    j.setUndecorated(true);
-    j.setBackground(new Color(0, 0, 0, 0)); 
-    j.setLocationRelativeTo(null);
-    j.setVisible(true);
-    ja.addActionListener(new ActionListener() {
-        public void actionPerformed(ActionEvent e) {
-            j.dispose();
-        }			
-    });
-}
-public void j() {
-	JFrame j = new JFrame();
-    j.setSize(515, 150);
-    j.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-    ImageIcon im = new ImageIcon("panel.png");
-    JLabel label = new JLabel(im);
-    j.setLayout(null);
-    label.setBounds(0, 0, im.getIconWidth(), im.getIconHeight());
-    j.add(label);
-    JLabel mi = new JLabel("NO SE HA PODIDO COJER EL SALDO DE LA BASE DE DATOS");
-    mi.setBounds(25, 10, 450, 30); 
-    mi.setHorizontalAlignment(JLabel.CENTER);
-    mi.setFont(Registro.fuente1);
-    label.add(mi);
-    ImageIcon cruz = new ImageIcon("cruz.png");
-    JLabel cru = new JLabel(cruz);
-    cru.setBounds(290, 45, 50, 50);
-    label.add(cru);
-    ImageIcon cruz2 = new ImageIcon("cruz.png");
-    JLabel cru2 = new JLabel(cruz2);
-    cru2.setBounds(160, 45, 50, 50);
-    label.add(cru2);
-    JButton ja = new JButton("OK");
-    ja.setBounds(220, 70, 60, 30);
-    label.add(ja);
-    String color2 = "#027017";
-    Color bac = Color.decode(color2);
-    ja.setBackground(bac);
-    ja.setFocusPainted(false);
-    ja.setBorderPainted(false);
-    j.setResizable(false);
-    j.setUndecorated(true);
-    j.setBackground(new Color(0, 0, 0, 0)); 
-    j.setLocationRelativeTo(null);
-    j.setVisible(true);
-    ja.addActionListener(new ActionListener() {
-        public void actionPerformed(ActionEvent e) {
-            j.dispose();
-        }			
-    });
-}
-public void k() {
-	JFrame j = new JFrame();
-    j.setSize(515, 150);
-    j.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-    ImageIcon im = new ImageIcon("panel.png");
-    JLabel label = new JLabel(im);
-    j.setLayout(null);
-    label.setBounds(0, 0, im.getIconWidth(), im.getIconHeight());
-    j.add(label);
-    JLabel mi = new JLabel("TIENES QUE RELLENAR EL CAMPO NOMBRE");
-    mi.setBounds(25, 10, 450, 30); 
-    mi.setHorizontalAlignment(JLabel.CENTER);
-    mi.setFont(Registro.fuente1);
-    label.add(mi);
-    JButton ja = new JButton("OK");
-    ja.setBounds(220, 70, 60, 30);
-    label.add(ja);
-    String color2 = "#027017";
-    Color bac = Color.decode(color2);
-    ja.setBackground(bac);
-    ja.setFocusPainted(false);
-    ja.setBorderPainted(false);
-    j.setResizable(false);
-    j.setUndecorated(true);
-    j.setBackground(new Color(0, 0, 0, 0)); 
-    j.setLocationRelativeTo(null);
-    j.setVisible(true);
-    ja.addActionListener(new ActionListener() {
-        public void actionPerformed(ActionEvent e) {
-            j.dispose();
-        }			
-    });
-}
-public void l() {
-	JFrame j = new JFrame();
-    j.setSize(515, 150);
-    j.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-    ImageIcon im = new ImageIcon("panel.png");
-    JLabel label = new JLabel(im);
-    j.setLayout(null);
-    label.setBounds(0, 0, im.getIconWidth(), im.getIconHeight());
-    j.add(label);
-    JLabel mi = new JLabel("EL NOMBRE NO PUEDE TENER MAS DE 15 LETRAS");
-    mi.setBounds(25, 10, 450, 30);  
-    mi.setHorizontalAlignment(JLabel.CENTER);
-    mi.setFont(Registro.fuente1);
-    label.add(mi);
-    ImageIcon cruz = new ImageIcon("cruz.png");
-    JLabel cru = new JLabel(cruz);
-    cru.setBounds(290, 45, 50, 50);
-    label.add(cru);
-    ImageIcon cruz2 = new ImageIcon("cruz.png");
-    JLabel cru2 = new JLabel(cruz2);
-    cru2.setBounds(160, 45, 50, 50);
-    label.add(cru2);
-    JButton ja = new JButton("OK");
-    ja.setBounds(220, 70, 60, 30);
-    label.add(ja);
-    String color2 = "#027017";
-    Color bac = Color.decode(color2);
-    ja.setBackground(bac);
-    ja.setFocusPainted(false);
-    ja.setBorderPainted(false);
-    j.setResizable(false);
-    j.setUndecorated(true);
-    j.setBackground(new Color(0, 0, 0, 0)); 
-    j.setLocationRelativeTo(null);
-    j.setVisible(true);
-    ja.addActionListener(new ActionListener() {
-        public void actionPerformed(ActionEvent e) {
-            j.dispose();
-        }			
-    });
-}
-public void m() {
-	JFrame j = new JFrame();
-    j.setSize(515, 150);
-    j.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-    ImageIcon im = new ImageIcon("panel.png");
-    JLabel label = new JLabel(im);
-    j.setLayout(null);
-    label.setBounds(0, 0, im.getIconWidth(), im.getIconHeight());
-    j.add(label);
-    JLabel mi = new JLabel("NOMBRE DE USUARIO CAMBIADO CORRECTAMENTE");
-    mi.setBounds(25, 10, 450, 30); 
-    mi.setHorizontalAlignment(JLabel.CENTER);
-    mi.setFont(Registro.fuente1);
-    label.add(mi);
-    JButton ja = new JButton("OK");
-    ja.setBounds(220, 70, 60, 30);
-    label.add(ja);
-    String color2 = "#027017";
-    Color bac = Color.decode(color2);
-    ja.setBackground(bac);
-    ja.setFocusPainted(false);
-    ja.setBorderPainted(false);
-    j.setResizable(false);
-    j.setUndecorated(true);
-    j.setBackground(new Color(0, 0, 0, 0)); 
-    j.setLocationRelativeTo(null);
-    j.setVisible(true);
-    ja.addActionListener(new ActionListener() {
-        public void actionPerformed(ActionEvent e) {
-            j.dispose();
-        }			
-    });
-}
-public void n() {
-	JFrame j = new JFrame();
-    j.setSize(515, 150);
-    j.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-    ImageIcon im = new ImageIcon("panel.png");
-    JLabel label = new JLabel(im);
-    j.setLayout(null);
-    label.setBounds(0, 0, im.getIconWidth(), im.getIconHeight());
-    j.add(label);
-    JLabel mi = new JLabel("NO SE PUDO OBTENER EL NOMBRE DE USUARIO");
-    mi.setBounds(25, 10, 450, 30);  
-    mi.setHorizontalAlignment(JLabel.CENTER);
-    mi.setFont(Registro.fuente1);
-    label.add(mi);
-    ImageIcon cruz = new ImageIcon("cruz.png");
-    JLabel cru = new JLabel(cruz);
-    cru.setBounds(290, 45, 50, 50);
-    label.add(cru);
-    ImageIcon cruz2 = new ImageIcon("cruz.png");
-    JLabel cru2 = new JLabel(cruz2);
-    cru2.setBounds(160, 45, 50, 50);
-    label.add(cru2);
-    JButton ja = new JButton("OK");
-    ja.setBounds(220, 70, 60, 30);
-    label.add(ja);
-    String color2 = "#027017";
-    Color bac = Color.decode(color2);
-    ja.setBackground(bac);
-    ja.setFocusPainted(false);
-    ja.setBorderPainted(false);
-    j.setResizable(false);
-    j.setUndecorated(true);
-    j.setBackground(new Color(0, 0, 0, 0)); 
-    j.setLocationRelativeTo(null);
-    j.setVisible(true);
-    ja.addActionListener(new ActionListener() {
-        public void actionPerformed(ActionEvent e) {
-            j.dispose();
-        }			
-    });
-}
-public void o() {
-	JFrame j = new JFrame();
-    j.setSize(515, 150);
-    j.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-    ImageIcon im = new ImageIcon("panel.png");
-    JLabel label = new JLabel(im);
-    j.setLayout(null);
-    label.setBounds(0, 0, im.getIconWidth(), im.getIconHeight());
-    j.add(label);
-    JLabel mi = new JLabel("NO SE PUDO OBTENER EL NOMBRE DE LA BASE DE DATOS");
-    mi.setBounds(25, 10, 450, 30);  
-    mi.setHorizontalAlignment(JLabel.CENTER);
-    mi.setFont(Registro.fuente1);
-    label.add(mi);
-    ImageIcon cruz = new ImageIcon("cruz.png");
-    JLabel cru = new JLabel(cruz);
-    cru.setBounds(290, 45, 50, 50);
-    label.add(cru);
-    ImageIcon cruz2 = new ImageIcon("cruz.png");
-    JLabel cru2 = new JLabel(cruz2);
-    cru2.setBounds(160, 45, 50, 50);
-    label.add(cru2);
-    JButton ja = new JButton("OK");
-    ja.setBounds(220, 70, 60, 30);
-    label.add(ja);
-    String color2 = "#027017";
-    Color bac = Color.decode(color2);
-    ja.setBackground(bac);
-    ja.setFocusPainted(false);
-    ja.setBorderPainted(false);
-    j.setResizable(false);
-    j.setUndecorated(true);
-    j.setBackground(new Color(0, 0, 0, 0)); 
-    j.setLocationRelativeTo(null);
-    j.setVisible(true);
-    ja.addActionListener(new ActionListener() {
-        public void actionPerformed(ActionEvent e) {
-            j.dispose();
-        }			
-    });
-}
-public void botonpregunta() {
-	j = new JFrame();
-    j.setSize(515, 150);
-    j.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-    ImageIcon im = new ImageIcon("panel.png");
-    JLabel label = new JLabel(im);
-    j.setLayout(null);
-    label.setBounds(0, 0, im.getIconWidth(), im.getIconHeight());
-    j.add(label);
-    JLabel mi = new JLabel("ESTAS SEGURO DE CAMBIAR TU CONTRASEÑA?");
-    mi.setBounds(25, 10, 450, 30); 
-    mi.setHorizontalAlignment(JLabel.CENTER);
-    mi.setFont(Registro.fuente1);
-    label.add(mi);    
-    ja.setBounds(130, 70, 60, 30);
-    label.add(ja);
-    String color2 = "#027017";
-    Color bac = Color.decode(color2);
-    ja.setBackground(bac);    
-    ja2.setBounds(300, 70, 60, 30);
-    label.add(ja2);
-    String color3 = "#027017";
-    Color bac2 = Color.decode(color3);
-    ja2.setBackground(bac2);
-    ja2.setFocusPainted(false);
-    ja2.setBorderPainted(false);
-    ja.setFocusPainted(false);
-    ja.setBorderPainted(false);
-    j.setResizable(false);
-    j.setUndecorated(true);
-    j.setBackground(new Color(0, 0, 0, 0)); 
-    j.setLocationRelativeTo(null);
-    j.setVisible(true);
-    
-}
+	public void e() {
+		JFrame j = new JFrame();
+	    j.setSize(515, 150);
+	    j.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+	    ImageIcon im = new ImageIcon("panel.png");
+	    JLabel label = new JLabel(im);
+	    j.setLayout(null);
+	    label.setBounds(0, 0, im.getIconWidth(), im.getIconHeight());
+	    j.add(label);
+	    JLabel mi = new JLabel("NOMBRE DE USUARIO ESTA VACÍO");
+	    mi.setBounds(25, 10, 450, 30); 
+	    mi.setHorizontalAlignment(JLabel.CENTER);
+	    mi.setFont(Registro.fuente1);
+	    label.add(mi);
+	    JButton ja = new JButton("OK");
+	    ja.setBounds(220, 70, 60, 30);
+	    label.add(ja);
+	    String color2 = "#027017";
+	    Color bac = Color.decode(color2);
+	    ja.setBackground(bac);
+	    ja.setFocusPainted(false);
+	    ja.setBorderPainted(false);
+	    j.setResizable(false);
+	    j.setUndecorated(true);
+	    j.setBackground(new Color(0, 0, 0, 0)); 
+	    j.setLocationRelativeTo(null);
+	    j.setVisible(true);
+	    ja.addActionListener(new ActionListener() {
+	        public void actionPerformed(ActionEvent e) {
+	            j.dispose();
+	        }			
+	    });
+	}
+	public void f() {
+		JFrame j = new JFrame();
+	    j.setSize(515, 150);
+	    j.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+	    ImageIcon im = new ImageIcon("panel.png");
+	    JLabel label = new JLabel(im);
+	    j.setLayout(null);
+	    label.setBounds(0, 0, im.getIconWidth(), im.getIconHeight());
+	    j.add(label);
+	    JLabel mi = new JLabel("NO SE PUDO OBTENER EL NOMBRE DE LA BASE DE DATOS");
+	    mi.setBounds(25, 10, 450, 30); 
+	    mi.setHorizontalAlignment(JLabel.CENTER);
+	    mi.setFont(Registro.fuente1);
+	    label.add(mi);
+	    ImageIcon cruz = new ImageIcon("cruz.png");
+	    JLabel cru = new JLabel(cruz);
+	    cru.setBounds(290, 45, 50, 50);
+	    label.add(cru);
+	    ImageIcon cruz2 = new ImageIcon("cruz.png");
+	    JLabel cru2 = new JLabel(cruz2);
+	    cru2.setBounds(160, 45, 50, 50);
+	    label.add(cru2);
+	    JButton ja = new JButton("OK");
+	    ja.setBounds(220, 70, 60, 30);
+	    label.add(ja);
+	    String color2 = "#027017";
+	    Color bac = Color.decode(color2);
+	    ja.setBackground(bac);
+	    ja.setFocusPainted(false);
+	    ja.setBorderPainted(false);
+	    j.setResizable(false);
+	    j.setUndecorated(true);
+	    j.setBackground(new Color(0, 0, 0, 0)); 
+	    j.setLocationRelativeTo(null);
+	    j.setVisible(true);
+	    ja.addActionListener(new ActionListener() {
+	        public void actionPerformed(ActionEvent e) {
+	            j.dispose();
+	        }			
+	    });
+	}
+	public void g() {
+		JFrame j = new JFrame();
+	    j.setSize(515, 150);
+	    j.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+	    ImageIcon im = new ImageIcon("panel.png");
+	    JLabel label = new JLabel(im);
+	    j.setLayout(null);
+	    label.setBounds(0, 0, im.getIconWidth(), im.getIconHeight());
+	    j.add(label);
+	    JLabel mi = new JLabel("NO SE HA PODIDO ACTUALIZAR EL SALDO");
+	    mi.setBounds(25, 10, 450, 30); 
+	    mi.setHorizontalAlignment(JLabel.CENTER);
+	    mi.setFont(Registro.fuente1);
+	    label.add(mi);
+	    ImageIcon cruz = new ImageIcon("cruz.png");
+	    JLabel cru = new JLabel(cruz);
+	    cru.setBounds(290, 45, 50, 50);
+	    label.add(cru);
+	    ImageIcon cruz2 = new ImageIcon("cruz.png");
+	    JLabel cru2 = new JLabel(cruz2);
+	    cru2.setBounds(160, 45, 50, 50);
+	    label.add(cru2);
+	    JButton ja = new JButton("OK");
+	    ja.setBounds(220, 70, 60, 30);
+	    label.add(ja);
+	    String color2 = "#027017";
+	    Color bac = Color.decode(color2);
+	    ja.setBackground(bac);
+	    ja.setFocusPainted(false);
+	    ja.setBorderPainted(false);
+	    j.setResizable(false);
+	    j.setUndecorated(true);
+	    j.setBackground(new Color(0, 0, 0, 0)); 
+	    j.setLocationRelativeTo(null);
+	    j.setVisible(true);
+	    ja.addActionListener(new ActionListener() {
+	        public void actionPerformed(ActionEvent e) {
+	            j.dispose();
+	        }			
+	    });
+	}
+	public void h() {
+		JFrame j = new JFrame();
+	    j.setSize(515, 150);
+	    j.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+	    ImageIcon im = new ImageIcon("panel.png");
+	    JLabel label = new JLabel(im);
+	    j.setLayout(null);
+	    label.setBounds(0, 0, im.getIconWidth(), im.getIconHeight());
+	    j.add(label);
+	    JLabel mi = new JLabel("LA CANTIDAD INGRESADA HA DE SER POSITIVA");
+	    mi.setBounds(25, 10, 450, 30); 
+	    mi.setHorizontalAlignment(JLabel.CENTER);
+	    mi.setFont(Registro.fuente1);
+	    label.add(mi);
+	    JButton ja = new JButton("OK");
+	    ja.setBounds(220, 70, 60, 30);
+	    label.add(ja);
+	    String color2 = "#027017";
+	    Color bac = Color.decode(color2);
+	    ja.setBackground(bac);
+	    ja.setFocusPainted(false);
+	    ja.setBorderPainted(false);
+	    j.setResizable(false);
+	    j.setUndecorated(true);
+	    j.setBackground(new Color(0, 0, 0, 0)); 
+	    j.setLocationRelativeTo(null);
+	    j.setVisible(true);
+	    ja.addActionListener(new ActionListener() {
+	        public void actionPerformed(ActionEvent e) {
+	            j.dispose();
+	        }			
+	    });
+	}
+	public void i() {
+		JFrame j = new JFrame();
+	    j.setSize(515, 150);
+	    j.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+	    ImageIcon im = new ImageIcon("panel.png");
+	    JLabel label = new JLabel(im);
+	    j.setLayout(null);
+	    label.setBounds(0, 0, im.getIconWidth(), im.getIconHeight());
+	    j.add(label);
+	    JLabel mi = new JLabel("INSERTA UN NUMERO VALIDO EN EL CAMPO");
+	    mi.setBounds(25, 10, 450, 30); 
+	    mi.setHorizontalAlignment(JLabel.CENTER);
+	    mi.setFont(Registro.fuente1);
+	    label.add(mi);
+	    JButton ja = new JButton("OK");
+	    ja.setBounds(220, 70, 60, 30);
+	    label.add(ja);
+	    String color2 = "#027017";
+	    Color bac = Color.decode(color2);
+	    ja.setBackground(bac);
+	    ja.setFocusPainted(false);
+	    ja.setBorderPainted(false);
+	    j.setResizable(false);
+	    j.setUndecorated(true);
+	    j.setBackground(new Color(0, 0, 0, 0)); 
+	    j.setLocationRelativeTo(null);
+	    j.setVisible(true);
+	    ja.addActionListener(new ActionListener() {
+	        public void actionPerformed(ActionEvent e) {
+	            j.dispose();
+	        }			
+	    });
+	}
+	public void j() {
+		JFrame j = new JFrame();
+	    j.setSize(515, 150);
+	    j.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+	    ImageIcon im = new ImageIcon("panel.png");
+	    JLabel label = new JLabel(im);
+	    j.setLayout(null);
+	    label.setBounds(0, 0, im.getIconWidth(), im.getIconHeight());
+	    j.add(label);
+	    JLabel mi = new JLabel("NO SE HA PODIDO COJER EL SALDO DE LA BASE DE DATOS");
+	    mi.setBounds(25, 10, 450, 30); 
+	    mi.setHorizontalAlignment(JLabel.CENTER);
+	    mi.setFont(Registro.fuente1);
+	    label.add(mi);
+	    ImageIcon cruz = new ImageIcon("cruz.png");
+	    JLabel cru = new JLabel(cruz);
+	    cru.setBounds(290, 45, 50, 50);
+	    label.add(cru);
+	    ImageIcon cruz2 = new ImageIcon("cruz.png");
+	    JLabel cru2 = new JLabel(cruz2);
+	    cru2.setBounds(160, 45, 50, 50);
+	    label.add(cru2);
+	    JButton ja = new JButton("OK");
+	    ja.setBounds(220, 70, 60, 30);
+	    label.add(ja);
+	    String color2 = "#027017";
+	    Color bac = Color.decode(color2);
+	    ja.setBackground(bac);
+	    ja.setFocusPainted(false);
+	    ja.setBorderPainted(false);
+	    j.setResizable(false);
+	    j.setUndecorated(true);
+	    j.setBackground(new Color(0, 0, 0, 0)); 
+	    j.setLocationRelativeTo(null);
+	    j.setVisible(true);
+	    ja.addActionListener(new ActionListener() {
+	        public void actionPerformed(ActionEvent e) {
+	            j.dispose();
+	        }			
+	    });
+	}
+	public void k() {
+		JFrame j = new JFrame();
+	    j.setSize(515, 150);
+	    j.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+	    ImageIcon im = new ImageIcon("panel.png");
+	    JLabel label = new JLabel(im);
+	    j.setLayout(null);
+	    label.setBounds(0, 0, im.getIconWidth(), im.getIconHeight());
+	    j.add(label);
+	    JLabel mi = new JLabel("TIENES QUE RELLENAR EL CAMPO NOMBRE");
+	    mi.setBounds(25, 10, 450, 30); 
+	    mi.setHorizontalAlignment(JLabel.CENTER);
+	    mi.setFont(Registro.fuente1);
+	    label.add(mi);
+	    JButton ja = new JButton("OK");
+	    ja.setBounds(220, 70, 60, 30);
+	    label.add(ja);
+	    String color2 = "#027017";
+	    Color bac = Color.decode(color2);
+	    ja.setBackground(bac);
+	    ja.setFocusPainted(false);
+	    ja.setBorderPainted(false);
+	    j.setResizable(false);
+	    j.setUndecorated(true);
+	    j.setBackground(new Color(0, 0, 0, 0)); 
+	    j.setLocationRelativeTo(null);
+	    j.setVisible(true);
+	    ja.addActionListener(new ActionListener() {
+	        public void actionPerformed(ActionEvent e) {
+	            j.dispose();
+	        }			
+	    });
+	}
+	public void l() {
+		JFrame j = new JFrame();
+	    j.setSize(515, 150);
+	    j.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+	    ImageIcon im = new ImageIcon("panel.png");
+	    JLabel label = new JLabel(im);
+	    j.setLayout(null);
+	    label.setBounds(0, 0, im.getIconWidth(), im.getIconHeight());
+	    j.add(label);
+	    JLabel mi = new JLabel("EL NOMBRE NO PUEDE TENER MAS DE 15 LETRAS");
+	    mi.setBounds(25, 10, 450, 30);  
+	    mi.setHorizontalAlignment(JLabel.CENTER);
+	    mi.setFont(Registro.fuente1);
+	    label.add(mi);
+	    ImageIcon cruz = new ImageIcon("cruz.png");
+	    JLabel cru = new JLabel(cruz);
+	    cru.setBounds(290, 45, 50, 50);
+	    label.add(cru);
+	    ImageIcon cruz2 = new ImageIcon("cruz.png");
+	    JLabel cru2 = new JLabel(cruz2);
+	    cru2.setBounds(160, 45, 50, 50);
+	    label.add(cru2);
+	    JButton ja = new JButton("OK");
+	    ja.setBounds(220, 70, 60, 30);
+	    label.add(ja);
+	    String color2 = "#027017";
+	    Color bac = Color.decode(color2);
+	    ja.setBackground(bac);
+	    ja.setFocusPainted(false);
+	    ja.setBorderPainted(false);
+	    j.setResizable(false);
+	    j.setUndecorated(true);
+	    j.setBackground(new Color(0, 0, 0, 0)); 
+	    j.setLocationRelativeTo(null);
+	    j.setVisible(true);
+	    ja.addActionListener(new ActionListener() {
+	        public void actionPerformed(ActionEvent e) {
+	            j.dispose();
+	        }			
+	    });
+	}
+	public void m() {
+		JFrame j = new JFrame();
+	    j.setSize(515, 150);
+	    j.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+	    ImageIcon im = new ImageIcon("panel.png");
+	    JLabel label = new JLabel(im);
+	    j.setLayout(null);
+	    label.setBounds(0, 0, im.getIconWidth(), im.getIconHeight());
+	    j.add(label);
+	    JLabel mi = new JLabel("NOMBRE DE USUARIO CAMBIADO CORRECTAMENTE");
+	    mi.setBounds(25, 10, 450, 30); 
+	    mi.setHorizontalAlignment(JLabel.CENTER);
+	    mi.setFont(Registro.fuente1);
+	    label.add(mi);
+	    JButton ja = new JButton("OK");
+	    ja.setBounds(220, 70, 60, 30);
+	    label.add(ja);
+	    String color2 = "#027017";
+	    Color bac = Color.decode(color2);
+	    ja.setBackground(bac);
+	    ja.setFocusPainted(false);
+	    ja.setBorderPainted(false);
+	    j.setResizable(false);
+	    j.setUndecorated(true);
+	    j.setBackground(new Color(0, 0, 0, 0)); 
+	    j.setLocationRelativeTo(null);
+	    j.setVisible(true);
+	    ja.addActionListener(new ActionListener() {
+	        public void actionPerformed(ActionEvent e) {
+	            j.dispose();
+	        }			
+	    });
+	}
+	public void n() {
+		JFrame j = new JFrame();
+	    j.setSize(515, 150);
+	    j.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+	    ImageIcon im = new ImageIcon("panel.png");
+	    JLabel label = new JLabel(im);
+	    j.setLayout(null);
+	    label.setBounds(0, 0, im.getIconWidth(), im.getIconHeight());
+	    j.add(label);
+	    JLabel mi = new JLabel("NO SE PUDO OBTENER EL NOMBRE DE USUARIO");
+	    mi.setBounds(25, 10, 450, 30);  
+	    mi.setHorizontalAlignment(JLabel.CENTER);
+	    mi.setFont(Registro.fuente1);
+	    label.add(mi);
+	    ImageIcon cruz = new ImageIcon("cruz.png");
+	    JLabel cru = new JLabel(cruz);
+	    cru.setBounds(290, 45, 50, 50);
+	    label.add(cru);
+	    ImageIcon cruz2 = new ImageIcon("cruz.png");
+	    JLabel cru2 = new JLabel(cruz2);
+	    cru2.setBounds(160, 45, 50, 50);
+	    label.add(cru2);
+	    JButton ja = new JButton("OK");
+	    ja.setBounds(220, 70, 60, 30);
+	    label.add(ja);
+	    String color2 = "#027017";
+	    Color bac = Color.decode(color2);
+	    ja.setBackground(bac);
+	    ja.setFocusPainted(false);
+	    ja.setBorderPainted(false);
+	    j.setResizable(false);
+	    j.setUndecorated(true);
+	    j.setBackground(new Color(0, 0, 0, 0)); 
+	    j.setLocationRelativeTo(null);
+	    j.setVisible(true);
+	    ja.addActionListener(new ActionListener() {
+	        public void actionPerformed(ActionEvent e) {
+	            j.dispose();
+	        }			
+	    });
+	}
+	public void o() {
+		JFrame j = new JFrame();
+	    j.setSize(515, 150);
+	    j.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+	    ImageIcon im = new ImageIcon("panel.png");
+	    JLabel label = new JLabel(im);
+	    j.setLayout(null);
+	    label.setBounds(0, 0, im.getIconWidth(), im.getIconHeight());
+	    j.add(label);
+	    JLabel mi = new JLabel("NO SE PUDO OBTENER EL NOMBRE DE LA BASE DE DATOS");
+	    mi.setBounds(25, 10, 450, 30);  
+	    mi.setHorizontalAlignment(JLabel.CENTER);
+	    mi.setFont(Registro.fuente1);
+	    label.add(mi);
+	    ImageIcon cruz = new ImageIcon("cruz.png");
+	    JLabel cru = new JLabel(cruz);
+	    cru.setBounds(290, 45, 50, 50);
+	    label.add(cru);
+	    ImageIcon cruz2 = new ImageIcon("cruz.png");
+	    JLabel cru2 = new JLabel(cruz2);
+	    cru2.setBounds(160, 45, 50, 50);
+	    label.add(cru2);
+	    JButton ja = new JButton("OK");
+	    ja.setBounds(220, 70, 60, 30);
+	    label.add(ja);
+	    String color2 = "#027017";
+	    Color bac = Color.decode(color2);
+	    ja.setBackground(bac);
+	    ja.setFocusPainted(false);
+	    ja.setBorderPainted(false);
+	    j.setResizable(false);
+	    j.setUndecorated(true);
+	    j.setBackground(new Color(0, 0, 0, 0)); 
+	    j.setLocationRelativeTo(null);
+	    j.setVisible(true);
+	    ja.addActionListener(new ActionListener() {
+	        public void actionPerformed(ActionEvent e) {
+	            j.dispose();
+	        }			
+	    });
+	}
+	public void botonpregunta() {
+		j = new JFrame();
+	    j.setSize(515, 150);
+	    j.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+	    ImageIcon im = new ImageIcon("panel.png");
+	    JLabel label = new JLabel(im);
+	    j.setLayout(null);
+	    label.setBounds(0, 0, im.getIconWidth(), im.getIconHeight());
+	    j.add(label);
+	    JLabel mi = new JLabel("ESTAS SEGURO DE CAMBIAR TU CONTRASEÑA?");
+	    mi.setBounds(25, 10, 450, 30); 
+	    mi.setHorizontalAlignment(JLabel.CENTER);
+	    mi.setFont(Registro.fuente1);
+	    label.add(mi);    
+	    ja.setBounds(130, 70, 60, 30);
+	    label.add(ja);
+	    String color2 = "#027017";
+	    Color bac = Color.decode(color2);
+	    ja.setBackground(bac);    
+	    ja2.setBounds(300, 70, 60, 30);
+	    label.add(ja2);
+	    String color3 = "#027017";
+	    Color bac2 = Color.decode(color3);
+	    ja2.setBackground(bac2);
+	    ja2.setFocusPainted(false);
+	    ja2.setBorderPainted(false);
+	    ja.setFocusPainted(false);
+	    ja.setBorderPainted(false);
+	    j.setResizable(false);
+	    j.setUndecorated(true);
+	    j.setBackground(new Color(0, 0, 0, 0)); 
+	    j.setLocationRelativeTo(null);
+	    j.setVisible(true);
+	    
+	}
+	public void p() {
+		JFrame j = new JFrame();
+	    j.setSize(515, 150);
+	    j.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+	    ImageIcon im = new ImageIcon("panel.png");
+	    JLabel label = new JLabel(im);
+	    j.setLayout(null);
+	    label.setBounds(0, 0, im.getIconWidth(), im.getIconHeight());
+	    j.add(label);
+	    JLabel mi = new JLabel("LAS CONTRASEÑAS NO COINCIDEN");
+	    mi.setBounds(25, 10, 450, 30);  
+	    mi.setHorizontalAlignment(JLabel.CENTER);
+	    mi.setFont(Registro.fuente1);
+	    label.add(mi);
+	    ImageIcon cruz = new ImageIcon("cruz.png");
+	    JLabel cru = new JLabel(cruz);
+	    cru.setBounds(290, 45, 50, 50);
+	    label.add(cru);
+	    ImageIcon cruz2 = new ImageIcon("cruz.png");
+	    JLabel cru2 = new JLabel(cruz2);
+	    cru2.setBounds(160, 45, 50, 50);
+	    label.add(cru2);
+	    JButton ja = new JButton("OK");
+	    ja.setBounds(220, 70, 60, 30);
+	    label.add(ja);
+	    String color2 = "#027017";
+	    Color bac = Color.decode(color2);
+	    ja.setBackground(bac);
+	    ja.setFocusPainted(false);
+	    ja.setBorderPainted(false);
+	    j.setResizable(false);
+	    j.setUndecorated(true);
+	    j.setBackground(new Color(0, 0, 0, 0)); 
+	    j.setLocationRelativeTo(null);
+	    j.setVisible(true);
+	    ja.addActionListener(new ActionListener() {
+	        public void actionPerformed(ActionEvent e) {
+	            j.dispose();
+	        }			
+	    });
+	}
+	public void q() {
+		JFrame j = new JFrame();
+	    j.setSize(515, 150);
+	    j.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+	    ImageIcon im = new ImageIcon("panel.png");
+	    JLabel label = new JLabel(im);
+	    j.setLayout(null);
+	    label.setBounds(0, 0, im.getIconWidth(), im.getIconHeight());
+	    j.add(label);
+	    JLabel mi = new JLabel("NO MAS DE 20 CARACTERES PORFAVOR");
+	    mi.setBounds(25, 10, 450, 30); 
+	    mi.setHorizontalAlignment(JLabel.CENTER);
+	    mi.setFont(Registro.fuente1);
+	    label.add(mi);
+	    JButton ja = new JButton("OK");
+	    ja.setBounds(220, 70, 60, 30);
+	    label.add(ja);
+	    String color2 = "#027017";
+	    Color bac = Color.decode(color2);
+	    ja.setBackground(bac);
+	    ja.setFocusPainted(false);
+	    ja.setBorderPainted(false);
+	    j.setResizable(false);
+	    j.setUndecorated(true);
+	    j.setBackground(new Color(0, 0, 0, 0)); 
+	    j.setLocationRelativeTo(null);
+	    j.setVisible(true);
+	    ja.addActionListener(new ActionListener() {
+	        public void actionPerformed(ActionEvent e) {
+	            j.dispose();
+	        }			
+	    });
+	}
+	public void r() {
+		JFrame j = new JFrame();
+	    j.setSize(515, 150);
+	    j.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+	    ImageIcon im = new ImageIcon("panel.png");
+	    JLabel label = new JLabel(im);
+	    j.setLayout(null);
+	    label.setBounds(0, 0, im.getIconWidth(), im.getIconHeight());
+	    j.add(label);
+	    JLabel mi = new JLabel("CONTRASEÑA ACTUALIZADA, INICIE SESION A CONTINUACION");
+	    mi.setBounds(25, 10, 450, 30); 
+	    mi.setHorizontalAlignment(JLabel.CENTER);
+	    mi.setFont(Registro.fuente1);
+	    label.add(mi);
+	    JButton ja = new JButton("OK");
+	    ja.setBounds(220, 70, 60, 30);
+	    label.add(ja);
+	    String color2 = "#027017";
+	    Color bac = Color.decode(color2);
+	    ja.setBackground(bac);
+	    ja.setFocusPainted(false);
+	    ja.setBorderPainted(false);
+	    j.setResizable(false);
+	    j.setUndecorated(true);
+	    j.setBackground(new Color(0, 0, 0, 0)); 
+	    j.setLocationRelativeTo(null);
+	    j.setVisible(true);
+	    ja.addActionListener(new ActionListener() {
+	        public void actionPerformed(ActionEvent e) {
+	            j.dispose();
+	        }			
+	    });
+	}
+	public void s() {
+		JFrame j = new JFrame();
+	    j.setSize(515, 150);
+	    j.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+	    ImageIcon im = new ImageIcon("panel.png");
+	    JLabel label = new JLabel(im);
+	    j.setLayout(null);
+	    label.setBounds(0, 0, im.getIconWidth(), im.getIconHeight());
+	    j.add(label);
+	    JLabel mi = new JLabel("NO SE PUEDE CAMBIAR LA CONTRASEÑA");
+	    mi.setBounds(25, 10, 450, 30); 
+	    mi.setHorizontalAlignment(JLabel.CENTER);
+	    mi.setFont(Registro.fuente1);
+	    label.add(mi);
+	    JButton ja = new JButton("OK");
+	    ja.setBounds(220, 70, 60, 30);
+	    label.add(ja);
+	    String color2 = "#027017";
+	    Color bac = Color.decode(color2);
+	    ja.setBackground(bac);
+	    ja.setFocusPainted(false);
+	    ja.setBorderPainted(false);
+	    j.setResizable(false);
+	    j.setUndecorated(true);
+	    j.setBackground(new Color(0, 0, 0, 0)); 
+	    j.setLocationRelativeTo(null);
+	    j.setVisible(true);
+	    ja.addActionListener(new ActionListener() {
+	        public void actionPerformed(ActionEvent e) {
+	            j.dispose();
+	        }			
+	    });
+	}	
+	public void t() {
+		JFrame j = new JFrame();
+	    j.setSize(515, 150);
+	    j.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+	    ImageIcon im = new ImageIcon("panel.png");
+	    JLabel label = new JLabel(im);
+	    j.setLayout(null);
+	    label.setBounds(0, 0, im.getIconWidth(), im.getIconHeight());
+	    j.add(label);
+	    JLabel mi = new JLabel("PORFAVOR, RELLENA TODOS LOS CAMPOS");
+	    mi.setBounds(25, 10, 450, 30); 
+	    mi.setHorizontalAlignment(JLabel.CENTER);
+	    mi.setFont(Registro.fuente1);
+	    label.add(mi);
+	    JButton ja = new JButton("OK");
+	    ja.setBounds(220, 70, 60, 30);
+	    label.add(ja);
+	    String color2 = "#027017";
+	    Color bac = Color.decode(color2);
+	    ja.setBackground(bac);
+	    ja.setFocusPainted(false);
+	    ja.setBorderPainted(false);
+	    j.setResizable(false);
+	    j.setUndecorated(true);
+	    j.setBackground(new Color(0, 0, 0, 0)); 
+	    j.setLocationRelativeTo(null);
+	    j.setVisible(true);
+	    ja.addActionListener(new ActionListener() {
+	        public void actionPerformed(ActionEvent e) {
+	            j.dispose();
+	        }			
+	    });
+	}
+	public void v() {
+		JFrame j = new JFrame();
+	    j.setSize(515, 150);
+	    j.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+	    ImageIcon im = new ImageIcon("panel.png");
+	    JLabel label = new JLabel(im);
+	    j.setLayout(null);
+	    label.setBounds(0, 0, im.getIconWidth(), im.getIconHeight());
+	    j.add(label);
+	    JLabel mi = new JLabel("PORFAVOR, INTRODUZCA UN CORREO VALIDO");
+	    mi.setBounds(25, 10, 450, 30); 
+	    mi.setHorizontalAlignment(JLabel.CENTER);
+	    mi.setFont(Registro.fuente1);
+	    label.add(mi);
+	    JButton ja = new JButton("OK");
+	    ja.setBounds(220, 70, 60, 30);
+	    label.add(ja);
+	    String color2 = "#027017";
+	    Color bac = Color.decode(color2);
+	    ja.setBackground(bac);
+	    ja.setFocusPainted(false);
+	    ja.setBorderPainted(false);
+	    j.setResizable(false);
+	    j.setUndecorated(true);
+	    j.setBackground(new Color(0, 0, 0, 0)); 
+	    j.setLocationRelativeTo(null);
+	    j.setVisible(true);
+	    ja.addActionListener(new ActionListener() {
+	        public void actionPerformed(ActionEvent e) {
+	            j.dispose();
+	        }			
+	    });
+	}
+	public void u() {
+		JFrame j = new JFrame();
+	    j.setSize(515, 150);
+	    j.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+	    ImageIcon im = new ImageIcon("panel.png");
+	    JLabel label = new JLabel(im);
+	    j.setLayout(null);
+	    label.setBounds(0, 0, im.getIconWidth(), im.getIconHeight());
+	    j.add(label);
+	    JLabel mi = new JLabel("SU NOMBRE NO PUEDE CONTENER MAS DE 15 CARACTERES");
+	    mi.setBounds(25, 10, 450, 30); 
+	    mi.setHorizontalAlignment(JLabel.CENTER);
+	    mi.setFont(Registro.fuente1);
+	    label.add(mi);
+	    JButton ja = new JButton("OK");
+	    ja.setBounds(220, 70, 60, 30);
+	    label.add(ja);
+	    String color2 = "#027017";
+	    Color bac = Color.decode(color2);
+	    ja.setBackground(bac);
+	    ja.setFocusPainted(false);
+	    ja.setBorderPainted(false);
+	    j.setResizable(false);
+	    j.setUndecorated(true);
+	    j.setBackground(new Color(0, 0, 0, 0)); 
+	    j.setLocationRelativeTo(null);
+	    j.setVisible(true);
+	    ja.addActionListener(new ActionListener() {
+	        public void actionPerformed(ActionEvent e) {
+	            j.dispose();
+	        }			
+	    });
+	}
+	public void w() {
+		JFrame j = new JFrame();
+	    j.setSize(515, 150);
+	    j.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+	    ImageIcon im = new ImageIcon("panel.png");
+	    JLabel label = new JLabel(im);
+	    j.setLayout(null);
+	    label.setBounds(0, 0, im.getIconWidth(), im.getIconHeight());
+	    j.add(label);
+	    JLabel mi = new JLabel("SU CONTRASEÑA NO PUEDE CONTENER MAS DE 20 CARACTERES");
+	    mi.setBounds(25, 10, 450, 30); 
+	    mi.setHorizontalAlignment(JLabel.CENTER);
+	    mi.setFont(Registro.fuente1);
+	    label.add(mi);
+	    JButton ja = new JButton("OK");
+	    ja.setBounds(220, 70, 60, 30);
+	    label.add(ja);
+	    String color2 = "#027017";
+	    Color bac = Color.decode(color2);
+	    ja.setBackground(bac);
+	    ja.setFocusPainted(false);
+	    ja.setBorderPainted(false);
+	    j.setResizable(false);
+	    j.setUndecorated(true);
+	    j.setBackground(new Color(0, 0, 0, 0)); 
+	    j.setLocationRelativeTo(null);
+	    j.setVisible(true);
+	    ja.addActionListener(new ActionListener() {
+	        public void actionPerformed(ActionEvent e) {
+	            j.dispose();
+	        }			
+	    });
+	}
+	public void x() {
+		JFrame j = new JFrame();
+	    j.setSize(515, 150);
+	    j.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+	    ImageIcon im = new ImageIcon("panel.png");
+	    JLabel label = new JLabel(im);
+	    j.setLayout(null);
+	    label.setBounds(0, 0, im.getIconWidth(), im.getIconHeight());
+	    j.add(label);
+	    JLabel mi = new JLabel("SU CIUDAD NO PUEDE CONTENER MAS DE 20 CARACTERES");
+	    mi.setBounds(25, 10, 450, 30); 
+	    mi.setHorizontalAlignment(JLabel.CENTER);
+	    mi.setFont(Registro.fuente1);
+	    label.add(mi);
+	    JButton ja = new JButton("OK");
+	    ja.setBounds(220, 70, 60, 30);
+	    label.add(ja);
+	    String color2 = "#027017";
+	    Color bac = Color.decode(color2);
+	    ja.setBackground(bac);
+	    ja.setFocusPainted(false);
+	    ja.setBorderPainted(false);
+	    j.setResizable(false);
+	    j.setUndecorated(true);
+	    j.setBackground(new Color(0, 0, 0, 0)); 
+	    j.setLocationRelativeTo(null);
+	    j.setVisible(true);
+	    ja.addActionListener(new ActionListener() {
+	        public void actionPerformed(ActionEvent e) {
+	            j.dispose();
+	        }			
+	    });
+	}
+	public void y() {
+		JFrame j = new JFrame();
+	    j.setSize(515, 150);
+	    j.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+	    ImageIcon im = new ImageIcon("panel.png");
+	    JLabel label = new JLabel(im);
+	    j.setLayout(null);
+	    label.setBounds(0, 0, im.getIconWidth(), im.getIconHeight());
+	    j.add(label);
+	    JLabel mi = new JLabel("SUS APELLIDOS NO PUEDEN CONTENER MAS DE 50 CARACTERES");
+	    mi.setBounds(25, 10, 450, 30); 
+	    mi.setHorizontalAlignment(JLabel.CENTER);
+	    mi.setFont(Registro.fuente1);
+	    label.add(mi);
+	    JButton ja = new JButton("OK");
+	    ja.setBounds(220, 70, 60, 30);
+	    label.add(ja);
+	    String color2 = "#027017";
+	    Color bac = Color.decode(color2);
+	    ja.setBackground(bac);
+	    ja.setFocusPainted(false);
+	    ja.setBorderPainted(false);
+	    j.setResizable(false);
+	    j.setUndecorated(true);
+	    j.setBackground(new Color(0, 0, 0, 0)); 
+	    j.setLocationRelativeTo(null);
+	    j.setVisible(true);
+	    ja.addActionListener(new ActionListener() {
+	        public void actionPerformed(ActionEvent e) {
+	            j.dispose();
+	        }			
+	    });
+	}
+	public void z() {
+		JFrame j = new JFrame();
+	    j.setSize(515, 150);
+	    j.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+	    ImageIcon im = new ImageIcon("panel.png");
+	    JLabel label = new JLabel(im);
+	    j.setLayout(null);
+	    label.setBounds(0, 0, im.getIconWidth(), im.getIconHeight());
+	    j.add(label);
+	    JLabel mi = new JLabel("SU CORREO NO PUEDE CONTENER MAS DE 30 CARACTERES");
+	    mi.setBounds(25, 10, 450, 30); 
+	    mi.setHorizontalAlignment(JLabel.CENTER);
+	    mi.setFont(Registro.fuente1);
+	    label.add(mi);
+	    JButton ja = new JButton("OK");
+	    ja.setBounds(220, 70, 60, 30);
+	    label.add(ja);
+	    String color2 = "#027017";
+	    Color bac = Color.decode(color2);
+	    ja.setBackground(bac);
+	    ja.setFocusPainted(false);
+	    ja.setBorderPainted(false);
+	    j.setResizable(false);
+	    j.setUndecorated(true);
+	    j.setBackground(new Color(0, 0, 0, 0)); 
+	    j.setLocationRelativeTo(null);
+	    j.setVisible(true);
+	    ja.addActionListener(new ActionListener() {
+	        public void actionPerformed(ActionEvent e) {
+	            j.dispose();
+	        }			
+	    });
+	}
+	public void A() {
+		JFrame j = new JFrame();
+	    j.setSize(515, 150);
+	    j.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+	    ImageIcon im = new ImageIcon("panel.png");
+	    JLabel label = new JLabel(im);
+	    j.setLayout(null);
+	    label.setBounds(0, 0, im.getIconWidth(), im.getIconHeight());
+	    j.add(label);
+	    JLabel mi = new JLabel("CORREO YA EXISTENTE");
+	    mi.setBounds(25, 10, 450, 30); 
+	    mi.setHorizontalAlignment(JLabel.CENTER);
+	    mi.setFont(Registro.fuente1);
+	    label.add(mi);
+	    JLabel mi2 = new JLabel("CAMBIA EL CORREO O INICIA SESIÓN");
+	    mi2.setBounds(25, 37, 450, 30); 
+	    mi2.setHorizontalAlignment(JLabel.CENTER);
+	    mi2.setFont(Registro.fuente1);
+	    label.add(mi2);
+	    JButton ja = new JButton("OK");
+	    ja.setBounds(220, 70, 60, 30);
+	    label.add(ja);
+	    String color2 = "#027017";
+	    Color bac = Color.decode(color2);
+	    ja.setBackground(bac);
+	    ja.setFocusPainted(false);
+	    ja.setBorderPainted(false);
+	    j.setResizable(false);
+	    j.setUndecorated(true);
+	    j.setBackground(new Color(0, 0, 0, 0)); 
+	    j.setLocationRelativeTo(null);
+	    j.setVisible(true);
+	    ja.addActionListener(new ActionListener() {
+	        public void actionPerformed(ActionEvent e) {
+	            j.dispose();
+	        }			
+	    });
+	}
+	public void B() {
+		j8 = new JFrame();
+	    j8.setSize(515, 150);
+	    j8.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+	    ImageIcon im = new ImageIcon("panel.png");
+	    JLabel label = new JLabel(im);
+	    j8.setLayout(null);
+	    label.setBounds(0, 0, im.getIconWidth(), im.getIconHeight());
+	    j8.add(label);
+	    JLabel mi = new JLabel("REGISTRO EXITOSO, AHORA INICIE SESIÓN");
+	    mi.setBounds(25, 10, 450, 30); 
+	    mi.setHorizontalAlignment(JLabel.CENTER);
+	    mi.setFont(Registro.fuente1);
+	    label.add(mi);
+	    but= new JButton();
+	    but.setBounds(220, 70, 60, 30);
+	    label.add(but);
+	    String color2 = "#027017";
+	    Color bac = Color.decode(color2);
+	    but.setBackground(bac);
+	    but.setFocusPainted(false);
+	    but.setBorderPainted(false);
+	    j8.setResizable(false);
+	    j8.setUndecorated(true);
+	    j8.setBackground(new Color(0, 0, 0, 0)); 
+	    j8.setLocationRelativeTo(null);
+	    j8.setVisible(true);
+	    but.addActionListener(new ActionListener() {
+	        public void actionPerformed(ActionEvent e) {
+	            j8.dispose();
+	        }			
+	    });
+	}
+	public void C() {
+		JFrame j = new JFrame();
+	    j.setSize(515, 150);
+	    j.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+	    ImageIcon im = new ImageIcon("panel.png");
+	    JLabel label = new JLabel(im);
+	    j.setLayout(null);
+	    label.setBounds(0, 0, im.getIconWidth(), im.getIconHeight());
+	    j.add(label);
+	    JLabel mi = new JLabel("CORREO YA EXISTENTE");
+	    mi.setBounds(25, 10, 450, 30); 
+	    mi.setHorizontalAlignment(JLabel.CENTER);
+	    mi.setFont(Registro.fuente1);
+	    label.add(mi);
+	    JLabel mi2 = new JLabel("ERROR AL REGISTRAR EL USUARIO");
+	    mi2.setBounds(25, 37, 450, 30); 
+	    mi2.setHorizontalAlignment(JLabel.CENTER);
+	    mi2.setFont(Registro.fuente1);
+	    label.add(mi2);
+	    JButton ja = new JButton("OK");
+	    ja.setBounds(220, 70, 60, 30);
+	    label.add(ja);
+	    String color2 = "#027017";
+	    Color bac = Color.decode(color2);
+	    ja.setBackground(bac);
+	    ja.setFocusPainted(false);
+	    ja.setBorderPainted(false);
+	    j.setResizable(false);
+	    j.setUndecorated(true);
+	    j.setBackground(new Color(0, 0, 0, 0)); 
+	    j.setLocationRelativeTo(null);
+	    j.setVisible(true);
+	    ja.addActionListener(new ActionListener() {
+	        public void actionPerformed(ActionEvent e) {
+	            j.dispose();
+	        }			
+	    });
+	}
+	
 }
 
 

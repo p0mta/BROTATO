@@ -353,12 +353,16 @@ public class pantalla_usuario extends JFrame {
 		                    String password2 = new String(rep.getPassword());
 
 		                    if (password.length() > 20) {
-		                        JOptionPane.showMessageDialog(pantalla_usuario.this, "La contraseña no puede contener más de 20 caracteres");
+		                    	OtrasCosas ja = new OtrasCosas();
+		                    	ja.q(); 
+		                    	otra.j.dispose(); 
 		                        return;
 		                    }
 
 		                    if (!password.equals(password2)) {
-		                        JOptionPane.showMessageDialog(pantalla_usuario.this, "Las contraseñas no coinciden");
+		                    	OtrasCosas ja = new OtrasCosas();
+		                    	ja.p(); 
+		                        otra.j.dispose(); 
 		                        return;
 		                    }
 
@@ -372,19 +376,26 @@ public class pantalla_usuario extends JFrame {
 		                        int rowsUpdated = preparedStatement.executeUpdate();
 
 		                        if (rowsUpdated > 0) {
-		                            JOptionPane.showMessageDialog(pantalla_usuario.this, "Contraseña modificada correctamente");
+		                        	dispose();
+				                    Login logi = new Login();
+		                        	OtrasCosas ja = new OtrasCosas();
+			                    	ja.r(); 
+			                        otra.j.dispose(); 
 		                        } else {
-		                            JOptionPane.showMessageDialog(pantalla_usuario.this, "No se pudo modificar la contraseña. Verifica que la contraseña actual sea correcta.");
+		                        	OtrasCosas ja = new OtrasCosas();
+			                    	ja.s(); 
+			                        otra.j.dispose(); 
 		                        }
 
 		                    } catch (SQLException ex) {
 		                        ex.printStackTrace();
-		                        JOptionPane.showMessageDialog(pantalla_usuario.this, "Error al modificar la contraseña");
+		                        OtrasCosas ja = new OtrasCosas();
+		                    	ja.s(); 
+		                        otra.j.dispose(); 
 		                    }
 
 		                    // Cerrar la ventana actual y volver a la ventana de inicio de sesión
-		                    dispose();
-		                    Login logi = new Login();
+		                    
 		                    
 		                    
 	                            otra.j.dispose(); 
