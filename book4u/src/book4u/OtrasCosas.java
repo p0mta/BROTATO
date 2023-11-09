@@ -24,7 +24,7 @@ public class OtrasCosas {
         j.setLayout(null);
         label.setBounds(0, 0, im.getIconWidth(), im.getIconHeight());
         j.add(label);
-        JLabel mi = new JLabel("NO SE PERMITEN MAS DE 10 CARACTERES");
+        JLabel mi = new JLabel("NO SE PERMITEN MAS DE 8 CARACTERES");
         mi.setBounds(50, 10, 400, 30); 
         mi.setHorizontalAlignment(JLabel.CENTER);
         mi.setFont(Registro.fuente1);
@@ -1171,7 +1171,64 @@ public class OtrasCosas {
 	        }			
 	    });
 	}
-	
+	public void D() {
+        JFrame j = new JFrame();
+        j.setSize(515, 150);
+        j.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        ImageIcon im = new ImageIcon("panel.png");
+        JLabel label = new JLabel(im);
+        j.setLayout(null);
+        label.setBounds(0, 0, im.getIconWidth(), im.getIconHeight());
+        j.add(label);
+        JLabel mi = new JLabel("ERROR: EL VALOR MAXIMO ES 9999999.99 BROCOINS");
+        mi.setBounds(50, 10, 400, 30); 
+        mi.setHorizontalAlignment(JLabel.CENTER);
+        mi.setFont(Registro.fuente1);
+        label.add(mi);
+        ImageIcon cruz = new ImageIcon("cruz.png");
+        JLabel cru = new JLabel(cruz);
+        cru.setBounds(290, 45, 50, 50);
+        label.add(cru);
+        ImageIcon cruz2 = new ImageIcon("cruz.png");
+        JLabel cru2 = new JLabel(cruz2);
+        cru2.setBounds(160, 45, 50, 50);
+        label.add(cru2);
+        JButton ja = new JButton("OK");
+        ja.setBounds(220, 70, 60, 30);
+        label.add(ja);
+        String color2 = "#027017";
+        Color bac = Color.decode(color2);
+        ja.setBackground(bac);
+        ja.setFocusPainted(false);
+        ja.setBorderPainted(false);
+        j.setResizable(false);
+        j.setUndecorated(true);
+        j.setBackground(new Color(0, 0, 0, 0)); 
+        j.setLocationRelativeTo(null);
+        j.setVisible(true);
+        ja.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent e) {
+                j.dispose(); 
+            }	
+        });
+    }
+	public void ofertas() {
+		JFrame of = new JFrame();
+		of.setSize(600, 400);
+		of.setLocationRelativeTo(null);
+		of.setLayout(null);
+		of.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		
+		JLabel a1 = new JLabel("POR 20€ --> 2 BROCOINS AHORA 5 BRO COINS ");
+		JLabel a2 = new JLabel("POR 200€ --> 20 BROCOINS AHORA 40 BRO COINS ");
+		JLabel a3 = new JLabel("POR 2000€ -->  200 BROCOINS AHORA 300 BRO COINS ");
+		JLabel a4 = new JLabel("POR 20000€ -->  2000 BROCOINS AHORA 2500 BRO COINS ");
+		
+		a1.setBounds(5, 10, 350, 30);
+		a1.setFont(Registro.fuente1);
+		of.add(a1);
+		of.setVisible(true);
+	}
 }
 
 

@@ -19,6 +19,8 @@ import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JPasswordField;
 import javax.swing.JTextField;
+import javax.swing.event.DocumentEvent;
+import javax.swing.event.DocumentListener;
 
 public class pantalla_usuario extends JFrame {
 	
@@ -30,6 +32,9 @@ public class pantalla_usuario extends JFrame {
 	private boolean visiongucci2 = false;
 	static JPasswordField rep;
 	ImageIcon papi = new ImageIcon("panel.png");
+	JLabel act = new JLabel("VALOR EN DINERO: " );
+	JTextField saldo1 = new JTextField();
+	
 	public pantalla_usuario() {
 		
 		setTitle("Usuario");
@@ -202,12 +207,12 @@ public class pantalla_usuario extends JFrame {
         this.add(change);
         
         double saldo3 = obtenerSaldoDesdeBaseDeDatos(correo, contraseña);
-        JLabel saldo = new JLabel("AÑADIR SALDO('"+saldo3+"'€)");
+        JLabel saldo = new JLabel("AÑADIR BROCOINS( ACTUALES:"+saldo3+")");
         saldo.setHorizontalAlignment(JLabel.CENTER);
         saldo.setFont(Registro.fuente1);
         saldo.setBounds(25, 250, 350, 30);
         add(saldo);
-        JTextField saldo1 = new JTextField();
+        saldo1 = new JTextField();
         saldo1.setFont(Registro.fuente2);
         saldo1.setBounds(100, 280, 200, 25);
         saldo1.setBorder(BorderFactory.createLineBorder(Color.black));
@@ -220,8 +225,34 @@ public class pantalla_usuario extends JFrame {
         change2.setBorderPainted(false);
         change2.setContentAreaFilled(false);
         this.add(change2);
-        
-		
+        ImageIcon ofer = new ImageIcon("oferta.gif");
+        JButton oferta = new JButton(ofer);
+        oferta.setBounds(320, 280, 100, 70);
+        oferta.setFocusPainted(false);
+        oferta.setBorderPainted(false);
+        oferta.setContentAreaFilled(false);
+        this.add(oferta);
+        act = new JLabel();
+        act.setBounds(10, 330, 400, 30);
+        act.setFont(Registro.fuente1);
+        act.setHorizontalAlignment(JLabel.CENTER);
+        this.add(act);
+        saldo1.getDocument().addDocumentListener(new DocumentListener() {
+            @Override
+            public void insertUpdate(DocumentEvent e) {
+                actualizarLabel(); // Método para actualizar el JLabel
+            }
+
+            @Override
+            public void removeUpdate(DocumentEvent e) {
+                actualizarLabel();
+            }
+
+            @Override
+            public void changedUpdate(DocumentEvent e) {
+                actualizarLabel();
+            }
+        });
         JLabel contras = new JLabel("REPETIR CONTRASEÑA");
         
 		 String colorfondo = "#579514";
@@ -420,12 +451,50 @@ public class pantalla_usuario extends JFrame {
 	            	Pantalla_principal pat = new Pantalla_principal();
 	            }
 	        });
+	        oferta.addActionListener(new ActionListener() {
+	            public void actionPerformed(ActionEvent e) {
+	            	
+	            	OtrasCosas pait = new OtrasCosas();
+	            	pait.ofertas();
+	            }
+	        });
 
 	    }
 
-	    // Método para obtener el nombre desde la base de datos
+	    
 	
 	
+	private void actualizarLabel() {
+	    try {
+	        // Obtener el texto ingresado en el JTextField
+	        String saldoIngresado = saldo1.getText();
+
+	        // Validar que el texto ingresado sea un número (entero o decimal)
+	        if (saldoIngresado.matches("^\\d{1,9}(\\.\\d+)?(,\\d+)?$")) {
+	            // Reemplazar comas por puntos para asegurarse de que sea un número válido
+	            saldoIngresado = saldoIngresado.replace(",", "");
+
+	            // Convertir el saldo ingresado a un número
+	            double cantidadIngresada = Double.parseDouble(saldoIngresado);
+
+	            // Multiplicar por 10 y actualizar el texto del JLabel
+	            double resultado = cantidadIngresada * 10;
+
+	            // Formatear el resultado para evitar la notación científica y limitar los decimales
+	            String resultadoFormateado = String.format("%.2f", resultado);
+
+	            act.setText("VALOR EN DINERO: " + resultadoFormateado);
+	        } else {
+	            // Si no es un número válido, puedes mostrar un mensaje de error o dejar el JLabel vacío
+	            act.setText("VALOR EN DINERO: VALOR MAXIMO 999999999.99");
+	        }
+	    } catch (NumberFormatException ex) {
+	        // Manejar la excepción si ocurre algún error al convertir a double
+	        act.setText("VALOR EN DINERO: ");
+	    }
+	}
+
+
 	public double obtenerSaldoDesdeBaseDeDatos(String correo, String contraseña) {
 	    double saldo3 = -1; // Valor por defecto si no se encuentra el saldo
 	    try {
@@ -448,6 +517,13 @@ public class pantalla_usuario extends JFrame {
 
 	// Método para actualizar el saldo en la base de datos
 	public boolean actualizarSaldoEnBaseDeDatos(String correo, String contraseña, double nuevoSaldo) {
+	    // Validar que el nuevo saldo no supere el límite máximo
+	    if (nuevoSaldo > 9999999.99) {
+	    	OtrasCosas ja = new OtrasCosas();
+        	ja.D(); 
+	        return false;
+	    }
+
 	    try {
 	        String updateQuery = "UPDATE USUARIO SET DINERO = ? WHERE CORREO = ? AND CONTRASEÑA = ?";
 	        PreparedStatement preparedStatement = Login.connection.prepareStatement(updateQuery);
@@ -463,6 +539,7 @@ public class pantalla_usuario extends JFrame {
 	        return false;
 	    }
 	}
+
 public String obtenerNombreDesdeBaseDeDatos(String correo, String contraseña) {
     String nombre = null;
     try {

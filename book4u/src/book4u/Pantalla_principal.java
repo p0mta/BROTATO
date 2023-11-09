@@ -1,6 +1,8 @@
 package book4u;
 
 import javax.swing.*;
+import java.text.NumberFormat;
+import java.text.ParseException;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -205,7 +207,7 @@ public class Pantalla_principal extends JFrame {
         return nombre;
     }
     public double obtenerdinero(String correo, String contraseña) {
-        double mon = 0;
+        double mon = -1;
         try {
             String selectQuery = "SELECT DINERO FROM USUARIO WHERE CORREO = ? AND CONTRASEÑA = ?";
             PreparedStatement preparedStatement = Login.connection.prepareStatement(selectQuery);
@@ -214,13 +216,15 @@ public class Pantalla_principal extends JFrame {
             ResultSet resultSet = preparedStatement.executeQuery();
 
             if (resultSet.next()) {
-            	mon = resultSet.getDouble("DINERO");
+                
+                mon = resultSet.getDouble("DINERO");
             }
-
+            
             resultSet.close();
         } catch (SQLException ex) {
             ex.printStackTrace();
         }
         return mon;
     }
+
 }
