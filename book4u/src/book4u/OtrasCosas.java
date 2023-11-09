@@ -12,7 +12,9 @@ public class OtrasCosas {
 	JButton ja2 = new JButton("NO");
 	JFrame j8;
 	JFrame j;
+	JFrame j9;
 	JButton but = new JButton("NO");
+	JButton bi = new JButton("OK");
 	public void Otrascosas() {
         JFrame j = new JFrame();
         j.setSize(515, 150);
@@ -88,35 +90,35 @@ public class OtrasCosas {
         });
     }
     public void a() {
-    	JFrame j = new JFrame();
-        j.setSize(515, 150);
-        j.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+    	j9 = new JFrame();
+        j9.setSize(515, 150);
+        j9.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         ImageIcon im = new ImageIcon("panel.png");
         JLabel label = new JLabel(im);
-        j.setLayout(null);
+        j9.setLayout(null);
         label.setBounds(0, 0, im.getIconWidth(), im.getIconHeight());
-        j.add(label);
+        j9.add(label);
         JLabel mi = new JLabel("INICIO DE SESIÓN EXITOSO");
         mi.setBounds(50, 10, 400, 30); 
         mi.setHorizontalAlignment(JLabel.CENTER);
         mi.setFont(Registro.fuente1);
         label.add(mi);
-        JButton ja = new JButton("OK");
-        ja.setBounds(220, 70, 60, 30);
-        label.add(ja);
+        bi = new JButton("OK");
+        bi.setBounds(220, 70, 60, 30);
+        label.add(bi);
         String color2 = "#027017";
         Color bac = Color.decode(color2);
-        ja.setBackground(bac);
-        ja.setFocusPainted(false);
-        ja.setBorderPainted(false);
-        j.setResizable(false);
-        j.setUndecorated(true);
-        j.setBackground(new Color(0, 0, 0, 0)); 
-        j.setLocationRelativeTo(null);
-        j.setVisible(true);
-        ja.addActionListener(new ActionListener() {
+        bi.setBackground(bac);
+        bi.setFocusPainted(false);
+        bi.setBorderPainted(false);
+        j9.setResizable(false);
+        j9.setUndecorated(true);
+        j9.setBackground(new Color(0, 0, 0, 0)); 
+        j9.setLocationRelativeTo(null);
+        j9.setVisible(true);
+        bi.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
-                j.dispose();
+                j9.dispose();
             }			
         });
     }

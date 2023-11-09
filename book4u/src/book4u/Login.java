@@ -163,10 +163,18 @@ public class Login extends JFrame {
                 String password = new String(getPasswordField().getPassword());
                 boolean loginSuccessful = loginUser(usuario, password);
                 if (loginSuccessful) {
-                	dispose();
-                    Pantalla_principal pant = new Pantalla_principal();
-                    OtrasCosas lp = new OtrasCosas();
-                    lp.a();
+                	
+                    OtrasCosas lp2 = new OtrasCosas();
+                    lp2.a();
+                   
+                    lp2.bi.addActionListener(new ActionListener() {
+	                    public void actionPerformed(ActionEvent e) {	                    	
+	                    		lp2.j9.dispose(); 
+	                    		dispose();
+	                            Pantalla_principal pant = new Pantalla_principal();
+	                            
+	                    }
+	                });
 
                     // Aquí iría el código para abrir la ventana principal de la aplicación
                 } else {
@@ -176,7 +184,7 @@ public class Login extends JFrame {
             }
         });
         try {
-            connection = DriverManager.getConnection("jdbc:oracle:thin:@192.168.3.26:1521:xe", "23_24_DAM2_BROTATO", "123456");
+            connection = DriverManager.getConnection("jdbc:oracle:thin:@oracle.ilerna.com:1521:xe", "23_24_DAM2_BROTATO", "123456");
         } catch (SQLException e) {
             e.printStackTrace();
             OtrasCosas lp = new OtrasCosas();
