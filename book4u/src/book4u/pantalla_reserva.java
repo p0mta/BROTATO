@@ -12,7 +12,7 @@ import java.sql.SQLException;
 
 
 public class pantalla_reserva extends JFrame {
-    public pantalla_reserva() {
+    public pantalla_reserva() throws SQLException {
         setTitle("Reserva de lugares residenciales");
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setSize(800, 500);
@@ -37,7 +37,7 @@ public class pantalla_reserva extends JFrame {
         panelBlanco.add(tit);
         
         JButton reservarButton = new JButton("Reservar");
-        reservarButton.setBounds(400, 350, 150, 30);
+        reservarButton.setBounds(400, 400, 150, 30);
         add(reservarButton);
         reservarButton.setFont(Registro.fuente1);
         reservarButton.setBackground(Color.white);
@@ -59,13 +59,13 @@ public class pantalla_reserva extends JFrame {
         this.add(but);
 
         JLabel lugarLabel = new JLabel("Lugar Residencial:");
-        lugarLabel.setBounds(115, 150, 150, 30);
+        lugarLabel.setBounds(165, 150, 150, 30);
         add(lugarLabel);
         lugarLabel.setFont(Registro.fuente1);
 
         String[] lugaresResidenciales = {"Casa", "Apartamento", "Cabaña","Hotel"};
         JComboBox<String> combi = new JComboBox<>(lugaresResidenciales);
-        combi.setBounds(260, 150, 200, 30);
+        combi.setBounds(310, 150, 200, 30);
         combi.setFont(Registro.fuente2);
         combi.setBackground(Color.WHITE);
         combi.setBorder(BorderFactory.createLineBorder(Color.BLACK));
@@ -73,13 +73,13 @@ public class pantalla_reserva extends JFrame {
         add(combi);
 
         JLabel paisLabel = new JLabel("País:");
-        paisLabel.setBounds(200, 200, 150, 30);
+        paisLabel.setBounds(250, 200, 150, 30);
         add(paisLabel);
         paisLabel.setFont(Registro.fuente1);
 
         String[] paises = {"Dubai", "Japon", "Corea","Francia","Russia","Italia","Grecia","Colombia","Mexico","Irlanda","Alemania", };
         JComboBox<String> paisCombo = new JComboBox<>(paises);
-        paisCombo.setBounds(260, 200, 200, 30);
+        paisCombo.setBounds(310, 200, 200, 30);
         paisCombo.setFont(Registro.fuente2);
         paisCombo.setBackground(Color.WHITE);
         paisCombo.setBorder(BorderFactory.createLineBorder(Color.BLACK));
@@ -87,25 +87,25 @@ public class pantalla_reserva extends JFrame {
         add(paisCombo);
 
         JLabel fechaLabel = new JLabel("Fecha de Reserva:");
-        fechaLabel.setBounds(50, 250, 150, 30);
+        fechaLabel.setBounds(125, 250, 150, 30);
         add(fechaLabel);
         fechaLabel.setFont(Registro.fuente1);
         
         JLabel fechaLabel1 = new JLabel("Fecha de Salida:");
-        fechaLabel1.setBounds(420, 250, 150, 30);
+        fechaLabel1.setBounds(510, 250, 150, 30);
         add(fechaLabel1);
         fechaLabel1.setFont(Registro.fuente1);
         
 
         JDateChooser dateChooser = new JDateChooser();
-        dateChooser.setBounds(200, 250, 200, 30);
+        dateChooser.setBounds(100, 290, 200, 30);
         add(dateChooser);
         dateChooser.setBackground(Color.WHITE);
         dateChooser.setFont(Registro.fuente2);
         dateChooser.setBorder(BorderFactory.createLineBorder(Color.BLACK));
         
         JDateChooser dateChooser1 = new JDateChooser();
-        dateChooser1.setBounds(570, 250, 200, 30);
+        dateChooser1.setBounds(475, 290, 200, 30);
         add(dateChooser1);
         dateChooser1.setBackground(Color.WHITE);
         dateChooser1.setFont(Registro.fuente2);
@@ -117,57 +117,91 @@ public class pantalla_reserva extends JFrame {
             	Pantalla_principal pat = new Pantalla_principal();
             }
         });
+        
 
         
         JLabel precioLabel = new JLabel("Precio de la reserva: $0.00");
-        precioLabel.setBounds(250, 300, 350, 30);
+        precioLabel.setBounds(250, 350, 350, 30);
         add(precioLabel);
         precioLabel.setFont(Registro.fuente1);
 
         JButton calcularPrecioButton = new JButton("Calcular Precio");
-        calcularPrecioButton.setBounds(200, 350, 150, 30);
+        calcularPrecioButton.setBounds(200, 400, 150, 30);
         add(calcularPrecioButton);
         calcularPrecioButton.setFont(Registro.fuente1);
         calcularPrecioButton.setBackground(Color.white);
         calcularPrecioButton.setBorder(BorderFactory.createLineBorder(Color.BLACK));
-
-        calcularPrecioButton.addActionListener(e -> {
+        
+        reservarButton.addActionListener(e -> {
             String lugarResidencial = (String) combi.getSelectedItem();
             String pais = (String) paisCombo.getSelectedItem();
             Date selectedDate = dateChooser.getDate();
             Date selectedDate2 = dateChooser1.getDate();
             Date today = new Date();  // Fecha actual
-            
-            if(selectedDate == null) {
-            	JOptionPane.showMessageDialog(pantalla_reserva.this, "Por favor, completa todos los campos.");
-            }
-            if (selectedDate.before(today)) {
+
+            if (selectedDate == null || selectedDate2 == null) {
+                JOptionPane.showMessageDialog(pantalla_reserva.this, "Por favor, completa todas las fechas.");
+            return;
+            } else if (selectedDate.before(today)) {
                 JOptionPane.showMessageDialog(null, "No se puede reservar para una fecha anterior al día actual", "Error", JOptionPane.ERROR_MESSAGE);
-                return;
+            return;
+            } else if (selectedDate2.before(selectedDate)) {
+                JOptionPane.showMessageDialog(null, "La fecha de salida no puede ser anterior a la fecha de reserva", "Error", JOptionPane.ERROR_MESSAGE);
+            return;
             } else {
                 try {
                     // Insertar datos en la tabla de reservas
                     String query = "INSERT INTO reservas (dia, lugar, precio, pais,dia_salida) VALUES (?, ?, ?, ?,?)";
                     try (java.sql.PreparedStatement preparedStatement = connection.prepareStatement(query)) {
-                        preparedStatement.setDate(1, new java.sql.Date(selectedDate.getTime())); // Suponiendo que 'dia' es de tipo DATE en la base de datos
+                        preparedStatement.setDate(1, new java.sql.Date(selectedDate.getTime()));
                         preparedStatement.setString(2, lugarResidencial);
                         preparedStatement.setDouble(3, calcularPrecio(combi, paisCombo, dateChooser, dateChooser1));
                         preparedStatement.setString(4, pais);
                         preparedStatement.setDate(5, new java.sql.Date(selectedDate2.getTime()));
+                    
 
-                        
                         preparedStatement.executeUpdate();
                     }
 
                     // Otros pasos si es necesario
 
-                    precioLabel.setText("Precio de la reserva en " + pais + ": "+calcularPrecio(combi, paisCombo, dateChooser, dateChooser1)+"");
+                    precioLabel.setText("Precio de la reserva en " + pais + ": " + calcularPrecio(combi, paisCombo, dateChooser, dateChooser1) + "");
 
                 } catch (SQLException ex) {
                     ex.printStackTrace();
                 }
             }
-        });}
+        });
+        calcularPrecioButton.addActionListener(e -> {
+           
+			String lugarResidencial = (String) combi.getSelectedItem();
+            
+			String pais = (String) paisCombo.getSelectedItem();
+            
+			Date selectedDate = dateChooser.getDate();
+   
+			Date selectedDate2 = dateChooser1.getDate();
+            Date today = new Date();  // Fecha actual
+            
+            if(selectedDate == null) {
+            	JOptionPane.showMessageDialog(pantalla_reserva.this, "Por favor, completa todos los campos.");
+            	return;
+            }
+          if (selectedDate2.before(selectedDate)) {
+            JOptionPane.showMessageDialog(null, "La fecha de salida no puede ser anterior a la fecha de reserva", "Error", JOptionPane.ERROR_MESSAGE);
+            	return;
+            }
+            if (selectedDate.before(today)) {
+                JOptionPane.showMessageDialog(null, "No se puede reservar para una fecha anterior al día actual", "Error", JOptionPane.ERROR_MESSAGE);
+                return;
+            } else {
+                precioLabel.setText("Precio de la reserva en " + pais + ": "+calcularPrecio(combi, paisCombo, dateChooser, dateChooser1)+"");
+            }
+            });}
+    
+    
+       
+    
     
     private double calcularPrecio(JComboBox<String> combi, JComboBox<String> paisCombo, JDateChooser dateChooser, JDateChooser dateChooser1) {
         Date selectedDate = dateChooser.getDate();
@@ -246,7 +280,12 @@ public class pantalla_reserva extends JFrame {
     
     public static void main(String[] args) {
         SwingUtilities.invokeLater(() -> {
-            pantalla_reserva frame = new pantalla_reserva();
+            try {
+				pantalla_reserva frame = new pantalla_reserva();
+			} catch (SQLException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
         });
     }
     Connection connection = null;{
@@ -258,6 +297,7 @@ public class pantalla_reserva extends JFrame {
     } catch (SQLException e) {
         System.err.println("Error al conectar a la base de datos: " + e.getMessage());
     } 
+    
 
     
     }
