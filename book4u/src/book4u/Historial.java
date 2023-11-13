@@ -19,7 +19,7 @@ public class Historial extends JFrame {
     private JPanel panel2;
     private JPanel panel3;
     private JPanel panel4;
-    private JButton button1;
+   
 
     public Historial() {
         // Configurar el frame
@@ -50,34 +50,36 @@ public class Historial extends JFrame {
         panel3.setBackground(Color.WHITE);
         panel3.setBounds(30, 200, 1125, 100);
         this.toFront();
+        
+        ImageIcon back = new ImageIcon("back.png");
+        JButton but = new JButton(back);
+        but.setBounds(10, 90, 30, 30);
+        but.setFont(Registro.fuente1);
+        but.setFocusPainted(false);
+        but.setBorderPainted(false);
+        but.setContentAreaFilled(false);
+        this.add(but);
+        but.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent e) {
+            	dispose();
+            	Pantalla_principal pat = new Pantalla_principal();
+            }
+        });
+
+    
 
         panel4 = new JPanel();
         panel4.setBackground(Color.YELLOW);
         panel4.setBounds(0, 0, 0, 0);
 
-        ImageIcon iniciarsesion = new ImageIcon("botonMenu.png");
-
-        button1 = new JButton(iniciarsesion);
-        button1.setBounds(1050, 25, 100, 100);
-        button1.setBorderPainted(false);
-        button1.setFocusPainted(false);
-        button1.setBackground(Color.WHITE);
-
-        button1.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                // Agregar aquí el código para volver a la clase "Menu"
-                dispose(); // Cierra la ventana actual
-              //  new Menu(); // Crea una nueva instancia de la clase "Menu" (ajusta esto según tu implementación)
-            }
-        });
+        
 
         // Agregar los paneles al frame
         add(panel1);
         add(panel2);
         add(panel3);
         add(panel4);
-        add(button1);
+        
 
         // Mostrar el frame
         setVisible(true);
