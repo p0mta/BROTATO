@@ -1,3 +1,4 @@
+
 package book4u;
 
 import javax.swing.*;
@@ -17,79 +18,142 @@ public class Login extends JFrame {
     Font fuente = new Font("Comic Sans MS",Font.PLAIN,23);
     Font texto = new Font("Comic Sans MS",Font.PLAIN,14);
     Font titulo1 = new Font("Comic Sans MS",Font.PLAIN,35);
-   
-    public Login() {
-    	
-        // Configurar el frame
-        setTitle("BOOK4U- Login/Registro");
-        setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        this.setSize(900, 700);
-        this.setLocationRelativeTo(null);
-        
-        String colorfondo = "#579514";
-        
-        Color backgroundColor = Color.decode(colorfondo);
-        this.getContentPane().setBackground(backgroundColor);
-        
-        ImageIcon imagen = new ImageIcon("drogas.jpg");
-        JLabel label = new JLabel(imagen);
-        label.setBounds( 225, 150, 400, 300);
-        
-        
-        
-        
+    private boolean contraseniasVisible = false;
 
-        // Crear los componentes
-        JLabel titulo = new JLabel("BOOK4U");
-        titulo.setBounds(230,50,450,35);
-        titulo.setForeground(Color.GREEN);
-        titulo.setFont(titulo1);
-        JLabel usernameLabel = new JLabel("Usuario:");
-        usernameLabel.setFont(fuente);
-        usernameLabel.setForeground(Color.green);
-        usernameLabel.setBounds(110, 500, 90, 20);
-        usernameField = new JTextField();
-        usernameField.setBounds(200, 501, 150, 25);  
-        usernameField.setFont(texto);
-        usernameField.setBorder(null);
-        usernameField.setForeground(Color.WHITE);
-        
-        
-        JLabel passwordLabel = new JLabel("Contraseña:");
-        passwordLabel.setFont(fuente);
-        passwordLabel.setForeground(Color.green);
-        passwordLabel.setBounds(450, 500, 150, 25);
-        setPasswordField(new JPasswordField());
-        getPasswordField().setBorder(null);
-        getPasswordField().setBounds(580, 501, 150, 25);
-        
-        
-        JButton loginButton = new JButton("Iniciar sesión");
-        loginButton.setBorderPainted(false);
-        loginButton.setBounds(150, 560, 150, 50);
-        loginButton.setBackground(Color.green);
-        loginButton.setForeground(Color.white);
-        
-        
-        JButton registerButton = new JButton("Registrarse");
-        registerButton.setBorderPainted(false);
-        registerButton.setBounds(500, 560, 150, 50);
-        registerButton.setBackground(Color.green);
-        registerButton.setForeground(Color.white);
-        this.setLayout(null);
+        public Login() {
+            // Configurar el frame
+            setTitle("BOOK4U- Login");
+            setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+            setSize(900, 700);
+            setLocationRelativeTo(null);
 
-        // Agregar los componentes al frame
-        add(titulo);
-        add(label);
-        add(usernameLabel);
-        add(usernameField);
-        add(passwordLabel);
-        add(getPasswordField());
-        add(loginButton);
-        add(registerButton);
+            String colorFondo = "#579514";
+            Color backgroundColor = Color.decode(colorFondo);
+            getContentPane().setBackground(backgroundColor);
 
-        // Mostrar el frame
-        setVisible(true);
+            // Crear un JPanel en la parte superior con el logo
+            JPanel logoPanel = new JPanel();
+            logoPanel.setBounds(0, 0, 900, 100);
+            logoPanel.setBackground(Color.WHITE); // Fondo blanco
+
+            ImageIcon imagen = new ImageIcon("logo.png");
+            JLabel label = new JLabel(imagen);
+            label.setPreferredSize(new Dimension(450, 100));
+            logoPanel.add(label);
+            
+
+            // Crear los componentes de inicio de sesión
+            Font fuente = new Font("Agency FB", Font.PLAIN, 23);
+            Font texto = new Font("Agency FB", Font.PLAIN, 18);
+
+            JLabel usernameLabel = new JLabel("CORREO");
+            usernameLabel.setFont(Registro.fuente1);
+            usernameLabel.setForeground(Color.BLACK);
+            usernameLabel.setBounds(230, 260, 90, 20);
+
+            usernameField = new JTextField();
+            usernameField.setBounds(165, 300, 200, 25);
+            usernameField.setFont(texto);
+            usernameField.setForeground(Color.BLACK);
+            usernameField.setBorder(BorderFactory.createLineBorder(Color.BLACK));
+
+            
+            JLabel passwordLabel = new JLabel("CONTRASEÑA");
+            passwordLabel.setFont(Registro.fuente1);
+            passwordLabel.setForeground(Color.BLACK);
+            passwordLabel.setBounds(550, 260, 150, 25);
+
+            passwordField = new JPasswordField();
+            passwordField.setBounds(500, 300, 200, 25);
+            passwordField.setBorder(BorderFactory.createLineBorder(Color.BLACK));
+            ImageIcon ima4 = new ImageIcon("ojo.png");
+            JButton botonvision2 = new JButton(ima4);
+            botonvision2.setBounds(230, 230, 30, 30);
+            botonvision2.setBackground(Color.white);
+            botonvision2.setBounds(passwordField.getWidth() - 30, 1, 25, 25); 
+            botonvision2.setBackground(Color.white);
+            botonvision2.setFocusPainted(false);
+            botonvision2.setBorderPainted(false);
+            botonvision2.setContentAreaFilled(false);
+            passwordField.add(botonvision2);
+            
+            ImageIcon iniciarsesion = new ImageIcon("login.png"); 
+            JButton loginButton = new JButton(iniciarsesion);
+            loginButton.setBounds(360, 375, 150, 55);
+            loginButton.setFocusPainted(false);
+            loginButton.setBorderPainted(false);
+            loginButton.setContentAreaFilled(false);
+            
+            
+
+            botonvision2.addActionListener(new ActionListener() {
+                public void actionPerformed(ActionEvent e) {
+                	 contraseniasVisible = !contraseniasVisible;
+                     
+                     if (contraseniasVisible) {
+                    	 passwordField.setEchoChar((char) 0);
+                        
+                    	 passwordField.setFont(Registro.fuente2);
+                      
+                     } else {
+                    	 passwordField.setEchoChar('·');
+                         
+                    	 passwordField.setFont(Registro.fuente2);
+                         
+                     }
+                }
+            });
+            
+            
+           
+            
+            
+            JLabel registroLabel = new JLabel("No estás registrado? Registrate!");
+            registroLabel.setFont(Registro.fuente1);
+            registroLabel.setForeground(Color.BLACK);
+            registroLabel.setBounds(310,570, 400, 25);
+            
+            loginButton.addActionListener(new ActionListener() {
+                @Override
+                public void actionPerformed(ActionEvent e) {
+                    
+                }
+            });
+            ImageIcon registro = new ImageIcon("botonregistro.png");
+            JButton registerButton = new JButton(registro);
+            registerButton.setBounds(360, 500, 150, 48);
+            registerButton.setFocusPainted(false);
+            registerButton.setBorderPainted(false);
+            registerButton.setContentAreaFilled(false);
+
+           
+            
+           
+
+
+            registerButton.addActionListener(new ActionListener() {
+                @Override
+                public void actionPerformed(ActionEvent e) {
+                  
+                }
+            });
+
+            // Agregar los componentes al frame
+            add(logoPanel);
+            add(usernameLabel);
+            add(usernameField);
+            add(passwordLabel);
+            add(passwordField);
+            add(loginButton);
+            add(registerButton);
+            add(registroLabel);
+            
+            
+
+            setLayout(null);
+            setVisible(true);
+            
+
     
 
        
@@ -99,14 +163,15 @@ public class Login extends JFrame {
                 String password = new String(getPasswordField().getPassword());
                 boolean loginSuccessful = loginUser(usuario, password);
                 if (loginSuccessful) {
-                    JOptionPane.showMessageDialog(Login.this, "Inicio de sesión exitoso");
-                    dispose();
-                    Menu carrit = new Menu();
-                   
-                    
+                	dispose();
+                    Pantalla_principal pant = new Pantalla_principal();
+                    OtrasCosas lp = new OtrasCosas();
+                    lp.a();
+
                     // Aquí iría el código para abrir la ventana principal de la aplicación
                 } else {
-                    JOptionPane.showMessageDialog(Login.this, "Inicio de sesión fallido");
+                	OtrasCosas lp = new OtrasCosas();
+                    lp.b();
                 }
             }
         });
@@ -114,71 +179,31 @@ public class Login extends JFrame {
             connection = DriverManager.getConnection("jdbc:oracle:thin:@192.168.3.26:1521:xe", "23_24_DAM2_BROTATO", "123456");
         } catch (SQLException e) {
             e.printStackTrace();
-            JOptionPane.showMessageDialog(Login.this, "Error al conectar a la base de datos");
+            OtrasCosas lp = new OtrasCosas();
+            lp.c();
             System.exit(1);
         }
         
         registerButton.addActionListener(new ActionListener() {
-            public void actionPerformed(ActionEvent e) {                
-                String usuario = usernameField.getText();
-                String password = new String(passwordField.getPassword());
+            public void actionPerformed(ActionEvent e) {
 
-                // Conectar a la base de datos y realizar el registro
-               
-                boolean userExists = false;
+            	dispose();
+            	Registro re = new Registro();
 
-                try {
-                    String query = "SELECT * FROM Usuario WHERE nombre = ?";
-                    PreparedStatement statement = connection.prepareStatement(query);
-                    statement.setString(1, usuario);
-
-                    ResultSet result = statement.executeQuery();
-                    if (result.next()) {
-                        userExists = true;
-                    }
-                } catch (SQLException ex) {
-                    ex.printStackTrace();
-                }
-
-                if (userExists) {
-                    JOptionPane.showMessageDialog(Login.this, "Este usuario ya está registrado cambia el usuario");
-                } else {
-                	JOptionPane.showMessageDialog(Login.this, "Registro exitoso, ahora inicia sesion");
-                    	 try {
-                         	String insert = "INSERT INTO usuario (NOMBRE, PASSWORD) VALUES ('"+usernameField.getText()+"','"+String.valueOf(getPasswordField().getPassword())+"')";
-                             PreparedStatement statement = connection.prepareStatement(insert);
-                             int rowsInserted = statement.executeUpdate();
-                              // Retorna true si se insertó al menos una fila
-                         } catch (SQLException e1) {
-                             e1.printStackTrace();
-                             JOptionPane.showMessageDialog(Login.this, "Error al registrar el usuario");
-                         }
-                
-            }
             }
         });
-        
-        
-      
-
-     
-
-        // Establecer la conexión >a la base de datos
-       
-
-        // Mostrar el frame
         setVisible(true);
     }
 
     private boolean loginUser(String nombre, String password) {
     	
         try {
-        	String select = "SELECT NOMBRE, PASSWORD FROM USUARIO WHERE NOMBRE = '"+usernameField.getText()+"' AND PASSWORD = '"+String.valueOf(getPasswordField().getPassword())+"'";
+        	String select = "SELECT CORREO, CONTRASEÑA FROM USUARIO WHERE CORREO = '"+usernameField.getText()+"' AND CONTRASEÑA = '"+String.valueOf(getPasswordField().getPassword())+"'";
             PreparedStatement statement = connection.prepareStatement(select);
             ResultSet resultSet = statement.executeQuery();
             while(resultSet.next()) {
-            	nombre = resultSet.getString("NOMBRE");
-            	password = resultSet.getString("PASSWORD");
+            	nombre = resultSet.getString("CORREO");
+            	password = resultSet.getString("CONTRASEÑA");
             	return true;
             }
 
@@ -187,25 +212,13 @@ public class Login extends JFrame {
            
         } catch (SQLException e) {
             e.printStackTrace();
-            JOptionPane.showMessageDialog(Login.this, "Error al consultar la base de datos");
-        }
-        return false;
-    }
-
-    private boolean registerUser(String nombre, String password) {
-        try {
-        	String insert = "INSERT INTO usuario (NOMBRE, PASSWORD) VALUES ('"+usernameField.getText()+"','"+String.valueOf(getPasswordField().getPassword())+"')";
-            PreparedStatement statement = connection.prepareStatement(insert);
-            int rowsInserted = statement.executeUpdate();
-            return rowsInserted > 0; // Retorna true si se insertó al menos una fila
-        } catch (SQLException e) {
-            e.printStackTrace();
-            JOptionPane.showMessageDialog(Login.this, "Error al registrar el usuario");
+            OtrasCosas lp = new OtrasCosas();
+            lp.d();
         }
         return false;
     }
     
-    public JTextField getUsernameField() {
+    public static JTextField getUsernameField() {
         return usernameField;
     }
     
