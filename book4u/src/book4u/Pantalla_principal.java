@@ -178,6 +178,12 @@ public class Pantalla_principal extends JFrame {
                 pantalla_usuario pat = new pantalla_usuario();
             }
         });
+        InicioButton.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent e) {
+                dispose();
+                pantalla_reserva pat = new pantalla_reserva();
+            }
+        });
 
         AtrasButton.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
