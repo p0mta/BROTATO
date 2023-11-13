@@ -1,12 +1,18 @@
 package book4u;
+
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import java.awt.Color;
+import java.awt.Font;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.ResultSet;
+import java.sql.Statement;
 
 public class Historial extends JFrame {
     private JPanel panel1;
@@ -25,17 +31,17 @@ public class Historial extends JFrame {
         String colorfondo = "#579514";
         Color backgroundColor = Color.decode(colorfondo);
         this.getContentPane().setBackground(backgroundColor);
-        
+
         ImageIcon imagen = new ImageIcon("Logo.png");
         JLabel label = new JLabel(imagen);
-        label.setBounds( 10, 10, 10, 10);
-        
+        label.setBounds(10, 10, 10, 10);
+
         // Crear los paneles
         panel1 = new JPanel();
         panel1.setBackground(Color.WHITE);
         panel1.setBounds(0, 0, 1200, 180); // Posición y tamaño
         panel1.add(label);
-        
+
         panel2 = new JPanel();
         panel2.setBackground(Color.BLACK);
         panel2.setBounds(30, 200, 1125, 540);
@@ -48,16 +54,15 @@ public class Historial extends JFrame {
         panel4 = new JPanel();
         panel4.setBackground(Color.YELLOW);
         panel4.setBounds(0, 0, 0, 0);
-        
-       
-        ImageIcon iniciarsesion = new ImageIcon("botonMenu.png"); 
+
+        ImageIcon iniciarsesion = new ImageIcon("botonMenu.png");
 
         button1 = new JButton(iniciarsesion);
         button1.setBounds(1050, 25, 100, 100);
         button1.setBorderPainted(false);
         button1.setFocusPainted(false);
         button1.setBackground(Color.WHITE);
-        
+
         button1.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
@@ -66,10 +71,7 @@ public class Historial extends JFrame {
               //  new Menu(); // Crea una nueva instancia de la clase "Menu" (ajusta esto según tu implementación)
             }
         });
-        
-        
-       
-        
+
         // Agregar los paneles al frame
         add(panel1);
         add(panel2);
@@ -79,7 +81,56 @@ public class Historial extends JFrame {
 
         // Mostrar el frame
         setVisible(true);
+
+        // Recuperar y mostrar los datos desde la base de datos
+        retrieveAndDisplayData();
     }
+
+    private void retrieveAndDisplayData() {
+        try {
+            Connection connection = DriverManager.getConnection("jdbc:oracle:thin:@192.168.3.26:1521:xe", "23_24_DAM2_BROTATO", "123456");
+            Statement statement = connection.createStatement();
+            ResultSet resultSet = statement.executeQuery("SELECT IDRESERVA, DIA, LUGAR, PRECIO, PAIS, DIA_SALIDA FROM RESERVAS");
+
+            boolean hasData = false;
+
+            while (resultSet.next()) {
+                String idReserva = resultSet.getString("IDRESERVA");
+                String dia = resultSet.getString("DIA");
+                String lugar = resultSet.getString("LUGAR");
+                String precio = resultSet.getString("PRECIO");
+                String pais = resultSet.getString("PAIS");
+                String diaSalida = resultSet.getString("DIA_SALIDA");
+
+                // Crear etiquetas para cada columna y agregarlas al panel2
+                Font font = new Font("Agency FB", Font.BOLD, 23); // Puedes ajustar la fuente y el tamaño según tus preferencias
+                JLabel dataLabel = new JLabel("DIA: " + dia + ", LUGAR: " + lugar + ", PRECIO: " + precio + ", PAIS: " + pais + ", DIA_SALIDA: " + diaSalida);
+                dataLabel.setFont(font); // Establecer la fuente y el tamaño
+                panel2.add(dataLabel);
+                dataLabel.setForeground(Color.white);
+                hasData = true;
+
+            }
+
+            resultSet.close();
+            statement.close();
+            connection.close();
+
+            if (!hasData) {
+                JLabel noDataLabel = new JLabel("No hay datos disponibles todavía.");
+                noDataLabel.setForeground(Color.white);
+                panel2.add(noDataLabel);
+            }
+
+            // Actualizar el panel para reflejar los cambios
+            panel2.revalidate();
+            panel2.repaint();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
+
 
     public static void main(String[] args) {
         Historial historial = new Historial();
