@@ -217,37 +217,45 @@ public class Registro extends JFrame {
                 // Comprueba si algún campo está vacío y muestra un mensaje de error.
                 if (usuario.isEmpty() || password.isEmpty() || password2.isEmpty() ||
                         nombreText.isEmpty() || apellidosText.isEmpty() || ciudadText.isEmpty()) {
-                        JOptionPane.showMessageDialog(Registro.this, "Por favor, completa todos los campos.");
+	                	OtrasCosas ja = new OtrasCosas();
+	                	ja.t();  
                         return;
                     }
                 if (!password.equals(password2)) {
-                    JOptionPane.showMessageDialog(Registro.this, "La contraseña no coincide, vuelve a intentarlo");
+                	OtrasCosas ja = new OtrasCosas();
+                	ja.k();
                     return;
                 }
 
                
                 if (!usuario.endsWith("@gmail.com")) {
-                    JOptionPane.showMessageDialog(Registro.this, "Debes utilizar un correo valido para registrarte.");
+                	OtrasCosas ja = new OtrasCosas();
+                	ja.v();
                     return; // Sale de la acción si el correo no es válido.
                 }
                 if(nombre.getText().length() > 15) {
-                	JOptionPane.showMessageDialog(Registro.this, "No puede rebasar de 15 caracteres en su nombre");
+                	OtrasCosas ja = new OtrasCosas();
+                	ja.u();
                     return; 
                 }
                 else if(contraseña.getPassword().length > 20) {
-                	JOptionPane.showMessageDialog(Registro.this, "No puede rebasar de 20 caracteres en la contraseña");
+                	OtrasCosas ja = new OtrasCosas();
+                	ja.w();
                     return; 
                 }
                 else if(ciudad.getText().length() > 20) {
-                	JOptionPane.showMessageDialog(Registro.this, "No puede rebasar de 20 caracteres en la ciudad");
+                	OtrasCosas ja = new OtrasCosas();
+                	ja.x();
                     return; 
                 }
                 else if(apellidos.getText().length() > 50) {
-                	JOptionPane.showMessageDialog(Registro.this, "No puede rebasar de 50 caracteres en sus apellidos");
+                	OtrasCosas ja = new OtrasCosas();
+                	ja.y();
                     return; 
                 }
                 else if(correo.getText().length() > 30) {
-                	JOptionPane.showMessageDialog(Registro.this, "No puede rebasar de 30 caracteres en el correo");
+                	OtrasCosas ja = new OtrasCosas();
+                	ja.z();
                     return; 
                 }
 
@@ -268,11 +276,25 @@ public class Registro extends JFrame {
                 }
 
                 if (userExists) {
-                    JOptionPane.showMessageDialog(Registro.this, "Este usuario ya está registrado. Cambia el correo o inicia sesión.");
+                	OtrasCosas ja = new OtrasCosas();
+                	ja.A();
+                	return;
                 } else {
-                    JOptionPane.showMessageDialog(Registro.this, "Registro exitoso. Ahora inicia sesión.");
-                    dispose();
-                    Login log = new Login();
+                	OtrasCosas ja7 = new OtrasCosas();
+                	ja7.B();
+                	ja7.but.addActionListener(new ActionListener() {
+	                    public void actionPerformed(ActionEvent e) {
+	                    	
+	                    	if (ja7.but != null) {
+	                            ja7.j8.dispose(); 
+	                            dispose();
+	                            Login log = new Login();
+	                        }
+	    	                
+	                        return;
+	                    }
+	                });
+                    
                     try {
                         String insert = "INSERT INTO USUARIO (NOMBRE, CONTRASEÑA, CORREO, CIUDAD, APELLIDOS) VALUES (?, ?, ?, ?, ?)";
                         PreparedStatement statement = Login.connection.prepareStatement(insert);
@@ -286,11 +308,13 @@ public class Registro extends JFrame {
                         if (rowsInserted > 0) {
                             // Éxito en la inserción
                         } else {
-                            JOptionPane.showMessageDialog(Registro.this, "Error al registrar el usuario intentelo de nuevo");
+                        	OtrasCosas ja = new OtrasCosas();
+                        	ja.C();
                         }
                     } catch (SQLException e1) {
                         e1.printStackTrace();
-                        JOptionPane.showMessageDialog(Registro.this, "Error al registrar el usuario");
+                        OtrasCosas ja = new OtrasCosas();
+                    	ja.C();
                     }
                 }
             }
