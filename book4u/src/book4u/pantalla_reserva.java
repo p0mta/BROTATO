@@ -9,9 +9,12 @@ import java.util.concurrent.TimeUnit;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;
+import java.util.HashMap;
+import java.util.Map;
 
 
 public class pantalla_reserva extends JFrame {
+	private Map<String, String> imagenesPorPaisYLugar = new HashMap<>();
     public pantalla_reserva() throws SQLException {
         setTitle("Reserva de lugares residenciales");
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -19,7 +22,7 @@ public class pantalla_reserva extends JFrame {
         setLocationRelativeTo(null);
         setVisible(true);
         setLayout(null);
-
+        
         String colorFondo = "#579514";
         Color backgroundColor = Color.decode(colorFondo);
         getContentPane().setBackground(backgroundColor);
@@ -35,6 +38,14 @@ public class pantalla_reserva extends JFrame {
         tit.setFont(Registro.fuente);
         tit.setBounds(225, 0, 400, 75);
         panelBlanco.add(tit);
+        
+        
+        
+        imagenesPorPaisYLugar.put("DubaiCasa".toLowerCase(), "dubaicasa.jpg");
+        imagenesPorPaisYLugar.put("JaponCasa".toLowerCase(), "images/japon_casa.jpg");
+        JLabel imagenLabel = new JLabel();
+        imagenLabel.setBounds(200, 450, 200, 200);  // Ajusta la posición y el tamaño según tus necesidades
+        add(imagenLabel);
         
         JButton reservarButton = new JButton("Reservar");
         reservarButton.setBounds(400, 400, 150, 30);
@@ -197,7 +208,23 @@ public class pantalla_reserva extends JFrame {
             } else {
                 precioLabel.setText("Precio de la reserva en " + pais + ": "+calcularPrecio(combi, paisCombo, dateChooser, dateChooser1)+"");
             }
-            });}
+         
+
+            // Obtener la ruta de la imagen correspondiente
+            String rutaImagen = imagenesPorPaisYLugar.get((pais + lugarResidencial).toLowerCase());
+            System.out.println("Ruta de la imagen: " + rutaImagen);
+
+
+            // Verificar si la ruta de la imagen existe y mostrarla en el JLabel
+            if (rutaImagen != null) {
+                ImageIcon imagenSeleccionada = new ImageIcon(rutaImagen);
+                imagenLabel.setIcon(imagenSeleccionada);
+            } else {
+                // Manejar el caso en el que no haya una imagen asociada
+                JOptionPane.showMessageDialog(pantalla_reserva.this, "No hay imagen disponible para esta combinación");
+            }
+        });
+            };
     
     
        
