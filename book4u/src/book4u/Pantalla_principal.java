@@ -191,6 +191,12 @@ public class Pantalla_principal extends JFrame {
                 Login pa = new Login();
             }
         });
+        HistorialButton.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent e) {
+                dispose();
+                Historial pa = new Historial();
+            }
+        });
     }
 
     public String obtenerNombreDesdeBaseDeDatos(String correo, String contraseña) {
