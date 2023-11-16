@@ -51,7 +51,7 @@ public class pantalla_reserva extends JFrame {
         imagenesPorPaisYLugar.put("ColombiaCasa".toLowerCase(), "CA.jpg");
         imagenesPorPaisYLugar.put("MexicoCasa".toLowerCase(), "MC.jpg");
         imagenesPorPaisYLugar.put("IrlandaCasa".toLowerCase(), "IA.jpg");
-        imagenesPorPaisYLugar.put("AlemaniaCasa".toLowerCase(), "AC.jpg");
+        imagenesPorPaisYLugar.put("AlemaniaCasa".toLowerCase(), "CAT.jpg");
         
         imagenesPorPaisYLugar.put("DubaiApartamento".toLowerCase(), "DA.jpg");
         imagenesPorPaisYLugar.put("JaponApartamento".toLowerCase(), "JA.jpg");
@@ -75,7 +75,7 @@ public class pantalla_reserva extends JFrame {
         imagenesPorPaisYLugar.put("ColombiaCabaña".toLowerCase(), "CT1.jpg");
         imagenesPorPaisYLugar.put("MexicoCabaña".toLowerCase(), "MT.jpg");
         imagenesPorPaisYLugar.put("IrlandaCabaña".toLowerCase(), "IT1.jpg");
-        imagenesPorPaisYLugar.put("AlemaniaCabaña".toLowerCase(), "AT.jpg");
+        imagenesPorPaisYLugar.put("AlemaniaCabaña".toLowerCase(), "AC.jpg");
         
         imagenesPorPaisYLugar.put("DubaiHotel".toLowerCase(), "DH.jpg");
         imagenesPorPaisYLugar.put("JaponHotel".toLowerCase(), "JH.jpg");
@@ -259,7 +259,7 @@ public class pantalla_reserva extends JFrame {
 
             // Obtener la ruta de la imagen correspondiente
             String rutaImagen = imagenesPorPaisYLugar.get((pais + lugarResidencial).toLowerCase());
-            System.out.println("Ruta de la imagen: " + rutaImagen);
+            
 
 
             // Verificar si la ruta de la imagen existe y mostrarla en el JLabel
