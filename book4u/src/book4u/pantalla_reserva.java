@@ -41,10 +41,57 @@ public class pantalla_reserva extends JFrame {
         
         
         
-        imagenesPorPaisYLugar.put("DubaiCasa".toLowerCase(), "dubaicasa.jpg");
-        imagenesPorPaisYLugar.put("JaponCasa".toLowerCase(), "images/japon_casa.jpg");
+        imagenesPorPaisYLugar.put("DubaiCasa".toLowerCase(), "casadubai.jpg");
+        imagenesPorPaisYLugar.put("JaponCasa".toLowerCase(), "JC.jpg");
+        imagenesPorPaisYLugar.put("CoreaCasa".toLowerCase(), "CC.jpg");
+        imagenesPorPaisYLugar.put("FranciaCasa".toLowerCase(), "FC.jpg");
+        imagenesPorPaisYLugar.put("RussiaCasa".toLowerCase(), "RC1.jpg");
+        imagenesPorPaisYLugar.put("ItaliaCasa".toLowerCase(), "IC.jpg");
+        imagenesPorPaisYLugar.put("GreciaCasa".toLowerCase(), "GC.jpg");
+        imagenesPorPaisYLugar.put("ColombiaCasa".toLowerCase(), "CA.jpg");
+        imagenesPorPaisYLugar.put("MexicoCasa".toLowerCase(), "MC.jpg");
+        imagenesPorPaisYLugar.put("IrlandaCasa".toLowerCase(), "IA.jpg");
+        imagenesPorPaisYLugar.put("AlemaniaCasa".toLowerCase(), "AC.jpg");
+        
+        imagenesPorPaisYLugar.put("DubaiApartamento".toLowerCase(), "DA.jpg");
+        imagenesPorPaisYLugar.put("JaponApartamento".toLowerCase(), "JA.jpg");
+        imagenesPorPaisYLugar.put("CoreaApartamento".toLowerCase(), "CA.jpg");
+        imagenesPorPaisYLugar.put("FranciaApartamento".toLowerCase(), "FA.jpg");
+        imagenesPorPaisYLugar.put("RussiaApartamento".toLowerCase(), "RA.jpg");
+        imagenesPorPaisYLugar.put("ItaliaApartamento".toLowerCase(), "IA.jpg");
+        imagenesPorPaisYLugar.put("GreciaApartamento".toLowerCase(), "GA.jpg");
+        imagenesPorPaisYLugar.put("ColombiaApartamento".toLowerCase(), "CA1.jpg");
+        imagenesPorPaisYLugar.put("MexicoApartamento".toLowerCase(), "MA.jpg");
+        imagenesPorPaisYLugar.put("IrlandaApartamento".toLowerCase(), "IA1.jpg");
+        imagenesPorPaisYLugar.put("AlemaniaApartamento".toLowerCase(), "AA.jpg");
+        
+        imagenesPorPaisYLugar.put("DubaiCabaña".toLowerCase(), "DT.jpg");
+        imagenesPorPaisYLugar.put("JaponCabaña".toLowerCase(), "JT.jpg");
+        imagenesPorPaisYLugar.put("CoreaCabaña".toLowerCase(), "CT.jpg");
+        imagenesPorPaisYLugar.put("FranciaCabaña".toLowerCase(), "FT.jpg");
+        imagenesPorPaisYLugar.put("RussiaCabaña".toLowerCase(), "RT.jpg");
+        imagenesPorPaisYLugar.put("ItaliaCabaña".toLowerCase(), "IT.jpg");
+        imagenesPorPaisYLugar.put("GreciaCabaña".toLowerCase(), "GT.jpg");
+        imagenesPorPaisYLugar.put("ColombiaCabaña".toLowerCase(), "CT1.jpg");
+        imagenesPorPaisYLugar.put("MexicoCabaña".toLowerCase(), "MT.jpg");
+        imagenesPorPaisYLugar.put("IrlandaCabaña".toLowerCase(), "IT1.jpg");
+        imagenesPorPaisYLugar.put("AlemaniaCabaña".toLowerCase(), "AT.jpg");
+        
+        imagenesPorPaisYLugar.put("DubaiHotel".toLowerCase(), "DH.jpg");
+        imagenesPorPaisYLugar.put("JaponHotel".toLowerCase(), "JH.jpg");
+        imagenesPorPaisYLugar.put("CoreaHotel".toLowerCase(), "CH.jpg");
+        imagenesPorPaisYLugar.put("FranciaHotel".toLowerCase(), "FH.jpg");
+        imagenesPorPaisYLugar.put("RussiaHotel".toLowerCase(), "RH.jpg");
+        imagenesPorPaisYLugar.put("ItaliaHotel".toLowerCase(), "IH.jpg");
+        imagenesPorPaisYLugar.put("GreciaHotel".toLowerCase(), "GH.jpg");
+        imagenesPorPaisYLugar.put("ColombiaHotel".toLowerCase(), "CH1.jpg");
+        imagenesPorPaisYLugar.put("MexicoHotel".toLowerCase(), "MH.jpg");
+        imagenesPorPaisYLugar.put("IrlandaHotel".toLowerCase(), "IH1.jpg");
+        imagenesPorPaisYLugar.put("AlemaniaHotel".toLowerCase(), "AH.jpg");
+ 
+        
         JLabel imagenLabel = new JLabel();
-        imagenLabel.setBounds(200, 450, 200, 200);  // Ajusta la posición y el tamaño según tus necesidades
+        imagenLabel.setBounds(550, 50, 200, 200);  // Ajusta la posición y el tamaño según tus necesidades
         add(imagenLabel);
         
         JButton reservarButton = new JButton("Reservar");
