@@ -181,7 +181,12 @@ public class Pantalla_principal extends JFrame {
         InicioButton.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
                 dispose();
-                pantalla_reserva pat = new pantalla_reserva();
+                try {
+					pantalla_reserva pat = new pantalla_reserva();
+				} catch (SQLException e1) {
+					// TODO Auto-generated catch block
+					e1.printStackTrace();
+				}
             }
         });
 
@@ -194,7 +199,7 @@ public class Pantalla_principal extends JFrame {
         HistorialButton.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
                 dispose();
-                Historial pa = new Historial();
+                reservas pa = new reservas();
             }
         });
     }

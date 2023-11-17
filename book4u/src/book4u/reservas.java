@@ -1,16 +1,7 @@
 package book4u;
 
-import javax.swing.ImageIcon;
-import javax.swing.JButton;
-import javax.swing.JFrame;
-import javax.swing.JLabel;
-import javax.swing.JPanel;
 import java.awt.Color;
-import java.awt.Component;
 import java.awt.Font;
-import java.awt.Image;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.ResultSet;
@@ -18,86 +9,46 @@ import java.sql.Statement;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
-public class Historial extends JFrame {
-    private JPanel panel1;
-    private JPanel panel2;
-    private JPanel panel3;
-    private JPanel panel4;
-    
-    
-    public Historial() {
-        // Configurar el frame
-        setTitle("Historial");
-        setSize(1200, 800);
-        setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        this.setLayout(null); // Usamos un diseño absoluto para posicionar los paneles manualmente
-        this.setLocationRelativeTo(null);
-        String colorfondo = "#579514";
+import javax.swing.ImageIcon;
+import javax.swing.JFrame;
+import javax.swing.JLabel;
+import javax.swing.JPanel;
+
+public class reservas extends JFrame {
+	
+	JPanel panel2 = new JPanel();
+	public reservas() {
+		setSize(1200,800);
+		this.setLocationRelativeTo(null);
+		this.setLayout(null);
+		String colorfondo = "#579514";
         Color backgroundColor = Color.decode(colorfondo);
         this.getContentPane().setBackground(backgroundColor);
-
-        ImageIcon imagen = new ImageIcon("Logo.png");
-        JLabel label = new JLabel(imagen);
-        label.setBounds(525, -10, 150, 150);
-
-        // Crear los paneles
-        panel1 = new JPanel();
-        panel1.setLayout(null);
-        panel1.setBackground(Color.WHITE);
-        panel1.setBounds(0, 0, 1200, 100); // Posición y tamaño
-        panel1.add(label);
-
+        JPanel pan = new JPanel();
+        pan.setBounds(0, 0, 1200, 75);
+        pan.setVisible(true);
+        pan.setBackground(Color.WHITE);
+        pan.setLayout(null);
+        this.add(pan);
         panel2 = new JPanel();
         panel2.setBackground(Color.BLACK);
-        panel2.setBounds(30, 200, 1125, 540);
+        panel2.setBounds(30, 130, 1125, 600);
         panel2.setLayout(null);
-
-        panel3 = new JPanel();
-        panel3.setBackground(Color.WHITE);
-        panel3.setBounds(30, 200, 1125, 100);
-        this.toFront();
-        
-        ImageIcon back = new ImageIcon("back.png");
-        JButton but = new JButton(back);
-        but.setBounds(10, 120, 30, 30);
-        but.setFont(Registro.fuente1);
-        but.setFocusPainted(false);
-        but.setBorderPainted(false);
-        but.setContentAreaFilled(false);
-        this.add(but);
-        but.addActionListener(new ActionListener() {
-            public void actionPerformed(ActionEvent e) {
-            	dispose();
-            	Pantalla_principal pat = new Pantalla_principal();
-            }
-        });
-
-    
-
-        panel4 = new JPanel();
-        panel4.setBackground(Color.YELLOW);
-        panel4.setBounds(0, 0, 0, 0);
-
-        
-
-        // Agregar los paneles al frame
-        add(panel1);
-        add(panel2);
-        add(panel3);
-        add(panel4);
-        
-
-        // Mostrar el frame
-        setVisible(true);
-        JLabel dataLabel1 = new JLabel("DIA D'ENTRADA                         LUGAR                         PRECIO                         PAIS                         DIA_SALIDA " );
-        dataLabel1.setBounds(40, 170, 850, 30);
+        JLabel tit = new JLabel("RESERVAS");
+        tit.setHorizontalAlignment(JLabel.CENTER);
+        tit.setFont(Registro.fuente);
+        tit.setBounds(375, 0, 400, 75);
+        pan.add(tit);
+        JLabel dataLabel1 = new JLabel("DIA D'ENTRADA                              LUGAR                              PRECIO                              PAIS                              DIA_SALIDA " );
+        dataLabel1.setBounds(100, 90, 1000, 30);
         this.add(dataLabel1);
         dataLabel1.setFont(Registro.fuente1);
-        // Recuperar y mostrar los datos desde la base de datos
         retrieveAndDisplayData();
-    }
-
-    private void retrieveAndDisplayData() {
+		
+        this.add(panel2);
+		this.setVisible(true);
+	}
+	private void retrieveAndDisplayData() {
         try {
             Connection connection = DriverManager.getConnection("jdbc:oracle:thin:@192.168.3.26:1521:xe", "23_24_DAM2_BROTATO", "123456");
             Statement statement = connection.createStatement();
@@ -111,9 +62,11 @@ public class Historial extends JFrame {
                 String lugar = resultSet.getString("LUGAR");
                 String precio = resultSet.getString("PRECIO");
                 String pais = resultSet.getString("PAIS");
-                String diaSalida = resultSet.getString("DIA_SALIDA");
+                Date diaSalida = resultSet.getDate("DIA_SALIDA");
                 SimpleDateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy");
                 String diaFormateado = dateFormat.format(fecha);
+                String diasalida = dateFormat.format(diaSalida);
+                
                 // Crear etiquetas para cada columna y agregarlas al panel2
                 Font font = new Font("Agency FB", Font.BOLD, 23);
                 JLabel dataLabel = new JLabel(diaFormateado);
@@ -123,7 +76,7 @@ public class Historial extends JFrame {
                 int labelSpacing = 10; // Espacio entre etiquetas
                 int yPosition = (resultSet.getRow() - 1) * (labelHeight + labelSpacing);
                 
-                dataLabel.setBounds(10, yPosition, 150, labelHeight);
+                dataLabel.setBounds(70, yPosition, 150, labelHeight);
                 dataLabel.setFont(font);
                 
                 ImageIcon moni = new ImageIcon("moneda.gif");
@@ -134,7 +87,7 @@ public class Historial extends JFrame {
                 int labelSpacing1 = 10; // Espacio entre etiquetas
                 int yPosition1 = (resultSet.getRow() - 1) * (labelHeight1 + labelSpacing1);
                 
-                lugar1.setBounds(245, yPosition1, 150, labelHeight1);
+                lugar1.setBounds(330, yPosition1, 150, labelHeight1);
                 lugar1.setFont(font);
                 
                 
@@ -143,17 +96,33 @@ public class Historial extends JFrame {
                 int labelSpacing2 = 10; // Espacio entre etiquetas
                 int yPosition2 = (resultSet.getRow() - 1) * (labelHeight2 + labelSpacing2);
                 
-                precio1.setBounds(400, yPosition2, 150, labelHeight2);
+                precio1.setBounds(510, yPosition2, 150, labelHeight2);
                 precio1.setFont(font);
-                
-                
                 precio1.setIcon(moni);
                 
+                JLabel pais1 = new JLabel(pais);
+                int labelHeight3 = 30; // Altura estimada de cada etiqueta
+                int labelSpacing3 = 10; // Espacio entre etiquetas
+                int yPosition3 = (resultSet.getRow() - 1) * (labelHeight3 + labelSpacing3);
                 
+                pais1.setBounds(730, yPosition3, 150, labelHeight3);
+                pais1.setFont(font);
                 
+                JLabel salida = new JLabel(diasalida);
+                int labelHeight4 = 30; // Altura estimada de cada etiqueta
+                int labelSpacing4 = 10; // Espacio entre etiquetas
+                int yPosition4 = (resultSet.getRow() - 1) * (labelHeight4 + labelSpacing4);
+                
+                salida.setBounds(910, yPosition4, 150, labelHeight4);
+                salida.setFont(font);
+                
+                panel2.add(salida);
+                panel2.add(pais1);
                 panel2.add(lugar1);
                 panel2.add(dataLabel);
                 panel2.add(precio1);
+                salida.setForeground(Color.white);
+                pais1.setForeground(Color.white);
                 dataLabel.setForeground(Color.white);
                 lugar1.setForeground(Color.white);
                 precio1.setForeground(Color.white);
@@ -176,11 +145,5 @@ public class Historial extends JFrame {
         } catch (Exception e) {
             e.printStackTrace();
         }
-    }
-
-
-
-    public static void main(String[] args) {
-        Historial historial = new Historial();
     }
 }
