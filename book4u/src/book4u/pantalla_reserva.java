@@ -87,7 +87,7 @@ public class pantalla_reserva extends JFrame {
         imagenesPorPaisYLugar.put("ColombiaHotel".toLowerCase(), "CH1.jpg");
         imagenesPorPaisYLugar.put("MexicoHotel".toLowerCase(), "MH.jpg");
         imagenesPorPaisYLugar.put("IrlandaHotel".toLowerCase(), "IH1.jpg");
-        imagenesPorPaisYLugar.put("AlmaniaHotel".toLowerCase(), "AH.jpg");
+        imagenesPorPaisYLugar.put("AlemaniaHotel".toLowerCase(), "AH.jpg");
  
         
         JLabel imagenLabel = new JLabel();
@@ -225,9 +225,12 @@ public class pantalla_reserva extends JFrame {
 
                     precioLabel.setText("Precio de la reserva en " + pais + ": " + calcularPrecio(combi, paisCombo, dateChooser, dateChooser1) + "");
 
-                } catch (SQLException ex) {
+                }
+                catch (SQLException ex) {
                     ex.printStackTrace();
                 }
+                dispose();
+                Pantalla_principal pa = new Pantalla_principal();
             }
         });
         calcularPrecioButton.addActionListener(e -> {
@@ -272,6 +275,7 @@ public class pantalla_reserva extends JFrame {
             }
         });
             };
+            
     
     
        
