@@ -45,7 +45,7 @@ public class pantalla_reserva extends JFrame {
         imagenesPorPaisYLugar.put("JaponCasa".toLowerCase(), "JC.jpg");
         imagenesPorPaisYLugar.put("CoreaCasa".toLowerCase(), "CC.jpg");
         imagenesPorPaisYLugar.put("FranciaCasa".toLowerCase(), "FC.jpg");
-        imagenesPorPaisYLugar.put("RussiaCasa".toLowerCase(), "RC1.jpg");
+        imagenesPorPaisYLugar.put("RusiaCasa".toLowerCase(), "RC1.jpg");
         imagenesPorPaisYLugar.put("ItaliaCasa".toLowerCase(), "IC.jpg");
         imagenesPorPaisYLugar.put("GreciaCasa".toLowerCase(), "GC.jpg");
         imagenesPorPaisYLugar.put("ColombiaCasa".toLowerCase(), "CA.jpg");
@@ -57,7 +57,7 @@ public class pantalla_reserva extends JFrame {
         imagenesPorPaisYLugar.put("JaponApartamento".toLowerCase(), "JA.jpg");
         imagenesPorPaisYLugar.put("CoreaApartamento".toLowerCase(), "CA.jpg");
         imagenesPorPaisYLugar.put("FranciaApartamento".toLowerCase(), "FA.jpg");
-        imagenesPorPaisYLugar.put("RussiaApartamento".toLowerCase(), "RA.jpg");
+        imagenesPorPaisYLugar.put("RusiaApartamento".toLowerCase(), "RA.jpg");
         imagenesPorPaisYLugar.put("ItaliaApartamento".toLowerCase(), "IA.jpg");
         imagenesPorPaisYLugar.put("GreciaApartamento".toLowerCase(), "GA.jpg");
         imagenesPorPaisYLugar.put("ColombiaApartamento".toLowerCase(), "CA1.jpg");
@@ -69,7 +69,7 @@ public class pantalla_reserva extends JFrame {
         imagenesPorPaisYLugar.put("JaponCabaña".toLowerCase(), "JT.jpg");
         imagenesPorPaisYLugar.put("CoreaCabaña".toLowerCase(), "CT.jpg");
         imagenesPorPaisYLugar.put("FranciaCabaña".toLowerCase(), "FT.jpg");
-        imagenesPorPaisYLugar.put("RussiaCabaña".toLowerCase(), "RT.jpg");
+        imagenesPorPaisYLugar.put("RusiaCabaña".toLowerCase(), "RT.jpg");
         imagenesPorPaisYLugar.put("ItaliaCabaña".toLowerCase(), "IT.jpg");
         imagenesPorPaisYLugar.put("GreciaCabaña".toLowerCase(), "GT.jpg");
         imagenesPorPaisYLugar.put("ColombiaCabaña".toLowerCase(), "CT1.jpg");
@@ -81,13 +81,13 @@ public class pantalla_reserva extends JFrame {
         imagenesPorPaisYLugar.put("JaponHotel".toLowerCase(), "JH.jpg");
         imagenesPorPaisYLugar.put("CoreaHotel".toLowerCase(), "CH.jpg");
         imagenesPorPaisYLugar.put("FranciaHotel".toLowerCase(), "FH.jpg");
-        imagenesPorPaisYLugar.put("RussiaHotel".toLowerCase(), "RH.jpg");
+        imagenesPorPaisYLugar.put("RusiaHotel".toLowerCase(), "RH.jpg");
         imagenesPorPaisYLugar.put("ItaliaHotel".toLowerCase(), "IH.jpg");
         imagenesPorPaisYLugar.put("GreciaHotel".toLowerCase(), "GH.jpg");
         imagenesPorPaisYLugar.put("ColombiaHotel".toLowerCase(), "CH1.jpg");
         imagenesPorPaisYLugar.put("MexicoHotel".toLowerCase(), "MH.jpg");
         imagenesPorPaisYLugar.put("IrlandaHotel".toLowerCase(), "IH1.jpg");
-        imagenesPorPaisYLugar.put("AlemaniaHotel".toLowerCase(), "AH.jpg");
+        imagenesPorPaisYLugar.put("AlmaniaHotel".toLowerCase(), "AH.jpg");
  
         
         JLabel imagenLabel = new JLabel();
@@ -135,7 +135,7 @@ public class pantalla_reserva extends JFrame {
         add(paisLabel);
         paisLabel.setFont(Registro.fuente1);
 
-        String[] paises = {"Dubai", "Japon", "Corea","Francia","Russia","Italia","Grecia","Colombia","Mexico","Irlanda","Alemania", };
+        String[] paises = {"Dubai", "Japon", "Corea","Francia","Rusia","Italia","Grecia","Colombia","Mexico","Irlanda","Alemania", };
         JComboBox<String> paisCombo = new JComboBox<>(paises);
         paisCombo.setBounds(310, 200, 200, 30);
         paisCombo.setFont(Registro.fuente2);
@@ -316,7 +316,7 @@ public class pantalla_reserva extends JFrame {
             case "Francia":
                 precioBase *= 1.2;
                 break;
-            case "Russia":
+            case "Rusia":
                 precioBase *= 1.5;
                 break;
             case "Italia":
