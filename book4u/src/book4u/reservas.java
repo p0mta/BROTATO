@@ -2,6 +2,8 @@ package book4u;
 
 import java.awt.Color;
 import java.awt.Font;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.ResultSet;
@@ -10,6 +12,7 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 
 import javax.swing.ImageIcon;
+import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
@@ -46,12 +49,26 @@ public class reservas extends JFrame {
         retrieveAndDisplayData();
 		
         this.add(panel2);
+        ImageIcon back = new ImageIcon("back.png");
+        JButton but = new JButton(back);
+        but.setBounds(10, 90, 30, 30);
+        but.setFont(Registro.fuente1);
+        but.setFocusPainted(false);
+        but.setBorderPainted(false);
+        but.setContentAreaFilled(false);
+        this.add(but);
+        but.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent e) {
+            	dispose();
+            	Pantalla_principal pat = new Pantalla_principal();
+            }
+        });
 		this.setVisible(true);
 	}
 	private void retrieveAndDisplayData() {
         try {
-            Connection connection = DriverManager.getConnection("jdbc:oracle:thin:@192.168.3.26:1521:xe", "23_24_DAM2_BROTATO", "123456");
-            Statement statement = connection.createStatement();
+            
+            Statement statement = Login.connection.createStatement();
             ResultSet resultSet = statement.executeQuery("SELECT IDRESERVA, DIA, LUGAR, PRECIO, PAIS, DIA_SALIDA FROM RESERVAS");
 
             boolean hasData = false;
@@ -131,7 +148,7 @@ public class reservas extends JFrame {
 
             resultSet.close();
             statement.close();
-            connection.close();
+            
 
             if (!hasData) {
                 JLabel noDataLabel = new JLabel("No hay datos disponibles todavía.");
