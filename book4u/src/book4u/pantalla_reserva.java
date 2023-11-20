@@ -281,79 +281,89 @@ public class pantalla_reserva extends JFrame {
        
     
     
-    private double calcularPrecio(JComboBox<String> combi, JComboBox<String> paisCombo, JDateChooser dateChooser, JDateChooser dateChooser1) {
-        Date selectedDate = dateChooser.getDate();
-        Date selectedDate2 = dateChooser1.getDate();
-        String lugarResidencial = (String) combi.getSelectedItem();
-        String pais = (String) paisCombo.getSelectedItem();
+            private double calcularPrecio(JComboBox<String> combi, JComboBox<String> paisCombo, JDateChooser dateChooser, JDateChooser dateChooser1) {
+                Date selectedDate = dateChooser.getDate();
+                Date selectedDate2 = dateChooser1.getDate();
+                String lugarResidencial = (String) combi.getSelectedItem();
+                String pais = (String) paisCombo.getSelectedItem();
 
-        // Lógica para calcular el precio basado en lugar residencial y país
-        double precioBase = 100.0;  // Precio base, puedes ajustarlo según tus necesidades
+                double precioBase = 10;  // Precio base, puedes ajustarlo según tus necesidades
 
-        switch (lugarResidencial) {
-            case "Casa":
-                precioBase += 50.0;  // Puedes ajustar el incremento/decremento según el tipo de lugar
-                break;
-            case "Apartamento":
-                precioBase += 30.0;
-                break;
-            case "Cabaña":
-                precioBase += 40.0;
-                break;
-            case "Hotel":
-                precioBase += 80.0;
-                break;
-            // Puedes agregar más casos según sea necesario
-        }
+                switch (lugarResidencial) {
+                    case "Casa":
+                        precioBase += 60.0;  // Puedes ajustar el incremento/decremento según el tipo de lugar
+                        break;
+                    case "Apartamento":
+                        precioBase += 40.0;
+                        break;
+                    case "Cabaña":
+                        precioBase += 30.0;
+                        break;
+                    case "Hotel":
+                        precioBase += 70.0;
+                        break;
+                    // Puedes agregar más casos según sea necesario
+                }
 
-        // Ajustes adicionales basados en el país
-        switch (pais) {
-            case "Dubai":
-                precioBase *= 2;  // Ajuste según el país
-                break;
-            case "Japon":
-                precioBase *= 1.8;
-                break;
-            case "Corea":
-                precioBase *= 1.7;
-                break;
-            case "Francia":
-                precioBase *= 1.2;
-                break;
-            case "Rusia":
-                precioBase *= 1.5;
-                break;
-            case "Italia":
-                precioBase *= 1.1;
-                break;
-            case "Grecia":
-                precioBase *= 1.4;
-                break;
-            case "Colombia":
-                precioBase *= 1.3;
-                break;
-            case "Mexico":
-                precioBase *= 1.9;
-                break;
-            case "Irlanda":
-                precioBase *= 1.4;
-                break;
-            case "Alemania":
-                precioBase *= 1.25;
-                break;
+                switch (pais) {
+                    case "Dubai":
+                        precioBase *= 2.2;  // Ajuste según el país
+                        break;
+                    case "Japon":
+                        precioBase *= 1.8;
+                        break;
+                    case "Corea":
+                        precioBase *= 1.7;
+                        break;
+                    case "Francia":
+                        precioBase *= 1.2;
+                        break;
+                    case "Rusia":
+                        precioBase *= 1.5;
+                        break;
+                    case "Italia":
+                        precioBase *= 1.1;
+                        break;
+                    case "Grecia":
+                        precioBase *= 1.4;
+                        break;
+                    case "Colombia":
+                        precioBase *= 1.35;
+                        break;
+                    case "Mexico":
+                        precioBase *= 1.9;
+                        break;
+                    case "Irlanda":
+                        precioBase *= 1.4;
+                        break;
+                    case "Alemania":
+                        precioBase *= 1.25;
+                        break;
+                }
+
+                long diferenciaMillis = selectedDate2.getTime() - selectedDate.getTime();
+                long diferenciaDias = TimeUnit.MILLISECONDS.toDays(diferenciaMillis);
+
+                // Ajustar el precio según la duración de la reserva y tipo de lugar residencial
+                switch (lugarResidencial) {
+                    case "Casa":
+                        precioBase += 50.0 * diferenciaDias;  // Ajuste específico para Casas
+                        break;
+                    case "Apartamento":
+                        precioBase += 40.0 * diferenciaDias;  // Ajuste específico para Apartamentos
+                        break;
+                    case "Cabaña":
+                        precioBase += 30.0 * diferenciaDias;  // Ajuste específico para Cabañas
+                        break;
+                    case "Hotel":
+                        precioBase += 60.0 * diferenciaDias;  // Ajuste específico para Hoteles
+                        break;
+                    // Puedes agregar más casos según sea necesario
+                }
+
+                return precioBase;
             }
-			
-        long diferenciaMillis = selectedDate2.getTime() - selectedDate.getTime();
-        long diferenciaDias = TimeUnit.MILLISECONDS.toDays(diferenciaMillis);
 
-        // Ajustar el precio según la duración de la reserva
-        precioBase += 50.0 * diferenciaDias;  // Ajusta el 10 según tus necesidades
-
-
-       
-
-        return precioBase;
-    }
 
     
     public static void main(String[] args) {
