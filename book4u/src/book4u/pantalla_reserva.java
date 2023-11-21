@@ -11,6 +11,8 @@ import java.sql.DriverManager;
 import java.sql.SQLException;
 import java.util.HashMap;
 import java.util.Map;
+import javax.swing.JOptionPane;
+import java.sql.PreparedStatement;
 
 
 public class pantalla_reserva extends JFrame {
@@ -87,7 +89,7 @@ public class pantalla_reserva extends JFrame {
         imagenesPorPaisYLugar.put("ColombiaHotel".toLowerCase(), "CH1.jpg");
         imagenesPorPaisYLugar.put("MexicoHotel".toLowerCase(), "MH.jpg");
         imagenesPorPaisYLugar.put("IrlandaHotel".toLowerCase(), "IH1.jpg");
-        imagenesPorPaisYLugar.put("AlmaniaHotel".toLowerCase(), "AH.jpg");
+        imagenesPorPaisYLugar.put("AlemaniaHotel".toLowerCase(), "AH.jpg");
  
         
         JLabel imagenLabel = new JLabel();
@@ -207,18 +209,23 @@ public class pantalla_reserva extends JFrame {
                 JOptionPane.showMessageDialog(null, "La fecha de salida no puede ser anterior a la fecha de reserva", "Error", JOptionPane.ERROR_MESSAGE);
             return;
             } else {
-                try {
+            	try {
                     // Insertar datos en la tabla de reservas
-                    String query = "INSERT INTO reservas (dia, lugar, precio, pais,dia_salida) VALUES (?, ?, ?, ?,?)";
-                    try (java.sql.PreparedStatement preparedStatement = connection.prepareStatement(query)) {
+                    String query = "INSERT INTO reservas (dia, lugar, precio, pais, dia_salida) VALUES (?, ?, ?, ?, ?)";
+                    try (PreparedStatement preparedStatement = connection.prepareStatement(query)) {
                         preparedStatement.setDate(1, new java.sql.Date(selectedDate.getTime()));
                         preparedStatement.setString(2, lugarResidencial);
-                        preparedStatement.setDouble(3, calcularPrecio(combi, paisCombo, dateChooser, dateChooser1));
+                        double precioReserva = calcularPrecio(combi, paisCombo, dateChooser, dateChooser1);
+                        preparedStatement.setDouble(3, precioReserva);
                         preparedStatement.setString(4, pais);
                         preparedStatement.setDate(5, new java.sql.Date(selectedDate2.getTime()));
-                    
 
                         preparedStatement.executeUpdate();
+
+                        // Restar el precio de la reserva al saldo del usuario
+                        String correoUsuario = Login.getUsernameField().getText();  // Ajusta esto según cómo obtienes el correo del usuario
+                        pantalla_usuario pantallaUsuario = new pantalla_usuario();
+                        pantallaUsuario.actualizarSaldoDespuesDeReserva(correoUsuario, precioReserva);
                     }
 
                     // Otros pasos si es necesario
@@ -228,6 +235,8 @@ public class pantalla_reserva extends JFrame {
                 } catch (SQLException ex) {
                     ex.printStackTrace();
                 }
+                dispose();
+                Pantalla_principal pa = new Pantalla_principal();
             }
         });
         calcularPrecioButton.addActionListener(e -> {
@@ -272,84 +281,95 @@ public class pantalla_reserva extends JFrame {
             }
         });
             };
+            
     
     
        
     
     
-    private double calcularPrecio(JComboBox<String> combi, JComboBox<String> paisCombo, JDateChooser dateChooser, JDateChooser dateChooser1) {
-        Date selectedDate = dateChooser.getDate();
-        Date selectedDate2 = dateChooser1.getDate();
-        String lugarResidencial = (String) combi.getSelectedItem();
-        String pais = (String) paisCombo.getSelectedItem();
+            private double calcularPrecio(JComboBox<String> combi, JComboBox<String> paisCombo, JDateChooser dateChooser, JDateChooser dateChooser1) {
+                Date selectedDate = dateChooser.getDate();
+                Date selectedDate2 = dateChooser1.getDate();
+                String lugarResidencial = (String) combi.getSelectedItem();
+                String pais = (String) paisCombo.getSelectedItem();
 
-        // Lógica para calcular el precio basado en lugar residencial y país
-        double precioBase = 100.0;  // Precio base, puedes ajustarlo según tus necesidades
+                double precioBase = 10;  // Precio base, puedes ajustarlo según tus necesidades
 
-        switch (lugarResidencial) {
-            case "Casa":
-                precioBase += 50.0;  // Puedes ajustar el incremento/decremento según el tipo de lugar
-                break;
-            case "Apartamento":
-                precioBase += 30.0;
-                break;
-            case "Cabaña":
-                precioBase += 40.0;
-                break;
-            case "Hotel":
-                precioBase += 80.0;
-                break;
-            // Puedes agregar más casos según sea necesario
-        }
+                switch (lugarResidencial) {
+                    case "Casa":
+                        precioBase += 60.0;  // Puedes ajustar el incremento/decremento según el tipo de lugar
+                        break;
+                    case "Apartamento":
+                        precioBase += 40.0;
+                        break;
+                    case "Cabaña":
+                        precioBase += 30.0;
+                        break;
+                    case "Hotel":
+                        precioBase += 70.0;
+                        break;
+                    // Puedes agregar más casos según sea necesario
+                }
 
-        // Ajustes adicionales basados en el país
-        switch (pais) {
-            case "Dubai":
-                precioBase *= 2;  // Ajuste según el país
-                break;
-            case "Japon":
-                precioBase *= 1.8;
-                break;
-            case "Corea":
-                precioBase *= 1.7;
-                break;
-            case "Francia":
-                precioBase *= 1.2;
-                break;
-            case "Rusia":
-                precioBase *= 1.5;
-                break;
-            case "Italia":
-                precioBase *= 1.1;
-                break;
-            case "Grecia":
-                precioBase *= 1.4;
-                break;
-            case "Colombia":
-                precioBase *= 1.3;
-                break;
-            case "Mexico":
-                precioBase *= 1.9;
-                break;
-            case "Irlanda":
-                precioBase *= 1.4;
-                break;
-            case "Alemania":
-                precioBase *= 1.25;
-                break;
+                switch (pais) {
+                    case "Dubai":
+                        precioBase *= 2.2;  // Ajuste según el país
+                        break;
+                    case "Japon":
+                        precioBase *= 1.8;
+                        break;
+                    case "Corea":
+                        precioBase *= 1.7;
+                        break;
+                    case "Francia":
+                        precioBase *= 1.2;
+                        break;
+                    case "Rusia":
+                        precioBase *= 1.5;
+                        break;
+                    case "Italia":
+                        precioBase *= 1.1;
+                        break;
+                    case "Grecia":
+                        precioBase *= 1.4;
+                        break;
+                    case "Colombia":
+                        precioBase *= 1.35;
+                        break;
+                    case "Mexico":
+                        precioBase *= 1.9;
+                        break;
+                    case "Irlanda":
+                        precioBase *= 1.4;
+                        break;
+                    case "Alemania":
+                        precioBase *= 1.25;
+                        break;
+                }
+
+                long diferenciaMillis = selectedDate2.getTime() - selectedDate.getTime();
+                long diferenciaDias = TimeUnit.MILLISECONDS.toDays(diferenciaMillis);
+
+                // Ajustar el precio según la duración de la reserva y tipo de lugar residencial
+                switch (lugarResidencial) {
+                    case "Casa":
+                        precioBase += 50.0 * diferenciaDias;  // Ajuste específico para Casas
+                        break;
+                    case "Apartamento":
+                        precioBase += 40.0 * diferenciaDias;  // Ajuste específico para Apartamentos
+                        break;
+                    case "Cabaña":
+                        precioBase += 30.0 * diferenciaDias;  // Ajuste específico para Cabañas
+                        break;
+                    case "Hotel":
+                        precioBase += 60.0 * diferenciaDias;  // Ajuste específico para Hoteles
+                        break;
+                    // Puedes agregar más casos según sea necesario
+                }
+
+                return precioBase;
             }
-			
-        long diferenciaMillis = selectedDate2.getTime() - selectedDate.getTime();
-        long diferenciaDias = TimeUnit.MILLISECONDS.toDays(diferenciaMillis);
 
-        // Ajustar el precio según la duración de la reserva
-        precioBase += 50.0 * diferenciaDias;  // Ajusta el 10 según tus necesidades
-
-
-       
-
-        return precioBase;
-    }
 
     
     public static void main(String[] args) {
