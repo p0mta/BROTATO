@@ -10,12 +10,16 @@ import java.sql.Statement;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
+import javax.swing.BorderFactory;
+import javax.swing.BoxLayout;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
+
+import com.toedter.calendar.JDateChooser;
 
 public class reservas extends JFrame {
 
@@ -53,19 +57,23 @@ public class reservas extends JFrame {
         dataLabel1.setFont(Registro.fuente1);
         retrieveAndDisplayData();
 
-        this.add(panel2);
+        this.add(panel2);   
 
-        // Botón para resetear la clase y cargar datos actualizados
-        JButton resetButton = new JButton("Resetear");
-        resetButton.setBounds(10, 130, 100, 30);
-        resetButton.setFont(Registro.fuente1);
-        resetButton.setFocusPainted(false);
-        resetButton.addActionListener(new ActionListener() {
+        // Botón back
+        ImageIcon back = new ImageIcon("back.png");
+        JButton but = new JButton(back);
+        but.setBounds(10, 90, 30, 30);
+        but.setFont(Registro.fuente1);
+        but.setFocusPainted(false);
+        but.setBorderPainted(false);
+        but.setContentAreaFilled(false);
+        this.add(but);
+        but.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
-                resetearClase();
+                dispose();
+                Pantalla_principal pat = new Pantalla_principal();
             }
         });
-        
 
         this.setVisible(true);
     }
@@ -134,7 +142,8 @@ public class reservas extends JFrame {
                 salida.setBounds(910, yPosition4, 150, labelHeight4);
                 salida.setFont(font);
 
-                // Botón Modificar
+             // Botón Modificar
+                
                 JButton botonModificar = new JButton();
                 botonModificar.setBounds(1035, yPosition, 35, 30);
                 botonModificar.setFont(Registro.fuente1);
@@ -147,12 +156,67 @@ public class reservas extends JFrame {
 
                 botonModificar.addActionListener(new ActionListener() {
                     public void actionPerformed(ActionEvent e) {
-                        modificarReserva(idReserva);
+                        // Mostrar un cuadro de diálogo para que el usuario ingrese las nuevas fechas
+                        JDateChooser dateChooser = new JDateChooser();
+                        dateChooser.setDateFormatString("yyyy-MM-dd");
+                        dateChooser.setBounds(100, 290, 200, 30);
+                        add(dateChooser);
+                        dateChooser.setBackground(Color.WHITE);
+                        dateChooser.setFont(Registro.fuente2);
+                        dateChooser.setBorder(BorderFactory.createLineBorder(Color.BLACK));
+
+                        JDateChooser dateChooser1 = new JDateChooser();
+                        dateChooser1.setDateFormatString("yyyy-MM-dd");
+                        dateChooser1.setBounds(475, 290, 200, 30);
+                        add(dateChooser1);
+                        dateChooser1.setBackground(Color.WHITE);
+                        dateChooser1.setFont(Registro.fuente2);
+                        dateChooser1.setBorder(BorderFactory.createLineBorder(Color.BLACK));
+
+                        int result = JOptionPane.showConfirmDialog(null, new Object[] { "Fecha de Reserva:", dateChooser, "Fecha de Salida:", dateChooser1 },
+                                "Ingrese las nuevas fechas", JOptionPane.OK_CANCEL_OPTION);
+
+                        // Verificar si el usuario hizo clic en "OK"
+                        if (result == JOptionPane.OK_OPTION) {
+                            // Obtener las nuevas fechas seleccionadas por el usuario
+                            Date nuevaFechaEntrada = dateChooser.getDate();
+                            Date nuevaFechaSalida = dateChooser1.getDate();
+
+                            // Verificar si las fechas no son nulas
+                            if (nuevaFechaEntrada != null && nuevaFechaSalida != null) {
+                                // Formatear las fechas al formato yyyy-MM-dd
+                                SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
+                                String fechaEntradaFormatted = dateFormat.format(nuevaFechaEntrada);
+                                String fechaSalidaFormatted = dateFormat.format(nuevaFechaSalida);
+
+                                // Lógica para actualizar la base de datos con las nuevas fechas
+                                String sql = "UPDATE RESERVAS SET DIA = TO_DATE('" + fechaEntradaFormatted + "', 'yyyy-MM-dd'), " +
+                                        "DIA_SALIDA = TO_DATE('" + fechaSalidaFormatted + "', 'yyyy-MM-dd') WHERE IDRESERVA = " + idReserva;
+
+                                try {
+                                    Statement statement = Login.connection.createStatement();
+                                    statement.executeUpdate(sql);
+                                    statement.close();
+
+                                    // Actualizar la interfaz gráfica con los nuevos datos
+                                    retrieveAndDisplayData();
+                                } catch (Exception ex) {
+                                    ex.printStackTrace();
+                                    // Manejar la excepción según tus necesidades
+                                }
+                            }
+                        }
+                        dispose();
+                        reservas re = new reservas();
                     }
+                    
                 });
 
                 this.add(botonModificar);
                 panel2.add(botonModificar);
+              
+                
+
 
                 // Botón Borrar
                 JButton botonBorrar = new JButton();
@@ -271,7 +335,13 @@ public class reservas extends JFrame {
             retrieveAndDisplayData();
         }
     }
+
+    public static void main(String[] args) {
+        // Puedes agregar aquí la lógica para inicializar la conexión y crear la instancia de la clase reservas
+        reservas ventanaReservas = new reservas();
+    }
 }
+
 
 
 
