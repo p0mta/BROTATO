@@ -27,6 +27,7 @@ public class Login extends JFrame {
             setSize(900, 700);
             setLocationRelativeTo(null);
 
+            
             String colorFondo = "#579514";
             Color backgroundColor = Color.decode(colorFondo);
             getContentPane().setBackground(backgroundColor);
@@ -51,7 +52,7 @@ public class Login extends JFrame {
             usernameLabel.setForeground(Color.BLACK);
             usernameLabel.setBounds(230, 260, 90, 20);
 
-            usernameField = new JTextField();
+            usernameField = new JTextField("a@gmail.com");
             usernameField.setBounds(165, 300, 200, 25);
             usernameField.setFont(texto);
             usernameField.setForeground(Color.BLACK);
@@ -63,7 +64,7 @@ public class Login extends JFrame {
             passwordLabel.setForeground(Color.BLACK);
             passwordLabel.setBounds(550, 260, 150, 25);
 
-            passwordField = new JPasswordField();
+            passwordField = new JPasswordField("a");
             passwordField.setBounds(500, 300, 200, 25);
             passwordField.setBorder(BorderFactory.createLineBorder(Color.BLACK));
             ImageIcon ima4 = new ImageIcon("ojo.png");

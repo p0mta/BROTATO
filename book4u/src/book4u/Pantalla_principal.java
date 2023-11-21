@@ -199,7 +199,7 @@ public class Pantalla_principal extends JFrame {
         HistorialButton.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
                 dispose();
-                Historial pa = new Historial();
+                reservas pa = new reservas();
             }
         });
     }
