@@ -11,6 +11,8 @@ import java.sql.DriverManager;
 import java.sql.SQLException;
 import java.util.HashMap;
 import java.util.Map;
+import javax.swing.JOptionPane;
+import java.sql.PreparedStatement;
 
 
 public class pantalla_reserva extends JFrame {
@@ -207,26 +209,30 @@ public class pantalla_reserva extends JFrame {
                 JOptionPane.showMessageDialog(null, "La fecha de salida no puede ser anterior a la fecha de reserva", "Error", JOptionPane.ERROR_MESSAGE);
             return;
             } else {
-                try {
+            	try {
                     // Insertar datos en la tabla de reservas
-                    String query = "INSERT INTO reservas (dia, lugar, precio, pais,dia_salida) VALUES (?, ?, ?, ?,?)";
-                    try (java.sql.PreparedStatement preparedStatement = connection.prepareStatement(query)) {
+                    String query = "INSERT INTO reservas (dia, lugar, precio, pais, dia_salida) VALUES (?, ?, ?, ?, ?)";
+                    try (PreparedStatement preparedStatement = connection.prepareStatement(query)) {
                         preparedStatement.setDate(1, new java.sql.Date(selectedDate.getTime()));
                         preparedStatement.setString(2, lugarResidencial);
-                        preparedStatement.setDouble(3, calcularPrecio(combi, paisCombo, dateChooser, dateChooser1));
+                        double precioReserva = calcularPrecio(combi, paisCombo, dateChooser, dateChooser1);
+                        preparedStatement.setDouble(3, precioReserva);
                         preparedStatement.setString(4, pais);
                         preparedStatement.setDate(5, new java.sql.Date(selectedDate2.getTime()));
-                    
 
                         preparedStatement.executeUpdate();
+
+                        // Restar el precio de la reserva al saldo del usuario
+                        String correoUsuario = Login.getUsernameField().getText();  // Ajusta esto según cómo obtienes el correo del usuario
+                        pantalla_usuario pantallaUsuario = new pantalla_usuario();
+                        pantallaUsuario.actualizarSaldoDespuesDeReserva(correoUsuario, precioReserva);
                     }
 
                     // Otros pasos si es necesario
 
                     precioLabel.setText("Precio de la reserva en " + pais + ": " + calcularPrecio(combi, paisCombo, dateChooser, dateChooser1) + "");
 
-                }
-                catch (SQLException ex) {
+                } catch (SQLException ex) {
                     ex.printStackTrace();
                 }
                 dispose();
