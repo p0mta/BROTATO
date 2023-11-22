@@ -133,19 +133,25 @@ public class Pantalla_principal extends JFrame {
         InicioButton.setForeground(Color.black);
 
         JButton UsuarioButton = new JButton("USUARIO");
-        UsuarioButton.setBounds(45, 190, 150, 50);
+        UsuarioButton.setBounds(45, 230, 150, 50);
         UsuarioButton.setFont(Registro.fuente1);
         UsuarioButton.setBackground(Color.white);
         UsuarioButton.setForeground(Color.black);
 
+        JButton ReservesButton =  new JButton("MIS RESERVAS");
+        ReservesButton.setBounds(45, 300, 150, 50);
+        ReservesButton.setFont(Registro.fuente1);
+        ReservesButton.setBackground(Color.white);
+        ReservesButton.setForeground(Color.black);
+        
         JButton HistorialButton =  new JButton("HISTORIAL");
-        HistorialButton.setBounds(45, 290, 150, 50);
+        HistorialButton.setBounds(45, 160, 150, 50);
         HistorialButton.setFont(Registro.fuente1);
         HistorialButton.setBackground(Color.white);
         HistorialButton.setForeground(Color.black);
 
         JButton AtrasButton = new JButton("CERRAR SESIÓN");
-        AtrasButton.setBounds(45, 390, 150, 50);
+        AtrasButton.setBounds(45, 370, 150, 50);
         AtrasButton.setFont(Registro.fuente1);
         AtrasButton.setBackground(Color.white);
         AtrasButton.setForeground(Color.black);
@@ -155,6 +161,7 @@ public class Pantalla_principal extends JFrame {
         desp.add(UsuarioButton);
         desp.add(HistorialButton);
         desp.add(AtrasButton);
+        desp.add(ReservesButton);
         ImageIcon imageIcon = new ImageIcon("moneda.gif");
         JLabel mo = new JLabel(imageIcon);
         mo.setBounds(750, 82, 30, 32);
@@ -196,12 +203,20 @@ public class Pantalla_principal extends JFrame {
                 Login pa = new Login();
             }
         });
-        HistorialButton.addActionListener(new ActionListener() {
+        ReservesButton.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
                 dispose();
                 reservas pa = new reservas();
             }
         });
+        HistorialButton.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent e) {
+                dispose();
+                Historial re = new Historial();
+            }
+        });
+     
+        
     }
 
     public String obtenerNombreDesdeBaseDeDatos(String correo, String contraseña) {
