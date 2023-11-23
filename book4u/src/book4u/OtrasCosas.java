@@ -1114,7 +1114,7 @@ public class OtrasCosas {
 	    mi.setHorizontalAlignment(JLabel.CENTER);
 	    mi.setFont(Registro.fuente1);
 	    label.add(mi);
-	    but= new JButton();
+	    but= new JButton("OK");
 	    but.setBounds(220, 70, 60, 30);
 	    label.add(but);
 	    String color2 = "#027017";
