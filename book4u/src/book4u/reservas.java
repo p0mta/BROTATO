@@ -26,6 +26,7 @@ public class reservas extends JFrame {
     JPanel panel2 = new JPanel();
 
     public reservas() {
+    	
         setSize(1200, 800);
         this.setLocationRelativeTo(null);
         this.setLayout(null);
@@ -81,9 +82,12 @@ public class reservas extends JFrame {
     private void retrieveAndDisplayData() {
         try {
             Statement statement = Login.connection.createStatement();
+            String query = "SELECT IDRESERVA, DIA, LUGAR, PRECIO, PAIS, DIA_SALIDA FROM RESERVAS WHERE CORREO = '"+Login.usernameField.getText()+"'";
+            System.out.println(query);
             ResultSet resultSet = statement
-                    .executeQuery("SELECT IDRESERVA, DIA, LUGAR, PRECIO, PAIS, DIA_SALIDA FROM RESERVAS");
+                    .executeQuery(query);
 
+            
             boolean hasData = false;
 
             while (resultSet.next()) {

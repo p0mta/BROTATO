@@ -15,9 +15,9 @@ import javax.swing.JOptionPane;
 import java.sql.PreparedStatement;
 
 
-public class pantalla_reserva extends JFrame {
-	private Map<String, String> imagenesPorPaisYLugar = new HashMap<>();
-    public pantalla_reserva() throws SQLException {
+public class editar_reserva extends JFrame {
+	private Map<String, String> imagenesPorPaisYLugar1 = new HashMap<>();
+    public editar_reserva() throws SQLException {
         setTitle("Reserva de lugares residenciales");
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setSize(800, 500);
@@ -43,60 +43,60 @@ public class pantalla_reserva extends JFrame {
         
         
         
-        imagenesPorPaisYLugar.put("DubaiCasa".toLowerCase(), "casadubai.jpg");
-        imagenesPorPaisYLugar.put("JaponCasa".toLowerCase(), "JC.jpg");
-        imagenesPorPaisYLugar.put("CoreaCasa".toLowerCase(), "CC.jpg");
-        imagenesPorPaisYLugar.put("FranciaCasa".toLowerCase(), "FC.jpg");
-        imagenesPorPaisYLugar.put("RusiaCasa".toLowerCase(), "RC1.jpg");
-        imagenesPorPaisYLugar.put("ItaliaCasa".toLowerCase(), "IC.jpg");
-        imagenesPorPaisYLugar.put("GreciaCasa".toLowerCase(), "GC.jpg");
-        imagenesPorPaisYLugar.put("ColombiaCasa".toLowerCase(), "CA.jpg");
-        imagenesPorPaisYLugar.put("MexicoCasa".toLowerCase(), "MC.jpg");
-        imagenesPorPaisYLugar.put("IrlandaCasa".toLowerCase(), "IA.jpg");
-        imagenesPorPaisYLugar.put("AlemaniaCasa".toLowerCase(), "CAT.jpg");
+        imagenesPorPaisYLugar1.put("DubaiCasa".toLowerCase(), "casadubai.jpg");
+        imagenesPorPaisYLugar1.put("JaponCasa".toLowerCase(), "JC.jpg");
+        imagenesPorPaisYLugar1.put("CoreaCasa".toLowerCase(), "CC.jpg");
+        imagenesPorPaisYLugar1.put("FranciaCasa".toLowerCase(), "FC.jpg");
+        imagenesPorPaisYLugar1.put("RusiaCasa".toLowerCase(), "RC1.jpg");
+        imagenesPorPaisYLugar1.put("ItaliaCasa".toLowerCase(), "IC.jpg");
+        imagenesPorPaisYLugar1.put("GreciaCasa".toLowerCase(), "GC.jpg");
+        imagenesPorPaisYLugar1.put("ColombiaCasa".toLowerCase(), "CA.jpg");
+        imagenesPorPaisYLugar1.put("MexicoCasa".toLowerCase(), "MC.jpg");
+        imagenesPorPaisYLugar1.put("IrlandaCasa".toLowerCase(), "IA.jpg");
+        imagenesPorPaisYLugar1.put("AlemaniaCasa".toLowerCase(), "CAT.jpg");
         
-        imagenesPorPaisYLugar.put("DubaiApartamento".toLowerCase(), "DA.jpg");
-        imagenesPorPaisYLugar.put("JaponApartamento".toLowerCase(), "JA.jpg");
-        imagenesPorPaisYLugar.put("CoreaApartamento".toLowerCase(), "CA.jpg");
-        imagenesPorPaisYLugar.put("FranciaApartamento".toLowerCase(), "FA.jpg");
-        imagenesPorPaisYLugar.put("RusiaApartamento".toLowerCase(), "RA.jpg");
-        imagenesPorPaisYLugar.put("ItaliaApartamento".toLowerCase(), "IA.jpg");
-        imagenesPorPaisYLugar.put("GreciaApartamento".toLowerCase(), "GA.jpg");
-        imagenesPorPaisYLugar.put("ColombiaApartamento".toLowerCase(), "CA1.jpg");
-        imagenesPorPaisYLugar.put("MexicoApartamento".toLowerCase(), "MA.jpg");
-        imagenesPorPaisYLugar.put("IrlandaApartamento".toLowerCase(), "IA1.jpg");
-        imagenesPorPaisYLugar.put("AlemaniaApartamento".toLowerCase(), "AA.jpg");
+        imagenesPorPaisYLugar1.put("DubaiApartamento".toLowerCase(), "DA.jpg");
+        imagenesPorPaisYLugar1.put("JaponApartamento".toLowerCase(), "JA.jpg");
+        imagenesPorPaisYLugar1.put("CoreaApartamento".toLowerCase(), "CA.jpg");
+        imagenesPorPaisYLugar1.put("FranciaApartamento".toLowerCase(), "FA.jpg");
+        imagenesPorPaisYLugar1.put("RusiaApartamento".toLowerCase(), "RA.jpg");
+        imagenesPorPaisYLugar1.put("ItaliaApartamento".toLowerCase(), "IA.jpg");
+        imagenesPorPaisYLugar1.put("GreciaApartamento".toLowerCase(), "GA.jpg");
+        imagenesPorPaisYLugar1.put("ColombiaApartamento".toLowerCase(), "CA1.jpg");
+        imagenesPorPaisYLugar1.put("MexicoApartamento".toLowerCase(), "MA.jpg");
+        imagenesPorPaisYLugar1.put("IrlandaApartamento".toLowerCase(), "IA1.jpg");
+        imagenesPorPaisYLugar1.put("AlemaniaApartamento".toLowerCase(), "AA.jpg");
         
-        imagenesPorPaisYLugar.put("DubaiCabaña".toLowerCase(), "DT.jpg");
-        imagenesPorPaisYLugar.put("JaponCabaña".toLowerCase(), "JT.jpg");
-        imagenesPorPaisYLugar.put("CoreaCabaña".toLowerCase(), "CT.jpg");
-        imagenesPorPaisYLugar.put("FranciaCabaña".toLowerCase(), "FT.jpg");
-        imagenesPorPaisYLugar.put("RusiaCabaña".toLowerCase(), "RT.jpg");
-        imagenesPorPaisYLugar.put("ItaliaCabaña".toLowerCase(), "IT.jpg");
-        imagenesPorPaisYLugar.put("GreciaCabaña".toLowerCase(), "GT.jpg");
-        imagenesPorPaisYLugar.put("ColombiaCabaña".toLowerCase(), "CT1.jpg");
-        imagenesPorPaisYLugar.put("MexicoCabaña".toLowerCase(), "MT.jpg");
-        imagenesPorPaisYLugar.put("IrlandaCabaña".toLowerCase(), "IT1.jpg");
-        imagenesPorPaisYLugar.put("AlemaniaCabaña".toLowerCase(), "AC.jpg");
+        imagenesPorPaisYLugar1.put("DubaiCabaña".toLowerCase(), "DT.jpg");
+        imagenesPorPaisYLugar1.put("JaponCabaña".toLowerCase(), "JT.jpg");
+        imagenesPorPaisYLugar1.put("CoreaCabaña".toLowerCase(), "CT.jpg");
+        imagenesPorPaisYLugar1.put("FranciaCabaña".toLowerCase(), "FT.jpg");
+        imagenesPorPaisYLugar1.put("RusiaCabaña".toLowerCase(), "RT.jpg");
+        imagenesPorPaisYLugar1.put("ItaliaCabaña".toLowerCase(), "IT.jpg");
+        imagenesPorPaisYLugar1.put("GreciaCabaña".toLowerCase(), "GT.jpg");
+        imagenesPorPaisYLugar1.put("ColombiaCabaña".toLowerCase(), "CT1.jpg");
+        imagenesPorPaisYLugar1.put("MexicoCabaña".toLowerCase(), "MT.jpg");
+        imagenesPorPaisYLugar1.put("IrlandaCabaña".toLowerCase(), "IT1.jpg");
+        imagenesPorPaisYLugar1.put("AlemaniaCabaña".toLowerCase(), "AC.jpg");
         
-        imagenesPorPaisYLugar.put("DubaiHotel".toLowerCase(), "DH.jpg");
-        imagenesPorPaisYLugar.put("JaponHotel".toLowerCase(), "JH.jpg");
-        imagenesPorPaisYLugar.put("CoreaHotel".toLowerCase(), "CH.jpg");
-        imagenesPorPaisYLugar.put("FranciaHotel".toLowerCase(), "FH.jpg");
-        imagenesPorPaisYLugar.put("RusiaHotel".toLowerCase(), "RH.jpg");
-        imagenesPorPaisYLugar.put("ItaliaHotel".toLowerCase(), "IH.jpg");
-        imagenesPorPaisYLugar.put("GreciaHotel".toLowerCase(), "GH.jpg");
-        imagenesPorPaisYLugar.put("ColombiaHotel".toLowerCase(), "CH1.jpg");
-        imagenesPorPaisYLugar.put("MexicoHotel".toLowerCase(), "MH.jpg");
-        imagenesPorPaisYLugar.put("IrlandaHotel".toLowerCase(), "IH1.jpg");
-        imagenesPorPaisYLugar.put("AlemaniaHotel".toLowerCase(), "AH.jpg");
+        imagenesPorPaisYLugar1.put("DubaiHotel".toLowerCase(), "DH.jpg");
+        imagenesPorPaisYLugar1.put("JaponHotel".toLowerCase(), "JH.jpg");
+        imagenesPorPaisYLugar1.put("CoreaHotel".toLowerCase(), "CH.jpg");
+        imagenesPorPaisYLugar1.put("FranciaHotel".toLowerCase(), "FH.jpg");
+        imagenesPorPaisYLugar1.put("RusiaHotel".toLowerCase(), "RH.jpg");
+        imagenesPorPaisYLugar1.put("ItaliaHotel".toLowerCase(), "IH.jpg");
+        imagenesPorPaisYLugar1.put("GreciaHotel".toLowerCase(), "GH.jpg");
+        imagenesPorPaisYLugar1.put("ColombiaHotel".toLowerCase(), "CH1.jpg");
+        imagenesPorPaisYLugar1.put("MexicoHotel".toLowerCase(), "MH.jpg");
+        imagenesPorPaisYLugar1.put("IrlandaHotel".toLowerCase(), "IH1.jpg");
+        imagenesPorPaisYLugar1.put("AlemaniaHotel".toLowerCase(), "AH.jpg");
  
         
         JLabel imagenLabel = new JLabel();
         imagenLabel.setBounds(550, 50, 200, 200);  // Ajusta la posición y el tamaño según tus necesidades
         add(imagenLabel);
         
-        JButton reservarButton = new JButton("Reservar");
+        JButton reservarButton = new JButton("Guardar");
         reservarButton.setBounds(400, 400, 150, 30);
         add(reservarButton);
         reservarButton.setFont(Registro.fuente1);
@@ -202,7 +202,7 @@ public class pantalla_reserva extends JFrame {
             corr = Login.usernameField.getText();
 
             if (selectedDate == null || selectedDate2 == null) {
-                JOptionPane.showMessageDialog(pantalla_reserva.this, "Por favor, completa todas las fechas.");
+                JOptionPane.showMessageDialog(editar_reserva.this, "Por favor, completa todas las fechas.");
             return;
             } else if (selectedDate.before(today)) {
                 JOptionPane.showMessageDialog(null, "No se puede reservar para una fecha anterior al día actual", "Error", JOptionPane.ERROR_MESSAGE);
@@ -254,7 +254,7 @@ public class pantalla_reserva extends JFrame {
             Date today = new Date();  // Fecha actual
             
             if(selectedDate == null) {
-            	JOptionPane.showMessageDialog(pantalla_reserva.this, "Por favor, completa todos los campos.");
+            	JOptionPane.showMessageDialog(editar_reserva.this, "Por favor, completa todos los campos.");
             	return;
             }
           if (selectedDate2.before(selectedDate)) {
@@ -270,7 +270,7 @@ public class pantalla_reserva extends JFrame {
          
 
             // Obtener la ruta de la imagen correspondiente
-            String rutaImagen = imagenesPorPaisYLugar.get((pais + lugarResidencial).toLowerCase());
+            String rutaImagen = imagenesPorPaisYLugar1.get((pais + lugarResidencial).toLowerCase());
             
 
 
@@ -280,7 +280,7 @@ public class pantalla_reserva extends JFrame {
                 imagenLabel.setIcon(imagenSeleccionada);
             } else {
                 // Manejar el caso en el que no haya una imagen asociada
-                JOptionPane.showMessageDialog(pantalla_reserva.this, "No hay imagen disponible para esta combinación");
+                JOptionPane.showMessageDialog(editar_reserva.this, "No hay imagen disponible para esta combinación");
             }
         });
             };
@@ -378,7 +378,7 @@ public class pantalla_reserva extends JFrame {
     public static void main(String[] args) {
         SwingUtilities.invokeLater(() -> {
             try {
-				pantalla_reserva frame = new pantalla_reserva();
+				editar_reserva frame = new editar_reserva();
 			} catch (SQLException e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
@@ -403,3 +403,4 @@ public class pantalla_reserva extends JFrame {
 
     
 }
+
