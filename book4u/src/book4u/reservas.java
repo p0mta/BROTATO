@@ -81,8 +81,10 @@ public class reservas extends JFrame {
     private void retrieveAndDisplayData() {
         try {
             Statement statement = Login.connection.createStatement();
-            ResultSet resultSet = statement
-                    .executeQuery("SELECT IDRESERVA, DIA, LUGAR, PRECIO, PAIS, DIA_SALIDA FROM RESERVAS");
+            String sql = "SELECT IDRESERVA, DIA, LUGAR, PRECIO, PAIS, DIA_SALIDA " +
+                    "FROM RESERVAS " +
+                    "WHERE CORREO = '" + Login.getUsernameField().getText() + "'";
+       ResultSet resultSet = statement.executeQuery(sql);
 
             boolean hasData = false;
 
