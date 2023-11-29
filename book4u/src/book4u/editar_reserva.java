@@ -23,7 +23,7 @@ public class editar_reserva extends JFrame {
     private JComboBox<String> paisCombo;
     private JDateChooser dateChooser;
     private JDateChooser dateChooser1;
-    
+   
     public editar_reserva(int idReserva) throws SQLException {
     	
         setTitle("Reserva de lugares residenciales");
@@ -212,14 +212,17 @@ public class editar_reserva extends JFrame {
             corr = Login.usernameField.getText();
 
             if (selectedDate == null || selectedDate2 == null) {
-                JOptionPane.showMessageDialog(editar_reserva.this, "Por favor, completa todas las fechas.");
-                return;
+            	OtrasCosas tra = new OtrasCosas();
+            	tra.AG();
+            	return;
             } else if (selectedDate.before(today)) {
-                JOptionPane.showMessageDialog(null, "No se puede reservar para una fecha anterior al día actual", "Error", JOptionPane.ERROR_MESSAGE);
+            	OtrasCosas tra = new OtrasCosas();
+            	  tra.GA();
                 return;
             } else if (selectedDate2.before(selectedDate)) {
-                JOptionPane.showMessageDialog(null, "La fecha de salida no puede ser anterior a la fecha de reserva", "Error", JOptionPane.ERROR_MESSAGE);
-                return;
+            	OtrasCosas tra = new OtrasCosas();
+            	tra.DA();
+            	return;
             } else {
                 try {
                     // Calcular el precio antes de la reserva
@@ -269,16 +272,19 @@ public class editar_reserva extends JFrame {
             Date today = new Date();  // Fecha actual
             
             if(selectedDate == null) {
-            	JOptionPane.showMessageDialog(editar_reserva.this, "Por favor, completa todos los campos.");
+            	OtrasCosas tra = new OtrasCosas();
+            	tra.AG();
             	return;
             }
           if (selectedDate2.before(selectedDate)) {
-            JOptionPane.showMessageDialog(null, "La fecha de salida no puede ser anterior a la fecha de reserva", "Error", JOptionPane.ERROR_MESSAGE);
-            	return;
+        	  OtrasCosas tra = new OtrasCosas();
+        	  tra.GA();
+            return;
             }
             if (selectedDate.before(today)) {
-                JOptionPane.showMessageDialog(null, "No se puede reservar para una fecha anterior al día actual", "Error", JOptionPane.ERROR_MESSAGE);
-                return;
+            	OtrasCosas tra = new OtrasCosas();
+            	tra.DA();
+            	return;
             } else {
                 precioLabel.setText("Precio de la reserva en " + pais + ": "+calcularPrecio(combi, paisCombo, dateChooser, dateChooser1)+"");
             }
@@ -342,9 +348,13 @@ public class editar_reserva extends JFrame {
                             // Actualiza el saldo del usuario si la actualización fue exitosa
                             actualizarSaldoDespuesDeModificacion(Login.getUsernameField().getText(), precioAntiguo, precioReserva);
 
-                            JOptionPane.showMessageDialog(this, "Reserva modificada exitosamente.");
+                            OtrasCosas tra = new OtrasCosas();
+                        	tra.AF();
+                        	                      
                         } else {
-                            JOptionPane.showMessageDialog(this, "Error al modificar la reserva.", "Error", JOptionPane.ERROR_MESSAGE);
+                        	OtrasCosas tra = new OtrasCosas();
+                        	tra.AF();
+                        	
                         }
 
                         // Cierra la ventana después de la modificación

@@ -29,7 +29,7 @@ public class reservas extends JFrame {
     JPanel panel2 = new JPanel();
     private List<Integer> idReservasList = new ArrayList<>();
     public reservas() {
-    	
+    
         setSize(1200, 800);
         this.setLocationRelativeTo(null);
         this.setLayout(null);

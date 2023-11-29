@@ -14,7 +14,7 @@ public class Pantalla_principal extends JFrame {
     private boolean menuvisible = false;
     public Font fuenti = new Font("Agency FB", Font.BOLD, 40);
     public Font fuenti2 = new Font("Agency FB", Font.BOLD, 30);
-    
+   
     public Pantalla_principal() {
         JPanel pan = new JPanel();
         pan.setBounds(0, 0, 800, 75);
