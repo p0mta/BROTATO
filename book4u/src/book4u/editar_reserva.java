@@ -9,15 +9,23 @@ import java.util.concurrent.TimeUnit;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;
+import java.sql.Statement;
 import java.util.HashMap;
 import java.util.Map;
 import javax.swing.JOptionPane;
 import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 
 
 public class editar_reserva extends JFrame {
 	private Map<String, String> imagenesPorPaisYLugar1 = new HashMap<>();
-    public editar_reserva() throws SQLException {
+	private JComboBox<String> combi;
+    private JComboBox<String> paisCombo;
+    private JDateChooser dateChooser;
+    private JDateChooser dateChooser1;
+   
+    public editar_reserva(int idReserva) throws SQLException {
+    	
         setTitle("Reserva de lugares residenciales");
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setSize(800, 500);
@@ -36,7 +44,7 @@ public class editar_reserva extends JFrame {
         panelBlanco.setLayout(null);
         add(panelBlanco);
 
-        JLabel tit = new JLabel("PANTALLA RESERVA");
+        JLabel tit = new JLabel("MODIFICAR RESERVA");
         tit.setFont(Registro.fuente);
         tit.setBounds(225, 0, 400, 75);
         panelBlanco.add(tit);
@@ -124,7 +132,7 @@ public class editar_reserva extends JFrame {
         lugarLabel.setFont(Registro.fuente1);
 
         String[] lugaresResidenciales = {"Casa", "Apartamento", "Cabaña","Hotel"};
-        JComboBox<String> combi = new JComboBox<>(lugaresResidenciales);
+        combi = new JComboBox<>(lugaresResidenciales);
         combi.setBounds(310, 150, 200, 30);
         combi.setFont(Registro.fuente2);
         combi.setBackground(Color.WHITE);
@@ -138,7 +146,7 @@ public class editar_reserva extends JFrame {
         paisLabel.setFont(Registro.fuente1);
 
         String[] paises = {"Dubai", "Japon", "Corea","Francia","Rusia","Italia","Grecia","Colombia","Mexico","Irlanda","Alemania", };
-        JComboBox<String> paisCombo = new JComboBox<>(paises);
+        paisCombo = new JComboBox<>(paises);
         paisCombo.setBounds(310, 200, 200, 30);
         paisCombo.setFont(Registro.fuente2);
         paisCombo.setBackground(Color.WHITE);
@@ -157,14 +165,14 @@ public class editar_reserva extends JFrame {
         fechaLabel1.setFont(Registro.fuente1);
         
 
-        JDateChooser dateChooser = new JDateChooser();
+        dateChooser = new JDateChooser();
         dateChooser.setBounds(100, 290, 200, 30);
         add(dateChooser);
         dateChooser.setBackground(Color.WHITE);
         dateChooser.setFont(Registro.fuente2);
         dateChooser.setBorder(BorderFactory.createLineBorder(Color.BLACK));
         
-        JDateChooser dateChooser1 = new JDateChooser();
+        dateChooser1 = new JDateChooser();
         dateChooser1.setBounds(475, 290, 200, 30);
         add(dateChooser1);
         dateChooser1.setBackground(Color.WHITE);
@@ -192,7 +200,9 @@ public class editar_reserva extends JFrame {
         calcularPrecioButton.setBackground(Color.white);
         calcularPrecioButton.setBorder(BorderFactory.createLineBorder(Color.BLACK));
         
+        
         reservarButton.addActionListener(e -> {
+        	
             String lugarResidencial = (String) combi.getSelectedItem();
             String pais = (String) paisCombo.getSelectedItem();
             Date selectedDate = dateChooser.getDate();
@@ -202,39 +212,46 @@ public class editar_reserva extends JFrame {
             corr = Login.usernameField.getText();
 
             if (selectedDate == null || selectedDate2 == null) {
-                JOptionPane.showMessageDialog(editar_reserva.this, "Por favor, completa todas las fechas.");
-            return;
+            	OtrasCosas tra = new OtrasCosas();
+            	tra.AG();
+            	return;
             } else if (selectedDate.before(today)) {
-                JOptionPane.showMessageDialog(null, "No se puede reservar para una fecha anterior al día actual", "Error", JOptionPane.ERROR_MESSAGE);
-            return;
+            	OtrasCosas tra = new OtrasCosas();
+            	  tra.GA();
+                return;
             } else if (selectedDate2.before(selectedDate)) {
-                JOptionPane.showMessageDialog(null, "La fecha de salida no puede ser anterior a la fecha de reserva", "Error", JOptionPane.ERROR_MESSAGE);
-            return;
+            	OtrasCosas tra = new OtrasCosas();
+            	tra.DA();
+            	return;
             } else {
-            	try {
-                    // Insertar datos en la tabla de reservas
-                    String query = "INSERT INTO reservas (dia, lugar, precio, pais, dia_salida,correo) VALUES (?, ?, ?, ?, ?, ?)";
-                    try (PreparedStatement preparedStatement = connection.prepareStatement(query)) {
-                        preparedStatement.setDate(1, new java.sql.Date(selectedDate.getTime()));
+                try {
+                    // Calcular el precio antes de la reserva
+                    double precioAntes = obtenerPrecioActual(idReserva);
+                    
+                    // Actualizar la base de datos con la nueva reserva
+                    String query = "UPDATE RESERVAS SET DIA = ?, LUGAR = ?, PRECIO = ?, PAIS = ?, DIA_SALIDA = ? WHERE IDRESERVA = ?";
+                    try (PreparedStatement preparedStatement = Login.connection.prepareStatement(query)) {
+                        preparedStatement.setDate(1, new java.sql.Date(dateChooser.getDate().getTime()));
                         preparedStatement.setString(2, lugarResidencial);
                         double precioReserva = calcularPrecio(combi, paisCombo, dateChooser, dateChooser1);
                         preparedStatement.setDouble(3, precioReserva);
                         preparedStatement.setString(4, pais);
-                        preparedStatement.setDate(5, new java.sql.Date(selectedDate2.getTime()));
-                        preparedStatement.setString(6, corr);
+                        preparedStatement.setDate(5, new java.sql.Date(dateChooser1.getDate().getTime()));
+                        preparedStatement.setInt(6, idReserva);
 
                         preparedStatement.executeUpdate();
 
-                        // Restar el precio de la reserva al saldo del usuario
-                        String correoUsuario = Login.getUsernameField().getText();  // Ajusta esto según cómo obtienes el correo del usuario
-                        pantalla_usuario pantallaUsuario = new pantalla_usuario();
-                        pantallaUsuario.actualizarSaldoDespuesDeReserva(correoUsuario, precioReserva);
+                        // Calcular el precio después de la reserva
+                        double precioDespues = calcularPrecio(combi, paisCombo, dateChooser, dateChooser1);
+
+                        // Realizar la devolución de dinero
+                        double cantidadDevuelta = precioAntes - precioDespues;
+                        devolverDinero(corr, cantidadDevuelta);
+
+                        // Otros pasos si es necesario
+
+                        precioLabel.setText("Precio de la reserva en " + pais + ": " + precioReserva);
                     }
-
-                    // Otros pasos si es necesario
-
-                    precioLabel.setText("Precio de la reserva en " + pais + ": " + calcularPrecio(combi, paisCombo, dateChooser, dateChooser1) + "");
-
                 } catch (SQLException ex) {
                     ex.printStackTrace();
                 }
@@ -242,6 +259,7 @@ public class editar_reserva extends JFrame {
                 Pantalla_principal pa = new Pantalla_principal();
             }
         });
+
         calcularPrecioButton.addActionListener(e -> {
            
 			String lugarResidencial = (String) combi.getSelectedItem();
@@ -254,16 +272,19 @@ public class editar_reserva extends JFrame {
             Date today = new Date();  // Fecha actual
             
             if(selectedDate == null) {
-            	JOptionPane.showMessageDialog(editar_reserva.this, "Por favor, completa todos los campos.");
+            	OtrasCosas tra = new OtrasCosas();
+            	tra.AG();
             	return;
             }
           if (selectedDate2.before(selectedDate)) {
-            JOptionPane.showMessageDialog(null, "La fecha de salida no puede ser anterior a la fecha de reserva", "Error", JOptionPane.ERROR_MESSAGE);
-            	return;
+        	  OtrasCosas tra = new OtrasCosas();
+        	  tra.GA();
+            return;
             }
             if (selectedDate.before(today)) {
-                JOptionPane.showMessageDialog(null, "No se puede reservar para una fecha anterior al día actual", "Error", JOptionPane.ERROR_MESSAGE);
-                return;
+            	OtrasCosas tra = new OtrasCosas();
+            	tra.DA();
+            	return;
             } else {
                 precioLabel.setText("Precio de la reserva en " + pais + ": "+calcularPrecio(combi, paisCombo, dateChooser, dateChooser1)+"");
             }
@@ -286,8 +307,125 @@ public class editar_reserva extends JFrame {
             };
             
     
-    
-       
+            private void devolverDinero(String correoUsuario, double cantidad) {
+                // Obtener el saldo actual del usuario
+                double saldoActual = obtenerSaldoUsuario(correoUsuario);
+
+                // Calcular el nuevo saldo después de devolver el dinero
+                double nuevoSaldo = saldoActual + cantidad;
+
+                // Actualizar el saldo en la base de datos
+                try {
+                    String updateQuery = "UPDATE USUARIO SET DINERO = ? WHERE CORREO = ?";
+                    try (PreparedStatement preparedStatement = Login.connection.prepareStatement(updateQuery)) {
+                        preparedStatement.setDouble(1, nuevoSaldo);
+                        preparedStatement.setString(2, correoUsuario);
+                        preparedStatement.executeUpdate();
+                    }
+                } catch (SQLException e) {
+                    e.printStackTrace();
+                }
+            }
+            public void modificarReserva(int idReserva) {
+                try {
+                    String query = "UPDATE RESERVAS SET DIA = ?, LUGAR = ?, PRECIO = ?, PAIS = ?, DIA_SALIDA = ? WHERE IDRESERVA = ?";
+                    try (PreparedStatement preparedStatement = Login.connection.prepareStatement(query)) {
+                        preparedStatement.setDate(1, new java.sql.Date(dateChooser.getDate().getTime()));
+                        preparedStatement.setString(2, (String) combi.getSelectedItem());
+                        double precioReserva = calcularPrecio(combi, paisCombo, dateChooser, dateChooser1);
+                        preparedStatement.setDouble(3, precioReserva);
+                        preparedStatement.setString(4, (String) paisCombo.getSelectedItem());
+                        preparedStatement.setDate(5, new java.sql.Date(dateChooser1.getDate().getTime()));
+                        preparedStatement.setInt(6, idReserva);
+
+                        // Obtén el precio anterior de la reserva antes de la actualización
+                        double precioAntiguo = obtenerPrecioActual(idReserva);
+
+                        // Ejecuta la actualización en la base de datos
+                        int filasActualizadas = preparedStatement.executeUpdate();
+
+                        if (filasActualizadas > 0) {
+                            // Actualiza el saldo del usuario si la actualización fue exitosa
+                            actualizarSaldoDespuesDeModificacion(Login.getUsernameField().getText(), precioAntiguo, precioReserva);
+
+                            OtrasCosas tra = new OtrasCosas();
+                        	tra.AF();
+                        	                      
+                        } else {
+                        	OtrasCosas tra = new OtrasCosas();
+                        	tra.AF();
+                        	
+                        }
+
+                        // Cierra la ventana después de la modificación
+                        dispose();
+                        Pantalla_principal pa = new Pantalla_principal();
+                    }
+                } catch (SQLException ex) {
+                    ex.printStackTrace();
+                }
+            }
+
+
+            private double obtenerPrecioActual(int idReserva) {
+                double precioActual = 0.0;
+                try {
+                    String query = "SELECT PRECIO FROM RESERVAS WHERE IDRESERVA = ?";
+                    try (PreparedStatement preparedStatement = Login.connection.prepareStatement(query)) {
+                        preparedStatement.setInt(1, idReserva);
+                        ResultSet resultSet = preparedStatement.executeQuery();
+                        if (resultSet.next()) {
+                            precioActual = resultSet.getDouble("PRECIO");
+                        }
+                    }
+                } catch (SQLException e) {
+                    e.printStackTrace();
+                }
+                return precioActual;
+            }
+
+
+            private void actualizarSaldoDespuesDeModificacion(String correoUsuario, double precioAnterior, double precioNuevo) {
+                // Obtener el saldo actual del usuario
+                double saldoActual = obtenerSaldoUsuario(correoUsuario);
+
+                // Calcular la diferencia entre el precio anterior y el nuevo precio
+                double diferenciaPrecio = precioNuevo - precioAnterior;
+
+                // Calcular el nuevo saldo del usuario
+                double nuevoSaldo = saldoActual - diferenciaPrecio;
+
+                // Actualizar el saldo en la base de datos
+                try {
+                    String updateQuery = "UPDATE USUARIO SET DINERO = ? WHERE CORREO = ?";
+                    try (PreparedStatement preparedStatement = Login.connection.prepareStatement(updateQuery)) {
+                        preparedStatement.setDouble(1, nuevoSaldo);
+                        preparedStatement.setString(2, correoUsuario);
+                        preparedStatement.executeUpdate();
+                    }
+                } catch (SQLException e) {
+                    e.printStackTrace();
+                }
+            }
+
+            private double obtenerSaldoUsuario(String correoUsuario) {
+                try {
+                    Statement statement = Login.connection.createStatement();
+                    String query = "SELECT DINERO FROM USUARIO WHERE CORREO = '" + correoUsuario + "'";
+                    ResultSet resultSet = statement.executeQuery(query);
+
+                    if (resultSet.next()) {
+                        return resultSet.getDouble("DINERO");
+                    }
+
+                    resultSet.close();
+                    statement.close();
+                } catch (SQLException e) {
+                    e.printStackTrace();
+                }
+
+                return 0.0; // Valor predeterminado si hay un error
+            }
     
     
             private double calcularPrecio(JComboBox<String> combi, JComboBox<String> paisCombo, JDateChooser dateChooser, JDateChooser dateChooser1) {
@@ -375,31 +513,10 @@ public class editar_reserva extends JFrame {
 
 
     
-    public static void main(String[] args) {
-        SwingUtilities.invokeLater(() -> {
-            try {
-				editar_reserva frame = new editar_reserva();
-			} catch (SQLException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			}
-        });
-    }
-    Connection connection = null;{
-
-    try {
-        connection = DriverManager.getConnection("jdbc:oracle:thin:@192.168.3.26:1521:xe", "23_24_DAM2_BROTATO", "123456");
-        System.out.println("Conexión exitosa a la base de datos Oracle.");
-        // Puedes realizar consultas y otras operaciones con 'connection' aquí
-    } catch (SQLException e) {
-        System.err.println("Error al conectar a la base de datos: " + e.getMessage());
-    } 
+    
     
 
-    
-    }
-
-
+  
 
     
 }

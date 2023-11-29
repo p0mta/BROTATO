@@ -52,7 +52,7 @@ public class Login extends JFrame {
             usernameLabel.setForeground(Color.BLACK);
             usernameLabel.setBounds(230, 260, 90, 20);
 
-            usernameField = new JTextField("a@gmail.com");
+            usernameField = new JTextField();
             usernameField.setBounds(165, 300, 200, 25);
             usernameField.setFont(texto);
             usernameField.setForeground(Color.BLACK);
@@ -64,7 +64,7 @@ public class Login extends JFrame {
             passwordLabel.setForeground(Color.BLACK);
             passwordLabel.setBounds(550, 260, 150, 25);
 
-            passwordField = new JPasswordField("a");
+            passwordField = new JPasswordField();
             passwordField.setBounds(500, 300, 200, 25);
             passwordField.setBorder(BorderFactory.createLineBorder(Color.BLACK));
             ImageIcon ima4 = new ImageIcon("ojo.png");
@@ -185,13 +185,14 @@ public class Login extends JFrame {
             }
         });
         try {
-            connection = DriverManager.getConnection("jdbc:oracle:thin:@192.168.3.26:1521:xe", "23_24_DAM2_BROTATO", "123456");
+            connection = DriverManager.getConnection("jdbc:oracle:thin:@oracle.ilerna.com:1521:xe", "23_24_DAM2_BROTATO", "123456");
         } catch (SQLException e) {
             e.printStackTrace();
             OtrasCosas lp = new OtrasCosas();
             lp.c();
             System.exit(1);
         }
+        
         
         registerButton.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {

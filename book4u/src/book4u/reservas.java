@@ -6,9 +6,12 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.sql.Connection;
 import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.sql.Statement;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 
 import javax.swing.BorderFactory;
 import javax.swing.BoxLayout;
@@ -24,9 +27,9 @@ import com.toedter.calendar.JDateChooser;
 public class reservas extends JFrame {
 
     JPanel panel2 = new JPanel();
-
+    private List<Integer> idReservasList = new ArrayList<>();
     public reservas() {
-    	
+    
         setSize(1200, 800);
         this.setLocationRelativeTo(null);
         this.setLayout(null);
@@ -82,8 +85,7 @@ public class reservas extends JFrame {
     private void retrieveAndDisplayData() {
         try {
             Statement statement = Login.connection.createStatement();
-            String query = "SELECT IDRESERVA, DIA, LUGAR, PRECIO, PAIS, DIA_SALIDA FROM RESERVAS WHERE CORREO = '"+Login.usernameField.getText()+"'";
-            System.out.println(query);
+            String query = "SELECT IDRESERVA, DIA, LUGAR, PRECIO, PAIS, DIA_SALIDA FROM RESERVAS WHERE CORREO = '"+Login.usernameField.getText()+"'";            
             ResultSet resultSet = statement
                     .executeQuery(query);
 
@@ -161,59 +163,26 @@ public class reservas extends JFrame {
                 botonModificar.addActionListener(new ActionListener() {
                     public void actionPerformed(ActionEvent e) {
                         // Mostrar un cuadro de diálogo para que el usuario ingrese las nuevas fechas
-                        JDateChooser dateChooser = new JDateChooser();
-                        dateChooser.setDateFormatString("yyyy-MM-dd");
-                        dateChooser.setBounds(100, 290, 200, 30);
-                        add(dateChooser);
-                        dateChooser.setBackground(Color.WHITE);
-                        dateChooser.setFont(Registro.fuente2);
-                        dateChooser.setBorder(BorderFactory.createLineBorder(Color.BLACK));
-
-                        JDateChooser dateChooser1 = new JDateChooser();
-                        dateChooser1.setDateFormatString("yyyy-MM-dd");
-                        dateChooser1.setBounds(475, 290, 200, 30);
-                        add(dateChooser1);
-                        dateChooser1.setBackground(Color.WHITE);
-                        dateChooser1.setFont(Registro.fuente2);
-                        dateChooser1.setBorder(BorderFactory.createLineBorder(Color.BLACK));
-
-                        int result = JOptionPane.showConfirmDialog(null, new Object[] { "Fecha de Reserva:", dateChooser, "Fecha de Salida:", dateChooser1 },
-                                "Ingrese las nuevas fechas", JOptionPane.OK_CANCEL_OPTION);
-
-                        // Verificar si el usuario hizo clic en "OK"
-                        if (result == JOptionPane.OK_OPTION) {
-                            // Obtener las nuevas fechas seleccionadas por el usuario
-                            Date nuevaFechaEntrada = dateChooser.getDate();
-                            Date nuevaFechaSalida = dateChooser1.getDate();
-
-                            // Verificar si las fechas no son nulas
-                            if (nuevaFechaEntrada != null && nuevaFechaSalida != null) {
-                                // Formatear las fechas al formato yyyy-MM-dd
-                                SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
-                                String fechaEntradaFormatted = dateFormat.format(nuevaFechaEntrada);
-                                String fechaSalidaFormatted = dateFormat.format(nuevaFechaSalida);
-
-                                // Lógica para actualizar la base de datos con las nuevas fechas
-                                String sql = "UPDATE RESERVAS SET DIA = TO_DATE('" + fechaEntradaFormatted + "', 'yyyy-MM-dd'), " +
-                                        "DIA_SALIDA = TO_DATE('" + fechaSalidaFormatted + "', 'yyyy-MM-dd') WHERE IDRESERVA = " + idReserva;
-
-                                try {
-                                    Statement statement = Login.connection.createStatement();
-                                    statement.executeUpdate(sql);
-                                    statement.close();
-
-                                    // Actualizar la interfaz gráfica con los nuevos datos
-                                    retrieveAndDisplayData();
-                                } catch (Exception ex) {
-                                    ex.printStackTrace();
-                                    // Manejar la excepción según tus necesidades
-                                }
-                            }
-                        }
                         dispose();
-                        reservas re = new reservas();
+                        try {
+                            // Obtener el índice de la reserva en la lista
+                            int index = idReservasList.indexOf(idReserva);
+                            
+                            // Verificar si se encuentra el idReserva en la lista
+                            if (index != -1) {
+                                // Obtener el idReserva correspondiente al índice
+                                int idReservaSeleccionado = idReservasList.get(index);
+                                
+                                // Crear una instancia de editar_reserva con el idReserva
+                                editar_reserva re = new editar_reserva(idReservaSeleccionado);
+                            } else {
+                                // Manejar el caso en el que no se encuentre el idReserva
+                                System.out.println("ID de reserva no encontrado en la lista.");
+                            }
+                        } catch (SQLException e1) {
+                            e1.printStackTrace();
+                        }
                     }
-                    
                 });
 
                 this.add(botonModificar);
@@ -236,8 +205,7 @@ public class reservas extends JFrame {
                 botonBorrar.addActionListener(new ActionListener() {
                     public void actionPerformed(ActionEvent e) {
                         borrarReserva(idReserva);
-                        dispose();
-                        reservas re = new reservas();
+                        
                     }
                 });
 
@@ -256,6 +224,7 @@ public class reservas extends JFrame {
                 precio1.setForeground(Color.white);
 
                 hasData = true;
+                idReservasList.add(idReserva);
             }
 
             resultSet.close();
@@ -273,6 +242,7 @@ public class reservas extends JFrame {
         } catch (Exception e) {
             e.printStackTrace();
         }
+        
     }
 
     public void resetearClase() {
@@ -283,46 +253,17 @@ public class reservas extends JFrame {
         reservas nuevaReserva = new reservas();
     }
 
-    public void modificarReserva(int idReserva) {
-        // Mostrar un cuadro de diálogo para que el usuario ingrese los nuevos datos
-        String nuevaFechaEntrada = JOptionPane.showInputDialog("Ingrese la nueva fecha de entrada (dd/MM/yyyy):");
-        String nuevaFechaSalida = JOptionPane.showInputDialog("Ingrese la nueva fecha de salida (dd/MM/yyyy):");
 
-        // Verificar si el usuario ingresó algo y realizar la actualización si es necesario
-        if (nuevaFechaEntrada != null && !nuevaFechaEntrada.isEmpty() && nuevaFechaSalida != null
-                && !nuevaFechaSalida.isEmpty()) {
-            try {
-                // Convertir las cadenas de fecha a objetos Date
-                SimpleDateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy");
-                Date fechaEntrada = dateFormat.parse(nuevaFechaEntrada);
-                Date fechaSalida = dateFormat.parse(nuevaFechaSalida);
-
-                // Lógica para actualizar la base de datos con las nuevas fechas
-                String sql = "UPDATE RESERVAS SET DIA = '" + new java.sql.Date(fechaEntrada.getTime())
-                        + "', DIA_SALIDA = '" + new java.sql.Date(fechaSalida.getTime()) + "' WHERE IDRESERVA = "
-                        + idReserva;
-
-                Statement statement = Login.connection.createStatement();
-                statement.executeUpdate(sql);
-                statement.close();
-            } catch (Exception e) {
-                e.printStackTrace();
-                // Manejar la excepción según tus necesidades
-            }
-
-            // Actualizar la interfaz gráfica con los nuevos datos
-            retrieveAndDisplayData();
-        }
-    }
 
     public void borrarReserva(int idReserva) {
         // Mostrar un cuadro de diálogo de confirmación
-        int confirmacion = JOptionPane.showConfirmDialog(null,
-                "¿Estás seguro de que quieres borrar esta reserva?", "Confirmación de Borrado",
-                JOptionPane.YES_NO_OPTION);
+    	OtrasCosas on = new OtrasCosas();
+    	on.botonpregunta1();
+        
 
         // Verificar la respuesta del usuario
-        if (confirmacion == JOptionPane.YES_OPTION) {
+    	 on.UNO.addActionListener(new ActionListener() {
+             public void actionPerformed(ActionEvent e) {
             // Lógica para borrar la reserva de la base de datos
             String sql = "DELETE FROM RESERVAS WHERE IDRESERVA = " + idReserva;
 
@@ -330,19 +271,35 @@ public class reservas extends JFrame {
                 Statement statement = Login.connection.createStatement();
                 statement.executeUpdate(sql);
                 statement.close();
-            } catch (Exception e) {
-                e.printStackTrace();
+            } catch (Exception e1) {
+                e1.printStackTrace();
+                on.sica.dispose(); 
                 // Manejar la excepción según tus necesidades
             }
 
             // Actualizar la interfaz gráfica con los datos actualizados
             retrieveAndDisplayData();
-        }
+            dispose();
+            reservas re = new reservas();
+             }
+    	 });
+    	 
+    	 
+    	 on.DOS.addActionListener(new ActionListener() {
+             public void actionPerformed(ActionEvent e) {
+            // Lógica para borrar la reserva de la base de datos
+            	 if (on.sica != null) {
+                     on.sica.dispose(); // Cerrar la ventana al presionar "NO"
+                 }
+	                
+                 return;
+             }
+    	 });
+    	 
     }
 
-    public static void main(String[] args) {
-        // Puedes agregar aquí la lógica para inicializar la conexión y crear la instancia de la clase reservas
-        reservas ventanaReservas = new reservas();
+    public List<Integer> getIdReservasList() {
+        return idReservasList;
     }
 }
 

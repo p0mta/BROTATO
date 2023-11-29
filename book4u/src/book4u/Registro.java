@@ -30,7 +30,7 @@ public class Registro extends JFrame {
 		this.setVisible(true);
 		this.setLayout(null);
 		
-       
+      
         
 		
 		JPanel pan = new JPanel();

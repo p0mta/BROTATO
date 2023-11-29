@@ -10,6 +10,9 @@ import javax.swing.JTextField;
 public class OtrasCosas {
 	JButton ja = new JButton("SI");
 	JButton ja2 = new JButton("NO");
+	JButton UNO = new JButton("SI");
+	JButton DOS = new JButton("NO");
+	JFrame sica;
 	JFrame j8;
 	JFrame j;
 	JFrame j9;
@@ -56,6 +59,47 @@ public class OtrasCosas {
             }	
         });
     }
+	public void GA() {
+        JFrame j = new JFrame();
+        j.setSize(515, 150);
+        j.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        ImageIcon im = new ImageIcon("panel.png");
+        JLabel label = new JLabel(im);
+        j.setLayout(null);
+        label.setBounds(0, 0, im.getIconWidth(), im.getIconHeight());
+        j.add(label);
+        JLabel mi = new JLabel("NO SE PUEDE HACER UNA RESERVA ANTES DE HOY");
+        mi.setBounds(25, 10, 450, 30); 
+        mi.setHorizontalAlignment(JLabel.CENTER);
+        mi.setFont(Registro.fuente1);
+        label.add(mi);
+        ImageIcon cruz = new ImageIcon("cruz.png");
+        JLabel cru = new JLabel(cruz);
+        cru.setBounds(290, 45, 50, 50);
+        label.add(cru);
+        ImageIcon cruz2 = new ImageIcon("cruz.png");
+        JLabel cru2 = new JLabel(cruz2);
+        cru2.setBounds(160, 45, 50, 50);
+        label.add(cru2);
+        JButton ja = new JButton("OK");
+        ja.setBounds(220, 70, 60, 30);
+        label.add(ja);
+        String color2 = "#027017";
+        Color bac = Color.decode(color2);
+        ja.setBackground(bac);
+        ja.setFocusPainted(false);
+        ja.setBorderPainted(false);
+        j.setResizable(false);
+        j.setUndecorated(true);
+        j.setBackground(new Color(0, 0, 0, 0)); 
+        j.setLocationRelativeTo(null);
+        j.setVisible(true);
+        ja.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent e) {
+                j.dispose(); 
+            }	
+        });
+    }
     public void casi() {
     	JFrame j = new JFrame();
         j.setSize(515, 150);
@@ -66,6 +110,72 @@ public class OtrasCosas {
         label.setBounds(0, 0, im.getIconWidth(), im.getIconHeight());
         j.add(label);
         JLabel mi = new JLabel("SALDO ACTUALIZADO CORRECTAMENTE");
+        mi.setBounds(50, 10, 400, 30); 
+        mi.setHorizontalAlignment(JLabel.CENTER);
+        mi.setFont(Registro.fuente1);
+        label.add(mi);
+        JButton ja = new JButton("OK");
+        ja.setBounds(220, 70, 60, 30);
+        label.add(ja);
+        String color2 = "#027017";
+        Color bac = Color.decode(color2);
+        ja.setBackground(bac);
+        ja.setFocusPainted(false);
+        ja.setBorderPainted(false);
+        j.setResizable(false);
+        j.setUndecorated(true);
+        j.setBackground(new Color(0, 0, 0, 0)); 
+        j.setLocationRelativeTo(null);
+        j.setVisible(true);
+        ja.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent e) {
+                j.dispose();
+            }			
+        });
+    }
+    public void AG() {
+    	JFrame j = new JFrame();
+        j.setSize(515, 150);
+        j.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        ImageIcon im = new ImageIcon("panel.png");
+        JLabel label = new JLabel(im);
+        j.setLayout(null);
+        label.setBounds(0, 0, im.getIconWidth(), im.getIconHeight());
+        j.add(label);
+        JLabel mi = new JLabel("PORFAVOR, COMPLETA TODAS LA FECHAS.");
+        mi.setBounds(50, 10, 400, 30); 
+        mi.setHorizontalAlignment(JLabel.CENTER);
+        mi.setFont(Registro.fuente1);
+        label.add(mi);
+        JButton ja = new JButton("OK");
+        ja.setBounds(220, 70, 60, 30);
+        label.add(ja);
+        String color2 = "#027017";
+        Color bac = Color.decode(color2);
+        ja.setBackground(bac);
+        ja.setFocusPainted(false);
+        ja.setBorderPainted(false);
+        j.setResizable(false);
+        j.setUndecorated(true);
+        j.setBackground(new Color(0, 0, 0, 0)); 
+        j.setLocationRelativeTo(null);
+        j.setVisible(true);
+        ja.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent e) {
+                j.dispose();
+            }			
+        });
+    }
+    public void AF() {
+    	JFrame j = new JFrame();
+        j.setSize(515, 150);
+        j.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        ImageIcon im = new ImageIcon("panel.png");
+        JLabel label = new JLabel(im);
+        j.setLayout(null);
+        label.setBounds(0, 0, im.getIconWidth(), im.getIconHeight());
+        j.add(label);
+        JLabel mi = new JLabel("RESERVA MODIFICADA CORRECTAMENTE");
         mi.setBounds(50, 10, 400, 30); 
         mi.setHorizontalAlignment(JLabel.CENTER);
         mi.setFont(Registro.fuente1);
@@ -132,6 +242,47 @@ public class OtrasCosas {
         label.setBounds(0, 0, im.getIconWidth(), im.getIconHeight());
         j.add(label);
         JLabel mi = new JLabel("INICIO DE SESIÓN FALLIDO");
+        mi.setBounds(50, 10, 400, 30);  
+        mi.setHorizontalAlignment(JLabel.CENTER);
+        mi.setFont(Registro.fuente1);
+        label.add(mi);
+        ImageIcon cruz = new ImageIcon("cruz.png");
+        JLabel cru = new JLabel(cruz);
+        cru.setBounds(290, 45, 50, 50);
+        label.add(cru);
+        ImageIcon cruz2 = new ImageIcon("cruz.png");
+        JLabel cru2 = new JLabel(cruz2);
+        cru2.setBounds(160, 45, 50, 50);
+        label.add(cru2);
+        JButton ja = new JButton("OK");
+        ja.setBounds(220, 70, 60, 30);
+        label.add(ja);
+        String color2 = "#027017";
+        Color bac = Color.decode(color2);
+        ja.setBackground(bac);
+        ja.setFocusPainted(false);
+        ja.setBorderPainted(false);
+        j.setResizable(false);
+        j.setUndecorated(true);
+        j.setBackground(new Color(0, 0, 0, 0)); 
+        j.setLocationRelativeTo(null);
+        j.setVisible(true);
+        ja.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent e) {
+                j.dispose();
+            }			
+        });
+    }
+    public void bs() {
+    	JFrame j = new JFrame();
+        j.setSize(515, 150);
+        j.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        ImageIcon im = new ImageIcon("panel.png");
+        JLabel label = new JLabel(im);
+        j.setLayout(null);
+        label.setBounds(0, 0, im.getIconWidth(), im.getIconHeight());
+        j.add(label);
+        JLabel mi = new JLabel("NO SE PUDO MODIFICAR LA RESERVA");
         mi.setBounds(50, 10, 400, 30);  
         mi.setHorizontalAlignment(JLabel.CENTER);
         mi.setFont(Registro.fuente1);
@@ -1171,6 +1322,39 @@ public class OtrasCosas {
 	        }			
 	    });
 	}
+	public void CA() {
+		JFrame j = new JFrame();
+	    j.setSize(515, 150);
+	    j.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+	    ImageIcon im = new ImageIcon("panel.png");
+	    JLabel label = new JLabel(im);
+	    j.setLayout(null);
+	    label.setBounds(0, 0, im.getIconWidth(), im.getIconHeight());
+	    j.add(label);
+	    JLabel mi = new JLabel("RELLENA EL CAMPO, FECHA RESERVA PORFAVOR");
+	    mi.setBounds(25, 10, 450, 30); 
+	    mi.setHorizontalAlignment(JLabel.CENTER);
+	    mi.setFont(Registro.fuente1);
+	    label.add(mi);
+	    JButton ja = new JButton("OK");
+	    ja.setBounds(220, 70, 60, 30);
+	    label.add(ja);
+	    String color2 = "#027017";
+	    Color bac = Color.decode(color2);
+	    ja.setBackground(bac);
+	    ja.setFocusPainted(false);
+	    ja.setBorderPainted(false);
+	    j.setResizable(false);
+	    j.setUndecorated(true);
+	    j.setBackground(new Color(0, 0, 0, 0)); 
+	    j.setLocationRelativeTo(null);
+	    j.setVisible(true);
+	    ja.addActionListener(new ActionListener() {
+	        public void actionPerformed(ActionEvent e) {
+	            j.dispose();
+	        }			
+	    });
+	}
 	public void D() {
         JFrame j = new JFrame();
         j.setSize(515, 150);
@@ -1212,54 +1396,82 @@ public class OtrasCosas {
             }	
         });
     }
-	public void ofertas() {
-		JFrame of = new JFrame();
-		of.setSize(600, 280);
-		of.setLocationRelativeTo(null);
-		of.setLayout(null);
-		of.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		
-		JLabel a1 = new JLabel("POR 20€ --> 2 BROCOINS AHORA 5 BRO COINS ");
-		JLabel a2 = new JLabel("POR 200€ --> 20 BROCOINS AHORA 40 BRO COINS ");
-		JLabel a3 = new JLabel("POR 2000€ -->  200 BROCOINS AHORA 300 BRO COINS ");
-		JLabel a4 = new JLabel("POR 20000€ -->  2000 BROCOINS AHORA 2500 BRO COINS ");
-		
-		a1.setBounds(5, 10, 500, 30);
-		a1.setFont(Registro.fuente1);
-		of.add(a1);
-		a2.setBounds(5, 70, 500, 30);
-		a2.setFont(Registro.fuente1);
-		of.add(a2);
-		a3.setBounds(5, 130, 500, 30);
-		a3.setFont(Registro.fuente1);
-		of.add(a3);
-		a4.setBounds(5, 190, 500, 30);
-		a4.setFont(Registro.fuente1);
-		of.add(a4);
-		 String colorFondo = "#579514";
-         Color backgroundColor = Color.decode(colorFondo);
-        of.getContentPane().setBackground(backgroundColor);
-        ImageIcon imageIcon = new ImageIcon("moneda.gif");
-        JLabel mo = new JLabel(imageIcon);
-        mo.setBounds(340, 7, 30, 32);
-        of.add(mo);
-        
-        ImageIcon imageIcon2 = new ImageIcon("moneda.gif");
-        JLabel mo2 = new JLabel(imageIcon2);
-        mo2.setBounds(370, 67, 30, 32);
-        of.add(mo2);
-        
-        ImageIcon imageIcon3 = new ImageIcon("moneda.gif");
-        JLabel mo3 = new JLabel(imageIcon3);
-        mo3.setBounds(400, 127, 30, 32);
-        of.add(mo3);
-        
-        ImageIcon imageIcon4 = new ImageIcon("moneda.gif");
-        JLabel mo4 = new JLabel(imageIcon4);
-        mo4.setBounds(430, 187, 30, 32);
-        of.add(mo4);
-        
-		of.setVisible(true);
+	public void DA() {
+        JFrame j = new JFrame();
+        j.setSize(515, 150);
+        j.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        ImageIcon im = new ImageIcon("panel.png");
+        JLabel label = new JLabel(im);
+        j.setLayout(null);
+        label.setBounds(0, 0, im.getIconWidth(), im.getIconHeight());
+        j.add(label);
+        JLabel mi = new JLabel("NO PUEDES IR ATRAS AL TIEMPO CRACK");
+        mi.setBounds(25, 10, 450, 30); 
+        mi.setHorizontalAlignment(JLabel.CENTER);
+        mi.setFont(Registro.fuente1);
+        label.add(mi);
+        ImageIcon cruz = new ImageIcon("cruz.png");
+        JLabel cru = new JLabel(cruz);
+        cru.setBounds(290, 45, 50, 50);
+        label.add(cru);
+        ImageIcon cruz2 = new ImageIcon("cruz.png");
+        JLabel cru2 = new JLabel(cruz2);
+        cru2.setBounds(160, 45, 50, 50);
+        label.add(cru2);
+        JButton ja = new JButton("OK");
+        ja.setBounds(220, 70, 60, 30);
+        label.add(ja);
+        String color2 = "#027017";
+        Color bac = Color.decode(color2);
+        ja.setBackground(bac);
+        ja.setFocusPainted(false);
+        ja.setBorderPainted(false);
+        j.setResizable(false);
+        j.setUndecorated(true);
+        j.setBackground(new Color(0, 0, 0, 0)); 
+        j.setLocationRelativeTo(null);
+        j.setVisible(true);
+        ja.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent e) {
+                j.dispose(); 
+            }	
+        });
+    }
+	
+	public void botonpregunta1() {
+		sica = new JFrame();
+		sica.setSize(515, 150);
+		sica.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+	    ImageIcon im = new ImageIcon("panel.png");
+	    JLabel label = new JLabel(im);
+	    sica.setLayout(null);
+	    label.setBounds(0, 0, im.getIconWidth(), im.getIconHeight());
+	    sica.add(label);
+	    JLabel mi = new JLabel("ESTAS SEGURO DE ELIMINAR LA RESERVA?");
+	    mi.setBounds(25, 10, 450, 30); 
+	    mi.setHorizontalAlignment(JLabel.CENTER);
+	    mi.setFont(Registro.fuente1);
+	    label.add(mi);    
+	    UNO.setBounds(130, 70, 60, 30);
+	    label.add(UNO);
+	    String color2 = "#027017";
+	    Color bac = Color.decode(color2);
+	    UNO.setBackground(bac);    
+	    DOS.setBounds(300, 70, 60, 30);
+	    label.add(DOS);
+	    String color3 = "#027017";
+	    Color bac2 = Color.decode(color3);
+	    DOS.setBackground(bac2);
+	    DOS.setFocusPainted(false);
+	    DOS.setBorderPainted(false);
+	    UNO.setFocusPainted(false);
+	    UNO.setBorderPainted(false);
+	    sica.setResizable(false);
+	    sica.setUndecorated(true);
+	    sica.setBackground(new Color(0, 0, 0, 0)); 
+	    sica.setLocationRelativeTo(null);
+	    sica.setVisible(true);
+	    
 	}
 }
 
