@@ -214,7 +214,7 @@ public class pantalla_reserva extends JFrame {
             	try {
                     // Insertar datos en la tabla de reservas
                     String query = "INSERT INTO reservas (dia, lugar, precio, pais, dia_salida,correo) VALUES (?, ?, ?, ?, ?, ?)";
-                    try (PreparedStatement preparedStatement = connection.prepareStatement(query)) {
+                    try (PreparedStatement preparedStatement = Login.connection.prepareStatement(query)) {
                         preparedStatement.setDate(1, new java.sql.Date(selectedDate.getTime()));
                         preparedStatement.setString(2, lugarResidencial);
                         double precioReserva = calcularPrecio(combi, paisCombo, dateChooser, dateChooser1);
@@ -375,29 +375,7 @@ public class pantalla_reserva extends JFrame {
 
 
     
-    public static void main(String[] args) {
-        SwingUtilities.invokeLater(() -> {
-            try {
-				pantalla_reserva frame = new pantalla_reserva();
-			} catch (SQLException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			}
-        });
-    }
-    Connection connection = null;{
-
-    try {
-        connection = DriverManager.getConnection("jdbc:oracle:thin:@192.168.3.26:1521:xe", "23_24_DAM2_BROTATO", "123456");
-        System.out.println("Conexión exitosa a la base de datos Oracle.");
-        // Puedes realizar consultas y otras operaciones con 'connection' aquí
-    } catch (SQLException e) {
-        System.err.println("Error al conectar a la base de datos: " + e.getMessage());
-    } 
     
-
-    
-    }
 
 
 

@@ -161,55 +161,6 @@ public class reservas extends JFrame {
                 botonModificar.addActionListener(new ActionListener() {
                     public void actionPerformed(ActionEvent e) {
                         // Mostrar un cuadro de diálogo para que el usuario ingrese las nuevas fechas
-                        JDateChooser dateChooser = new JDateChooser();
-                        dateChooser.setDateFormatString("yyyy-MM-dd");
-                        dateChooser.setBounds(100, 290, 200, 30);
-                        add(dateChooser);
-                        dateChooser.setBackground(Color.WHITE);
-                        dateChooser.setFont(Registro.fuente2);
-                        dateChooser.setBorder(BorderFactory.createLineBorder(Color.BLACK));
-
-                        JDateChooser dateChooser1 = new JDateChooser();
-                        dateChooser1.setDateFormatString("yyyy-MM-dd");
-                        dateChooser1.setBounds(475, 290, 200, 30);
-                        add(dateChooser1);
-                        dateChooser1.setBackground(Color.WHITE);
-                        dateChooser1.setFont(Registro.fuente2);
-                        dateChooser1.setBorder(BorderFactory.createLineBorder(Color.BLACK));
-
-                        int result = JOptionPane.showConfirmDialog(null, new Object[] { "Fecha de Reserva:", dateChooser, "Fecha de Salida:", dateChooser1 },
-                                "Ingrese las nuevas fechas", JOptionPane.OK_CANCEL_OPTION);
-
-                        // Verificar si el usuario hizo clic en "OK"
-                        if (result == JOptionPane.OK_OPTION) {
-                            // Obtener las nuevas fechas seleccionadas por el usuario
-                            Date nuevaFechaEntrada = dateChooser.getDate();
-                            Date nuevaFechaSalida = dateChooser1.getDate();
-
-                            // Verificar si las fechas no son nulas
-                            if (nuevaFechaEntrada != null && nuevaFechaSalida != null) {
-                                // Formatear las fechas al formato yyyy-MM-dd
-                                SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
-                                String fechaEntradaFormatted = dateFormat.format(nuevaFechaEntrada);
-                                String fechaSalidaFormatted = dateFormat.format(nuevaFechaSalida);
-
-                                // Lógica para actualizar la base de datos con las nuevas fechas
-                                String sql = "UPDATE RESERVAS SET DIA = TO_DATE('" + fechaEntradaFormatted + "', 'yyyy-MM-dd'), " +
-                                        "DIA_SALIDA = TO_DATE('" + fechaSalidaFormatted + "', 'yyyy-MM-dd') WHERE IDRESERVA = " + idReserva;
-
-                                try {
-                                    Statement statement = Login.connection.createStatement();
-                                    statement.executeUpdate(sql);
-                                    statement.close();
-
-                                    // Actualizar la interfaz gráfica con los nuevos datos
-                                    retrieveAndDisplayData();
-                                } catch (Exception ex) {
-                                    ex.printStackTrace();
-                                    // Manejar la excepción según tus necesidades
-                                }
-                            }
-                        }
                         dispose();
                         reservas re = new reservas();
                     }
