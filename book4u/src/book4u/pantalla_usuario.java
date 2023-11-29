@@ -22,6 +22,7 @@ import javax.swing.JTextField;
 import javax.swing.event.DocumentEvent;
 import javax.swing.event.DocumentListener;
 
+
 public class pantalla_usuario extends JFrame {
 	
 	static Font fuente = new Font("AGENCY FB", Font.BOLD,50);
@@ -560,4 +561,44 @@ public String obtenerNombreDesdeBaseDeDatos(String correo, String contraseña) {
     return nombre;
 }
 
+
+
+
+public void actualizarSaldoDespuesDeReserva(String correoUsuario, double precioReserva) {
+    try {
+        // Consulta para obtener el saldo actual del usuario
+        String obtenerSaldoQuery = "SELECT DINERO FROM USUARIO WHERE CORREO = ?";
+        try (PreparedStatement obtenerSaldoStatement = Login.connection.prepareStatement(obtenerSaldoQuery)) {
+            obtenerSaldoStatement.setString(1, correoUsuario);
+            ResultSet resultSet = obtenerSaldoStatement.executeQuery();
+
+            if (resultSet.next()) {
+                // Obtener el saldo actual
+                double saldoActual = resultSet.getDouble("DINERO");
+
+                // Calcular el nuevo saldo restando el precio de la reserva
+                double nuevoSaldo = saldoActual - precioReserva;
+
+                // Actualizar el saldo en la base de datos
+                String actualizarSaldoQuery = "UPDATE USUARIO SET DINERO = ? WHERE CORREO = ?";
+                try (PreparedStatement actualizarSaldoStatement = Login.connection.prepareStatement(actualizarSaldoQuery)) {
+                    actualizarSaldoStatement.setDouble(1, nuevoSaldo);
+                    actualizarSaldoStatement.setString(2, correoUsuario);
+                    actualizarSaldoStatement.executeUpdate();
+                }
+
+                // Aquí puedes realizar otras acciones o mostrar mensajes según sea necesario
+            } else {
+                // El usuario no fue encontrado
+                System.out.println("Usuario no encontrado: " + correoUsuario);
+            }
+        }
+    } catch (SQLException e) {
+        e.printStackTrace();
+    }
 }
+
+}
+
+
+

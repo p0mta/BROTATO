@@ -23,8 +23,8 @@ public class Historial extends JFrame {
     private JPanel panel2;
     private JPanel panel3;
     private JPanel panel4;
-   
-
+    
+    
     public Historial() {
         // Configurar el frame
         setTitle("Historial");
@@ -111,9 +111,13 @@ public class Historial extends JFrame {
                 String lugar = resultSet.getString("LUGAR");
                 String precio = resultSet.getString("PRECIO");
                 String pais = resultSet.getString("PAIS");
-                String diaSalida = resultSet.getString("DIA_SALIDA");
+                Date diaSalida = resultSet.getDate("DIA_SALIDA");
                 SimpleDateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy");
                 String diaFormateado = dateFormat.format(fecha);
+                
+                SimpleDateFormat dateFormat1 = new SimpleDateFormat("dd/MM/yyyy");
+                String diaFormateado1 = dateFormat1.format(diaSalida);
+                
                 // Crear etiquetas para cada columna y agregarlas al panel2
                 Font font = new Font("Agency FB", Font.BOLD, 23);
                 JLabel dataLabel = new JLabel(diaFormateado);
@@ -149,14 +153,34 @@ public class Historial extends JFrame {
                 
                 precio1.setIcon(moni);
                 
+                JLabel pais1 = new JLabel(pais);
+                int labelHeight3 = 30; // Altura estimada de cada etiqueta
+                int labelSpacing3 = 10; // Espacio entre etiquetas
+                int yPosition3 = (resultSet.getRow() - 1) * (labelHeight3 + labelSpacing3);
+                
+                pais1.setBounds(595, yPosition3, 150, labelHeight3);
+                pais1.setFont(font);
+                
+                JLabel diasalida = new JLabel(diaFormateado1);
+                int labelHeight4 = 30; // Altura estimada de cada etiqueta
+                int labelSpacing4 = 10; // Espacio entre etiquetas
+                int yPosition4 = (resultSet.getRow() - 1) * (labelHeight4 + labelSpacing4);
+                
+                diasalida.setBounds(755, yPosition4, 150, labelHeight4);
+                diasalida.setFont(font);
+                
                 
                 
                 panel2.add(lugar1);
                 panel2.add(dataLabel);
                 panel2.add(precio1);
+                panel2.add(pais1);
+                panel2.add(diasalida);
                 dataLabel.setForeground(Color.white);
                 lugar1.setForeground(Color.white);
                 precio1.setForeground(Color.white);
+                pais1.setForeground(Color.white);
+                diasalida.setForeground(Color.white);
                 hasData = true;
             }
 
@@ -180,7 +204,5 @@ public class Historial extends JFrame {
 
 
 
-    public static void main(String[] args) {
-        Historial historial = new Historial();
-    }
+    
 }
