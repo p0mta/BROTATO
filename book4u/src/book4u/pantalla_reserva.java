@@ -202,7 +202,8 @@ public class pantalla_reserva extends JFrame {
             corr = Login.usernameField.getText();
 
             if (selectedDate == null || selectedDate2 == null) {
-                JOptionPane.showMessageDialog(pantalla_reserva.this, "Por favor, completa todas las fechas.");
+            	OtrasCosas tra = new OtrasCosas();
+            	tra.AG();
             return;
             } else if (selectedDate.before(today)) {
                 JOptionPane.showMessageDialog(null, "No se puede reservar para una fecha anterior al día actual", "Error", JOptionPane.ERROR_MESSAGE);
