@@ -228,6 +228,7 @@ public class pantalla_reserva extends JFrame {
                         // Restar el precio de la reserva al saldo del usuario
                         String correoUsuario = Login.getUsernameField().getText();  // Ajusta esto según cómo obtienes el correo del usuario
                         pantalla_usuario pantallaUsuario = new pantalla_usuario();
+                        pantallaUsuario.dispose();
                         pantallaUsuario.actualizarSaldoDespuesDeReserva(correoUsuario, precioReserva);
                     }
 

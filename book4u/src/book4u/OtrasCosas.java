@@ -10,6 +10,9 @@ import javax.swing.JTextField;
 public class OtrasCosas {
 	JButton ja = new JButton("SI");
 	JButton ja2 = new JButton("NO");
+	JButton UNO = new JButton("SI");
+	JButton DOS = new JButton("NO");
+	JFrame sica;
 	JFrame j8;
 	JFrame j;
 	JFrame j9;
@@ -1260,6 +1263,41 @@ public class OtrasCosas {
         of.add(mo4);
         
 		of.setVisible(true);
+	}
+	public void botonpregunta1() {
+		sica = new JFrame();
+		sica.setSize(515, 150);
+		sica.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+	    ImageIcon im = new ImageIcon("panel.png");
+	    JLabel label = new JLabel(im);
+	    sica.setLayout(null);
+	    label.setBounds(0, 0, im.getIconWidth(), im.getIconHeight());
+	    sica.add(label);
+	    JLabel mi = new JLabel("ESTAS SEGURO DE ELIMINAR LA RESERVA?");
+	    mi.setBounds(25, 10, 450, 30); 
+	    mi.setHorizontalAlignment(JLabel.CENTER);
+	    mi.setFont(Registro.fuente1);
+	    label.add(mi);    
+	    UNO.setBounds(130, 70, 60, 30);
+	    label.add(UNO);
+	    String color2 = "#027017";
+	    Color bac = Color.decode(color2);
+	    UNO.setBackground(bac);    
+	    DOS.setBounds(300, 70, 60, 30);
+	    label.add(DOS);
+	    String color3 = "#027017";
+	    Color bac2 = Color.decode(color3);
+	    DOS.setBackground(bac2);
+	    DOS.setFocusPainted(false);
+	    DOS.setBorderPainted(false);
+	    UNO.setFocusPainted(false);
+	    UNO.setBorderPainted(false);
+	    sica.setResizable(false);
+	    sica.setUndecorated(true);
+	    sica.setBackground(new Color(0, 0, 0, 0)); 
+	    sica.setLocationRelativeTo(null);
+	    sica.setVisible(true);
+	    
 	}
 }
 

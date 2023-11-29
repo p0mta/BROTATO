@@ -24,7 +24,8 @@ public class editar_reserva extends JFrame {
     private JDateChooser dateChooser;
     private JDateChooser dateChooser1;
     
-    public editar_reserva() throws SQLException {
+    public editar_reserva(int idReserva) throws SQLException {
+    	
         setTitle("Reserva de lugares residenciales");
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setSize(800, 500);
@@ -201,6 +202,7 @@ public class editar_reserva extends JFrame {
         
         
         reservarButton.addActionListener(e -> {
+        	
             String lugarResidencial = (String) combi.getSelectedItem();
             String pais = (String) paisCombo.getSelectedItem();
             Date selectedDate = dateChooser.getDate();
@@ -221,7 +223,7 @@ public class editar_reserva extends JFrame {
             } else {
                 try {
                     // Calcular el precio antes de la reserva
-                    double precioAntes = obtenerPrecioActual(reservas.idreserva);
+                    double precioAntes = obtenerPrecioActual(idReserva);
                     
                     // Actualizar la base de datos con la nueva reserva
                     String query = "UPDATE RESERVAS SET DIA = ?, LUGAR = ?, PRECIO = ?, PAIS = ?, DIA_SALIDA = ? WHERE IDRESERVA = ?";
@@ -232,7 +234,7 @@ public class editar_reserva extends JFrame {
                         preparedStatement.setDouble(3, precioReserva);
                         preparedStatement.setString(4, pais);
                         preparedStatement.setDate(5, new java.sql.Date(dateChooser1.getDate().getTime()));
-                        preparedStatement.setInt(6, reservas.idreserva);
+                        preparedStatement.setInt(6, idReserva);
 
                         preparedStatement.executeUpdate();
 
@@ -318,7 +320,7 @@ public class editar_reserva extends JFrame {
                     e.printStackTrace();
                 }
             }
-            public void modificarReserva() {
+            public void modificarReserva(int idReserva) {
                 try {
                     String query = "UPDATE RESERVAS SET DIA = ?, LUGAR = ?, PRECIO = ?, PAIS = ?, DIA_SALIDA = ? WHERE IDRESERVA = ?";
                     try (PreparedStatement preparedStatement = Login.connection.prepareStatement(query)) {
@@ -328,10 +330,10 @@ public class editar_reserva extends JFrame {
                         preparedStatement.setDouble(3, precioReserva);
                         preparedStatement.setString(4, (String) paisCombo.getSelectedItem());
                         preparedStatement.setDate(5, new java.sql.Date(dateChooser1.getDate().getTime()));
-                        preparedStatement.setInt(6, reservas.idreserva);
+                        preparedStatement.setInt(6, idReserva);
 
                         // Obtén el precio anterior de la reserva antes de la actualización
-                        double precioAntiguo = obtenerPrecioActual(reservas.idreserva);
+                        double precioAntiguo = obtenerPrecioActual(idReserva);
 
                         // Ejecuta la actualización en la base de datos
                         int filasActualizadas = preparedStatement.executeUpdate();
