@@ -1437,55 +1437,7 @@ public class OtrasCosas {
             }	
         });
     }
-	public void ofertas() {
-		JFrame of = new JFrame();
-		of.setSize(600, 280);
-		of.setLocationRelativeTo(null);
-		of.setLayout(null);
-		of.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		
-		JLabel a1 = new JLabel("POR 20€ --> 2 BROCOINS AHORA 5 BRO COINS ");
-		JLabel a2 = new JLabel("POR 200€ --> 20 BROCOINS AHORA 40 BRO COINS ");
-		JLabel a3 = new JLabel("POR 2000€ -->  200 BROCOINS AHORA 300 BRO COINS ");
-		JLabel a4 = new JLabel("POR 20000€ -->  2000 BROCOINS AHORA 2500 BRO COINS ");
-		
-		a1.setBounds(5, 10, 500, 30);
-		a1.setFont(Registro.fuente1);
-		of.add(a1);
-		a2.setBounds(5, 70, 500, 30);
-		a2.setFont(Registro.fuente1);
-		of.add(a2);
-		a3.setBounds(5, 130, 500, 30);
-		a3.setFont(Registro.fuente1);
-		of.add(a3);
-		a4.setBounds(5, 190, 500, 30);
-		a4.setFont(Registro.fuente1);
-		of.add(a4);
-		 String colorFondo = "#579514";
-         Color backgroundColor = Color.decode(colorFondo);
-        of.getContentPane().setBackground(backgroundColor);
-        ImageIcon imageIcon = new ImageIcon("moneda.gif");
-        JLabel mo = new JLabel(imageIcon);
-        mo.setBounds(340, 7, 30, 32);
-        of.add(mo);
-        
-        ImageIcon imageIcon2 = new ImageIcon("moneda.gif");
-        JLabel mo2 = new JLabel(imageIcon2);
-        mo2.setBounds(370, 67, 30, 32);
-        of.add(mo2);
-        
-        ImageIcon imageIcon3 = new ImageIcon("moneda.gif");
-        JLabel mo3 = new JLabel(imageIcon3);
-        mo3.setBounds(400, 127, 30, 32);
-        of.add(mo3);
-        
-        ImageIcon imageIcon4 = new ImageIcon("moneda.gif");
-        JLabel mo4 = new JLabel(imageIcon4);
-        mo4.setBounds(430, 187, 30, 32);
-        of.add(mo4);
-        
-		of.setVisible(true);
-	}
+	
 	public void botonpregunta1() {
 		sica = new JFrame();
 		sica.setSize(515, 150);

@@ -452,13 +452,7 @@ public class pantalla_usuario extends JFrame {
 	            	Pantalla_principal pat = new Pantalla_principal();
 	            }
 	        });
-	        oferta.addActionListener(new ActionListener() {
-	            public void actionPerformed(ActionEvent e) {
-	            	
-	            	OtrasCosas pait = new OtrasCosas();
-	            	pait.ofertas();
-	            }
-	        });
+	       
 
 	    }
 
