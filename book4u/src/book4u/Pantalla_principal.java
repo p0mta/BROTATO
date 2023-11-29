@@ -41,8 +41,19 @@ public class Pantalla_principal extends JFrame {
         titi.setHorizontalAlignment(JLabel.CENTER);
         titi.setBounds(100, 100, 600, 50);
         titi.setFont(fuenti);
+<<<<<<< Updated upstream
         
 
+=======
+        ImageIcon imageIcon = new ImageIcon("moneda.gif");
+        Image image = imageIcon.getImage().getScaledInstance(20, 20, Image.SCALE_SMOOTH);
+        ImageIcon resizedImageIcon = new ImageIcon(image);
+
+        JLabel etiqueta = new JLabel();
+        etiqueta.setIcon(resizedImageIcon);
+        etiqueta.setBounds(100, 20, 20, 20);
+        pan.add(etiqueta);
+>>>>>>> Stashed changes
         
         // Crear un JLayeredPane para administrar las capas
         JLayeredPane layeredPane = new JLayeredPane();
