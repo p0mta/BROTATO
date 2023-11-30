@@ -14,7 +14,7 @@ public class Pantalla_principal extends JFrame {
     private boolean menuvisible = false;
     public Font fuenti = new Font("Agency FB", Font.BOLD, 40);
     public Font fuenti2 = new Font("Agency FB", Font.BOLD, 30);
-    
+   
     public Pantalla_principal() {
         JPanel pan = new JPanel();
         pan.setBounds(0, 0, 800, 75);
@@ -41,7 +41,15 @@ public class Pantalla_principal extends JFrame {
         titi.setHorizontalAlignment(JLabel.CENTER);
         titi.setBounds(100, 100, 600, 50);
         titi.setFont(fuenti);
-        
+
+        ImageIcon imageIcon = new ImageIcon("moneda.gif");
+        Image image = imageIcon.getImage().getScaledInstance(20, 20, Image.SCALE_SMOOTH);
+        ImageIcon resizedImageIcon = new ImageIcon(image);
+
+        JLabel etiqueta = new JLabel();
+        etiqueta.setIcon(resizedImageIcon);
+        etiqueta.setBounds(100, 20, 20, 20);
+        pan.add(etiqueta);
 
         
         // Crear un JLayeredPane para administrar las capas
@@ -162,8 +170,8 @@ public class Pantalla_principal extends JFrame {
         desp.add(HistorialButton);
         desp.add(AtrasButton);
         desp.add(ReservesButton);
-        ImageIcon imageIcon = new ImageIcon("moneda.gif");
-        JLabel mo = new JLabel(imageIcon);
+        ImageIcon imageIcon1 = new ImageIcon("moneda.gif");
+        JLabel mo = new JLabel(imageIcon1);
         mo.setBounds(750, 82, 30, 32);
         this.add(mo);
         setVisible(true);

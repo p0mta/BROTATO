@@ -164,6 +164,7 @@ public class pantalla_reserva extends JFrame {
         dateChooser.setFont(Registro.fuente2);
         dateChooser.setBorder(BorderFactory.createLineBorder(Color.BLACK));
         
+        
         JDateChooser dateChooser1 = new JDateChooser();
         dateChooser1.setBounds(475, 290, 200, 30);
         add(dateChooser1);
@@ -198,33 +199,43 @@ public class pantalla_reserva extends JFrame {
             Date selectedDate = dateChooser.getDate();
             Date selectedDate2 = dateChooser1.getDate();
             Date today = new Date();  // Fecha actual
+            String corr = new String();
+            corr = Login.usernameField.getText();
 
+            
             if (selectedDate == null || selectedDate2 == null) {
-                JOptionPane.showMessageDialog(pantalla_reserva.this, "Por favor, completa todas las fechas.");
+            	OtrasCosas tra = new OtrasCosas();
+            	tra.AG();
             return;
             } else if (selectedDate.before(today)) {
-                JOptionPane.showMessageDialog(null, "No se puede reservar para una fecha anterior al día actual", "Error", JOptionPane.ERROR_MESSAGE);
+            	OtrasCosas tra = new OtrasCosas();
+            	tra.GA();
+                
             return;
             } else if (selectedDate2.before(selectedDate)) {
-                JOptionPane.showMessageDialog(null, "La fecha de salida no puede ser anterior a la fecha de reserva", "Error", JOptionPane.ERROR_MESSAGE);
+            	OtrasCosas tra = new OtrasCosas();
+            	tra.DA();
+               
             return;
             } else {
             	try {
                     // Insertar datos en la tabla de reservas
-                    String query = "INSERT INTO reservas (dia, lugar, precio, pais, dia_salida) VALUES (?, ?, ?, ?, ?)";
-                    try (PreparedStatement preparedStatement = connection.prepareStatement(query)) {
+                    String query = "INSERT INTO reservas (dia, lugar, precio, pais, dia_salida,correo) VALUES (?, ?, ?, ?, ?, ?)";
+                    try (PreparedStatement preparedStatement = Login.connection.prepareStatement(query)) {
                         preparedStatement.setDate(1, new java.sql.Date(selectedDate.getTime()));
                         preparedStatement.setString(2, lugarResidencial);
                         double precioReserva = calcularPrecio(combi, paisCombo, dateChooser, dateChooser1);
                         preparedStatement.setDouble(3, precioReserva);
                         preparedStatement.setString(4, pais);
                         preparedStatement.setDate(5, new java.sql.Date(selectedDate2.getTime()));
+                        preparedStatement.setString(6, corr);
 
                         preparedStatement.executeUpdate();
 
                         // Restar el precio de la reserva al saldo del usuario
                         String correoUsuario = Login.getUsernameField().getText();  // Ajusta esto según cómo obtienes el correo del usuario
                         pantalla_usuario pantallaUsuario = new pantalla_usuario();
+                        pantallaUsuario.dispose();
                         pantallaUsuario.actualizarSaldoDespuesDeReserva(correoUsuario, precioReserva);
                     }
 
@@ -250,17 +261,21 @@ public class pantalla_reserva extends JFrame {
 			Date selectedDate2 = dateChooser1.getDate();
             Date today = new Date();  // Fecha actual
             
-            if(selectedDate == null) {
-            	JOptionPane.showMessageDialog(pantalla_reserva.this, "Por favor, completa todos los campos.");
+            if(selectedDate == null || selectedDate2 == null) {
+            	OtrasCosas tra = new OtrasCosas();
+            	tra.AG();
             	return;
             }
+            
           if (selectedDate2.before(selectedDate)) {
-            JOptionPane.showMessageDialog(null, "La fecha de salida no puede ser anterior a la fecha de reserva", "Error", JOptionPane.ERROR_MESSAGE);
-            	return;
+        	  OtrasCosas tra = new OtrasCosas();
+          	  tra.GA();
+              return;
             }
             if (selectedDate.before(today)) {
-                JOptionPane.showMessageDialog(null, "No se puede reservar para una fecha anterior al día actual", "Error", JOptionPane.ERROR_MESSAGE);
-                return;
+            	OtrasCosas tra = new OtrasCosas();
+            	tra.DA();
+            	return;
             } else {
                 precioLabel.setText("Precio de la reserva en " + pais + ": "+calcularPrecio(combi, paisCombo, dateChooser, dateChooser1)+"");
             }
@@ -372,29 +387,7 @@ public class pantalla_reserva extends JFrame {
 
 
     
-    public static void main(String[] args) {
-        SwingUtilities.invokeLater(() -> {
-            try {
-				pantalla_reserva frame = new pantalla_reserva();
-			} catch (SQLException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			}
-        });
-    }
-    Connection connection = null;{
-
-    try {
-        connection = DriverManager.getConnection("jdbc:oracle:thin:@192.168.3.26:1521:xe", "23_24_DAM2_BROTATO", "123456");
-        System.out.println("Conexión exitosa a la base de datos Oracle.");
-        // Puedes realizar consultas y otras operaciones con 'connection' aquí
-    } catch (SQLException e) {
-        System.err.println("Error al conectar a la base de datos: " + e.getMessage());
-    } 
     
-
-    
-    }
 
 
 
