@@ -6,16 +6,12 @@
 			<attribute name="module" value="true"/>
 		</attributes>
 	</classpathentry>
-<<<<<<< Updated upstream
-	<classpathentry kind="lib" path="C:/Users/romer/Downloads/TRABAJO/ojdbc11.jar">
+	<classpathentry kind="lib" path="C:/Users/romer/Downloads/TRABAJO/jcalendar-1.4.jar">
 		<attributes>
 			<attribute name="module" value="true"/>
 		</attributes>
 	</classpathentry>
-	<classpathentry kind="lib" path="C:/Users/romer/Downloads/jcalendar-1.4.jar">
-=======
-	<classpathentry kind="lib" path="C:/Users/romer/Downloads/ojdbc11.jar">
->>>>>>> Stashed changes
+	<classpathentry kind="lib" path="C:/Users/romer/Downloads/TRABAJO/ojdbc11.jar">
 		<attributes>
 			<attribute name="module" value="true"/>
 		</attributes>

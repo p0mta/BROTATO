@@ -520,4 +520,3 @@ public class editar_reserva extends JFrame {
 
     
 }
-

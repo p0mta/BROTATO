@@ -206,7 +206,4 @@ public class Historial extends JFrame {
         }
     }
 
-
-
-    
 }
