@@ -42,6 +42,7 @@ public class Pantalla_principal extends JFrame {
         titi.setBounds(100, 100, 600, 50);
         titi.setFont(fuenti);
 
+
         ImageIcon imageIcon = new ImageIcon("moneda.gif");
         Image image = imageIcon.getImage().getScaledInstance(20, 20, Image.SCALE_SMOOTH);
         ImageIcon resizedImageIcon = new ImageIcon(image);
@@ -50,6 +51,10 @@ public class Pantalla_principal extends JFrame {
         etiqueta.setIcon(resizedImageIcon);
         etiqueta.setBounds(100, 20, 20, 20);
         pan.add(etiqueta);
+
+
+
+        
 
         
         // Crear un JLayeredPane para administrar las capas

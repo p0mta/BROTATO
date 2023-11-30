@@ -205,4 +205,5 @@ public class Historial extends JFrame {
             e.printStackTrace();
         }
     }
+
 }
