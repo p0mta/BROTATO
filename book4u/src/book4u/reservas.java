@@ -5,6 +5,7 @@ import java.awt.Font;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.sql.Connection;
+import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
@@ -280,6 +281,7 @@ public class reservas extends JFrame {
             // Actualizar la interfaz gráfica con los datos actualizados
             retrieveAndDisplayData();
             dispose();
+            on.sica.dispose();
             reservas re = new reservas();
              }
     	 });
@@ -301,6 +303,25 @@ public class reservas extends JFrame {
     public List<Integer> getIdReservasList() {
         return idReservasList;
     }
+    public double obtenerSaldoDesdeBaseDeDatos(String correo, String contraseña) {
+	    double saldo4 = -1; // Valor por defecto si no se encuentra el saldo
+	    try {
+	        String selectQuery = "SELECT DINERO FROM USUARIO WHERE CORREO = ? AND CONTRASEÑA = ?";
+	        PreparedStatement preparedStatement = Login.connection.prepareStatement(selectQuery);
+	        preparedStatement.setString(1, correo);
+	        preparedStatement.setString(2, contraseña);
+	        ResultSet resultSet = preparedStatement.executeQuery();
+
+	        if (resultSet.next()) {
+	        	saldo4 = resultSet.getDouble("DINERO");
+	        }
+
+	        resultSet.close();
+	    } catch (SQLException ex) {
+	        ex.printStackTrace();
+	    }
+	    return saldo4;
+	}
 }
 
 
