@@ -245,9 +245,9 @@ public class Registro extends JFrame {
                 }
 
                
-                if (!usuario.endsWith("@gmail.com")) {
-                	OtrasCosas ja = new OtrasCosas();
-                	ja.v();
+                if (usuario.equals("@gmail.com") || !usuario.endsWith("@gmail.com")) {
+                    OtrasCosas ja = new OtrasCosas();
+                    ja.v();
                     return; // Sale de la acción si el correo no es válido.
                 }
                 if(nombre.getText().length() > 15) {
