@@ -4,7 +4,6 @@ import java.awt.Color;
 import java.awt.Font;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
@@ -12,17 +11,13 @@ import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
-
-import javax.swing.BorderFactory;
-import javax.swing.BoxLayout;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
-import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 
-import com.toedter.calendar.JDateChooser;
+
 
 public class reservas extends JFrame {
 
@@ -32,6 +27,7 @@ public class reservas extends JFrame {
     
         setSize(1200, 800);
         this.setLocationRelativeTo(null);
+        this.setUndecorated(true);
         this.setLayout(null);
         String colorfondo = "#579514";
         Color backgroundColor = Color.decode(colorfondo);
@@ -257,50 +253,69 @@ public class reservas extends JFrame {
 
     public void borrarReserva(int idReserva) {
         // Mostrar un cuadro de diálogo de confirmación
-    	OtrasCosas on = new OtrasCosas();
-    	on.botonpregunta1();
-        
+        OtrasCosas on = new OtrasCosas();
+        on.botonpregunta1();
 
         // Verificar la respuesta del usuario
-    	 on.UNO.addActionListener(new ActionListener() {
-             public void actionPerformed(ActionEvent e) {
-            // Lógica para borrar la reserva de la base de datos
-            String sql = "DELETE FROM RESERVAS WHERE IDRESERVA = " + idReserva;
+        on.UNO.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent e) {
+                try {
+                    // Obtener el precio de la reserva que se va a cancelar
+                    String queryPrecio = "SELECT PRECIO FROM RESERVAS WHERE IDRESERVA = " + idReserva;
+                    Statement statementPrecio = Login.connection.createStatement();
+                    ResultSet resultSetPrecio = statementPrecio.executeQuery(queryPrecio);
 
-            try {
-                Statement statement = Login.connection.createStatement();
-                statement.executeUpdate(sql);
-                statement.close();
-            } catch (Exception e1) {
-                e1.printStackTrace();
-                on.sica.dispose(); 
-                // Manejar la excepción según tus necesidades
+                    if (resultSetPrecio.next()) {
+                        // Obtener el precio de la reserva
+                        String precioReserva = resultSetPrecio.getString("PRECIO");
+
+                        // Actualizar el dinero del usuario en la base de datos
+                        String queryActualizarDinero = "UPDATE USUARIO SET DINERO = DINERO + " + precioReserva + " WHERE CORREO = '" + Login.usernameField.getText() + "'";
+                        Statement statementActualizarDinero = Login.connection.createStatement();
+                        statementActualizarDinero.executeUpdate(queryActualizarDinero);
+
+                        statementActualizarDinero.close();
+                    }
+
+                    resultSetPrecio.close();
+                    statementPrecio.close();
+
+                    // Lógica para borrar la reserva de la base de datos
+                    String sql = "DELETE FROM RESERVAS WHERE IDRESERVA = " + idReserva;
+                    Statement statement = Login.connection.createStatement();
+                    statement.executeUpdate(sql);
+                    statement.close();
+
+                } catch (Exception e1) {
+                    e1.printStackTrace();
+                    on.sica.dispose();
+                    // Manejar la excepción según tus necesidades
+                }
+
+                // Actualizar la interfaz gráfica con los datos actualizados
+                retrieveAndDisplayData();
+                dispose();
+                on.sica.dispose();
+                reservas re = new reservas();
             }
+        });
 
-            // Actualizar la interfaz gráfica con los datos actualizados
-            retrieveAndDisplayData();
-            dispose();
-            reservas re = new reservas();
-             }
-    	 });
-    	 
-    	 
-    	 on.DOS.addActionListener(new ActionListener() {
-             public void actionPerformed(ActionEvent e) {
-            // Lógica para borrar la reserva de la base de datos
-            	 if (on.sica != null) {
-                     on.sica.dispose(); // Cerrar la ventana al presionar "NO"
-                 }
-	                
-                 return;
-             }
-    	 });
-    	 
+        on.DOS.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent e) {
+                // Lógica para borrar la reserva de la base de datos
+                if (on.sica != null) {
+                    on.sica.dispose(); // Cerrar la ventana al presionar "NO"
+                }
+
+                return;
+            }
+        });
     }
 
     public List<Integer> getIdReservasList() {
         return idReservasList;
     }
+  
 }
 
 

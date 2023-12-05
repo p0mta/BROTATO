@@ -59,6 +59,129 @@ public class OtrasCosas {
             }	
         });
     }
+	public void nosololetras() {
+        JFrame j = new JFrame();
+        j.setSize(515, 150);
+        j.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        ImageIcon im = new ImageIcon("panel.png");
+        JLabel label = new JLabel(im);
+        j.setLayout(null);
+        label.setBounds(0, 0, im.getIconWidth(), im.getIconHeight());
+        j.add(label);
+        JLabel mi = new JLabel("SOLO SE PERMITEN LETRAS EN EL CAMPO NOMBRE");
+        mi.setBounds(50, 10, 400, 30); 
+        mi.setHorizontalAlignment(JLabel.CENTER);
+        mi.setFont(Registro.fuente1);
+        label.add(mi);
+        ImageIcon cruz = new ImageIcon("cruz.png");
+        JLabel cru = new JLabel(cruz);
+        cru.setBounds(290, 45, 50, 50);
+        label.add(cru);
+        ImageIcon cruz2 = new ImageIcon("cruz.png");
+        JLabel cru2 = new JLabel(cruz2);
+        cru2.setBounds(160, 45, 50, 50);
+        label.add(cru2);
+        JButton ja = new JButton("OK");
+        ja.setBounds(220, 70, 60, 30);
+        label.add(ja);
+        String color2 = "#027017";
+        Color bac = Color.decode(color2);
+        ja.setBackground(bac);
+        ja.setFocusPainted(false);
+        ja.setBorderPainted(false);
+        j.setResizable(false);
+        j.setUndecorated(true);
+        j.setBackground(new Color(0, 0, 0, 0)); 
+        j.setLocationRelativeTo(null);
+        j.setVisible(true);
+        ja.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent e) {
+                j.dispose(); 
+            }	
+        });
+    }
+	public void nosololetras2() {
+        JFrame j = new JFrame();
+        j.setSize(515, 150);
+        j.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        ImageIcon im = new ImageIcon("panel.png");
+        JLabel label = new JLabel(im);
+        j.setLayout(null);
+        label.setBounds(0, 0, im.getIconWidth(), im.getIconHeight());
+        j.add(label);
+        JLabel mi = new JLabel("SOLO SE PERMITEN LETRAS EN EL CAMPO APELLIDOS");
+        mi.setBounds(50, 10, 400, 30); 
+        mi.setHorizontalAlignment(JLabel.CENTER);
+        mi.setFont(Registro.fuente1);
+        label.add(mi);
+        ImageIcon cruz = new ImageIcon("cruz.png");
+        JLabel cru = new JLabel(cruz);
+        cru.setBounds(290, 45, 50, 50);
+        label.add(cru);
+        ImageIcon cruz2 = new ImageIcon("cruz.png");
+        JLabel cru2 = new JLabel(cruz2);
+        cru2.setBounds(160, 45, 50, 50);
+        label.add(cru2);
+        JButton ja = new JButton("OK");
+        ja.setBounds(220, 70, 60, 30);
+        label.add(ja);
+        String color2 = "#027017";
+        Color bac = Color.decode(color2);
+        ja.setBackground(bac);
+        ja.setFocusPainted(false);
+        ja.setBorderPainted(false);
+        j.setResizable(false);
+        j.setUndecorated(true);
+        j.setBackground(new Color(0, 0, 0, 0)); 
+        j.setLocationRelativeTo(null);
+        j.setVisible(true);
+        ja.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent e) {
+                j.dispose(); 
+            }	
+        });
+    }
+	public void nosololetras3() {
+        JFrame j = new JFrame();
+        j.setSize(515, 150);
+        j.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        ImageIcon im = new ImageIcon("panel.png");
+        JLabel label = new JLabel(im);
+        j.setLayout(null);
+        label.setBounds(0, 0, im.getIconWidth(), im.getIconHeight());
+        j.add(label);
+        JLabel mi = new JLabel("SOLO SE PERMITEN LETRAS EN EL CAMPO CIUDAD");
+        mi.setBounds(50, 10, 400, 30); 
+        mi.setHorizontalAlignment(JLabel.CENTER);
+        mi.setFont(Registro.fuente1);
+        label.add(mi);
+        ImageIcon cruz = new ImageIcon("cruz.png");
+        JLabel cru = new JLabel(cruz);
+        cru.setBounds(290, 45, 50, 50);
+        label.add(cru);
+        ImageIcon cruz2 = new ImageIcon("cruz.png");
+        JLabel cru2 = new JLabel(cruz2);
+        cru2.setBounds(160, 45, 50, 50);
+        label.add(cru2);
+        JButton ja = new JButton("OK");
+        ja.setBounds(220, 70, 60, 30);
+        label.add(ja);
+        String color2 = "#027017";
+        Color bac = Color.decode(color2);
+        ja.setBackground(bac);
+        ja.setFocusPainted(false);
+        ja.setBorderPainted(false);
+        j.setResizable(false);
+        j.setUndecorated(true);
+        j.setBackground(new Color(0, 0, 0, 0)); 
+        j.setLocationRelativeTo(null);
+        j.setVisible(true);
+        ja.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent e) {
+                j.dispose(); 
+            }	
+        });
+    }
 	public void GA() {
         JFrame j = new JFrame();
         j.setSize(515, 150);
@@ -110,6 +233,39 @@ public class OtrasCosas {
         label.setBounds(0, 0, im.getIconWidth(), im.getIconHeight());
         j.add(label);
         JLabel mi = new JLabel("SALDO ACTUALIZADO CORRECTAMENTE");
+        mi.setBounds(50, 10, 400, 30); 
+        mi.setHorizontalAlignment(JLabel.CENTER);
+        mi.setFont(Registro.fuente1);
+        label.add(mi);
+        JButton ja = new JButton("OK");
+        ja.setBounds(220, 70, 60, 30);
+        label.add(ja);
+        String color2 = "#027017";
+        Color bac = Color.decode(color2);
+        ja.setBackground(bac);
+        ja.setFocusPainted(false);
+        ja.setBorderPainted(false);
+        j.setResizable(false);
+        j.setUndecorated(true);
+        j.setBackground(new Color(0, 0, 0, 0)); 
+        j.setLocationRelativeTo(null);
+        j.setVisible(true);
+        ja.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent e) {
+                j.dispose();
+            }			
+        });
+    }
+    public void saldo() {
+    	JFrame j = new JFrame();
+        j.setSize(515, 150);
+        j.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        ImageIcon im = new ImageIcon("panel.png");
+        JLabel label = new JLabel(im);
+        j.setLayout(null);
+        label.setBounds(0, 0, im.getIconWidth(), im.getIconHeight());
+        j.add(label);
+        JLabel mi = new JLabel("NO HAY SALDO SUFICIENTE");
         mi.setBounds(50, 10, 400, 30); 
         mi.setHorizontalAlignment(JLabel.CENTER);
         mi.setFont(Registro.fuente1);
@@ -627,7 +783,7 @@ public class OtrasCosas {
 	    j.setLayout(null);
 	    label.setBounds(0, 0, im.getIconWidth(), im.getIconHeight());
 	    j.add(label);
-	    JLabel mi = new JLabel("TIENES QUE RELLENAR EL CAMPO NOMBRE");
+	    JLabel mi = new JLabel("LAS CONTRASEÑAS NO COINCIDEN");
 	    mi.setBounds(25, 10, 450, 30); 
 	    mi.setHorizontalAlignment(JLabel.CENTER);
 	    mi.setFont(Registro.fuente1);

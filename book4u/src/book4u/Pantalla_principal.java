@@ -19,6 +19,7 @@ public class Pantalla_principal extends JFrame {
         JPanel pan = new JPanel();
         pan.setBounds(0, 0, 800, 75);
         pan.setVisible(true);
+        this.setUndecorated(true);
         pan.setBackground(Color.WHITE);
         pan.setLayout(null);
         this.add(pan);
@@ -37,9 +38,9 @@ public class Pantalla_principal extends JFrame {
         mama.setHorizontalAlignment(JLabel.RIGHT);
         mama.setBounds(505, 75, 250, 50);
         mama.setFont(fuenti2);
-        JLabel titi = new JLabel("BIENVENIDO A BOOK4U " + nombre);
+        JLabel titi = new JLabel("BIENVENIDO " + nombre.toUpperCase());
         titi.setHorizontalAlignment(JLabel.CENTER);
-        titi.setBounds(100, 100, 600, 50);
+        titi.setBounds(100, 120, 600, 50);
         titi.setFont(fuenti);
 
 
@@ -64,39 +65,39 @@ public class Pantalla_principal extends JFrame {
 
         JPanel nep = new JPanel();
         nep.setLayout(null);
-        nep.setBounds(50, 160, 200, 270);
+        nep.setBounds(50, 180, 200, 270);
         ImageIcon can = new ImageIcon("canarias.jpg");
         JLabel can1 = new JLabel(can);
-        can1.setBounds(15, 15, 170, 120);
+        can1.setBounds(15, 35, 170, 120);
         nep.add(can1);
         JLabel gran = new JLabel("ISLAS CANARIAS");
         gran.setFont(Registro.fuente1);
         gran.setHorizontalAlignment(JLabel.CENTER);
-        gran.setBounds(25, 170, 150, 25);
+        gran.setBounds(25, 190, 150, 25);
         nep.add(gran);
         layeredPane.add(nep, JLayeredPane.DEFAULT_LAYER);
        
         
         JPanel nep2 = new JPanel();
         nep2.setLayout(null);
-        nep2.setBounds(293, 160, 200, 270);
+        nep2.setBounds(293, 180, 200, 270);
         ImageIcon cant = new ImageIcon("paris.jpg");
         JLabel can2 = new JLabel(cant);
-        can2.setBounds(15, 15, 170, 120);
+        can2.setBounds(15, 35, 170, 120);
         nep2.add(can2);
         JLabel gran2 = new JLabel("PARIS, FRANCIA");
         gran2.setFont(Registro.fuente1);
         gran2.setHorizontalAlignment(JLabel.CENTER);
-        gran2.setBounds(25, 170, 150, 25);
+        gran2.setBounds(25, 190, 150, 25);
         nep2.add(gran2);
         layeredPane.add(nep2, JLayeredPane.DEFAULT_LAYER);
 
         JPanel nep3 = new JPanel();
         nep3.setLayout(null);
-        nep3.setBounds(535, 160, 200, 270);
+        nep3.setBounds(535, 180, 200, 270);
         ImageIcon canto = new ImageIcon("colombia.jpg");
         JLabel can3 = new JLabel(canto);
-        can3.setBounds(15, 15, 170, 120);
+        can3.setBounds(15, 35, 170, 120);
         nep3.add(can3);
         JLabel gran3 = new JLabel("<html>FARO DE CASTILLOGRANDE ,<br>COLOMBIA</html>");
         gran3.setFont(Registro.fuente1);
@@ -109,7 +110,7 @@ public class Pantalla_principal extends JFrame {
         ne.setFocusPainted(false);
         ne.setBorderPainted(false);
         ne.setContentAreaFilled(false);
-        ne.setBounds(700, 20, 50, 50);
+        ne.setBounds(720, 13, 50, 50);
         pan.add(ne);
 
         JPanel desp = new JPanel();
@@ -140,31 +141,31 @@ public class Pantalla_principal extends JFrame {
         titulo.setFont(Registro.fuente);
 
         JButton InicioButton = new JButton("RESERVAR");
-        InicioButton.setBounds(45, 90, 150, 50);
+        InicioButton.setBounds(45, 100, 150, 50);
         InicioButton.setFont(Registro.fuente1);
         InicioButton.setBackground(Color.white);
         InicioButton.setForeground(Color.black);
 
         JButton UsuarioButton = new JButton("USUARIO");
-        UsuarioButton.setBounds(45, 230, 150, 50);
+        UsuarioButton.setBounds(45, 240, 150, 50);
         UsuarioButton.setFont(Registro.fuente1);
         UsuarioButton.setBackground(Color.white);
         UsuarioButton.setForeground(Color.black);
 
         JButton ReservesButton =  new JButton("MIS RESERVAS");
-        ReservesButton.setBounds(45, 300, 150, 50);
+        ReservesButton.setBounds(45, 310, 150, 50);
         ReservesButton.setFont(Registro.fuente1);
         ReservesButton.setBackground(Color.white);
         ReservesButton.setForeground(Color.black);
         
         JButton HistorialButton =  new JButton("HISTORIAL");
-        HistorialButton.setBounds(45, 160, 150, 50);
+        HistorialButton.setBounds(45, 170, 150, 50);
         HistorialButton.setFont(Registro.fuente1);
         HistorialButton.setBackground(Color.white);
         HistorialButton.setForeground(Color.black);
 
         JButton AtrasButton = new JButton("CERRAR SESIÓN");
-        AtrasButton.setBounds(45, 370, 150, 50);
+        AtrasButton.setBounds(45, 380, 150, 50);
         AtrasButton.setFont(Registro.fuente1);
         AtrasButton.setBackground(Color.white);
         AtrasButton.setForeground(Color.black);

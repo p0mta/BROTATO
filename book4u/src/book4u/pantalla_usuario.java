@@ -1,9 +1,8 @@
 package book4u;
 
-import java.awt.BorderLayout;
+
 import java.awt.Color;
 import java.awt.Font;
-import java.awt.Graphics;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.sql.PreparedStatement;
@@ -12,10 +11,8 @@ import java.sql.SQLException;
 import javax.swing.BorderFactory;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
-import javax.swing.JDialog;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
-import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JPasswordField;
 import javax.swing.JTextField;
@@ -41,6 +38,7 @@ public class pantalla_usuario extends JFrame {
 		setTitle("Usuario");
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		this.setSize(800, 500);
+		this.setUndecorated(true);
 		this.setLocationRelativeTo(null);
 		this.setVisible(true);
 		this.setLayout(null);
@@ -68,7 +66,7 @@ public class pantalla_usuario extends JFrame {
 		String correo = Login.usernameField.getText();
 		String contraseña = String.valueOf(Login.getPasswordField().getPassword());
 		String nombre = obtenerNombreDesdeBaseDeDatos(correo, contraseña);
-		JLabel nombre2 = new JLabel("CAMBIAR NOMBRE ("+nombre.toUpperCase()+")");
+		JLabel nombre2 = new JLabel("CAMBIAR NOMBRE ("+nombre+")");
 		nombre2.setHorizontalAlignment(JLabel.CENTER);
 		nombre2.setBounds(50, 120, 300, 30);
 		nombre2.setFont(Registro.fuente1);
@@ -226,13 +224,6 @@ public class pantalla_usuario extends JFrame {
         change2.setBorderPainted(false);
         change2.setContentAreaFilled(false);
         this.add(change2);
-        ImageIcon ofer = new ImageIcon("oferta.gif");
-        JButton oferta = new JButton(ofer);
-        oferta.setBounds(320, 280, 100, 70);
-        oferta.setFocusPainted(false);
-        oferta.setBorderPainted(false);
-        oferta.setContentAreaFilled(false);
-        this.add(oferta);
         act = new JLabel();
         act.setBounds(10, 330, 400, 30);
         act.setFont(Registro.fuente1);
@@ -333,11 +324,15 @@ public class pantalla_usuario extends JFrame {
 	                if (nombre != null) {
 	                    // Validar que el nombre no tenga más de 15 caracteres
 	                    if (nombre3.getText().isEmpty()) {
-	                    	OtrasCosas ja = new OtrasCosas();
-	                    	ja.k();
+	                        OtrasCosas ja = new OtrasCosas();
+	                        ja.k();
 	                    } else if (nombre3.getText().length() > 15) {
-	                    	OtrasCosas ja = new OtrasCosas();
-	                    	ja.l();
+	                        OtrasCosas ja = new OtrasCosas();
+	                        ja.l();
+	                    } else if (!nombre3.getText().matches("^[a-zA-Z]+$")) {
+	                        // Validar que el nuevo nombre solo contenga letras
+	                        OtrasCosas ja = new OtrasCosas();
+	                        ja.nosololetras();
 	                    } else {
 	                        // Realizar la actualización con el nuevo nombre
 	                        String update = "UPDATE USUARIO SET NOMBRE = ? WHERE CORREO = ? AND CONTRASEÑA = ?";
@@ -350,23 +345,22 @@ public class pantalla_usuario extends JFrame {
 	                            int rowsUpdated = preparedStatement.executeUpdate();
 
 	                            if (rowsUpdated > 0) {
-	                            	dispose();
-	                                pantalla_usuario panta = new pantalla_usuario();
-	                                OtrasCosas ja = new OtrasCosas();
-	    	                    	ja.m();                              
+	                                dispose();
+	                               Pantalla_principal panta = new Pantalla_principal();
+	                                
 	                            } else {
-	                            	OtrasCosas ja = new OtrasCosas();
-	    	                    	ja.n();   
+	                                OtrasCosas ja = new OtrasCosas();
+	                                ja.n();
 	                            }
 	                        } catch (SQLException ex) {
 	                            ex.printStackTrace();
 	                            OtrasCosas ja = new OtrasCosas();
-    	                    	ja.n();   
+	                            ja.n();
 	                        }
 	                    }
 	                } else {
-	                	OtrasCosas ja = new OtrasCosas();
-                    	ja.o();   
+	                    OtrasCosas ja = new OtrasCosas();
+	                    ja.o();
 	                }
 	            }
 	        });
@@ -478,7 +472,7 @@ public class pantalla_usuario extends JFrame {
 	            // Formatear el resultado para evitar la notación científica y limitar los decimales
 	            String resultadoFormateado = String.format("%.2f", resultado);
 
-	            act.setText("VALOR EN DINERO: " + resultadoFormateado);
+	            act.setText("VALOR EN DINERO: " + resultadoFormateado + "€");
 	        } else {
 	            // Si no es un número válido, puedes mostrar un mensaje de error o dejar el JLabel vacío
 	            act.setText("VALOR EN DINERO: VALOR MAXIMO 999999999.99");

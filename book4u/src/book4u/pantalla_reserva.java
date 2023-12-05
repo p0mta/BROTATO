@@ -13,6 +13,7 @@ import java.util.HashMap;
 import java.util.Map;
 import javax.swing.JOptionPane;
 import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 
 
 public class pantalla_reserva extends JFrame {
@@ -21,6 +22,7 @@ public class pantalla_reserva extends JFrame {
         setTitle("Reserva de lugares residenciales");
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setSize(800, 500);
+        this.setUndecorated(true);
         setLocationRelativeTo(null);
         setVisible(true);
         setLayout(null);
@@ -201,7 +203,7 @@ public class pantalla_reserva extends JFrame {
             Date today = new Date();  // Fecha actual
             String corr = new String();
             corr = Login.usernameField.getText();
-
+            double precioReserva = calcularPrecio(combi, paisCombo, dateChooser, dateChooser1);
             
             if (selectedDate == null || selectedDate2 == null) {
             	OtrasCosas tra = new OtrasCosas();
@@ -218,13 +220,13 @@ public class pantalla_reserva extends JFrame {
                
             return;
             } else {
+            	 if (verificarSaldoSuficiente(corr, precioReserva)) {
             	try {
                     // Insertar datos en la tabla de reservas
                     String query = "INSERT INTO reservas (dia, lugar, precio, pais, dia_salida,correo) VALUES (?, ?, ?, ?, ?, ?)";
                     try (PreparedStatement preparedStatement = Login.connection.prepareStatement(query)) {
                         preparedStatement.setDate(1, new java.sql.Date(selectedDate.getTime()));
                         preparedStatement.setString(2, lugarResidencial);
-                        double precioReserva = calcularPrecio(combi, paisCombo, dateChooser, dateChooser1);
                         preparedStatement.setDouble(3, precioReserva);
                         preparedStatement.setString(4, pais);
                         preparedStatement.setDate(5, new java.sql.Date(selectedDate2.getTime()));
@@ -246,6 +248,12 @@ public class pantalla_reserva extends JFrame {
                 } catch (SQLException ex) {
                     ex.printStackTrace();
                 }
+            	 }
+            	 else {
+            		 OtrasCosas co = new OtrasCosas();
+            		 co.saldo();
+            		 return;
+            	 }
                 dispose();
                 Pantalla_principal pa = new Pantalla_principal();
             }
@@ -299,7 +307,24 @@ public class pantalla_reserva extends JFrame {
             
     
     
-       
+            private boolean verificarSaldoSuficiente(String correo, double precioReserva) {
+                try {
+                    String query = "SELECT dinero FROM usuario WHERE correo = ?";
+                    try (PreparedStatement preparedStatement = Login.connection.prepareStatement(query)) {
+                        preparedStatement.setString(1, correo);
+
+                        try (ResultSet resultSet = preparedStatement.executeQuery()) {
+                            if (resultSet.next()) {
+                                double saldoUsuario = resultSet.getDouble("dinero");
+                                return saldoUsuario >= precioReserva;
+                            }
+                        }
+                    }
+                } catch (SQLException ex) {
+                    ex.printStackTrace();
+                }
+                return false;
+            }
     
     
             private double calcularPrecio(JComboBox<String> combi, JComboBox<String> paisCombo, JDateChooser dateChooser, JDateChooser dateChooser1) {
@@ -308,20 +333,20 @@ public class pantalla_reserva extends JFrame {
                 String lugarResidencial = (String) combi.getSelectedItem();
                 String pais = (String) paisCombo.getSelectedItem();
 
-                double precioBase = 10;  // Precio base, puedes ajustarlo según tus necesidades
+                double precioBase = 2;  // Precio base, puedes ajustarlo según tus necesidades
 
                 switch (lugarResidencial) {
                     case "Casa":
-                        precioBase += 60.0;  // Puedes ajustar el incremento/decremento según el tipo de lugar
+                        precioBase += 6.0;  // Puedes ajustar el incremento/decremento según el tipo de lugar
                         break;
                     case "Apartamento":
-                        precioBase += 40.0;
+                        precioBase += 4.0;
                         break;
                     case "Cabaña":
-                        precioBase += 30.0;
+                        precioBase += 3.0;
                         break;
                     case "Hotel":
-                        precioBase += 70.0;
+                        precioBase += 7.0;
                         break;
                     // Puedes agregar más casos según sea necesario
                 }
@@ -368,16 +393,16 @@ public class pantalla_reserva extends JFrame {
                 // Ajustar el precio según la duración de la reserva y tipo de lugar residencial
                 switch (lugarResidencial) {
                     case "Casa":
-                        precioBase += 50.0 * diferenciaDias;  // Ajuste específico para Casas
+                        precioBase += 5.0 * diferenciaDias;  // Ajuste específico para Casas
                         break;
                     case "Apartamento":
-                        precioBase += 40.0 * diferenciaDias;  // Ajuste específico para Apartamentos
+                        precioBase += 4.0 * diferenciaDias;  // Ajuste específico para Apartamentos
                         break;
                     case "Cabaña":
-                        precioBase += 30.0 * diferenciaDias;  // Ajuste específico para Cabañas
+                        precioBase += 3.0 * diferenciaDias;  // Ajuste específico para Cabañas
                         break;
                     case "Hotel":
-                        precioBase += 60.0 * diferenciaDias;  // Ajuste específico para Hoteles
+                        precioBase += 6.0 * diferenciaDias;  // Ajuste específico para Hoteles
                         break;
                     // Puedes agregar más casos según sea necesario
                 }
