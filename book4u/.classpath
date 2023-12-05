@@ -6,12 +6,12 @@
 			<attribute name="module" value="true"/>
 		</attributes>
 	</classpathentry>
-	<classpathentry kind="lib" path="C:/Users/romer/Downloads/TRABAJO/jcalendar-1.4.jar">
+	<classpathentry kind="lib" path="C:/Users/alumnat/Documents/GitHub/BROTATO/book4u/jcalendar-1.4.jar">
 		<attributes>
 			<attribute name="module" value="true"/>
 		</attributes>
 	</classpathentry>
-	<classpathentry kind="lib" path="C:/Users/romer/Downloads/TRABAJO/ojdbc11.jar">
+	<classpathentry kind="lib" path="D:/ojdbc8.jar">
 		<attributes>
 			<attribute name="module" value="true"/>
 		</attributes>

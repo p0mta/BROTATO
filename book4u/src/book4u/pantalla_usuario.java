@@ -329,7 +329,7 @@ public class pantalla_usuario extends JFrame {
 	                    } else if (nombre3.getText().length() > 15) {
 	                        OtrasCosas ja = new OtrasCosas();
 	                        ja.l();
-	                    } else if (!nombre3.getText().matches("^[a-zA-Z]+$")) {
+	                    } else if (!nombre3.getText().matches("^[a-zA-Z ]+$")) {
 	                        // Validar que el nuevo nombre solo contenga letras
 	                        OtrasCosas ja = new OtrasCosas();
 	                        ja.nosololetras();
