@@ -22,10 +22,11 @@ public class Login extends JFrame {
         public Login() {
             // Configurar el frame
             setTitle("BOOK4U- Login");
-            setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-            setSize(900, 700);
+            this.setUndecorated(true);
+            setSize(800, 500);
             setLocationRelativeTo(null);
 
+            
             
             String colorFondo = "#579514";
             Color backgroundColor = Color.decode(colorFondo);
@@ -33,12 +34,13 @@ public class Login extends JFrame {
 
             // Crear un JPanel en la parte superior con el logo
             JPanel logoPanel = new JPanel();
+            logoPanel.setLayout(null);
             logoPanel.setBounds(0, 0, 900, 100);
             logoPanel.setBackground(Color.WHITE); // Fondo blanco
 
             ImageIcon imagen = new ImageIcon("logo.png");
             JLabel label = new JLabel(imagen);
-            label.setPreferredSize(new Dimension(450, 100));
+            label.setBounds(335, -10, 150, 150);
             logoPanel.add(label);
             
 
@@ -49,10 +51,10 @@ public class Login extends JFrame {
             JLabel usernameLabel = new JLabel("CORREO");
             usernameLabel.setFont(Registro.fuente1);
             usernameLabel.setForeground(Color.BLACK);
-            usernameLabel.setBounds(230, 260, 90, 20);
+            usernameLabel.setBounds(200, 160, 90, 20);
 
             usernameField = new JTextField();
-            usernameField.setBounds(165, 300, 200, 25);
+            usernameField.setBounds(125, 200, 200, 25);
             usernameField.setFont(texto);
             usernameField.setForeground(Color.BLACK);
             usernameField.setBorder(BorderFactory.createLineBorder(Color.BLACK));
@@ -61,14 +63,14 @@ public class Login extends JFrame {
             JLabel passwordLabel = new JLabel("CONTRASEÑA");
             passwordLabel.setFont(Registro.fuente1);
             passwordLabel.setForeground(Color.BLACK);
-            passwordLabel.setBounds(550, 260, 150, 25);
+            passwordLabel.setBounds(520, 160, 150, 25);
 
             passwordField = new JPasswordField();
-            passwordField.setBounds(500, 300, 200, 25);
+            passwordField.setBounds(470, 200, 200, 25);
             passwordField.setBorder(BorderFactory.createLineBorder(Color.BLACK));
             ImageIcon ima4 = new ImageIcon("ojo.png");
             JButton botonvision2 = new JButton(ima4);
-            botonvision2.setBounds(230, 230, 30, 30);
+            botonvision2.setBounds(210, 130, 30, 30);
             botonvision2.setBackground(Color.white);
             botonvision2.setBounds(passwordField.getWidth() - 30, 1, 25, 25); 
             botonvision2.setBackground(Color.white);
@@ -79,7 +81,7 @@ public class Login extends JFrame {
             
             ImageIcon iniciarsesion = new ImageIcon("login.png"); 
             JButton loginButton = new JButton(iniciarsesion);
-            loginButton.setBounds(360, 375, 150, 55);
+            loginButton.setBounds(325, 275, 150, 55);
             loginButton.setFocusPainted(false);
             loginButton.setBorderPainted(false);
             loginButton.setContentAreaFilled(false);
@@ -111,7 +113,7 @@ public class Login extends JFrame {
             JLabel registroLabel = new JLabel("No estás registrado? Registrate!");
             registroLabel.setFont(Registro.fuente1);
             registroLabel.setForeground(Color.BLACK);
-            registroLabel.setBounds(310,570, 400, 25);
+            registroLabel.setBounds(275,425, 400, 25);
             
             loginButton.addActionListener(new ActionListener() {
                 @Override
@@ -121,7 +123,7 @@ public class Login extends JFrame {
             });
             ImageIcon registro = new ImageIcon("botonregistro.png");
             JButton registerButton = new JButton(registro);
-            registerButton.setBounds(360, 500, 150, 48);
+            registerButton.setBounds(325, 355, 150, 48);
             registerButton.setFocusPainted(false);
             registerButton.setBorderPainted(false);
             registerButton.setContentAreaFilled(false);
@@ -138,6 +140,7 @@ public class Login extends JFrame {
                 }
             });
 
+            
             // Agregar los componentes al frame
             add(logoPanel);
             add(usernameLabel);
@@ -148,13 +151,23 @@ public class Login extends JFrame {
             add(registerButton);
             add(registroLabel);
             
-            
+            ImageIcon im = new ImageIcon("salir.png");
+            JButton la = new JButton(im);
+            la.setBounds(750, 15, 32, 32);
+            logoPanel.add(la);
+            la.setFocusPainted(false);
+            la.setBorderPainted(false);
+            la.setContentAreaFilled(false);
 
             setLayout(null);
             setVisible(true);
             
-
-    
+            
+            la.addActionListener(new ActionListener() {
+                public void actionPerformed(ActionEvent e) {
+                	dispose();
+                }
+            });
 
        
         loginButton.addActionListener(new ActionListener() {

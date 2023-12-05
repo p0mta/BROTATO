@@ -24,12 +24,11 @@ public class Registro extends JFrame {
 	public Registro(){
 		
 		setTitle("Registro");
-		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		this.setSize(800, 500);
 		this.setLocationRelativeTo(null);
-		this.setVisible(true);
 		this.setLayout(null);
-		
+		this.setUndecorated(true);
+		this.setVisible(true);
       
         
 		
@@ -226,7 +225,24 @@ public class Registro extends JFrame {
                 	ja.k();
                     return;
                 }
-
+                else if (!nombre.getText().matches("^[a-zA-Z]+$")) {
+                    // Validar que el nuevo nombre solo contenga letras
+                    OtrasCosas ja = new OtrasCosas();
+                    ja.nosololetras();
+                    return;
+                }
+                else if (!apellidos.getText().matches("^[a-zA-Z]+$")) {
+                    // Validar que el nuevo nombre solo contenga letras
+                    OtrasCosas ja = new OtrasCosas();
+                    ja.nosololetras2();
+                    return;
+                }
+                else if (!ciudad.getText().matches("^[a-zA-Z]+$")) {
+                    // Validar que el nuevo nombre solo contenga letras
+                    OtrasCosas ja = new OtrasCosas();
+                    ja.nosololetras3();
+                    return;
+                }
                
                 if (!usuario.endsWith("@gmail.com")) {
                 	OtrasCosas ja = new OtrasCosas();

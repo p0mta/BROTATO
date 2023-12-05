@@ -29,6 +29,7 @@ public class editar_reserva extends JFrame {
         setTitle("Reserva de lugares residenciales");
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setSize(800, 500);
+        this.setUndecorated(true);
         setLocationRelativeTo(null);
         setVisible(true);
         setLayout(null);
@@ -211,6 +212,17 @@ public class editar_reserva extends JFrame {
             String corr = new String();
             corr = Login.usernameField.getText();
 
+            double precioReserva = calcularPrecio(combi, paisCombo, dateChooser, dateChooser1);
+
+            // Verificar si el usuario tiene saldo suficiente
+            String correoUsuario = Login.usernameField.getText();
+            double saldoUsuario = obtenerSaldoUsuario(correoUsuario);
+
+            if (saldoUsuario < precioReserva) {
+                OtrasCosas sa =new OtrasCosas();
+                sa.saldo();
+                return;  // Salir del método si no hay saldo suficiente
+            }
             if (selectedDate == null || selectedDate2 == null) {
             	OtrasCosas tra = new OtrasCosas();
             	tra.AG();
@@ -224,16 +236,15 @@ public class editar_reserva extends JFrame {
             	tra.DA();
             	return;
             } else {
-                try {
+            	try {
                     // Calcular el precio antes de la reserva
                     double precioAntes = obtenerPrecioActual(idReserva);
-                    
+
                     // Actualizar la base de datos con la nueva reserva
                     String query = "UPDATE RESERVAS SET DIA = ?, LUGAR = ?, PRECIO = ?, PAIS = ?, DIA_SALIDA = ? WHERE IDRESERVA = ?";
                     try (PreparedStatement preparedStatement = Login.connection.prepareStatement(query)) {
                         preparedStatement.setDate(1, new java.sql.Date(dateChooser.getDate().getTime()));
                         preparedStatement.setString(2, lugarResidencial);
-                        double precioReserva = calcularPrecio(combi, paisCombo, dateChooser, dateChooser1);
                         preparedStatement.setDouble(3, precioReserva);
                         preparedStatement.setString(4, pais);
                         preparedStatement.setDate(5, new java.sql.Date(dateChooser1.getDate().getTime()));
@@ -246,7 +257,7 @@ public class editar_reserva extends JFrame {
 
                         // Realizar la devolución de dinero
                         double cantidadDevuelta = precioAntes - precioDespues;
-                        devolverDinero(corr, cantidadDevuelta);
+                        devolverDinero(correoUsuario, cantidadDevuelta);
 
                         // Otros pasos si es necesario
 
@@ -258,7 +269,7 @@ public class editar_reserva extends JFrame {
                 dispose();
                 Pantalla_principal pa = new Pantalla_principal();
             }
-        });
+            });
 
         calcularPrecioButton.addActionListener(e -> {
            
@@ -327,7 +338,9 @@ public class editar_reserva extends JFrame {
                 }
             }
             public void modificarReserva(int idReserva) {
+            	
                 try {
+                	 
                     String query = "UPDATE RESERVAS SET DIA = ?, LUGAR = ?, PRECIO = ?, PAIS = ?, DIA_SALIDA = ? WHERE IDRESERVA = ?";
                     try (PreparedStatement preparedStatement = Login.connection.prepareStatement(query)) {
                         preparedStatement.setDate(1, new java.sql.Date(dateChooser.getDate().getTime()));
@@ -365,7 +378,7 @@ public class editar_reserva extends JFrame {
                     ex.printStackTrace();
                 }
             }
-
+        
 
             private double obtenerPrecioActual(int idReserva) {
                 double precioActual = 0.0;
@@ -434,20 +447,20 @@ public class editar_reserva extends JFrame {
                 String lugarResidencial = (String) combi.getSelectedItem();
                 String pais = (String) paisCombo.getSelectedItem();
 
-                double precioBase = 10;  // Precio base, puedes ajustarlo según tus necesidades
+                double precioBase = 2;  // Precio base, puedes ajustarlo según tus necesidades
 
                 switch (lugarResidencial) {
                     case "Casa":
-                        precioBase += 60.0;  // Puedes ajustar el incremento/decremento según el tipo de lugar
+                        precioBase += 6.0;  // Puedes ajustar el incremento/decremento según el tipo de lugar
                         break;
                     case "Apartamento":
-                        precioBase += 40.0;
+                        precioBase += 4.0;
                         break;
                     case "Cabaña":
-                        precioBase += 30.0;
+                        precioBase += 3.0;
                         break;
                     case "Hotel":
-                        precioBase += 70.0;
+                        precioBase += 7.0;
                         break;
                     // Puedes agregar más casos según sea necesario
                 }
@@ -494,16 +507,16 @@ public class editar_reserva extends JFrame {
                 // Ajustar el precio según la duración de la reserva y tipo de lugar residencial
                 switch (lugarResidencial) {
                     case "Casa":
-                        precioBase += 50.0 * diferenciaDias;  // Ajuste específico para Casas
+                        precioBase += 5.0 * diferenciaDias;  // Ajuste específico para Casas
                         break;
                     case "Apartamento":
-                        precioBase += 40.0 * diferenciaDias;  // Ajuste específico para Apartamentos
+                        precioBase += 4.0 * diferenciaDias;  // Ajuste específico para Apartamentos
                         break;
                     case "Cabaña":
-                        precioBase += 30.0 * diferenciaDias;  // Ajuste específico para Cabañas
+                        precioBase += 3.0 * diferenciaDias;  // Ajuste específico para Cabañas
                         break;
                     case "Hotel":
-                        precioBase += 60.0 * diferenciaDias;  // Ajuste específico para Hoteles
+                        precioBase += 6.0 * diferenciaDias;  // Ajuste específico para Hoteles
                         break;
                     // Puedes agregar más casos según sea necesario
                 }
