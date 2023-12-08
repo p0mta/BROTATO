@@ -256,6 +256,39 @@ public class OtrasCosas {
             }			
         });
     }
+    public void re() {
+    	JFrame j = new JFrame();
+        j.setSize(515, 150);
+        j.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        ImageIcon im = new ImageIcon("panel.png");
+        JLabel label = new JLabel(im);
+        j.setLayout(null);
+        label.setBounds(0, 0, im.getIconWidth(), im.getIconHeight());
+        j.add(label);
+        JLabel mi = new JLabel("YA HAY UNA RESERVA PARA ESTAS FECHAS");
+        mi.setBounds(50, 10, 400, 30); 
+        mi.setHorizontalAlignment(JLabel.CENTER);
+        mi.setFont(Registro.fuente1);
+        label.add(mi);
+        JButton ja = new JButton("OK");
+        ja.setBounds(220, 70, 60, 30);
+        label.add(ja);
+        String color2 = "#027017";
+        Color bac = Color.decode(color2);
+        ja.setBackground(bac);
+        ja.setFocusPainted(false);
+        ja.setBorderPainted(false);
+        j.setResizable(false);
+        j.setUndecorated(true);
+        j.setBackground(new Color(0, 0, 0, 0)); 
+        j.setLocationRelativeTo(null);
+        j.setVisible(true);
+        ja.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent e) {
+                j.dispose();
+            }			
+        });
+    }
     public void saldo() {
     	JFrame j = new JFrame();
         j.setSize(515, 150);
