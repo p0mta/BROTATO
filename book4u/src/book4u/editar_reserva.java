@@ -235,6 +235,10 @@ public class editar_reserva extends JFrame {
             	OtrasCosas tra = new OtrasCosas();
             	tra.DA();
             	return;
+            }else if (existeReservaEnDias(lugarResidencial, pais, selectedDate, selectedDate2)) {
+            	OtrasCosas tra = new OtrasCosas();
+            	tra.re();
+            	return;
             } else {
             	try {
                     // Calcular el precio antes de la reserva
@@ -295,6 +299,10 @@ public class editar_reserva extends JFrame {
             if (selectedDate.before(today)) {
             	OtrasCosas tra = new OtrasCosas();
             	tra.DA();
+            	return;
+            }else if (existeReservaEnDias(lugarResidencial, pais, selectedDate, selectedDate2)) {
+            	OtrasCosas co = new OtrasCosas();
+       		    co.re();
             	return;
             } else {
                 precioLabel.setText("Precio de la reserva en " + pais + ": "+calcularPrecio(combi, paisCombo, dateChooser, dateChooser1)+"");
@@ -525,7 +533,29 @@ public class editar_reserva extends JFrame {
             }
 
 
-    
+            private boolean existeReservaEnDias(String lugarResidencial, String pais, Date fechaInicio, Date fechaFin) {
+                try {
+                    String query = "SELECT COUNT(*) AS count FROM reservas WHERE lugar = ? AND pais = ? AND (dia BETWEEN ? AND ? OR dia_salida BETWEEN ? AND ?)";
+                    try (PreparedStatement preparedStatement = Login.connection.prepareStatement(query)) {
+                        preparedStatement.setString(1, lugarResidencial);
+                        preparedStatement.setString(2, pais);
+                        preparedStatement.setDate(3, new java.sql.Date(fechaInicio.getTime()));
+                        preparedStatement.setDate(4, new java.sql.Date(fechaFin.getTime()));
+                        preparedStatement.setDate(5, new java.sql.Date(fechaInicio.getTime()));
+                        preparedStatement.setDate(6, new java.sql.Date(fechaFin.getTime()));
+
+                        try (ResultSet resultSet = preparedStatement.executeQuery()) {
+                            if (resultSet.next()) {
+                                int count = resultSet.getInt("count");
+                                return count > 0;
+                            }
+                        }
+                    }
+                } catch (SQLException ex) {
+                    ex.printStackTrace();
+                }
+                return false;
+            }
     
     
 

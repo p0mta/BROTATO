@@ -44,6 +44,7 @@ public class reservas extends JFrame {
         panel2.setBounds(30, 130, 1125, 600);
         panel2.setLayout(null);
 
+        
         JLabel tit = new JLabel("RESERVAS");
         tit.setHorizontalAlignment(JLabel.CENTER);
         tit.setFont(Registro.fuente);
@@ -294,9 +295,8 @@ public class reservas extends JFrame {
 
                 // Actualizar la interfaz gráfica con los datos actualizados
                 retrieveAndDisplayData();
-                dispose();
                 on.sica.dispose();
-                reservas re = new reservas();
+                updatePanelContent();
             }
         });
 
@@ -306,7 +306,7 @@ public class reservas extends JFrame {
                 if (on.sica != null) {
                     on.sica.dispose(); // Cerrar la ventana al presionar "NO"
                 }
-
+                updatePanelContent();
                 return;
             }
         });
@@ -315,7 +315,12 @@ public class reservas extends JFrame {
     public List<Integer> getIdReservasList() {
         return idReservasList;
     }
-  
+    private void updatePanelContent() {
+        panel2.removeAll(); // Remove all components from panel2
+        retrieveAndDisplayData(); // Add the updated data to panel2
+        panel2.revalidate();
+        panel2.repaint();
+    }
 }
 
 

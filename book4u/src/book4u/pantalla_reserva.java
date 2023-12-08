@@ -211,8 +211,9 @@ public class pantalla_reserva extends JFrame {
             return;
             }
             else if (existeReservaEnDias(lugarResidencial, pais, selectedDate, selectedDate2)) {
-                JOptionPane.showMessageDialog(pantalla_reserva.this, "Ya hay una reserva activa para esa combinación de lugar y país en esos días. Por favor, elige otras fechas o lugar.");
-                return;
+            	OtrasCosas tra = new OtrasCosas();
+            	tra.re();
+            	return;
             }else if (selectedDate.before(today)) {
             	OtrasCosas tra = new OtrasCosas();
             	tra.GA();
@@ -290,8 +291,9 @@ public class pantalla_reserva extends JFrame {
             	return;
             }
             else if (existeReservaEnDias(lugarResidencial, pais, selectedDate, selectedDate2)) {
-                JOptionPane.showMessageDialog(pantalla_reserva.this, "Ya hay una reserva activa para esa combinación de lugar y país en esos días. Por favor, elige otras fechas o lugar.");
-                return;
+            	OtrasCosas co = new OtrasCosas();
+       		    co.re();
+            	return;
             }else  {
                 precioLabel.setText("Precio de la reserva en " + pais + ": "+calcularPrecio(combi, paisCombo, dateChooser, dateChooser1)+"");
             }
