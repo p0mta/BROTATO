@@ -225,28 +225,29 @@ public class Registro extends JFrame {
                 	ja.k();
                     return;
                 }
-                else if (!nombre.getText().matches("^[a-zA-Z]+$")) {
-                    // Validar que el nuevo nombre solo contenga letras
+                if (!nombre.getText().matches("^[a-zA-Z ]+$")) {
+                    // Validar que el nuevo nombre solo contenga letras y espacios
                     OtrasCosas ja = new OtrasCosas();
                     ja.nosololetras();
                     return;
                 }
-                else if (!apellidos.getText().matches("^[a-zA-Z]+$")) {
-                    // Validar que el nuevo nombre solo contenga letras
+                else if (!apellidos.getText().matches("^[a-zA-Z ]+$")) {
+                    // Validar que el nuevo nombre solo contenga letras y espacios
                     OtrasCosas ja = new OtrasCosas();
                     ja.nosololetras2();
                     return;
                 }
-                else if (!ciudad.getText().matches("^[a-zA-Z]+$")) {
-                    // Validar que el nuevo nombre solo contenga letras
+                else if (!ciudad.getText().matches("^[a-zA-Z ]+$")) {
+                    // Validar que el nuevo nombre solo contenga letras y espacios
                     OtrasCosas ja = new OtrasCosas();
                     ja.nosololetras3();
                     return;
                 }
+
                
-                if (!usuario.endsWith("@gmail.com")) {
-                	OtrasCosas ja = new OtrasCosas();
-                	ja.v();
+                if (usuario.equals("@gmail.com") || !usuario.endsWith("@gmail.com")) {
+                    OtrasCosas ja = new OtrasCosas();
+                    ja.v();
                     return; // Sale de la acción si el correo no es válido.
                 }
                 if(nombre.getText().length() > 15) {
