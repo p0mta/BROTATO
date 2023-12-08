@@ -191,6 +191,7 @@ public class editar_reserva extends JFrame {
         
         JLabel precioLabel = new JLabel("Precio de la reserva: $0.00");
         precioLabel.setBounds(250, 350, 350, 30);
+        
         add(precioLabel);
         precioLabel.setFont(Registro.fuente1);
 
