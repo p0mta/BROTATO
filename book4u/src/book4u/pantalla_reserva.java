@@ -209,7 +209,11 @@ public class pantalla_reserva extends JFrame {
             	OtrasCosas tra = new OtrasCosas();
             	tra.AG();
             return;
-            } else if (selectedDate.before(today)) {
+            }
+            else if (existeReservaEnDias(lugarResidencial, pais, selectedDate, selectedDate2)) {
+                JOptionPane.showMessageDialog(pantalla_reserva.this, "Ya hay una reserva activa para esa combinación de lugar y país en esos días. Por favor, elige otras fechas o lugar.");
+                return;
+            }else if (selectedDate.before(today)) {
             	OtrasCosas tra = new OtrasCosas();
             	tra.GA();
                 
@@ -284,9 +288,14 @@ public class pantalla_reserva extends JFrame {
             	OtrasCosas tra = new OtrasCosas();
             	tra.DA();
             	return;
-            } else {
+            }
+            else if (existeReservaEnDias(lugarResidencial, pais, selectedDate, selectedDate2)) {
+                JOptionPane.showMessageDialog(pantalla_reserva.this, "Ya hay una reserva activa para esa combinación de lugar y país en esos días. Por favor, elige otras fechas o lugar.");
+                return;
+            }else  {
                 precioLabel.setText("Precio de la reserva en " + pais + ": "+calcularPrecio(combi, paisCombo, dateChooser, dateChooser1)+"");
             }
+            
          
 
             // Obtener la ruta de la imagen correspondiente
@@ -409,7 +418,29 @@ public class pantalla_reserva extends JFrame {
 
                 return precioBase;
             }
+            private boolean existeReservaEnDias(String lugarResidencial, String pais, Date fechaInicio, Date fechaFin) {
+                try {
+                    String query = "SELECT COUNT(*) AS count FROM reservas WHERE lugar = ? AND pais = ? AND (dia BETWEEN ? AND ? OR dia_salida BETWEEN ? AND ?)";
+                    try (PreparedStatement preparedStatement = Login.connection.prepareStatement(query)) {
+                        preparedStatement.setString(1, lugarResidencial);
+                        preparedStatement.setString(2, pais);
+                        preparedStatement.setDate(3, new java.sql.Date(fechaInicio.getTime()));
+                        preparedStatement.setDate(4, new java.sql.Date(fechaFin.getTime()));
+                        preparedStatement.setDate(5, new java.sql.Date(fechaInicio.getTime()));
+                        preparedStatement.setDate(6, new java.sql.Date(fechaFin.getTime()));
 
+                        try (ResultSet resultSet = preparedStatement.executeQuery()) {
+                            if (resultSet.next()) {
+                                int count = resultSet.getInt("count");
+                                return count > 0;
+                            }
+                        }
+                    }
+                } catch (SQLException ex) {
+                    ex.printStackTrace();
+                }
+                return false;
+            }
 
     
     

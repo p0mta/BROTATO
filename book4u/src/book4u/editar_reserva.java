@@ -183,7 +183,7 @@ public class editar_reserva extends JFrame {
         but.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
             	dispose();
-            	Pantalla_principal pat = new Pantalla_principal();
+            	reservas pat = new reservas();
             }
         });
         
