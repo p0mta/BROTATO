@@ -80,12 +80,17 @@ public class reservas extends JFrame {
     }
 
     private void retrieveAndDisplayData() {
-        try {
-            Statement statement = Login.connection.createStatement();
-            String query = "SELECT IDRESERVA, DIA, LUGAR, PRECIO, PAIS, DIA_SALIDA FROM RESERVAS WHERE CORREO = '"+Login.usernameField.getText()+"'";            
-            ResultSet resultSet = statement
-                    .executeQuery(query);
+    	 try {
+    	        Statement statement = Login.connection.createStatement();
+    	        SimpleDateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy");
+    	        String currentDate = dateFormat.format(new Date());
 
+    	        String query = "SELECT IDRESERVA, DIA, LUGAR, PRECIO, PAIS, DIA_SALIDA " +
+    	                       "FROM RESERVAS " +
+    	                       "WHERE CORREO = '" + Login.usernameField.getText() + "' " +
+    	                       "AND DIA >= TO_DATE('" + currentDate + "', 'DD/MM/YYYY')";
+    	            
+    	        ResultSet resultSet = statement.executeQuery(query);
             
             boolean hasData = false;
 
@@ -96,7 +101,7 @@ public class reservas extends JFrame {
                 String precio = resultSet.getString("PRECIO");
                 String pais = resultSet.getString("PAIS");
                 Date diaSalida = resultSet.getDate("DIA_SALIDA");
-                SimpleDateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy");
+                
                 String diaFormateado = dateFormat.format(fecha);
                 String diasalida = dateFormat.format(diaSalida);
 
