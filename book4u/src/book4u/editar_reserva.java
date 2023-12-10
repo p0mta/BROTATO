@@ -230,7 +230,7 @@ public class editar_reserva extends JFrame {
             	return;
             } else if (selectedDate.before(today)) {
             	OtrasCosas tra = new OtrasCosas();
-            	  tra.GA();
+            	tra.GA();
                 return;
             } else if (selectedDate2.before(selectedDate)) {
             	OtrasCosas tra = new OtrasCosas();
@@ -294,12 +294,12 @@ public class editar_reserva extends JFrame {
             }
           if (selectedDate2.before(selectedDate)) {
         	  OtrasCosas tra = new OtrasCosas();
-        	  tra.GA();
+            	tra.DA();
             return;
             }
             if (selectedDate.before(today)) {
             	OtrasCosas tra = new OtrasCosas();
-            	tra.DA();
+            	tra.GA();
             	return;
             }else if (existeReservaEnDias(lugarResidencial, pais, selectedDate, selectedDate2)) {
             	OtrasCosas co = new OtrasCosas();

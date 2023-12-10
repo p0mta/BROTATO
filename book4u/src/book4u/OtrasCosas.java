@@ -1594,7 +1594,7 @@ public class OtrasCosas {
         j.setLayout(null);
         label.setBounds(0, 0, im.getIconWidth(), im.getIconHeight());
         j.add(label);
-        JLabel mi = new JLabel("NO PUEDES IR ATRAS AL TIEMPO CRACK");
+        JLabel mi = new JLabel("NO PUEDES IR ATRAS AL TIEMPO");
         mi.setBounds(25, 10, 450, 30); 
         mi.setHorizontalAlignment(JLabel.CENTER);
         mi.setFont(Registro.fuente1);

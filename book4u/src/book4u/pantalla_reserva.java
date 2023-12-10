@@ -282,12 +282,12 @@ public class pantalla_reserva extends JFrame {
             
           if (selectedDate2.before(selectedDate)) {
         	  OtrasCosas tra = new OtrasCosas();
-          	  tra.GA();
+          	tra.DA();
               return;
             }
             if (selectedDate.before(today)) {
             	OtrasCosas tra = new OtrasCosas();
-            	tra.DA();
+            	tra.GA();
             	return;
             }
             else if (existeReservaEnDias(lugarResidencial, pais, selectedDate, selectedDate2)) {
